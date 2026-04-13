@@ -72,30 +72,32 @@ async function carregarDados() {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZl/pub?output=csv";
 
     const response = await fetch(url);
-    let texto = await response.text();
+    const texto = await response.text();
 
-    texto = texto.replace(/\r/g, "");
-    const linhas = texto.split("\n");
+    const linhas = texto
+      .split(/\n/)
+      .map(l => l.trim())
+      .filter(l => l.length > 0);
 
     let total = 0;
     let locais = {};
     let tempos = [];
     let listaPacientes = [];
 
-    for (let i = 2; i <= 49; i++) {
+    // 🔥 pula cabeçalho automaticamente
+    for (let i = 1; i < linhas.length; i++) {
 
-      let linha = linhas[i];
-      if (!linha) continue;
-
-      // 🔥 CORREÇÃO PRINCIPAL (evita quebra errada de colunas)
-      let colunas = linha.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
+      const colunas = linhas[i].split(",");
 
       let nome = (colunas[1] || "").replace(/"/g, "").trim();
       let local = (colunas[3] || "").replace(/"/g, "").trim();
       let horario = (colunas[4] || "").replace(/"/g, "").trim();
 
-      if (nome) total++;
+      if (!nome) continue;
 
+      total++;
+
+      // LOCAIS
       if (local) {
         local = local.toLowerCase();
 
@@ -106,7 +108,8 @@ async function carregarDados() {
         locais[local] = (locais[local] || 0) + 1;
       }
 
-      if (horario && nome) {
+      // TEMPO
+      if (horario) {
         let partes = horario.split(":");
 
         if (partes.length === 2) {
@@ -123,6 +126,7 @@ async function carregarDados() {
           let diff = (agora - entrada) / 60000;
 
           if (diff >= 0 && diff < 1440) {
+
             tempos.push(diff);
 
             let h = Math.floor(diff / 60);

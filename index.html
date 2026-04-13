@@ -101,6 +101,18 @@
     <p id="locais">Carregando...</p>
   </div>
 
+  <!-- 🆕 LEITOS UTI -->
+  <div class="box">
+    <h2>Leitos Livres UTI</h2>
+    <p id="leitosUTI">Carregando...</p>
+  </div>
+
+  <!-- 🆕 LEITOS APARTAMENTO -->
+  <div class="box">
+    <h2>Leitos Livres Apartamento</h2>
+    <p id="leitosAPT">Carregando...</p>
+  </div>
+
   <div class="box">
     <h2>Tempo Médio de Espera</h2>
     <p id="tempo">Carregando...</p>
@@ -129,15 +141,22 @@ async function carregarDados() {
     let tempos = [];
     let listaPacientes = [];
 
+    let leitosUTI = 0;
+    let leitosAPT = 0;
+
     linhas.forEach((linha, index) => {
       if (!linha) return;
 
       const colunas = linha.split(",");
-      if (colunas.length < 5) return;
+      if (colunas.length < 12) return;
 
       let nome = colunas[1];
       let local = colunas[3];
       let horario = colunas[4];
+
+      // 🆕 LEITOS (coluna L = índice 11)
+      if (index === 2) leitosUTI = colunas[11] || 0;
+      if (index === 3) leitosAPT = colunas[11] || 0;
 
       if (index >= 2 && index <= 49) {
 
@@ -194,6 +213,10 @@ async function carregarDados() {
 
     document.getElementById("locais").innerHTML = textoLocais || "Nenhum dado";
 
+    // 🆕 LEITOS
+    document.getElementById("leitosUTI").innerText = leitosUTI;
+    document.getElementById("leitosAPT").innerText = leitosAPT;
+
     if (tempos.length > 0) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
       document.getElementById("tempo").innerText =
@@ -231,6 +254,8 @@ async function carregarDados() {
     document.getElementById("total").innerText = "Erro";
     document.getElementById("locais").innerText = "Erro";
     document.getElementById("tempo").innerText = "Erro";
+    document.getElementById("leitosUTI").innerText = "Erro";
+    document.getElementById("leitosAPT").innerText = "Erro";
     document.getElementById("listaPacientes").innerText = "Erro";
   }
 }

@@ -56,6 +56,12 @@
   <p id="tempo">Carregando...</p>
 </div>
 
+<!-- NOVA CAIXA -->
+<div class="box">
+  <h2>Tempo de Espera por Paciente</h2>
+  <p id="listaPacientes">Carregando...</p>
+</div>
+
 <script>
 async function carregarDados() {
   try {
@@ -70,6 +76,7 @@ async function carregarDados() {
     let total = 0;
     let locais = {};
     let tempos = [];
+    let listaPacientes = [];
 
     linhas.forEach((linha, index) => {
       if (!linha) return;
@@ -83,12 +90,12 @@ async function carregarDados() {
 
       if (index >= 2 && index <= 49) {
 
-        // CONTAGEM PACIENTES
+        // TOTAL
         if (nome && nome.trim() !== "") {
           total++;
         }
 
-        // CONTAGEM LOCAIS
+        // LOCAIS
         if (local && local.trim() !== "") {
           local = local.trim().toLowerCase();
 
@@ -99,8 +106,8 @@ async function carregarDados() {
           locais[local] = (locais[local] || 0) + 1;
         }
 
-        // 🔥 TEMPO DE ESPERA
-        if (horario && horario.trim() !== "") {
+        // TEMPO + LISTA DE PACIENTES
+        if (horario && horario.trim() !== "" && nome && nome.trim() !== "") {
           let partes = horario.split(":");
 
           if (partes.length === 2) {
@@ -114,10 +121,17 @@ async function carregarDados() {
             entrada.setMinutes(minutos);
             entrada.setSeconds(0);
 
-            let diff = (agora - entrada) / 60000; // minutos
+            let diff = (agora - entrada) / 60000;
 
-            if (diff >= 0 && diff < 1440) { // até 24h
+            if (diff >= 0 && diff < 1440) {
               tempos.push(diff);
+
+              let h = Math.floor(diff / 60);
+              let m = Math.floor(diff % 60);
+
+              let tempoFormatado = `${h}h ${m}min`;
+
+              listaPacientes.push(`${nome} - ${tempoFormatado}`);
             }
           }
         }
@@ -141,7 +155,7 @@ async function carregarDados() {
     document.getElementById("locais").innerHTML =
       textoLocais || "Nenhum dado";
 
-    // 🔥 TEMPO MÉDIO
+    // TEMPO MÉDIO
     if (tempos.length > 0) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
 
@@ -154,11 +168,20 @@ async function carregarDados() {
       document.getElementById("tempo").innerText = "Sem dados";
     }
 
+    // LISTA DE PACIENTES
+    if (listaPacientes.length > 0) {
+      document.getElementById("listaPacientes").innerHTML =
+        listaPacientes.join("<br>");
+    } else {
+      document.getElementById("listaPacientes").innerText = "Sem dados";
+    }
+
   } catch (error) {
     console.error(error);
     document.getElementById("total").innerText = "Erro";
     document.getElementById("locais").innerText = "Erro";
     document.getElementById("tempo").innerText = "Erro";
+    document.getElementById("listaPacientes").innerText = "Erro";
   }
 }
 

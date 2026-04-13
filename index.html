@@ -83,9 +83,9 @@ async function carregarDados() {
       const colunas = linha.split(",");
       if (colunas.length < 5) return;
 
-      let nome = colunas[1];    // B
-      let local = colunas[3];   // D
-      let horario = colunas[4];  // E
+      let nome = colunas[1];
+      let local = colunas[3];
+      let horario = colunas[4];
 
       if (index >= 2 && index <= 49) {
 
@@ -127,23 +127,19 @@ async function carregarDados() {
 
               let tempoFormatado = `${h}h ${m}min`;
 
-              // 🔴 REGRA: maior que 2h fica vermelho
-              if (diff >= 120) {
-                listaPacientes.push(
-                  `<span style="color:red;font-weight:bold">
-                    ${nome} - ${tempoFormatado}
-                  </span>`
-                );
-              } else {
-                listaPacientes.push(
-                  `${nome} - ${tempoFormatado}`
-                );
-              }
+              listaPacientes.push({
+                nome,
+                tempoFormatado,
+                diff
+              });
             }
           }
         }
       }
     });
+
+    // 🔽 ORDENAR DO MAIOR PARA O MENOR TEMPO
+    listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
 
@@ -172,9 +168,21 @@ async function carregarDados() {
       document.getElementById("tempo").innerText = "Sem dados";
     }
 
+    // 🔴 LISTA ORDENADA + CORES
     if (listaPacientes.length > 0) {
-      document.getElementById("listaPacientes").innerHTML =
-        listaPacientes.join("<br>");
+
+      let html = listaPacientes.map(p => {
+        if (p.diff >= 120) {
+          return `<span style="color:red;font-weight:bold">
+                    ${p.nome} - ${p.tempoFormatado}
+                  </span>`;
+        } else {
+          return `${p.nome} - ${p.tempoFormatado}`;
+        }
+      }).join("<br>");
+
+      document.getElementById("listaPacientes").innerHTML = html;
+
     } else {
       document.getElementById("listaPacientes").innerText = "Sem dados";
     }

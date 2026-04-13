@@ -7,14 +7,31 @@
   <style>
     body {
       font-family: Arial;
-      background-color: #f5f0e6; /* creme */
       margin: 0;
       text-align: center;
+
+      /* IMAGEM DE FUNDO */
+      background-image: url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* CAMADA ESCURA PARA LEGIBILIDADE */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 31, 58, 0.75); /* azul escuro transparente */
+      z-index: -1;
     }
 
     header {
-      background-color: #0b1f3a; /* azul escuro */
-      color: #f5f0e6; /* creme */
+      background-color: rgba(11, 31, 58, 0.95);
+      color: #f5f0e6;
       padding: 18px;
       font-size: 26px;
       font-family: "Times New Roman";
@@ -31,29 +48,22 @@
       margin: auto;
     }
 
-    .leftCol {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .rightCol {
+    .leftCol, .rightCol {
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
     .box {
-      background: #fffaf0; /* creme claro */
+      background: rgba(245, 240, 230, 0.95); /* creme */
       padding: 18px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(11,31,58,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       position: relative;
-      border: 1px solid #0b1f3a20;
     }
 
     h2 {
-      color: #0b1f3a; /* azul escuro */
+      color: #0b1f3a;
       margin-bottom: 10px;
     }
 
@@ -79,10 +89,10 @@
     }
 
     .pacienteCard {
-      background: #fffaf0;
+      background: rgba(245, 240, 230, 0.95);
       border-radius: 10px;
       padding: 12px;
-      box-shadow: 0 2px 8px rgba(11,31,58,0.12);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       text-align: left;
       border-left: 6px solid #0b1f3a;
       display: flex;

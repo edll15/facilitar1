@@ -183,7 +183,7 @@ function getEmoji(minutes) {
 }
 
 /* =========================
-   VELOCÍMETRO 180° MODERNO
+   VELOCÍMETRO MODERNO
 ========================= */
 function drawGauge(minutes) {
   const canvas = document.getElementById("gauge");
@@ -197,11 +197,9 @@ function drawGauge(minutes) {
   const max = 180;
 
   const value = Math.min(minutes, max);
-  const startAngle = Math.PI;
-  const endAngle = 0;
 
-  function angleFromValue(v) {
-    return startAngle + (v / max) * Math.PI;
+  function angle(v) {
+    return Math.PI + (v / max) * Math.PI;
   }
 
   // fundo
@@ -212,75 +210,64 @@ function drawGauge(minutes) {
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // faixa verde
+  // cores
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angleFromValue(60));
+  ctx.arc(cx, cy, radius, Math.PI, angle(60));
   ctx.strokeStyle = "#2e7d32";
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // faixa amarela
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, angleFromValue(60), angleFromValue(120));
+  ctx.arc(cx, cy, radius, angle(60), angle(120));
   ctx.strokeStyle = "#f9a825";
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // faixa vermelha
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, angleFromValue(120), 0);
+  ctx.arc(cx, cy, radius, angle(120), 0);
   ctx.strokeStyle = "#c62828";
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // marcações (ticks)
-  for (let i = 0; i <= 6; i++) {
-    let v = (max / 6) * i;
-    let a = angleFromValue(v);
+  // APENAS 3 LABELS (corrigido)
+  const labels = [
+    { v: 60, text: "1h" },
+    { v: 120, text: "2h" },
+    { v: 180, text: ">3h" }
+  ];
 
-    let x1 = cx + (radius - 10) * Math.cos(a);
-    let y1 = cy + (radius - 10) * Math.sin(a);
+  ctx.fillStyle = "#333";
+  ctx.font = "bold 14px Arial";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
-    let x2 = cx + (radius - 25) * Math.cos(a);
-    let y2 = cy + (radius - 25) * Math.sin(a);
+  labels.forEach(l => {
+    let a = angle(l.v);
+    let x = cx + (radius - 38) * Math.cos(a);
+    let y = cy + (radius - 38) * Math.sin(a);
+    ctx.fillText(l.text, x, y);
+  });
 
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.strokeStyle = "#333";
-    ctx.lineWidth = 2;
-    ctx.stroke();
+  // ponteiro MAIS GROSSO
+  const a = angle(value);
 
-    // números
-    let tx = cx + (radius - 40) * Math.cos(a);
-    let ty = cy + (radius - 40) * Math.sin(a);
-
-    ctx.fillStyle = "#333";
-    ctx.font = "12px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(Math.round(v), tx, ty);
-  }
-
-  // ponteiro
-  const angle = angleFromValue(value);
-
-  let px = cx + (radius - 20) * Math.cos(angle);
-  let py = cy + (radius - 20) * Math.sin(angle);
+  let px = cx + (radius - 15) * Math.cos(a);
+  let py = cy + (radius - 15) * Math.sin(a);
 
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(px, py);
   ctx.strokeStyle = "#111";
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 7; // <<< MAIS GROSSO
+  ctx.lineCap = "round";
   ctx.stroke();
 
-  // ponta ponteiro
+  // ponta do ponteiro
   ctx.beginPath();
   ctx.fillStyle = "#111";
   ctx.moveTo(px, py);
-  ctx.lineTo(px - 10 * Math.cos(angle - 0.5), py - 10 * Math.sin(angle - 0.5));
-  ctx.lineTo(px - 10 * Math.cos(angle + 0.5), py - 10 * Math.sin(angle + 0.5));
+  ctx.lineTo(px - 12 * Math.cos(a - 0.5), py - 12 * Math.sin(a - 0.5));
+  ctx.lineTo(px - 12 * Math.cos(a + 0.5), py - 12 * Math.sin(a + 0.5));
   ctx.closePath();
   ctx.fill();
 
@@ -296,9 +283,7 @@ function drawGauge(minutes) {
   ctx.fill();
 }
 
-/* =========================
-   DADOS (SEM ALTERAÇÃO)
-========================= */
+/* RESTANTE DO CÓDIGO SEM ALTERAÇÃO */
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";

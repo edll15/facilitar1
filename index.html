@@ -22,13 +22,26 @@
       padding-left: 25px;
     }
 
+    /* NOVO LAYOUT */
     .container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 2fr 1fr;
       gap: 18px;
       padding: 20px;
       max-width: 1000px;
       margin: auto;
+    }
+
+    .leftCol {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .rightCol {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .box {
@@ -112,12 +125,6 @@
     .uti { background: #6a1b9a; }
     .apartamento { background: #1565c0; }
 
-    .gaugeContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
     canvas {
       max-width: 280px;
     }
@@ -143,31 +150,42 @@
 
 <div class="container">
 
-  <div class="box">
-    <h2>Total de Pacientes</h2>
-    <div id="total" class="bigNumber">0</div>
-  </div>
+  <!-- COLUNA ESQUERDA -->
+  <div class="leftCol">
 
-  <div class="box">
-    <h2>Tempo Médio de Espera</h2>
-    <div id="emojiStatus" class="statusEmoji">😃</div>
-
-    <div class="gaugeContainer">
-      <canvas id="gauge" width="280" height="200"></canvas>
-      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+    <div class="box">
+      <h2>Total de Pacientes</h2>
+      <div id="total" class="bigNumber">0</div>
     </div>
+
+    <div class="box">
+      <h2>Tempo Médio de Espera</h2>
+      <div id="emojiStatus" class="statusEmoji">😃</div>
+
+      <div class="gaugeContainer">
+        <canvas id="gauge" width="280" height="200"></canvas>
+        <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="box">
-    <h2>Leitos Livres UTI</h2>
-    <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+  <!-- COLUNA DIREITA -->
+  <div class="rightCol">
+
+    <div class="box">
+      <h2>Leitos Livres UTI</h2>
+      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
+    <div class="box">
+      <h2>Leitos Livres Apartamento</h2>
+      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
   </div>
 
-  <div class="box">
-    <h2>Leitos Livres Apartamento</h2>
-    <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
-  </div>
-
+  <!-- LISTA OCUPA TODA LARGURA -->
   <div class="box" style="grid-column: 1 / -1;">
     <h2>Tempo de Espera por Paciente</h2>
     <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
@@ -229,8 +247,6 @@ function drawGauge(minutes) {
   const tipX = cx + (radius - 15) * Math.cos(a);
   const tipY = cy + (radius - 15) * Math.sin(a);
 
-  /* 🔧 CORREÇÃO DEFINITIVA:
-     o ponteiro agora termina EXATAMENTE na base da seta */
   const baseX = cx + (radius - 30) * Math.cos(a);
   const baseY = cy + (radius - 30) * Math.sin(a);
 
@@ -242,7 +258,6 @@ function drawGauge(minutes) {
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // seta conectada perfeitamente
   ctx.beginPath();
   ctx.fillStyle = "#111";
   ctx.moveTo(tipX, tipY);
@@ -257,7 +272,6 @@ function drawGauge(minutes) {
   ctx.closePath();
   ctx.fill();
 
-  // centro
   ctx.beginPath();
   ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
   ctx.fillStyle = "#1b5e20";

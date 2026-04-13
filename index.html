@@ -67,8 +67,8 @@ async function carregarDados() {
     linhas.forEach((linha, index) => {
       const colunas = linha.split(",");
 
-      let nome = colunas[1];   // coluna B
-      let local = colunas[3];  // coluna D
+      let nome = colunas[1];
+      let local = colunas[3];
 
       if (index >= 2 && index <= 8) {
 
@@ -78,10 +78,7 @@ async function carregarDados() {
 
         if (local && local.trim() !== "") {
 
-          // 🔥 CORREÇÃO: normaliza o texto
           local = local.trim().toLowerCase();
-
-          // deixa primeira letra maiúscula
           local = local.charAt(0).toUpperCase() + local.slice(1);
 
           locais[local] = (locais[local] || 0) + 1;
@@ -91,11 +88,18 @@ async function carregarDados() {
 
     document.getElementById("total").innerText = total;
 
-    let textoLocais = Object.entries(locais)
-      .map(([local, qtd]) => `${local} ${qtd} pacientes`)
-      .join(" | ");
+    // 🔥 ORDEM FIXA: Apartamento primeiro, UTI depois
+    let textoLocais = "";
 
-    document.getElementById("locais").innerText =
+    if (locais["Apartamento"]) {
+      textoLocais += `Apartamento: ${locais["Apartamento"]} pacientes<br>`;
+    }
+
+    if (locais["Uti"]) {
+      textoLocais += `UTI: ${locais["Uti"]} pacientes`;
+    }
+
+    document.getElementById("locais").innerHTML =
       textoLocais || "Nenhum dado";
 
   } catch (error) {

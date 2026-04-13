@@ -7,41 +7,76 @@
   <style>
     body {
       font-family: Arial;
-      background-color: #f4f8f4;
-      text-align: center;
+      background-color: #eef5ee;
       margin: 0;
+      text-align: center;
     }
 
     header {
-      background-color: #2e7d32;
+      background-color: #1b5e20;
       color: white;
-      padding: 15px;
-      font-size: 24px;
+      padding: 18px;
+      font-size: 26px;
       font-family: "Times New Roman";
       text-align: left;
-      padding-left: 20px;
+      padding-left: 25px;
     }
 
-    /* 🔥 NOVO LAYOUT EM GRID */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 18px;
       padding: 20px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
     }
 
     .box {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     h2 {
-      color: #2e7d32;
+      color: #1b5e20;
+      margin-bottom: 10px;
     }
+
+    /* 🧑‍⚕️ GRID DE PACIENTES */
+    .pacientesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .pacienteCard {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: left;
+      border-left: 6px solid #1b5e20;
+    }
+
+    .nome {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: white;
+      margin-top: 6px;
+    }
+
+    .verde { background: #2e7d32; }
+    .amarelo { background: #f9a825; }
+    .vermelho { background: #c62828; }
 
     /* 📱 RESPONSIVO */
     @media (max-width: 700px) {
@@ -75,7 +110,7 @@
 
   <div class="box">
     <h2>Tempo de Espera por Paciente</h2>
-    <p id="listaPacientes">Carregando...</p>
+    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
   </div>
 
 </div>
@@ -120,7 +155,7 @@ async function carregarDados() {
           locais[local] = (locais[local] || 0) + 1;
         }
 
-        if (horario && horario.trim() !== "" && nome && nome.trim() !== "") {
+        if (horario && nome && nome.trim() !== "") {
           let partes = horario.split(":");
 
           if (partes.length === 2) {
@@ -151,31 +186,20 @@ async function carregarDados() {
       }
     });
 
-    // 🔽 ORDENAR DO MAIOR PARA O MENOR
     listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
 
     let textoLocais = "";
-
-    if (locais["Apartamento"]) {
-      textoLocais += `Apartamento: ${locais["Apartamento"]} pacientes<br>`;
-    }
-
-    if (locais["Uti"]) {
-      textoLocais += `UTI: ${locais["Uti"]} pacientes`;
-    }
+    if (locais["Apartamento"]) textoLocais += `Apartamento: ${locais["Apartamento"]}<br>`;
+    if (locais["Uti"]) textoLocais += `UTI: ${locais["Uti"]}`;
 
     document.getElementById("locais").innerHTML = textoLocais || "Nenhum dado";
 
     if (tempos.length > 0) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
-
-      let horas = Math.floor(media / 60);
-      let minutos = Math.floor(media % 60);
-
       document.getElementById("tempo").innerText =
-        `${horas}h ${minutos}min`;
+        `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
     } else {
       document.getElementById("tempo").innerText = "Sem dados";
     }
@@ -183,14 +207,20 @@ async function carregarDados() {
     if (listaPacientes.length > 0) {
 
       let html = listaPacientes.map(p => {
-        if (p.diff >= 120) {
-          return `<span style="color:red;font-weight:bold">
-                    ${p.nome} - ${p.tempoFormatado}
-                  </span>`;
-        } else {
-          return `${p.nome} - ${p.tempoFormatado}`;
-        }
-      }).join("<br>");
+
+        let cor = "verde";
+        if (p.diff >= 120) cor = "vermelho";
+        else if (p.diff >= 60) cor = "amarelo";
+
+        return `
+          <div class="pacienteCard">
+            <div class="nome">${p.nome}</div>
+            <div class="badge ${cor}">
+              ${p.tempoFormatado}
+            </div>
+          </div>
+        `;
+      }).join("");
 
       document.getElementById("listaPacientes").innerHTML = html;
 

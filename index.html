@@ -229,19 +229,20 @@ function drawGauge(minutes) {
   const tipX = cx + (radius - 15) * Math.cos(a);
   const tipY = cy + (radius - 15) * Math.sin(a);
 
-  /* 🔥 PONTEIRO AGORA SEM ESPAÇO BRANCO */
-  const baseX = cx + (radius - 15) * Math.cos(a);
-  const baseY = cy + (radius - 15) * Math.sin(a);
+  /* 🔧 CORREÇÃO DEFINITIVA:
+     o ponteiro agora termina EXATAMENTE na base da seta */
+  const baseX = cx + (radius - 30) * Math.cos(a);
+  const baseY = cy + (radius - 30) * Math.sin(a);
 
   ctx.beginPath();
   ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY); // encosta exatamente na seta
+  ctx.lineTo(baseX, baseY);
   ctx.strokeStyle = "#111";
   ctx.lineWidth = 7;
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // seta conectada diretamente ao corpo
+  // seta conectada perfeitamente
   ctx.beginPath();
   ctx.fillStyle = "#111";
   ctx.moveTo(tipX, tipY);

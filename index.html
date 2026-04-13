@@ -64,18 +64,18 @@
 async function carregarDados() {
   try {
     const response = await fetch(
-      "https://sheets.googleapis.com/v4/spreadsheets/1Hr4NYjGaTqEas-0EFfRlUfglXXf4NrnC20NTd2DUe-Q/values/B3:C9?key=SUA_API_KEY_AQUI"
+      "https://sheets.googleapis.com/v4/spreadsheets/1Hr4NYjGaTqEas-0EFfRlUfglXXf4NrnC20NTd2DUe-Q/values/B3:D9?key=SUA_API_KEY_AQUI"
     );
 
     const data = await response.json();
-    const pacientes = data.values;
+    const linhas = data.values;
 
     let total = 0;
     let locais = {};
 
-    pacientes.forEach(linha => {
+    linhas.forEach(linha => {
       let nome = linha[0];   // Coluna B
-      let local = linha[1];  // Coluna C
+      let local = linha[2];  // Coluna D (índice 2)
 
       if (nome) total++;
 

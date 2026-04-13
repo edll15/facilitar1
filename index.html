@@ -54,40 +54,30 @@
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/gviz/tq?tqx=out:json";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
     const response = await fetch(url);
-    const text = await response.text();
+    const texto = await response.text();
 
-    const json = JSON.parse(
-      text.replace("google.visualization.Query.setResponse(", "").slice(0, -2)
-    );
-
-    const rows = json.table.rows;
+    const linhas = texto.split("\n");
 
     let total = 0;
     let locais = {};
 
-    rows.forEach((row, index) => {
-      if (!row.c) return;
+    linhas.forEach((linha, index) => {
+      const colunas = linha.split(",");
 
-      // Pegando TODAS as colunas disponíveis
-      const cols = row.c.map(c => c ? c.v : "");
-
-      // Segurança: garante que tem colunas suficientes
-      if (cols.length < 4) return;
-
-      const nome = cols[1];   // coluna B
-      const local = cols[3];  // coluna D
+      const nome = colunas[1];  // coluna B
+      const local = colunas[3]; // coluna D
 
       // linhas 3 a 9
       if (index >= 2 && index <= 8) {
 
-        if (nome && nome.toString().trim() !== "") {
+        if (nome && nome.trim() !== "") {
           total++;
         }
 
-        if (local && local.toString().trim() !== "") {
+        if (local && local.trim() !== "") {
           locais[local] = (locais[local] || 0) + 1;
         }
       }
@@ -103,7 +93,7 @@ async function carregarDados() {
       textoLocais || "Nenhum dado";
 
   } catch (error) {
-    console.error("ERRO REAL:", error);
+    console.error(error);
     document.getElementById("total").innerText = "Erro";
     document.getElementById("locais").innerText = "Erro ao carregar";
   }

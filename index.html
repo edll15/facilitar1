@@ -73,34 +73,6 @@
     color: #1b5e20;
   }
 
-  .pacientesGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-  }
-
-  .card {
-    background: #fff;
-    padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border-left: 6px solid #1b5e20;
-    text-align: left;
-  }
-
-  .badge {
-    padding: 4px 8px;
-    border-radius: 8px;
-    color: white;
-    font-size: 12px;
-  }
-
-  .verde { background: #2e7d32; }
-  .amarelo { background: #f9a825; }
-  .vermelho { background: #c62828; }
-  .uti { background: #6a1b9a; }
-  .apt { background: #1565c0; }
-
 </style>
 </head>
 
@@ -127,32 +99,12 @@
 
   </div>
 
-  <div class="box">
-    <h2>Leitos UTI</h2>
-    <div id="leitosUTI" class="bigNumber">0</div>
-  </div>
-
-  <div class="box">
-    <h2>Leitos Apartamento</h2>
-    <div id="leitosAPT" class="bigNumber">0</div>
-  </div>
-
-  <div class="box" style="grid-column:1/-1;">
-    <h2>Pacientes</h2>
-    <div id="lista" class="pacientesGrid"></div>
-  </div>
-
 </div>
 
 <script>
 
-function emoji(m) {
-  if (m <= 60) return "😃";
-  if (m <= 120) return "😐";
-  return "😡";
-}
-
 function drawGauge(m) {
+
   const c = document.getElementById("gauge");
   const ctx = c.getContext("2d");
 
@@ -163,131 +115,77 @@ function drawGauge(m) {
   const r = 120;
 
   let color = "#2e7d32";
-  if (m > 120) color = "#c62828";
-  else if (m > 60) color = "#f9a825";
+  if(m>120) color="#c62828";
+  else if(m>60) color="#f9a825";
 
   // fundo
   ctx.beginPath();
-  ctx.arc(cx, cy, r, Math.PI, 0);
-  ctx.strokeStyle = "#ddd";
-  ctx.lineWidth = 18;
+  ctx.arc(cx,cy,r,Math.PI,0);
+  ctx.strokeStyle="#ddd";
+  ctx.lineWidth=18;
   ctx.stroke();
 
   // progresso
   let ang = Math.PI + (Math.min(m,180)/180)*Math.PI;
 
   ctx.beginPath();
-  ctx.arc(cx, cy, r, Math.PI, ang);
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 18;
+  ctx.arc(cx,cy,r,Math.PI,ang);
+  ctx.strokeStyle=color;
+  ctx.lineWidth=18;
   ctx.stroke();
-
-  // labels corrigidos (>>> 3h visível)
-  const labels = ["1h", "2h", ">3h"];
-  const pos = [0.2, 0.55, 0.92];
-
-  labels.forEach((t,i)=>{
-    let a = Math.PI + pos[i]*Math.PI;
-    let x = cx + (r+30)*Math.cos(a);
-    let y = cy + (r+30)*Math.sin(a);
-
-    ctx.fillStyle="#111";
-    ctx.font="bold 15px Arial";
-    ctx.fillText(t,x-15,y);
-  });
 
   // ponteiro
   let px = cx + (r-10)*Math.cos(ang);
   let py = cy + (r-10)*Math.sin(ang);
 
+  let baseX = cx;
+  let baseY = cy;
+
   ctx.beginPath();
-  ctx.moveTo(cx,cy);
+  ctx.moveTo(baseX,baseY);
   ctx.lineTo(px,py);
   ctx.strokeStyle="#000";
   ctx.lineWidth=4;
   ctx.stroke();
 
-  // seta
-  const s=10;
+  // 🔥 SETA CORRIGIDA (ALINHADA E SEM INVERSÃO)
+  const arrowSize = 12;
+
+  const dx = px - baseX;
+  const dy = py - baseY;
+  const len = Math.sqrt(dx*dx + dy*dy);
+
+  const ux = dx / len;
+  const uy = dy / len;
+
+  const vx = -uy;
+  const vy = ux;
+
+  const tipX = px;
+  const tipY = py;
+
+  const leftX = tipX - ux * arrowSize - vx * arrowSize * 0.6;
+  const leftY = tipY - uy * arrowSize - vy * arrowSize * 0.6;
+
+  const rightX = tipX - ux * arrowSize + vx * arrowSize * 0.6;
+  const rightY = tipY - uy * arrowSize + vy * arrowSize * 0.6;
+
   ctx.beginPath();
-  ctx.moveTo(px,py);
-  ctx.lineTo(px - s, py - s);
-  ctx.lineTo(px + s, py - s);
+  ctx.moveTo(tipX,tipY);
+  ctx.lineTo(leftX,leftY);
+  ctx.lineTo(rightX,rightY);
   ctx.closePath();
+  ctx.fillStyle="#000";
+  ctx.fill();
+
+  // centro
+  ctx.beginPath();
+  ctx.arc(cx,cy,6,0,Math.PI*2);
+  ctx.fillStyle="#000";
   ctx.fill();
 }
 
-async function load() {
-
-  const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
-
-  let r=await fetch(url);
-  let t=await r.text();
-
-  let lines=t.split("\n");
-
-  let total=0;
-  let tempos=[];
-  let lista=[];
-
-  let uti=0, apt=0;
-
-  lines.forEach((l,i)=>{
-    let c=l.split(",");
-    if(c.length<5) return;
-
-    let nome=c[1];
-    let local=c[3];
-    let hora=c[4];
-
-    if(i===2) uti=c[11]||0;
-    if(i===3) apt=c[11]||0;
-
-    if(nome) total++;
-
-    if(hora && hora.includes(":")) {
-      let [h,m]=hora.split(":").map(Number);
-      let now=new Date();
-      let inT=new Date();
-      inT.setHours(h,m,0);
-
-      let diff=(now-inT)/60000;
-
-      if(diff>=0){
-        tempos.push(diff);
-        lista.push({nome,local,diff});
-      }
-    }
-  });
-
-  document.getElementById("total").innerText=total;
-  document.getElementById("leitosUTI").innerText=uti;
-  document.getElementById("leitosAPT").innerText=apt;
-
-  let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
-
-  document.getElementById("emojiStatus").innerText = emoji(media);
-  document.getElementById("tempoTexto").innerText =
-    Math.floor(media/60)+"h "+Math.floor(media%60)+"min";
-
-  drawGauge(media);
-
-  lista.sort((a,b)=>b.diff-a.diff);
-
-  document.getElementById("lista").innerHTML =
-    lista.map(p=>`
-      <div class="card">
-        <b>${p.nome}</b><br>
-        ${p.local}<br>
-        <span class="badge ${p.diff>120?'vermelho':p.diff>60?'amarelo':'verde'}">
-          ${Math.floor(p.diff/60)}h ${Math.floor(p.diff%60)}min
-        </span>
-      </div>
-    `).join("");
-}
-
-setInterval(load,5000);
-load();
+drawGauge(90);
 
 </script>
 

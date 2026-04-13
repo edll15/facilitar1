@@ -2,19 +2,19 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa do Hospital</title>
+  <title>São Luiz AF</title>
 
   <style>
     body {
       font-family: Arial;
-      background-color: #eef5ee;
+      background-color: #f5f0e6; /* creme */
       margin: 0;
       text-align: center;
     }
 
     header {
-      background-color: #1b5e20;
-      color: white;
+      background-color: #0b1f3a; /* azul escuro */
+      color: #f5f0e6; /* creme */
       padding: 18px;
       font-size: 26px;
       font-family: "Times New Roman";
@@ -22,7 +22,6 @@
       padding-left: 25px;
     }
 
-    /* NOVO LAYOUT */
     .container {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -45,22 +44,23 @@
     }
 
     .box {
-      background: white;
+      background: #fffaf0; /* creme claro */
       padding: 18px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(11,31,58,0.15);
       position: relative;
+      border: 1px solid #0b1f3a20;
     }
 
     h2 {
-      color: #1b5e20;
+      color: #0b1f3a; /* azul escuro */
       margin-bottom: 10px;
     }
 
     .bigNumber {
       font-size: 64px;
       font-weight: bold;
-      color: #1b5e20;
+      color: #0b1f3a;
       margin: 10px 0;
     }
 
@@ -79,12 +79,12 @@
     }
 
     .pacienteCard {
-      background: #fff;
+      background: #fffaf0;
       border-radius: 10px;
       padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(11,31,58,0.12);
       text-align: left;
-      border-left: 6px solid #1b5e20;
+      border-left: 6px solid #0b1f3a;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -99,6 +99,7 @@
     .nome {
       font-weight: bold;
       font-size: 15px;
+      color: #0b1f3a;
     }
 
     .badgeTempo {
@@ -118,12 +119,12 @@
       font-weight: bold;
     }
 
-    .verde { background: #2e7d32; }
-    .amarelo { background: #f9a825; }
-    .vermelho { background: #c62828; }
+    .verde { background: #1b5e20; }
+    .amarelo { background: #b58900; }
+    .vermelho { background: #b71c1c; }
 
-    .uti { background: #6a1b9a; }
-    .apartamento { background: #1565c0; }
+    .uti { background: #4a148c; }
+    .apartamento { background: #0b3c6f; }
 
     canvas {
       max-width: 280px;
@@ -133,7 +134,7 @@
       margin-top: 10px;
       font-size: 20px;
       font-weight: bold;
-      color: #1b5e20;
+      color: #0b1f3a;
     }
 
     @media (max-width: 700px) {
@@ -146,11 +147,10 @@
 
 <body>
 
-<header>Mapa do Hospital</header>
+<header>São Luiz AF</header>
 
 <div class="container">
 
-  <!-- COLUNA ESQUERDA -->
   <div class="leftCol">
 
     <div class="box">
@@ -170,7 +170,6 @@
 
   </div>
 
-  <!-- COLUNA DIREITA -->
   <div class="rightCol">
 
     <div class="box">
@@ -185,7 +184,6 @@
 
   </div>
 
-  <!-- LISTA OCUPA TODA LARGURA -->
   <div class="box" style="grid-column: 1 / -1;">
     <h2>Tempo de Espera por Paciente</h2>
     <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
@@ -215,30 +213,27 @@ function drawGauge(minutes) {
     return Math.PI + (v / max) * Math.PI;
   }
 
-  // fundo
   ctx.beginPath();
   ctx.arc(cx, cy, radius, Math.PI, 0);
-  ctx.strokeStyle = "#e6e6e6";
+  ctx.strokeStyle = "#d8cfc0";
   ctx.lineWidth = 18;
-  ctx.lineCap = "round";
   ctx.stroke();
 
-  // cores
   ctx.beginPath();
   ctx.arc(cx, cy, radius, Math.PI, angle(60));
-  ctx.strokeStyle = "#2e7d32";
+  ctx.strokeStyle = "#0b3c6f";
   ctx.lineWidth = 18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, radius, angle(60), angle(120));
-  ctx.strokeStyle = "#f9a825";
+  ctx.strokeStyle = "#b58900";
   ctx.lineWidth = 18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, radius, angle(120), 0);
-  ctx.strokeStyle = "#c62828";
+  ctx.strokeStyle = "#b71c1c";
   ctx.lineWidth = 18;
   ctx.stroke();
 
@@ -253,13 +248,13 @@ function drawGauge(minutes) {
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(baseX, baseY);
-  ctx.strokeStyle = "#111";
+  ctx.strokeStyle = "#0b1f3a";
   ctx.lineWidth = 7;
   ctx.lineCap = "round";
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.fillStyle = "#111";
+  ctx.fillStyle = "#0b1f3a";
   ctx.moveTo(tipX, tipY);
   ctx.lineTo(
     tipX - 16 * Math.cos(a - 0.6),
@@ -274,12 +269,12 @@ function drawGauge(minutes) {
 
   ctx.beginPath();
   ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-  ctx.fillStyle = "#1b5e20";
+  ctx.fillStyle = "#0b1f3a";
   ctx.fill();
 
   ctx.beginPath();
   ctx.arc(cx, cy, 3, 0, 2 * Math.PI);
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#f5f0e6";
   ctx.fill();
 }
 

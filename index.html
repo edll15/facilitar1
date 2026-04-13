@@ -22,45 +22,17 @@
       padding-left: 20px;
     }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
     .box {
       background: white;
       padding: 20px;
+      margin: 20px auto;
+      width: 320px;
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     }
 
     h2 {
       color: #2e7d32;
-    }
-
-    /* 🔥 CENTRALIZA APENAS A CAIXA DO TEMPO MÉDIO */
-    .tempo-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 140px;
-      text-align: center;
-    }
-
-    .tempo-box h2 {
-      margin-bottom: 10px;
-    }
-
-    /* 📱 RESPONSIVO */
-    @media (max-width: 700px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -69,35 +41,30 @@
 
 <header>Facilitador</header>
 
-<div class="container">
+<div class="box">
+  <h2>Total de Pacientes</h2>
+  <p id="total">Carregando...</p>
+</div>
 
-  <div class="box">
-    <h2>Total de Pacientes</h2>
-    <p id="total">Carregando...</p>
-  </div>
+<div class="box">
+  <h2>Locais de Internação</h2>
+  <p id="locais">Carregando...</p>
+</div>
 
-  <div class="box">
-    <h2>Locais de Internação</h2>
-    <p id="locais">Carregando...</p>
-  </div>
+<div class="box">
+  <h2>Tempo Médio de Espera</h2>
+  <p id="tempo">Carregando...</p>
+</div>
 
-  <!-- 🔥 CAIXA CENTRALIZADA -->
-  <div class="box tempo-box">
-    <h2>Tempo Médio de Espera</h2>
-    <p id="tempo">Carregando...</p>
-  </div>
-
-  <div class="box">
-    <h2>Tempo de Espera por Paciente</h2>
-    <p id="listaPacientes">Carregando...</p>
-  </div>
-
+<div class="box">
+  <h2>Tempo de Espera por Paciente</h2>
+  <p id="listaPacientes">Carregando...</p>
 </div>
 
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlP/pub?output=csv";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
     const response = await fetch(url);
     let texto = await response.text();
@@ -122,7 +89,9 @@ async function carregarDados() {
 
       if (index >= 2 && index <= 49) {
 
-        if (nome && nome.trim() !== "") total++;
+        if (nome && nome.trim() !== "") {
+          total++;
+        }
 
         if (local && local.trim() !== "") {
           local = local.trim().toLowerCase();
@@ -158,13 +127,18 @@ async function carregarDados() {
 
               let tempoFormatado = `${h}h ${m}min`;
 
-              listaPacientes.push({ nome, tempoFormatado, diff });
+              listaPacientes.push({
+                nome,
+                tempoFormatado,
+                diff
+              });
             }
           }
         }
       }
     });
 
+    // 🔽 ORDENAR DO MAIOR PARA O MENOR TEMPO
     listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
@@ -179,7 +153,8 @@ async function carregarDados() {
       textoLocais += `UTI: ${locais["Uti"]} pacientes`;
     }
 
-    document.getElementById("locais").innerHTML = textoLocais || "Nenhum dado";
+    document.getElementById("locais").innerHTML =
+      textoLocais || "Nenhum dado";
 
     if (tempos.length > 0) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
@@ -193,6 +168,7 @@ async function carregarDados() {
       document.getElementById("tempo").innerText = "Sem dados";
     }
 
+    // 🔴 LISTA ORDENADA + CORES
     if (listaPacientes.length > 0) {
 
       let html = listaPacientes.map(p => {

@@ -1,137 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Mapa do Hospital</title>
+<meta charset="UTF-8">
+<title>Mapa do Hospital</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      background-color: #eef5ee;
-      margin: 0;
-      text-align: center;
-    }
+<style>
+  body {
+    font-family: Arial;
+    background: #eef5ee;
+    margin: 0;
+    text-align: center;
+  }
 
-    header {
-      background-color: #1b5e20;
-      color: white;
-      padding: 18px;
-      font-size: 26px;
-      font-family: "Times New Roman";
-      text-align: left;
-      padding-left: 25px;
-    }
+  header {
+    background: #1b5e20;
+    color: white;
+    padding: 18px;
+    font-size: 26px;
+    font-family: "Times New Roman";
+    text-align: left;
+    padding-left: 25px;
+  }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
 
-    .box {
-      background: white;
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      position: relative;
-    }
+  .box {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+  }
 
-    h2 {
-      color: #1b5e20;
-      margin-bottom: 10px;
-    }
+  h2 {
+    color: #1b5e20;
+  }
 
-    .bigNumber {
-      font-size: 64px;
-      font-weight: bold;
-      color: #1b5e20;
-      margin: 10px 0;
-    }
+  .bigNumber {
+    font-size: 60px;
+    font-weight: bold;
+    color: #1b5e20;
+  }
 
-    .statusEmoji {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 44px;
-    }
+  .statusEmoji {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 42px;
+  }
 
-    canvas {
-      max-width: 300px; /* 🔥 AUMENTADO */
-    }
+  canvas {
+    max-width: 320px;
+  }
 
-    .gaugeContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .gaugeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .tempoTexto {
-      margin-top: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #1b5e20;
-    }
+  .tempoTexto {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1b5e20;
+  }
 
-    .pacientesGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
+  .pacientesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+  }
 
-    .pacienteCard {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      text-align: left;
-      border-left: 6px solid #1b5e20;
-    }
+  .card {
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 6px solid #1b5e20;
+    text-align: left;
+  }
 
-    .linhaTop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  .badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+  }
 
-    .nome {
-      font-weight: bold;
-      font-size: 15px;
-    }
+  .verde { background: #2e7d32; }
+  .amarelo { background: #f9a825; }
+  .vermelho { background: #c62828; }
+  .uti { background: #6a1b9a; }
+  .apt { background: #1565c0; }
 
-    .badgeTempo {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: white;
-    }
-
-    .badgeLocal {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 11px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .verde { background: #2e7d32; }
-    .amarelo { background: #f9a825; }
-    .vermelho { background: #c62828; }
-
-    .uti { background: #6a1b9a; }
-    .apartamento { background: #1565c0; }
-
-    @media (max-width: 700px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
@@ -151,112 +121,174 @@
     <div id="emojiStatus" class="statusEmoji">😃</div>
 
     <div class="gaugeContainer">
-      <canvas id="gauge" width="300" height="210"></canvas> <!-- 🔥 AUMENTADO -->
+      <canvas id="gauge" width="320" height="220"></canvas>
       <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
 
   </div>
 
   <div class="box">
-    <h2>Leitos Livres UTI</h2>
-    <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+    <h2>Leitos UTI</h2>
+    <div id="leitosUTI" class="bigNumber">0</div>
   </div>
 
   <div class="box">
-    <h2>Leitos Livres Apartamento</h2>
-    <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+    <h2>Leitos Apartamento</h2>
+    <div id="leitosAPT" class="bigNumber">0</div>
   </div>
 
-  <div class="box" style="grid-column: 1 / -1;">
-    <h2>Tempo de Espera por Paciente</h2>
-    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
+  <div class="box" style="grid-column:1/-1;">
+    <h2>Pacientes</h2>
+    <div id="lista" class="pacientesGrid"></div>
   </div>
 
 </div>
 
 <script>
-function getEmoji(minutes) {
-  if (minutes <= 60) return "😃";
-  if (minutes <= 120) return "😐";
+
+function emoji(m) {
+  if (m <= 60) return "😃";
+  if (m <= 120) return "😐";
   return "😡";
 }
 
-function drawGauge(minutes) {
-  const canvas = document.getElementById("gauge");
-  const ctx = canvas.getContext("2d");
+function drawGauge(m) {
+  const c = document.getElementById("gauge");
+  const ctx = c.getContext("2d");
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0,0,c.width,c.height);
 
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height - 10;
-  const radius = 115; // 🔥 AUMENTADO
-  const max = 180;
+  const cx = c.width/2;
+  const cy = c.height-10;
+  const r = 120;
 
   let color = "#2e7d32";
-  if (minutes > 120) color = "#c62828";
-  else if (minutes > 60) color = "#f9a825";
+  if (m > 120) color = "#c62828";
+  else if (m > 60) color = "#f9a825";
 
   // fundo
   ctx.beginPath();
-  ctx.arc(centerX, centerY, radius, Math.PI, 0);
+  ctx.arc(cx, cy, r, Math.PI, 0);
+  ctx.strokeStyle = "#ddd";
   ctx.lineWidth = 18;
-  ctx.strokeStyle = "#e0e0e0";
   ctx.stroke();
 
   // progresso
-  let angle = Math.PI + (Math.min(minutes, max) / max) * Math.PI;
+  let ang = Math.PI + (Math.min(m,180)/180)*Math.PI;
 
   ctx.beginPath();
-  ctx.arc(centerX, centerY, radius, Math.PI, angle);
+  ctx.arc(cx, cy, r, Math.PI, ang);
   ctx.strokeStyle = color;
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // labels (ajustados para não cortar "h")
+  // labels corrigidos (>>> 3h visível)
   const labels = ["1h", "2h", ">3h"];
-  const positions = [0.25, 0.55, 0.9]; // 🔥 melhor distribuição
+  const pos = [0.2, 0.55, 0.92];
 
-  labels.forEach((label, i) => {
-    let t = positions[i];
-    let a = Math.PI + t * Math.PI;
+  labels.forEach((t,i)=>{
+    let a = Math.PI + pos[i]*Math.PI;
+    let x = cx + (r+30)*Math.cos(a);
+    let y = cy + (r+30)*Math.sin(a);
 
-    let x = centerX + (radius + 28) * Math.cos(a);
-    let y = centerY + (radius + 28) * Math.sin(a);
-
-    ctx.fillStyle = "#111";
-    ctx.font = "bold 15px Arial";
-    ctx.fillText(label, x - 15, y + 5);
+    ctx.fillStyle="#111";
+    ctx.font="bold 15px Arial";
+    ctx.fillText(t,x-15,y);
   });
 
   // ponteiro
-  let px = centerX + (radius - 10) * Math.cos(angle);
-  let py = centerY + (radius - 10) * Math.sin(angle);
+  let px = cx + (r-10)*Math.cos(ang);
+  let py = cy + (r-10)*Math.sin(ang);
 
   ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.lineTo(px, py);
-  ctx.strokeStyle = "#1b1b1b";
-  ctx.lineWidth = 4;
+  ctx.moveTo(cx,cy);
+  ctx.lineTo(px,py);
+  ctx.strokeStyle="#000";
+  ctx.lineWidth=4;
   ctx.stroke();
 
   // seta
-  const arrowSize = 10;
-  let angleArrow = angle;
-
+  const s=10;
   ctx.beginPath();
-  ctx.moveTo(px, py);
-  ctx.lineTo(
-    px - arrowSize * Math.cos(angleArrow - 0.5),
-    py - arrowSize * Math.sin(angleArrow - 0.5)
-  );
-  ctx.lineTo(
-    px - arrowSize * Math.cos(angleArrow + 0.5),
-    py - arrowSize * Math.sin(angleArrow + 0.5)
-  );
+  ctx.moveTo(px,py);
+  ctx.lineTo(px - s, py - s);
+  ctx.lineTo(px + s, py - s);
   ctx.closePath();
-  ctx.fillStyle = "#1b1b1b";
   ctx.fill();
 }
+
+async function load() {
+
+  const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+
+  let r=await fetch(url);
+  let t=await r.text();
+
+  let lines=t.split("\n");
+
+  let total=0;
+  let tempos=[];
+  let lista=[];
+
+  let uti=0, apt=0;
+
+  lines.forEach((l,i)=>{
+    let c=l.split(",");
+    if(c.length<5) return;
+
+    let nome=c[1];
+    let local=c[3];
+    let hora=c[4];
+
+    if(i===2) uti=c[11]||0;
+    if(i===3) apt=c[11]||0;
+
+    if(nome) total++;
+
+    if(hora && hora.includes(":")) {
+      let [h,m]=hora.split(":").map(Number);
+      let now=new Date();
+      let inT=new Date();
+      inT.setHours(h,m,0);
+
+      let diff=(now-inT)/60000;
+
+      if(diff>=0){
+        tempos.push(diff);
+        lista.push({nome,local,diff});
+      }
+    }
+  });
+
+  document.getElementById("total").innerText=total;
+  document.getElementById("leitosUTI").innerText=uti;
+  document.getElementById("leitosAPT").innerText=apt;
+
+  let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
+
+  document.getElementById("emojiStatus").innerText = emoji(media);
+  document.getElementById("tempoTexto").innerText =
+    Math.floor(media/60)+"h "+Math.floor(media%60)+"min";
+
+  drawGauge(media);
+
+  lista.sort((a,b)=>b.diff-a.diff);
+
+  document.getElementById("lista").innerHTML =
+    lista.map(p=>`
+      <div class="card">
+        <b>${p.nome}</b><br>
+        ${p.local}<br>
+        <span class="badge ${p.diff>120?'vermelho':p.diff>60?'amarelo':'verde'}">
+          ${Math.floor(p.diff/60)}h ${Math.floor(p.diff%60)}min
+        </span>
+      </div>
+    `).join("");
+}
+
+setInterval(load,5000);
+load();
+
 </script>
 
 </body>

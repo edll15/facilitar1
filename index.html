@@ -1,7 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de Pacientes</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f4f8f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 15px;
+      font-size: 24px;
+      font-family: "Times New Roman";
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      width: 320px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2e7d32;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>Facilitador</header>
+
+<div class="container">
+
+  <div class="box">
+    <h2>Total de Pacientes</h2>
+    <p id="total">Carregando...</p>
+  </div>
+
+  <div class="box">
+    <h2>Locais de Internação</h2>
+    <p id="locais">Carregando...</p>
+  </div>
+
+</div>
+
 <script>
 async function carregarDados() {
   try {
-    const url = "https://sheets.googleapis.com/v4/spreadsheets/1Hr4NYjGaTqEas-0EFfRlUfglXXf4NrnC20NTd2DUe-Q/values/B3:D9?key=SUA_API_KEY_AQUI";
+    const url = "https://sheets.googleapis.com/v4/spreadsheets/1Hr4NYjGaTqEas-0EFfRlUfglXXf4NrnC20NTd2DUe-Q/values/B3:D9?key=COLE_SUA_API_KEY_AQUI";
 
     const response = await fetch(url);
 
@@ -23,8 +85,8 @@ async function carregarDados() {
     let locais = {};
 
     linhas.forEach(linha => {
-      let nome = linha[0];   // B
-      let local = linha[2];  // D
+      let nome = linha[0];   // Coluna B (paciente)
+      let local = linha[2];  // Coluna D (local)
 
       if (nome && nome.trim() !== "") {
         total++;
@@ -51,4 +113,13 @@ async function carregarDados() {
     document.getElementById("locais").innerText = "Erro na API / chave inválida";
   }
 }
+
+// Atualiza automaticamente a cada 5 segundos
+setInterval(carregarDados, 5000);
+
+// Carrega ao abrir o site
+carregarDados();
 </script>
+
+</body>
+</html>

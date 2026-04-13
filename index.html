@@ -98,6 +98,25 @@
     .uti { background: #6a1b9a; }
     .apartamento { background: #1565c0; }
 
+    /* 🕒 GAUGE */
+    .gaugeContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      max-width: 260px;
+    }
+
+    .tempoTexto {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+
     @media (max-width: 700px) {
       .container {
         grid-template-columns: 1fr;
@@ -117,9 +136,15 @@
     <p id="total">Carregando...</p>
   </div>
 
+  <!-- 🕒 GAUGE BOX -->
   <div class="box">
     <h2>Tempo Médio de Espera</h2>
-    <p id="tempo">Carregando...</p>
+
+    <div class="gaugeContainer">
+      <canvas id="gauge" width="260" height="140"></canvas>
+      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+    </div>
+
   </div>
 
   <div class="box">
@@ -140,6 +165,54 @@
 </div>
 
 <script>
+function drawGauge(minutes) {
+  const canvas = document.getElementById("gauge");
+  const ctx = canvas.getContext("2d");
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0, 0, width, height);
+
+  const centerX = width / 2;
+  const centerY = height;
+  const radius = 110;
+
+  const max = 180; // 3h escala
+
+  // 🎨 COR SEGUNDO REGRA
+  let color = "#2e7d32";
+  if (minutes > 120) color = "#c62828";
+  else if (minutes > 60) color = "#f9a825";
+
+  // fundo semicirculo
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, Math.PI, 0, false);
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = "#e0e0e0";
+  ctx.stroke();
+
+  // progresso
+  let angle = Math.PI + (Math.min(minutes, max) / max) * Math.PI;
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, Math.PI, angle, false);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 18;
+  ctx.stroke();
+
+  // ponteiro
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.lineTo(
+    centerX + radius * Math.cos(angle),
+    centerY + radius * Math.sin(angle)
+  );
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
@@ -219,10 +292,14 @@ async function carregarDados() {
 
     if (tempos.length > 0) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
-      document.getElementById("tempo").innerText =
+
+      drawGauge(media);
+
+      document.getElementById("tempoTexto").innerText =
         `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
     } else {
-      document.getElementById("tempo").innerText = "Sem dados";
+      document.getElementById("tempoTexto").innerText = "Sem dados";
+      drawGauge(0);
     }
 
     if (listaPacientes.length > 0) {
@@ -244,18 +321,15 @@ async function carregarDados() {
 
         return `
           <div class="pacienteCard">
-            
             <div class="linhaTop">
               <div class="nome">${p.nome}</div>
               <span class="badgeLocal ${corLocal}">${textoLocal}</span>
             </div>
-
             <div>
               <span class="badgeTempo ${corTempo}">
                 ${p.tempoFormatado}
               </span>
             </div>
-
           </div>
         `;
       }).join("");
@@ -268,11 +342,6 @@ async function carregarDados() {
 
   } catch (error) {
     console.error(error);
-    document.getElementById("total").innerText = "Erro";
-    document.getElementById("tempo").innerText = "Erro";
-    document.getElementById("leitosUTI").innerText = "Erro";
-    document.getElementById("leitosAPT").innerText = "Erro";
-    document.getElementById("listaPacientes").innerText = "Erro";
   }
 }
 

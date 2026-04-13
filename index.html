@@ -45,7 +45,7 @@
 
     .pacientesGrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
       margin-top: 10px;
     }
@@ -57,25 +57,46 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       text-align: left;
       border-left: 6px solid #1b5e20;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .linhaTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
     }
 
     .nome {
       font-weight: bold;
-      margin-bottom: 6px;
+      font-size: 15px;
     }
 
-    .badge {
+    .badgeTempo {
       display: inline-block;
       padding: 4px 8px;
       border-radius: 8px;
       font-size: 12px;
       color: white;
-      margin-top: 6px;
+    }
+
+    .badgeLocal {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
     }
 
     .verde { background: #2e7d32; }
     .amarelo { background: #f9a825; }
     .vermelho { background: #c62828; }
+
+    .uti { background: #6a1b9a; }
+    .apartamento { background: #1565c0; }
 
     @media (max-width: 700px) {
       .container {
@@ -97,28 +118,21 @@
   </div>
 
   <div class="box">
-    <h2>Locais de Internação</h2>
-    <p id="locais">Carregando...</p>
-  </div>
-
-  <!-- 🆕 LEITOS UTI -->
-  <div class="box">
-    <h2>Leitos Livres UTI</h2>
-    <p id="leitosUTI">Carregando...</p>
-  </div>
-
-  <!-- 🆕 LEITOS APARTAMENTO -->
-  <div class="box">
-    <h2>Leitos Livres Apartamento</h2>
-    <p id="leitosAPT">Carregando...</p>
-  </div>
-
-  <div class="box">
     <h2>Tempo Médio de Espera</h2>
     <p id="tempo">Carregando...</p>
   </div>
 
   <div class="box">
+    <h2>Leitos Livres UTI</h2>
+    <p id="leitosUTI">Carregando...</p>
+  </div>
+
+  <div class="box">
+    <h2>Leitos Livres Apartamento</h2>
+    <p id="leitosAPT">Carregando...</p>
+  </div>
+
+  <div class="box" style="grid-column: 1 / -1;">
     <h2>Tempo de Espera por Paciente</h2>
     <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
   </div>
@@ -137,7 +151,6 @@ async function carregarDados() {
     const linhas = texto.split("\n");
 
     let total = 0;
-    let locais = {};
     let tempos = [];
     let listaPacientes = [];
 
@@ -154,23 +167,12 @@ async function carregarDados() {
       let local = colunas[3];
       let horario = colunas[4];
 
-      // 🆕 LEITOS (coluna L = índice 11)
       if (index === 2) leitosUTI = colunas[11] || 0;
       if (index === 3) leitosAPT = colunas[11] || 0;
 
       if (index >= 2 && index <= 49) {
 
         if (nome && nome.trim() !== "") total++;
-
-        if (local && local.trim() !== "") {
-          local = local.trim().toLowerCase();
-
-          if (local === "uti") local = "Uti";
-          else if (local === "apartamento") local = "Apartamento";
-          else local = local.charAt(0).toUpperCase() + local.slice(1);
-
-          locais[local] = (locais[local] || 0) + 1;
-        }
 
         if (horario && nome && nome.trim() !== "") {
           let partes = horario.split(":");
@@ -196,7 +198,12 @@ async function carregarDados() {
 
               let tempoFormatado = `${h}h ${m}min`;
 
-              listaPacientes.push({ nome, tempoFormatado, diff });
+              listaPacientes.push({
+                nome,
+                local,
+                tempoFormatado,
+                diff
+              });
             }
           }
         }
@@ -207,13 +214,6 @@ async function carregarDados() {
 
     document.getElementById("total").innerText = total;
 
-    let textoLocais = "";
-    if (locais["Apartamento"]) textoLocais += `Apartamento: ${locais["Apartamento"]}<br>`;
-    if (locais["Uti"]) textoLocais += `UTI: ${locais["Uti"]}`;
-
-    document.getElementById("locais").innerHTML = textoLocais || "Nenhum dado";
-
-    // 🆕 LEITOS
     document.getElementById("leitosUTI").innerText = leitosUTI;
     document.getElementById("leitosAPT").innerText = leitosAPT;
 
@@ -229,16 +229,33 @@ async function carregarDados() {
 
       let html = listaPacientes.map(p => {
 
-        let cor = "verde";
-        if (p.diff >= 120) cor = "vermelho";
-        else if (p.diff >= 60) cor = "amarelo";
+        let corTempo = "verde";
+        if (p.diff >= 120) corTempo = "vermelho";
+        else if (p.diff >= 60) corTempo = "amarelo";
+
+        let localFormatado = (p.local || "").toLowerCase();
+        let corLocal = "apartamento";
+        let textoLocal = "Apartamento";
+
+        if (localFormatado.includes("uti")) {
+          corLocal = "uti";
+          textoLocal = "UTI";
+        }
 
         return `
           <div class="pacienteCard">
-            <div class="nome">${p.nome}</div>
-            <div class="badge ${cor}">
-              ${p.tempoFormatado}
+            
+            <div class="linhaTop">
+              <div class="nome">${p.nome}</div>
+              <span class="badgeLocal ${corLocal}">${textoLocal}</span>
             </div>
+
+            <div>
+              <span class="badgeTempo ${corTempo}">
+                ${p.tempoFormatado}
+              </span>
+            </div>
+
           </div>
         `;
       }).join("");
@@ -252,7 +269,6 @@ async function carregarDados() {
   } catch (error) {
     console.error(error);
     document.getElementById("total").innerText = "Erro";
-    document.getElementById("locais").innerText = "Erro";
     document.getElementById("tempo").innerText = "Erro";
     document.getElementById("leitosUTI").innerText = "Erro";
     document.getElementById("leitosAPT").innerText = "Erro";

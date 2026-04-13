@@ -183,7 +183,7 @@ function getEmoji(minutes) {
 }
 
 /* =========================
-   VELOCÍMETRO MODERNO
+   VELOCÍMETRO
 ========================= */
 function drawGauge(minutes) {
   const canvas = document.getElementById("gauge");
@@ -195,8 +195,6 @@ function drawGauge(minutes) {
   const cy = canvas.height - 20;
   const radius = 110;
   const max = 180;
-
-  const value = Math.min(minutes, max);
 
   function angle(v) {
     return Math.PI + (v / max) * Math.PI;
@@ -229,27 +227,8 @@ function drawGauge(minutes) {
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // APENAS 3 LABELS (corrigido)
-  const labels = [
-    { v: 60, text: "1h" },
-    { v: 120, text: "2h" },
-    { v: 180, text: ">3h" }
-  ];
-
-  ctx.fillStyle = "#333";
-  ctx.font = "bold 14px Arial";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-
-  labels.forEach(l => {
-    let a = angle(l.v);
-    let x = cx + (radius - 38) * Math.cos(a);
-    let y = cy + (radius - 38) * Math.sin(a);
-    ctx.fillText(l.text, x, y);
-  });
-
-  // ponteiro MAIS GROSSO
-  const a = angle(value);
+  // ponteiro
+  const a = angle(Math.min(minutes, max));
 
   let px = cx + (radius - 15) * Math.cos(a);
   let py = cy + (radius - 15) * Math.sin(a);
@@ -258,16 +237,25 @@ function drawGauge(minutes) {
   ctx.moveTo(cx, cy);
   ctx.lineTo(px, py);
   ctx.strokeStyle = "#111";
-  ctx.lineWidth = 7; // <<< MAIS GROSSO
+  ctx.lineWidth = 7;
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // ponta do ponteiro
+  // 🔥 PONTA MAIS GROSSA (AUMENTADA)
   ctx.beginPath();
   ctx.fillStyle = "#111";
   ctx.moveTo(px, py);
-  ctx.lineTo(px - 12 * Math.cos(a - 0.5), py - 12 * Math.sin(a - 0.5));
-  ctx.lineTo(px - 12 * Math.cos(a + 0.5), py - 12 * Math.sin(a + 0.5));
+
+  ctx.lineTo(
+    px - 16 * Math.cos(a - 0.6),
+    py - 16 * Math.sin(a - 0.6)
+  );
+
+  ctx.lineTo(
+    px - 16 * Math.cos(a + 0.6),
+    py - 16 * Math.sin(a + 0.6)
+  );
+
   ctx.closePath();
   ctx.fill();
 
@@ -283,7 +271,6 @@ function drawGauge(minutes) {
   ctx.fill();
 }
 
-/* RESTANTE DO CÓDIGO SEM ALTERAÇÃO */
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";

@@ -51,47 +51,83 @@
   <p id="locais">Carregando...</p>
 </div>
 
+<div class="box">
+  <h2>Tempo Médio de Espera</h2>
+  <p id="tempo">Carregando...</p>
+</div>
+
 <script>
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
     const response = await fetch(url);
-    const texto = await response.text();
+    let texto = await response.text();
 
+    texto = texto.replace(/\r/g, "");
     const linhas = texto.split("\n");
 
     let total = 0;
     let locais = {};
+    let tempos = [];
 
     linhas.forEach((linha, index) => {
+      if (!linha) return;
+
       const colunas = linha.split(",");
+      if (colunas.length < 5) return;
 
-      let nome = colunas[1];   // coluna B
-      let local = colunas[3];  // coluna D
+      let nome = colunas[1];   // B
+      let local = colunas[3];  // D
+      let horario = colunas[4]; // E
 
-      // 🔥 AGORA de 3 até 50
       if (index >= 2 && index <= 49) {
 
+        // CONTAGEM PACIENTES
         if (nome && nome.trim() !== "") {
           total++;
         }
 
+        // CONTAGEM LOCAIS
         if (local && local.trim() !== "") {
-
           local = local.trim().toLowerCase();
 
-          // padronização
           if (local === "uti") local = "Uti";
+          else if (local === "apartamento") local = "Apartamento";
           else local = local.charAt(0).toUpperCase() + local.slice(1);
 
           locais[local] = (locais[local] || 0) + 1;
         }
+
+        // 🔥 TEMPO DE ESPERA
+        if (horario && horario.trim() !== "") {
+          let partes = horario.split(":");
+
+          if (partes.length === 2) {
+            let horas = parseInt(partes[0]);
+            let minutos = parseInt(partes[1]);
+
+            let agora = new Date();
+            let entrada = new Date();
+
+            entrada.setHours(horas);
+            entrada.setMinutes(minutos);
+            entrada.setSeconds(0);
+
+            let diff = (agora - entrada) / 60000; // minutos
+
+            if (diff >= 0 && diff < 1440) { // até 24h
+              tempos.push(diff);
+            }
+          }
+        }
       }
     });
 
+    // TOTAL
     document.getElementById("total").innerText = total;
 
+    // LOCAIS
     let textoLocais = "";
 
     if (locais["Apartamento"]) {
@@ -105,10 +141,24 @@ async function carregarDados() {
     document.getElementById("locais").innerHTML =
       textoLocais || "Nenhum dado";
 
+    // 🔥 TEMPO MÉDIO
+    if (tempos.length > 0) {
+      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+
+      let horas = Math.floor(media / 60);
+      let minutos = Math.floor(media % 60);
+
+      document.getElementById("tempo").innerText =
+        `${horas}h ${minutos}min`;
+    } else {
+      document.getElementById("tempo").innerText = "Sem dados";
+    }
+
   } catch (error) {
-    console.error("Erro:", error);
+    console.error(error);
     document.getElementById("total").innerText = "Erro";
-    document.getElementById("locais").innerText = "Erro ao carregar";
+    document.getElementById("locais").innerText = "Erro";
+    document.getElementById("tempo").innerText = "Erro";
   }
 }
 

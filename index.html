@@ -97,12 +97,10 @@
     .uti { background: #6a1b9a; }
     .apartamento { background: #1565c0; }
 
-    /* 🕒 GAUGE */
     .gaugeContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
     canvas {
@@ -137,12 +135,10 @@
 
   <div class="box">
     <h2>Tempo Médio de Espera</h2>
-
     <div class="gaugeContainer">
       <canvas id="gauge" width="260" height="160"></canvas>
       <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
-
   </div>
 
   <div class="box">
@@ -176,9 +172,8 @@ function drawGauge(minutes) {
   const centerY = height - 10;
   const radius = 105;
 
-  const max = 180; // 3h
+  const max = 180;
 
-  // 🎨 cor dinâmica
   let color = "#2e7d32";
   if (minutes > 120) color = "#c62828";
   else if (minutes > 60) color = "#f9a825";
@@ -199,7 +194,7 @@ function drawGauge(minutes) {
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // 🕒 MARCAÇÕES (1h, 2h, 3h)
+  // 🕒 marcações
   const labels = ["1h", "2h", "3h"];
   labels.forEach((label, i) => {
     let t = (i + 1) / 3;
@@ -213,25 +208,41 @@ function drawGauge(minutes) {
     ctx.fillText(label, x - 10, y + 5);
   });
 
-  // 🔥 PONTEIRO MODERNO
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
+  // 🔥 PONTEIRO COM SETA
+  const arrowSize = 10;
 
   let px = centerX + (radius - 10) * Math.cos(angle);
   let py = centerY + (radius - 10) * Math.sin(angle);
 
+  // linha do ponteiro
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
   ctx.lineTo(px, py);
   ctx.strokeStyle = "#1b1b1b";
   ctx.lineWidth = 4;
   ctx.stroke();
 
-  // ponta do ponteiro
+  // 🏹 seta na ponta
+  let angleArrow = angle;
+
   ctx.beginPath();
-  ctx.arc(px, py, 5, 0, 2 * Math.PI);
+  ctx.moveTo(px, py);
+
+  ctx.lineTo(
+    px - arrowSize * Math.cos(angleArrow - 0.5),
+    py - arrowSize * Math.sin(angleArrow - 0.5)
+  );
+
+  ctx.lineTo(
+    px - arrowSize * Math.cos(angleArrow + 0.5),
+    py - arrowSize * Math.sin(angleArrow + 0.5)
+  );
+
+  ctx.closePath();
   ctx.fillStyle = "#1b1b1b";
   ctx.fill();
 
-  // centro do relógio
+  // centro
   ctx.beginPath();
   ctx.arc(centerX, centerY, 6, 0, 2 * Math.PI);
   ctx.fillStyle = "#1b1b1b";
@@ -311,7 +322,6 @@ async function carregarDados() {
     listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
-
     document.getElementById("leitosUTI").innerText = leitosUTI;
     document.getElementById("leitosAPT").innerText = leitosAPT;
 

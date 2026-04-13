@@ -119,10 +119,7 @@
     }
 
     canvas {
-      max-width: 260px;
-      background: radial-gradient(circle at center, #ffffff 0%, #f4f8f4 100%);
-      border-radius: 50%;
-      box-shadow: inset 0 0 18px rgba(0,0,0,0.08);
+      max-width: 280px;
     }
 
     .tempoTexto {
@@ -156,7 +153,7 @@
     <div id="emojiStatus" class="statusEmoji">😃</div>
 
     <div class="gaugeContainer">
-      <canvas id="gauge" width="260" height="180"></canvas>
+      <canvas id="gauge" width="280" height="200"></canvas>
       <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
   </div>
@@ -185,9 +182,9 @@ function getEmoji(minutes) {
   return "😡";
 }
 
-/* =======================
-   GAUGE MODERNO (NOVO)
-======================= */
+/* =========================
+   VELOCÍMETRO 180° MODERNO
+========================= */
 function drawGauge(minutes) {
   const canvas = document.getElementById("gauge");
   const ctx = canvas.getContext("2d");
@@ -195,14 +192,19 @@ function drawGauge(minutes) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const cx = canvas.width / 2;
-  const cy = canvas.height - 15;
-  const radius = 100;
+  const cy = canvas.height - 20;
+  const radius = 110;
   const max = 180;
 
   const value = Math.min(minutes, max);
-  const angle = Math.PI + (value / max) * Math.PI;
+  const startAngle = Math.PI;
+  const endAngle = 0;
 
-  // fundo (trilho)
+  function angleFromValue(v) {
+    return startAngle + (v / max) * Math.PI;
+  }
+
+  // fundo
   ctx.beginPath();
   ctx.arc(cx, cy, radius, Math.PI, 0);
   ctx.strokeStyle = "#e6e6e6";
@@ -210,42 +212,81 @@ function drawGauge(minutes) {
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // gradiente moderno
-  const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-  grad.addColorStop(0, "#2e7d32");
-  grad.addColorStop(0.5, "#f9a825");
-  grad.addColorStop(1, "#c62828");
-
+  // faixa verde
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angle);
-  ctx.strokeStyle = grad;
+  ctx.arc(cx, cy, radius, Math.PI, angleFromValue(60));
+  ctx.strokeStyle = "#2e7d32";
   ctx.lineWidth = 18;
-  ctx.lineCap = "round";
   ctx.stroke();
 
-  // ponteiro moderno
-  const px = cx + (radius - 10) * Math.cos(angle);
-  const py = cy + (radius - 10) * Math.sin(angle);
+  // faixa amarela
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, angleFromValue(60), angleFromValue(120));
+  ctx.strokeStyle = "#f9a825";
+  ctx.lineWidth = 18;
+  ctx.stroke();
+
+  // faixa vermelha
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, angleFromValue(120), 0);
+  ctx.strokeStyle = "#c62828";
+  ctx.lineWidth = 18;
+  ctx.stroke();
+
+  // marcações (ticks)
+  for (let i = 0; i <= 6; i++) {
+    let v = (max / 6) * i;
+    let a = angleFromValue(v);
+
+    let x1 = cx + (radius - 10) * Math.cos(a);
+    let y1 = cy + (radius - 10) * Math.sin(a);
+
+    let x2 = cx + (radius - 25) * Math.cos(a);
+    let y2 = cy + (radius - 25) * Math.sin(a);
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // números
+    let tx = cx + (radius - 40) * Math.cos(a);
+    let ty = cy + (radius - 40) * Math.sin(a);
+
+    ctx.fillStyle = "#333";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(Math.round(v), tx, ty);
+  }
+
+  // ponteiro
+  const angle = angleFromValue(value);
+
+  let px = cx + (radius - 20) * Math.cos(angle);
+  let py = cy + (radius - 20) * Math.sin(angle);
 
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(px, py);
-  ctx.strokeStyle = "#222";
-  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#111";
+  ctx.lineWidth = 4;
   ctx.stroke();
 
-  // ponta do ponteiro (triângulo moderno)
+  // ponta ponteiro
   ctx.beginPath();
-  ctx.fillStyle = "#222";
+  ctx.fillStyle = "#111";
   ctx.moveTo(px, py);
-  ctx.lineTo(px - 10 * Math.cos(angle - 0.4), py - 10 * Math.sin(angle - 0.4));
-  ctx.lineTo(px - 10 * Math.cos(angle + 0.4), py - 10 * Math.sin(angle + 0.4));
+  ctx.lineTo(px - 10 * Math.cos(angle - 0.5), py - 10 * Math.sin(angle - 0.5));
+  ctx.lineTo(px - 10 * Math.cos(angle + 0.5), py - 10 * Math.sin(angle + 0.5));
   ctx.closePath();
   ctx.fill();
 
-  // centro moderno (círculo duplo)
+  // centro
   ctx.beginPath();
-  ctx.arc(cx, cy, 7, 0, 2 * Math.PI);
+  ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
   ctx.fillStyle = "#1b5e20";
   ctx.fill();
 
@@ -253,14 +294,11 @@ function drawGauge(minutes) {
   ctx.arc(cx, cy, 3, 0, 2 * Math.PI);
   ctx.fillStyle = "#fff";
   ctx.fill();
-
-  // texto central mais moderno
-  ctx.fillStyle = "#1b5e20";
-  ctx.font = "bold 16px Arial";
-  ctx.textAlign = "center";
-  ctx.fillText(`${Math.floor(minutes/60)}h ${Math.floor(minutes%60)}min`, cx, cy - 40);
 }
 
+/* =========================
+   DADOS (SEM ALTERAÇÃO)
+========================= */
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";

@@ -67,10 +67,11 @@ async function carregarDados() {
     linhas.forEach((linha, index) => {
       const colunas = linha.split(",");
 
-      let nome = colunas[1];
-      let local = colunas[3];
+      let nome = colunas[1];   // coluna B
+      let local = colunas[3];  // coluna D
 
-      if (index >= 2 && index <= 8) {
+      // 🔥 AGORA de 3 até 50
+      if (index >= 2 && index <= 49) {
 
         if (nome && nome.trim() !== "") {
           total++;
@@ -79,7 +80,10 @@ async function carregarDados() {
         if (local && local.trim() !== "") {
 
           local = local.trim().toLowerCase();
-          local = local.charAt(0).toUpperCase() + local.slice(1);
+
+          // padronização
+          if (local === "uti") local = "Uti";
+          else local = local.charAt(0).toUpperCase() + local.slice(1);
 
           locais[local] = (locais[local] || 0) + 1;
         }
@@ -88,7 +92,6 @@ async function carregarDados() {
 
     document.getElementById("total").innerText = total;
 
-    // 🔥 ORDEM FIXA: Apartamento primeiro, UTI depois
     let textoLocais = "";
 
     if (locais["Apartamento"]) {

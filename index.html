@@ -63,37 +63,33 @@
 <script>
 async function carregarDados() {
   try {
-    const url = "https://sheets.googleapis.com/v4/spreadsheets/1Hr4NYjGaTqEas-0EFfRlUfglXXf4NrnC20NTd2DUe-Q/values/B3:D9?key=COLE_SUA_API_KEY_AQUI";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/gviz/tq?tqx=out:json";
 
     const response = await fetch(url);
+    const text = await response.text();
 
-    if (!response.ok) {
-      throw new Error("Erro na API: " + response.status);
-    }
+    // Corrige o formato do Google
+    const json = JSON.parse(text.substring(47).slice(0, -2));
 
-    const data = await response.json();
-
-    console.log("Dados recebidos:", data);
-
-    if (!data.values) {
-      throw new Error("Sem dados na planilha");
-    }
-
-    const linhas = data.values;
+    const rows = json.table.rows;
 
     let total = 0;
     let locais = {};
 
-    linhas.forEach(linha => {
-      let nome = linha[0];   // Coluna B (paciente)
-      let local = linha[2];  // Coluna D (local)
+    rows.forEach((row, index) => {
+      const nome = row.c[1]?.v;   // Coluna B
+      const local = row.c[3]?.v;  // Coluna D
 
-      if (nome && nome.trim() !== "") {
-        total++;
-      }
+      // Considera apenas linhas 3 a 9
+      if (index >= 2 && index <= 8) {
 
-      if (local && local.trim() !== "") {
-        locais[local] = (locais[local] || 0) + 1;
+        if (nome && nome.toString().trim() !== "") {
+          total++;
+        }
+
+        if (local && local.toString().trim() !== "") {
+          locais[local] = (locais[local] || 0) + 1;
+        }
       }
     });
 
@@ -107,17 +103,16 @@ async function carregarDados() {
       textoLocais || "Nenhum dado";
 
   } catch (error) {
-    console.error("ERRO COMPLETO:", error);
-
+    console.error("Erro:", error);
     document.getElementById("total").innerText = "Erro";
-    document.getElementById("locais").innerText = "Erro na API / chave inválida";
+    document.getElementById("locais").innerText = "Erro ao carregar";
   }
 }
 
-// Atualiza automaticamente a cada 5 segundos
+// Atualiza a cada 5 segundos
 setInterval(carregarDados, 5000);
 
-// Carrega ao abrir o site
+// Primeira carga
 carregarDados();
 </script>
 

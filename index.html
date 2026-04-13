@@ -1,79 +1,141 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Mapa do Hospital</title>
+  <meta charset="UTF-8">
+  <title>Mapa do Hospital</title>
 
-<style>
-  body {
-    font-family: Arial;
-    background: #eef5ee;
-    margin: 0;
-    text-align: center;
-  }
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #eef5ee;
+      margin: 0;
+      text-align: center;
+    }
 
-  header {
-    background: #1b5e20;
-    color: white;
-    padding: 18px;
-    font-size: 26px;
-    font-family: "Times New Roman";
-    text-align: left;
-    padding-left: 25px;
-  }
+    header {
+      background-color: #1b5e20;
+      color: white;
+      padding: 18px;
+      font-size: 26px;
+      font-family: "Times New Roman";
+      text-align: left;
+      padding-left: 25px;
+    }
 
-  .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
-  }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-  .box {
-    background: white;
-    padding: 18px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    position: relative;
-  }
+    .box {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+    }
 
-  h2 {
-    color: #1b5e20;
-  }
+    h2 {
+      color: #1b5e20;
+      margin-bottom: 10px;
+    }
 
-  .bigNumber {
-    font-size: 60px;
-    font-weight: bold;
-    color: #1b5e20;
-  }
+    .bigNumber {
+      font-size: 64px;
+      font-weight: bold;
+      color: #1b5e20;
+      margin: 10px 0;
+    }
 
-  .statusEmoji {
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    font-size: 42px;
-  }
+    /* 🔥 EMOJI MAIOR NO CANTO */
+    .statusEmoji {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 44px; /* AUMENTADO */
+    }
 
-  canvas {
-    max-width: 320px;
-  }
+    .pacientesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
 
-  .gaugeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    .pacienteCard {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: left;
+      border-left: 6px solid #1b5e20;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-  .tempoTexto {
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #1b5e20;
-  }
+    .linhaTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-</style>
+    .nome {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .badgeTempo {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .badgeLocal {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .verde { background: #2e7d32; }
+    .amarelo { background: #f9a825; }
+    .vermelho { background: #c62828; }
+
+    .uti { background: #6a1b9a; }
+    .apartamento { background: #1565c0; }
+
+    .gaugeContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    canvas {
+      max-width: 260px;
+    }
+
+    .tempoTexto {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -90,103 +152,244 @@
   <div class="box">
     <h2>Tempo Médio de Espera</h2>
 
+    <!-- 🔥 EMOJI GRANDE NO CANTO -->
     <div id="emojiStatus" class="statusEmoji">😃</div>
 
     <div class="gaugeContainer">
-      <canvas id="gauge" width="320" height="220"></canvas>
+      <canvas id="gauge" width="260" height="180"></canvas>
       <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
 
   </div>
 
+  <div class="box">
+    <h2>Leitos Livres UTI</h2>
+    <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+  </div>
+
+  <div class="box">
+    <h2>Leitos Livres Apartamento</h2>
+    <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+  </div>
+
+  <div class="box" style="grid-column: 1 / -1;">
+    <h2>Tempo de Espera por Paciente</h2>
+    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
+  </div>
+
 </div>
 
 <script>
+function getEmoji(minutes) {
+  if (minutes <= 60) return "😃";
+  if (minutes <= 120) return "😐";
+  return "😡";
+}
 
-function drawGauge(m) {
+function drawGauge(minutes) {
+  const canvas = document.getElementById("gauge");
+  const ctx = canvas.getContext("2d");
 
-  const c = document.getElementById("gauge");
-  const ctx = c.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.clearRect(0,0,c.width,c.height);
-
-  const cx = c.width/2;
-  const cy = c.height-10;
-  const r = 120;
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height - 10;
+  const radius = 105;
+  const max = 180;
 
   let color = "#2e7d32";
-  if(m>120) color="#c62828";
-  else if(m>60) color="#f9a825";
+  if (minutes > 120) color = "#c62828";
+  else if (minutes > 60) color = "#f9a825";
 
   // fundo
   ctx.beginPath();
-  ctx.arc(cx,cy,r,Math.PI,0);
-  ctx.strokeStyle="#ddd";
-  ctx.lineWidth=18;
+  ctx.arc(centerX, centerY, radius, Math.PI, 0);
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = "#e0e0e0";
   ctx.stroke();
 
   // progresso
-  let ang = Math.PI + (Math.min(m,180)/180)*Math.PI;
+  let angle = Math.PI + (Math.min(minutes, max) / max) * Math.PI;
 
   ctx.beginPath();
-  ctx.arc(cx,cy,r,Math.PI,ang);
-  ctx.strokeStyle=color;
-  ctx.lineWidth=18;
+  ctx.arc(centerX, centerY, radius, Math.PI, angle);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 18;
   ctx.stroke();
+
+  // labels
+  const labels = ["1h", "2h", ">3h"];
+  const positions = [1/3, 2/3, 0.98];
+
+  labels.forEach((label, i) => {
+    let t = positions[i];
+    let a = Math.PI + t * Math.PI;
+
+    let x = centerX + (radius + 25) * Math.cos(a);
+    let y = centerY + (radius + 25) * Math.sin(a);
+
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 14px Arial";
+    ctx.fillText(label, x - 20, y + 6);
+  });
 
   // ponteiro
-  let px = cx + (r-10)*Math.cos(ang);
-  let py = cy + (r-10)*Math.sin(ang);
-
-  let baseX = cx;
-  let baseY = cy;
+  let px = centerX + (radius - 10) * Math.cos(angle);
+  let py = centerY + (radius - 10) * Math.sin(angle);
 
   ctx.beginPath();
-  ctx.moveTo(baseX,baseY);
-  ctx.lineTo(px,py);
-  ctx.strokeStyle="#000";
-  ctx.lineWidth=4;
+  ctx.moveTo(centerX, centerY);
+  ctx.lineTo(px, py);
+  ctx.strokeStyle = "#1b1b1b";
+  ctx.lineWidth = 4;
   ctx.stroke();
 
-  // 🔥 SETA CORRIGIDA (ALINHADA E SEM INVERSÃO)
-  const arrowSize = 12;
-
-  const dx = px - baseX;
-  const dy = py - baseY;
-  const len = Math.sqrt(dx*dx + dy*dy);
-
-  const ux = dx / len;
-  const uy = dy / len;
-
-  const vx = -uy;
-  const vy = ux;
-
-  const tipX = px;
-  const tipY = py;
-
-  const leftX = tipX - ux * arrowSize - vx * arrowSize * 0.6;
-  const leftY = tipY - uy * arrowSize - vy * arrowSize * 0.6;
-
-  const rightX = tipX - ux * arrowSize + vx * arrowSize * 0.6;
-  const rightY = tipY - uy * arrowSize + vy * arrowSize * 0.6;
+  // seta
+  const arrowSize = 10;
+  let angleArrow = angle;
 
   ctx.beginPath();
-  ctx.moveTo(tipX,tipY);
-  ctx.lineTo(leftX,leftY);
-  ctx.lineTo(rightX,rightY);
+  ctx.moveTo(px, py);
+  ctx.lineTo(
+    px - arrowSize * Math.cos(angleArrow - 0.5),
+    py - arrowSize * Math.sin(angleArrow - 0.5)
+  );
+  ctx.lineTo(
+    px - arrowSize * Math.cos(angleArrow + 0.5),
+    py - arrowSize * Math.sin(angleArrow + 0.5)
+  );
   ctx.closePath();
-  ctx.fillStyle="#000";
-  ctx.fill();
-
-  // centro
-  ctx.beginPath();
-  ctx.arc(cx,cy,6,0,Math.PI*2);
-  ctx.fillStyle="#000";
+  ctx.fillStyle = "#1b1b1b";
   ctx.fill();
 }
 
-drawGauge(90);
+async function carregarDados() {
+  try {
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
+    const response = await fetch(url);
+    let texto = await response.text();
+
+    texto = texto.replace(/\r/g, "");
+    const linhas = texto.split("\n");
+
+    let total = 0;
+    let tempos = [];
+    let listaPacientes = [];
+
+    let leitosUTI = 0;
+    let leitosAPT = 0;
+
+    linhas.forEach((linha, index) => {
+      if (!linha) return;
+
+      const colunas = linha.split(",");
+      if (colunas.length < 12) return;
+
+      let nome = colunas[1];
+      let local = colunas[3];
+      let horario = colunas[4];
+
+      if (index === 2) leitosUTI = colunas[11] || 0;
+      if (index === 3) leitosAPT = colunas[11] || 0;
+
+      if (index >= 2 && index <= 49) {
+
+        if (nome && nome.trim() !== "") total++;
+
+        if (horario && nome && nome.trim() !== "") {
+          let partes = horario.split(":");
+
+          if (partes.length === 2) {
+            let horas = parseInt(partes[0]);
+            let minutos = parseInt(partes[1]);
+
+            let agora = new Date();
+            let entrada = new Date();
+
+            entrada.setHours(horas);
+            entrada.setMinutes(minutos);
+            entrada.setSeconds(0);
+
+            let diff = (agora - entrada) / 60000;
+
+            if (diff >= 0 && diff < 1440) {
+              tempos.push(diff);
+
+              let h = Math.floor(diff / 60);
+              let m = Math.floor(diff % 60);
+
+              let tempoFormatado = `${h}h ${m}min`;
+
+              listaPacientes.push({ nome, local, tempoFormatado, diff });
+            }
+          }
+        }
+      }
+    });
+
+    listaPacientes.sort((a, b) => b.diff - a.diff);
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("leitosUTI").innerText = leitosUTI;
+    document.getElementById("leitosAPT").innerText = leitosAPT;
+
+    if (tempos.length > 0) {
+      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+
+      document.getElementById("tempoTexto").innerText =
+        `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
+
+      document.getElementById("emojiStatus").innerText = getEmoji(media);
+
+      drawGauge(media);
+    } else {
+      document.getElementById("tempoTexto").innerText = "0h 0min";
+      document.getElementById("emojiStatus").innerText = "😃";
+      drawGauge(0);
+    }
+
+    if (listaPacientes.length > 0) {
+      let html = listaPacientes.map(p => {
+
+        let corTempo = "verde";
+        if (p.diff > 120) corTempo = "vermelho";
+        else if (p.diff > 60) corTempo = "amarelo";
+
+        let localFormatado = (p.local || "").toLowerCase();
+        let corLocal = "apartamento";
+        let textoLocal = "Apartamento";
+
+        if (localFormatado.includes("uti")) {
+          corLocal = "uti";
+          textoLocal = "UTI";
+        }
+
+        return `
+          <div class="pacienteCard">
+            <div class="linhaTop">
+              <div class="nome">${p.nome}</div>
+              <span class="badgeLocal ${corLocal}">${textoLocal}</span>
+            </div>
+            <div>
+              <span class="badgeTempo ${corTempo}">
+                ${p.tempoFormatado}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("listaPacientes").innerHTML = html;
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+setInterval(carregarDados, 5000);
+carregarDados();
 </script>
 
 </body>

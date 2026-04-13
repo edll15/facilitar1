@@ -182,9 +182,6 @@ function getEmoji(minutes) {
   return "😡";
 }
 
-/* =========================
-   VELOCÍMETRO AJUSTADO
-========================= */
 function drawGauge(minutes) {
   const canvas = document.getElementById("gauge");
   const ctx = canvas.getContext("2d");
@@ -232,19 +229,19 @@ function drawGauge(minutes) {
   const tipX = cx + (radius - 15) * Math.cos(a);
   const tipY = cy + (radius - 15) * Math.sin(a);
 
-  // 🔧 LINHA DO PONTEIRO CORRIGIDA (não ultrapassa mais a seta)
-  const baseX = cx + (radius - 35) * Math.cos(a);
-  const baseY = cy + (radius - 35) * Math.sin(a);
+  /* 🔥 PONTEIRO AGORA SEM ESPAÇO BRANCO */
+  const baseX = cx + (radius - 15) * Math.cos(a);
+  const baseY = cy + (radius - 15) * Math.sin(a);
 
   ctx.beginPath();
   ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY); // termina na base do triângulo
+  ctx.lineTo(baseX, baseY); // encosta exatamente na seta
   ctx.strokeStyle = "#111";
   ctx.lineWidth = 7;
   ctx.lineCap = "round";
   ctx.stroke();
 
-  // seta (triângulo maior e coerente)
+  // seta conectada diretamente ao corpo
   ctx.beginPath();
   ctx.fillStyle = "#111";
   ctx.moveTo(tipX, tipY);

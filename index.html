@@ -51,12 +51,11 @@
       margin: 10px 0;
     }
 
-    /* 🔥 EMOJI MAIOR NO CANTO */
     .statusEmoji {
       position: absolute;
       top: 8px;
       right: 12px;
-      font-size: 44px; /* AUMENTADO */
+      font-size: 44px;
     }
 
     .pacientesGrid {
@@ -151,15 +150,12 @@
 
   <div class="box">
     <h2>Tempo Médio de Espera</h2>
-
-    <!-- 🔥 EMOJI GRANDE NO CANTO -->
     <div id="emojiStatus" class="statusEmoji">😃</div>
 
     <div class="gaugeContainer">
       <canvas id="gauge" width="260" height="180"></canvas>
       <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
-
   </div>
 
   <div class="box">
@@ -201,14 +197,12 @@ function drawGauge(minutes) {
   if (minutes > 120) color = "#c62828";
   else if (minutes > 60) color = "#f9a825";
 
-  // fundo
   ctx.beginPath();
   ctx.arc(centerX, centerY, radius, Math.PI, 0);
   ctx.lineWidth = 18;
   ctx.strokeStyle = "#e0e0e0";
   ctx.stroke();
 
-  // progresso
   let angle = Math.PI + (Math.min(minutes, max) / max) * Math.PI;
 
   ctx.beginPath();
@@ -217,9 +211,12 @@ function drawGauge(minutes) {
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  // labels
   const labels = ["1h", "2h", ">3h"];
   const positions = [1/3, 2/3, 0.98];
+
+  // ✅ CORREÇÃO AQUI (sem cortar o "h")
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
   labels.forEach((label, i) => {
     let t = positions[i];
@@ -230,10 +227,9 @@ function drawGauge(minutes) {
 
     ctx.fillStyle = "#111";
     ctx.font = "bold 14px Arial";
-    ctx.fillText(label, x - 20, y + 6);
+    ctx.fillText(label, x, y);
   });
 
-  // ponteiro
   let px = centerX + (radius - 10) * Math.cos(angle);
   let py = centerY + (radius - 10) * Math.sin(angle);
 
@@ -244,7 +240,6 @@ function drawGauge(minutes) {
   ctx.lineWidth = 4;
   ctx.stroke();
 
-  // seta
   const arrowSize = 10;
   let angleArrow = angle;
 

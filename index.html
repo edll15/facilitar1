@@ -34,11 +34,6 @@
     h2 {
       color: #2e7d32;
     }
-
-    .alerta {
-      color: red;
-      font-weight: bold;
-    }
   </style>
 </head>
 
@@ -61,6 +56,7 @@
   <p id="tempo">Carregando...</p>
 </div>
 
+<!-- NOVA CAIXA -->
 <div class="box">
   <h2>Tempo de Espera por Paciente</h2>
   <p id="listaPacientes">Carregando...</p>
@@ -69,82 +65,78 @@
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZl/pub?output=csv";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
     const response = await fetch(url);
-    const texto = await response.text();
+    let texto = await response.text();
 
-    const linhas = texto
-      .split(/\n/)
-      .map(l => l.trim())
-      .filter(l => l.length > 0);
+    texto = texto.replace(/\r/g, "");
+    const linhas = texto.split("\n");
 
     let total = 0;
     let locais = {};
     let tempos = [];
     let listaPacientes = [];
 
-    // 🔥 pula cabeçalho automaticamente
-    for (let i = 1; i < linhas.length; i++) {
+    linhas.forEach((linha, index) => {
+      if (!linha) return;
 
-      const colunas = linhas[i].split(",");
+      const colunas = linha.split(",");
+      if (colunas.length < 5) return;
 
-      let nome = (colunas[1] || "").replace(/"/g, "").trim();
-      let local = (colunas[3] || "").replace(/"/g, "").trim();
-      let horario = (colunas[4] || "").replace(/"/g, "").trim();
+      let nome = colunas[1];   // B
+      let local = colunas[3];  // D
+      let horario = colunas[4]; // E
 
-      if (!nome) continue;
+      if (index >= 2 && index <= 49) {
 
-      total++;
+        // TOTAL
+        if (nome && nome.trim() !== "") {
+          total++;
+        }
 
-      // LOCAIS
-      if (local) {
-        local = local.toLowerCase();
+        // LOCAIS
+        if (local && local.trim() !== "") {
+          local = local.trim().toLowerCase();
 
-        if (local === "uti") local = "Uti";
-        else if (local === "apartamento") local = "Apartamento";
-        else local = local.charAt(0).toUpperCase() + local.slice(1);
+          if (local === "uti") local = "Uti";
+          else if (local === "apartamento") local = "Apartamento";
+          else local = local.charAt(0).toUpperCase() + local.slice(1);
 
-        locais[local] = (locais[local] || 0) + 1;
-      }
+          locais[local] = (locais[local] || 0) + 1;
+        }
 
-      // TEMPO
-      if (horario) {
-        let partes = horario.split(":");
+        // TEMPO + LISTA DE PACIENTES
+        if (horario && horario.trim() !== "" && nome && nome.trim() !== "") {
+          let partes = horario.split(":");
 
-        if (partes.length === 2) {
-          let horas = parseInt(partes[0]);
-          let minutos = parseInt(partes[1]);
+          if (partes.length === 2) {
+            let horas = parseInt(partes[0]);
+            let minutos = parseInt(partes[1]);
 
-          let agora = new Date();
-          let entrada = new Date();
+            let agora = new Date();
+            let entrada = new Date();
 
-          entrada.setHours(horas);
-          entrada.setMinutes(minutos);
-          entrada.setSeconds(0);
+            entrada.setHours(horas);
+            entrada.setMinutes(minutos);
+            entrada.setSeconds(0);
 
-          let diff = (agora - entrada) / 60000;
+            let diff = (agora - entrada) / 60000;
 
-          if (diff >= 0 && diff < 1440) {
+            if (diff >= 0 && diff < 1440) {
+              tempos.push(diff);
 
-            tempos.push(diff);
+              let h = Math.floor(diff / 60);
+              let m = Math.floor(diff % 60);
 
-            let h = Math.floor(diff / 60);
-            let m = Math.floor(diff % 60);
+              let tempoFormatado = `${h}h ${m}min`;
 
-            let tempoFormatado = `${h}h ${m}min`;
-
-            if (diff > 120) {
-              listaPacientes.push(
-                `<span class="alerta">${nome} - ${tempoFormatado}</span>`
-              );
-            } else {
               listaPacientes.push(`${nome} - ${tempoFormatado}`);
             }
           }
         }
       }
-    }
+    });
 
     // TOTAL
     document.getElementById("total").innerText = total;
@@ -176,9 +168,13 @@ async function carregarDados() {
       document.getElementById("tempo").innerText = "Sem dados";
     }
 
-    // LISTA PACIENTES
-    document.getElementById("listaPacientes").innerHTML =
-      listaPacientes.length ? listaPacientes.join("<br>") : "Sem dados";
+    // LISTA DE PACIENTES
+    if (listaPacientes.length > 0) {
+      document.getElementById("listaPacientes").innerHTML =
+        listaPacientes.join("<br>");
+    } else {
+      document.getElementById("listaPacientes").innerText = "Sem dados";
+    }
 
   } catch (error) {
     console.error(error);

@@ -22,7 +22,6 @@
       padding-left: 20px;
     }
 
-    /* 🔥 NOVO LAYOUT EM GRID */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -41,6 +40,20 @@
 
     h2 {
       color: #2e7d32;
+    }
+
+    /* 🔥 CENTRALIZA APENAS A CAIXA DO TEMPO MÉDIO */
+    .tempo-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 140px;
+      text-align: center;
+    }
+
+    .tempo-box h2 {
+      margin-bottom: 10px;
     }
 
     /* 📱 RESPONSIVO */
@@ -68,7 +81,8 @@
     <p id="locais">Carregando...</p>
   </div>
 
-  <div class="box">
+  <!-- 🔥 CAIXA CENTRALIZADA -->
+  <div class="box tempo-box">
     <h2>Tempo Médio de Espera</h2>
     <p id="tempo">Carregando...</p>
   </div>
@@ -83,7 +97,7 @@
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlP/pub?output=csv";
 
     const response = await fetch(url);
     let texto = await response.text();
@@ -151,7 +165,6 @@ async function carregarDados() {
       }
     });
 
-    // 🔽 ORDENAR DO MAIOR PARA O MENOR
     listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;

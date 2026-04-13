@@ -82,70 +82,65 @@ async function carregarDados() {
     let tempos = [];
     let listaPacientes = [];
 
-    linhas.forEach((linha, index) => {
-      if (!linha) return;
+    for (let i = 2; i <= 49; i++) {
 
-      const colunas = linha.split(",");
-      if (colunas.length < 5) return;
+      let linha = linhas[i];
+      if (!linha) continue;
 
-      let nome = colunas[1];
-      let local = colunas[3];
-      let horario = colunas[4];
+      // 🔥 CORREÇÃO PRINCIPAL (evita quebra errada de colunas)
+      let colunas = linha.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
 
-      if (index >= 2 && index <= 49) {
+      let nome = (colunas[1] || "").replace(/"/g, "").trim();
+      let local = (colunas[3] || "").replace(/"/g, "").trim();
+      let horario = (colunas[4] || "").replace(/"/g, "").trim();
 
-        if (nome && nome.trim() !== "") {
-          total++;
-        }
+      if (nome) total++;
 
-        if (local && local.trim() !== "") {
-          local = local.trim().toLowerCase();
+      if (local) {
+        local = local.toLowerCase();
 
-          if (local === "uti") local = "Uti";
-          else if (local === "apartamento") local = "Apartamento";
-          else local = local.charAt(0).toUpperCase() + local.slice(1);
+        if (local === "uti") local = "Uti";
+        else if (local === "apartamento") local = "Apartamento";
+        else local = local.charAt(0).toUpperCase() + local.slice(1);
 
-          locais[local] = (locais[local] || 0) + 1;
-        }
+        locais[local] = (locais[local] || 0) + 1;
+      }
 
-        // TEMPO + LISTA
-        if (horario && horario.trim() !== "" && nome && nome.trim() !== "") {
-          let partes = horario.split(":");
+      if (horario && nome) {
+        let partes = horario.split(":");
 
-          if (partes.length === 2) {
-            let horas = parseInt(partes[0]);
-            let minutos = parseInt(partes[1]);
+        if (partes.length === 2) {
+          let horas = parseInt(partes[0]);
+          let minutos = parseInt(partes[1]);
 
-            let agora = new Date();
-            let entrada = new Date();
+          let agora = new Date();
+          let entrada = new Date();
 
-            entrada.setHours(horas);
-            entrada.setMinutes(minutos);
-            entrada.setSeconds(0);
+          entrada.setHours(horas);
+          entrada.setMinutes(minutos);
+          entrada.setSeconds(0);
 
-            let diff = (agora - entrada) / 60000;
+          let diff = (agora - entrada) / 60000;
 
-            if (diff >= 0 && diff < 1440) {
-              tempos.push(diff);
+          if (diff >= 0 && diff < 1440) {
+            tempos.push(diff);
 
-              let h = Math.floor(diff / 60);
-              let m = Math.floor(diff % 60);
+            let h = Math.floor(diff / 60);
+            let m = Math.floor(diff % 60);
 
-              let tempoFormatado = `${h}h ${m}min`;
+            let tempoFormatado = `${h}h ${m}min`;
 
-              // 🔥 ALERTA > 2 HORAS
-              if (diff > 120) {
-                listaPacientes.push(
-                  `<span class="alerta">${nome} - ${tempoFormatado}</span>`
-                );
-              } else {
-                listaPacientes.push(`${nome} - ${tempoFormatado}`);
-              }
+            if (diff > 120) {
+              listaPacientes.push(
+                `<span class="alerta">${nome} - ${tempoFormatado}</span>`
+              );
+            } else {
+              listaPacientes.push(`${nome} - ${tempoFormatado}`);
             }
           }
         }
       }
-    });
+    }
 
     // TOTAL
     document.getElementById("total").innerText = total;
@@ -177,13 +172,9 @@ async function carregarDados() {
       document.getElementById("tempo").innerText = "Sem dados";
     }
 
-    // LISTA DE PACIENTES
-    if (listaPacientes.length > 0) {
-      document.getElementById("listaPacientes").innerHTML =
-        listaPacientes.join("<br>");
-    } else {
-      document.getElementById("listaPacientes").innerText = "Sem dados";
-    }
+    // LISTA PACIENTES
+    document.getElementById("listaPacientes").innerHTML =
+      listaPacientes.length ? listaPacientes.join("<br>") : "Sem dados";
 
   } catch (error) {
     console.error(error);

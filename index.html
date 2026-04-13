@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de Pacientes</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f4f8f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 15px;
+      font-size: 24px;
+      font-family: "Times New Roman";
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2e7d32;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>Facilitador</header>
+
+<div class="container">
+
+  <div class="box">
+    <h2>Total de Pacientes</h2>
+    <p id="total">Carregando...</p>
+  </div>
+
+  <div class="box">
+    <h2>Locais de Internação</h2>
+    <p id="locais">Carregando...</p>
+  </div>
+
+</div>
+
+<script>
+async function carregarDados() {
+  try {
+    const response = await fetch("SUA_URL_AQUI");
+    const data = await response.json();
+
+    let pacientes = data.values;
+
+    let total = 0;
+    let locais = {};
+
+    pacientes.forEach(linha => {
+      let nome = linha[0];   // coluna B
+      let local = linha[1];  // coluna C
+
+      if (nome) {
+        total++;
+      }
+
+      if (local) {
+        if (!locais[local]) {
+          locais[local] = 0;
+        }
+        locais[local]++;
+      }
+    });
+
+    document.getElementById("total").innerText = total;
+
+    let textoLocais = Object.entries(locais)
+      .map(([local, qtd]) => `${local} ${qtd} pacientes`)
+      .join(" | ");
+
+    document.getElementById("locais").innerText = textoLocais;
+
+  } catch (error) {
+    console.error("Erro ao carregar dados:", error);
+  }
+}
+
+// Atualiza a cada 5 segundos (tempo real)
+setInterval(carregarDados, 5000);
+
+// Primeira carga
+carregarDados();
+</script>
+
+</body>
+</html>

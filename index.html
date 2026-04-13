@@ -10,7 +10,6 @@
       background-color: #f4f8f4;
       text-align: center;
       margin: 0;
-      padding: 0;
     }
 
     header {
@@ -21,10 +20,6 @@
       font-family: "Times New Roman";
       text-align: left;
       padding-left: 20px;
-    }
-
-    .container {
-      margin-top: 40px;
     }
 
     .box {
@@ -46,30 +41,25 @@
 
 <header>Facilitador</header>
 
-<div class="container">
+<div class="box">
+  <h2>Total de Pacientes</h2>
+  <p id="total">Carregando...</p>
+</div>
 
-  <div class="box">
-    <h2>Total de Pacientes</h2>
-    <p id="total">Carregando...</p>
-  </div>
-
-  <div class="box">
-    <h2>Locais de Internação</h2>
-    <p id="locais">Carregando...</p>
-  </div>
-
+<div class="box">
+  <h2>Locais de Internação</h2>
+  <p id="locais">Carregando...</p>
 </div>
 
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/gviz/tq?tqx=out:json";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/gviz/tq?tqx=out:json&sheet=1";
 
     const response = await fetch(url);
     const text = await response.text();
 
-    // Corrige o formato do Google
-    const json = JSON.parse(text.substring(47).slice(0, -2));
+    const json = JSON.parse(text.substring(47, text.length - 2));
 
     const rows = json.table.rows;
 
@@ -77,10 +67,13 @@ async function carregarDados() {
     let locais = {};
 
     rows.forEach((row, index) => {
-      const nome = row.c[1]?.v;   // Coluna B
-      const local = row.c[3]?.v;  // Coluna D
+      // Proteção contra linhas vazias
+      if (!row.c) return;
 
-      // Considera apenas linhas 3 a 9
+      const nome = row.c[1]?.v;   // coluna B
+      const local = row.c[3]?.v;  // coluna D
+
+      // linhas 3 a 9
       if (index >= 2 && index <= 8) {
 
         if (nome && nome.toString().trim() !== "") {
@@ -103,16 +96,13 @@ async function carregarDados() {
       textoLocais || "Nenhum dado";
 
   } catch (error) {
-    console.error("Erro:", error);
+    console.error(error);
     document.getElementById("total").innerText = "Erro";
     document.getElementById("locais").innerText = "Erro ao carregar";
   }
 }
 
-// Atualiza a cada 5 segundos
 setInterval(carregarDados, 5000);
-
-// Primeira carga
 carregarDados();
 </script>
 

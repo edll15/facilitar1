@@ -34,6 +34,11 @@
     h2 {
       color: #2e7d32;
     }
+
+    .alerta {
+      color: red;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -56,7 +61,6 @@
   <p id="tempo">Carregando...</p>
 </div>
 
-<!-- NOVA CAIXA -->
 <div class="box">
   <h2>Tempo de Espera por Paciente</h2>
   <p id="listaPacientes">Carregando...</p>
@@ -65,7 +69,7 @@
 <script>
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZl/pub?output=csv";
 
     const response = await fetch(url);
     let texto = await response.text();
@@ -84,18 +88,16 @@ async function carregarDados() {
       const colunas = linha.split(",");
       if (colunas.length < 5) return;
 
-      let nome = colunas[1];   // B
-      let local = colunas[3];  // D
-      let horario = colunas[4]; // E
+      let nome = colunas[1];
+      let local = colunas[3];
+      let horario = colunas[4];
 
       if (index >= 2 && index <= 49) {
 
-        // TOTAL
         if (nome && nome.trim() !== "") {
           total++;
         }
 
-        // LOCAIS
         if (local && local.trim() !== "") {
           local = local.trim().toLowerCase();
 
@@ -106,7 +108,7 @@ async function carregarDados() {
           locais[local] = (locais[local] || 0) + 1;
         }
 
-        // TEMPO + LISTA DE PACIENTES
+        // TEMPO + LISTA
         if (horario && horario.trim() !== "" && nome && nome.trim() !== "") {
           let partes = horario.split(":");
 
@@ -131,7 +133,14 @@ async function carregarDados() {
 
               let tempoFormatado = `${h}h ${m}min`;
 
-              listaPacientes.push(`${nome} - ${tempoFormatado}`);
+              // 🔥 ALERTA > 2 HORAS
+              if (diff > 120) {
+                listaPacientes.push(
+                  `<span class="alerta">${nome} - ${tempoFormatado}</span>`
+                );
+              } else {
+                listaPacientes.push(`${nome} - ${tempoFormatado}`);
+              }
             }
           }
         }

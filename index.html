@@ -1,33 +1,39 @@
 <script>
-function getEmoji(minutes) {
-  if (minutes <= 60) return "😃";
-  if (minutes <= 120) return "😐";
+function getEmoji(min) {
+  if (min <= 60) return "😃";
+  if (min <= 120) return "😐";
   return "😡";
 }
 
-// parser seguro de data
-function parseData(valor) {
-  if (!valor) return null;
+// interpretação MUITO segura da data (coluna F)
+function parseDate(v) {
+  if (!v) return null;
 
-  valor = valor.trim();
+  v = String(v).trim();
 
   // dd/mm/yyyy hh:mm
-  if (valor.includes("/")) {
-    let partes = valor.split(" ");
-    let [d, m, y] = partes[0].split("/").map(Number);
+  if (v.includes("/")) {
+    const [d, m, rest] = v.split("/");
+    let y, h = 0, min = 0;
 
-    let h = 0, min = 0;
-    if (partes[1]) {
-      [h, min] = partes[1].split(":").map(Number);
+    if (rest && rest.includes(" ")) {
+      const [yearPart, timePart] = rest.split(" ");
+      y = Number(yearPart);
+
+      if (timePart) {
+        [h, min] = timePart.split(":").map(Number);
+      }
+    } else {
+      y = new Date().getFullYear();
     }
 
-    return new Date(y, m - 1, d, h, min, 0);
+    return new Date(y, m - 1, d, h, min);
   }
 
-  // hh:mm (hoje)
-  if (valor.includes(":")) {
-    let [h, m] = valor.split(":").map(Number);
-    let d = new Date();
+  // hh:mm (assume hoje)
+  if (v.includes(":")) {
+    const [h, m] = v.split(":").map(Number);
+    const d = new Date();
     d.setHours(h, m, 0, 0);
     return d;
   }
@@ -35,29 +41,7 @@ function parseData(valor) {
   return null;
 }
 
-// CSV parser mais seguro (resolve vírgula quebrando colunas)
-function parseCSV(text) {
-  const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
-  return lines.map(line => {
-    let result = [];
-    let current = "";
-    let inQuotes = false;
-
-    for (let char of line) {
-      if (char === '"') inQuotes = !inQuotes;
-      else if (char === "," && !inQuotes) {
-        result.push(current);
-        current = "";
-      } else {
-        current += char;
-      }
-    }
-    result.push(current);
-    return result;
-  });
-}
-
-function drawGauge(minutes) {
+function drawGauge(min) {
   const canvas = document.getElementById("gauge");
   const ctx = canvas.getContext("2d");
 
@@ -65,66 +49,57 @@ function drawGauge(minutes) {
 
   const cx = canvas.width / 2;
   const cy = canvas.height - 20;
-  const radius = 110;
+  const r = 110;
   const max = 180;
 
-  function angle(v) {
-    return Math.PI + (v / max) * Math.PI;
-  }
+  const ang = v => Math.PI + (v / max) * Math.PI;
 
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, 0);
-  ctx.strokeStyle = "#d8cfc0";
+  ctx.arc(cx, cy, r, Math.PI, 0);
+  ctx.strokeStyle = "#ddd";
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  const zones = [
-    { from: 0, to: 60, color: "#0b3c6f" },
-    { from: 60, to: 120, color: "#b58900" },
-    { from: 120, to: 180, color: "#b71c1c" }
-  ];
-
-  zones.forEach(z => {
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, angle(z.from), angle(z.to));
-    ctx.strokeStyle = z.color;
-    ctx.lineWidth = 18;
-    ctx.stroke();
-  });
-
-  const a = angle(Math.min(minutes, max));
-
-  const tipX = cx + (radius - 15) * Math.cos(a);
-  const tipY = cy + (radius - 15) * Math.sin(a);
-
-  const baseX = cx + (radius - 30) * Math.cos(a);
-  const baseY = cy + (radius - 30) * Math.sin(a);
-
   ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY);
-  ctx.strokeStyle = "#0b1f3a";
-  ctx.lineWidth = 7;
+  ctx.arc(cx, cy, r, Math.PI, ang(60));
+  ctx.strokeStyle = "#0b3c6f";
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.fillStyle = "#0b1f3a";
-  ctx.moveTo(tipX, tipY);
-  ctx.lineTo(tipX - 16 * Math.cos(a - 0.6), tipY - 16 * Math.sin(a - 0.6));
-  ctx.lineTo(tipX - 16 * Math.cos(a + 0.6), tipY - 16 * Math.sin(a + 0.6));
-  ctx.closePath();
-  ctx.fill();
+  ctx.arc(cx, cy, r, ang(60), ang(120));
+  ctx.strokeStyle = "#b58900";
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, ang(120), 0);
+  ctx.strokeStyle = "#b71c1c";
+  ctx.stroke();
+
+  const a = ang(Math.min(min, max));
+
+  const x = cx + (r - 20) * Math.cos(a);
+  const y = cy + (r - 20) * Math.sin(a);
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(x, y);
+  ctx.strokeStyle = "#0b1f3a";
+  ctx.lineWidth = 6;
+  ctx.stroke();
 }
 
 async function carregarDados() {
   try {
+
     const url =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
-    const response = await fetch(url);
-    const text = await response.text();
+    const res = await fetch(url);
+    const text = await res.text();
 
-    const linhas = parseCSV(text);
+    const linhas = text
+      .split("\n")
+      .map(l => l.split(",").map(c => c.replace(/"/g, "").trim()));
 
     let total = 0;
     let tempos = [];
@@ -133,37 +108,36 @@ async function carregarDados() {
     let leitosUTI = 0;
     let leitosAPT = 0;
 
-    linhas.forEach((colunas, index) => {
-      if (!colunas || colunas.length < 6) return;
+    for (let i = 1; i < linhas.length; i++) {
+      const c = linhas[i];
+      if (!c || c.length < 6) continue;
 
-      let nome = colunas[1];
-      let local = colunas[3];
+      const nome = c[1];
+      const local = c[3];
+      const data = parseDate(c[5]); // 🔥 COLUNA F
 
-      // 🔥 COLUNA F = índice 5
-      let dataEntrada = parseData(colunas[5]);
+      if (!nome) continue;
 
-      if (index === 2) leitosUTI = colunas[11] || 0;
-      if (index === 3) leitosAPT = colunas[11] || 0;
+      total++;
 
-      if (index >= 2 && index <= 100) {
-        if (nome) total++;
+      if (i === 2) leitosUTI = c[11] || 0;
+      if (i === 3) leitosAPT = c[11] || 0;
 
-        if (dataEntrada && nome) {
-          let diff = (new Date() - dataEntrada) / 60000;
+      if (data) {
+        const diff = (new Date() - data) / 60000;
 
-          if (diff >= 0) {
-            tempos.push(diff);
+        if (diff >= 0 && diff < 20000) {
+          tempos.push(diff);
 
-            lista.push({
-              nome,
-              local,
-              diff,
-              tempo: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
-            });
-          }
+          lista.push({
+            nome,
+            local,
+            diff,
+            tempo: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
+          });
         }
       }
-    });
+    }
 
     lista.sort((a, b) => b.diff - a.diff);
 
@@ -172,7 +146,7 @@ async function carregarDados() {
     document.getElementById("leitosAPT").innerText = leitosAPT;
 
     if (tempos.length) {
-      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+      const media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
 
       document.getElementById("tempoTexto").innerText =
         `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
@@ -181,23 +155,21 @@ async function carregarDados() {
       drawGauge(media);
     }
 
-    document.getElementById("listaPacientes").innerHTML = lista
-      .map(p => {
-        let cor =
-          p.diff > 120 ? "vermelho" : p.diff > 60 ? "amarelo" : "verde";
-
-        return `
+    document.getElementById("listaPacientes").innerHTML =
+      lista.map(p => `
         <div class="pacienteCard">
           <div class="linhaTop">
             <div class="nome">${p.nome}</div>
-            <span class="badgeTempo ${cor}">${p.tempo}</span>
+          </div>
+          <div class="badgeTempo ${p.diff > 120 ? "vermelho" : p.diff > 60 ? "amarelo" : "verde"}">
+            ${p.tempo}
           </div>
           <div class="badgeLocal">${p.local || ""}</div>
-        </div>`;
-      })
-      .join("");
-  } catch (e) {
-    console.error("Erro:", e);
+        </div>
+      `).join("");
+
+  } catch (err) {
+    console.error("ERRO GERAL:", err);
   }
 }
 

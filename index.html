@@ -5,55 +5,6 @@ function getEmoji(minutes) {
   return "😡";
 }
 
-// 🔥 CSV parser REAL (resolve 100% os erros)
-function parseCSV(text) {
-  const rows = [];
-  let row = [];
-  let current = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-
-    if (c === '"') {
-      inQuotes = !inQuotes;
-    } else if (c === "," && !inQuotes) {
-      row.push(current);
-      current = "";
-    } else if (c === "\n" && !inQuotes) {
-      row.push(current);
-      rows.push(row);
-      row = [];
-      current = "";
-    } else {
-      current += c;
-    }
-  }
-
-  if (current || row.length) {
-    row.push(current);
-    rows.push(row);
-  }
-
-  return rows;
-}
-
-// 🔥 junta DATA (F) + HORA (E)
-function parseDateTime(data, hora) {
-  try {
-    if (!data || !hora) return null;
-
-    const [d, m, y] = data.trim().split("/").map(Number);
-    const [h, min] = hora.trim().split(":").map(Number);
-
-    if (!d || !m || !y) return null;
-
-    return new Date(y, m - 1, d, h || 0, min || 0, 0);
-  } catch {
-    return null;
-  }
-}
-
 function drawGauge(minutes) {
   const canvas = document.getElementById("gauge");
   const ctx = canvas.getContext("2d");
@@ -65,7 +16,9 @@ function drawGauge(minutes) {
   const radius = 110;
   const max = 180;
 
-  const angle = v => Math.PI + (v / max) * Math.PI;
+  function angle(v) {
+    return Math.PI + (v / max) * Math.PI;
+  }
 
   ctx.beginPath();
   ctx.arc(cx, cy, radius, Math.PI, 0);
@@ -76,16 +29,19 @@ function drawGauge(minutes) {
   ctx.beginPath();
   ctx.arc(cx, cy, radius, Math.PI, angle(60));
   ctx.strokeStyle = "#0b3c6f";
+  ctx.lineWidth = 18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, radius, angle(60), angle(120));
   ctx.strokeStyle = "#b58900";
+  ctx.lineWidth = 18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx, cy, radius, angle(120), 0);
   ctx.strokeStyle = "#b71c1c";
+  ctx.lineWidth = 18;
   ctx.stroke();
 
   const a = angle(Math.min(minutes, max));
@@ -106,61 +62,70 @@ async function carregarDados() {
     const url =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
-    const res = await fetch(url);
-    const text = await res.text();
+    const response = await fetch(url);
+    let texto = await response.text();
 
-    const linhas = parseCSV(text);
+    texto = texto.replace(/\r/g, "");
+    const linhas = texto.split("\n");
 
     let total = 0;
     let tempos = [];
-    let lista = [];
+    let listaPacientes = [];
 
     let leitosUTI = 0;
     let leitosAPT = 0;
 
     for (let i = 1; i < linhas.length; i++) {
-      const c = linhas[i];
-      if (!c || c.length < 6) continue;
+      const colunas = linhas[i].split(",");
 
-      const nome = c[1];
-      const local = c[3];
+      if (!colunas || colunas.length < 6) continue;
 
-      const hora = c[4]; // E
-      const data = c[5]; // F
+      let nome = colunas[1];
+      let local = colunas[3];
+
+      // 🔥 VOLTANDO AO MODELO SIMPLES (QUE FUNCIONAVA)
+      let horario = colunas[4]; // E (hora)
+      let data = colunas[5];    // F (data)
 
       if (!nome) continue;
 
       total++;
 
-      if (i === 2) leitosUTI = c[11] || 0;
-      if (i === 3) leitosAPT = c[11] || 0;
+      if (i === 2) leitosUTI = colunas[11] || 0;
+      if (i === 3) leitosAPT = colunas[11] || 0;
 
-      const entrada = parseDateTime(data, hora);
+      // 🔥 CÁLCULO SIMPLES E SEGURO (SEM QUEBRAR O SITE)
+      if (horario && data && horario.includes(":") && data.includes("/")) {
 
-      if (entrada) {
-        const diff = (new Date() - entrada) / 60000;
+        let [h, m] = horario.split(":").map(Number);
+        let [d, mo, y] = data.split("/").map(Number);
 
-        if (diff >= 0) {
+        let entrada = new Date(y, mo - 1, d, h, m, 0);
+
+        let agora = new Date();
+        let diff = (agora - entrada) / 60000;
+
+        if (diff >= 0 && diff < 10000) {
           tempos.push(diff);
 
-          lista.push({
+          listaPacientes.push({
             nome,
             local,
             diff,
-            tempo: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
+            tempoFormatado: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
           });
         }
       }
     }
 
-    lista.sort((a, b) => b.diff - a.diff);
+    listaPacientes.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
     document.getElementById("leitosUTI").innerText = leitosUTI;
     document.getElementById("leitosAPT").innerText = leitosAPT;
 
-    if (tempos.length) {
-      const media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+    if (tempos.length > 0) {
+      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
 
       document.getElementById("tempoTexto").innerText =
         `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
@@ -174,7 +139,7 @@ async function carregarDados() {
     }
 
     document.getElementById("listaPacientes").innerHTML =
-      lista.map(p => {
+      listaPacientes.map(p => {
         let cor =
           p.diff > 120 ? "vermelho" :
           p.diff > 60 ? "amarelo" : "verde";
@@ -191,16 +156,14 @@ async function carregarDados() {
             </div>
 
             <div class="badgeTempo ${cor}">
-              ${p.tempo}
+              ${p.tempoFormatado}
             </div>
           </div>
         `;
       }).join("");
 
-  } catch (e) {
-    console.error("Erro:", e);
-    document.getElementById("listaPacientes").innerHTML =
-      "Erro ao carregar dados.";
+  } catch (err) {
+    console.error(err);
   }
 }
 

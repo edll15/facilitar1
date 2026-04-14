@@ -1,142 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>São Luiz AF</title>
+<meta charset="UTF-8">
+<title>São Luiz AF</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      text-align: center;
-      background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  text-align: center;
+  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 31, 58, 0.78);
-      z-index: -1;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(11,31,58,0.78);
+  z-index: -1;
+}
 
-    header {
-      background-color: rgba(11, 31, 58, 0.95);
-      color: #f5f0e6;
-      padding: 18px;
-      font-size: 26px;
-      font-family: "Times New Roman";
-      text-align: left;
-      padding-left: 25px;
-    }
+header {
+  background-color: rgba(11,31,58,0.95);
+  color: #f5f0e6;
+  padding: 18px;
+  font-size: 26px;
+  font-family: "Times New Roman";
+  text-align: left;
+  padding-left: 25px;
+}
 
-    .container {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
 
-    .leftCol, .rightCol {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+.box {
+  background: rgba(245,240,230,0.96);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
 
-    .box {
-      background: rgba(245, 240, 230, 0.96);
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      position: relative;
-    }
+.bigNumber {
+  font-size: 60px;
+  font-weight: bold;
+  color: #0b1f3a;
+}
 
-    h2 {
-      color: #0b1f3a;
-      margin-bottom: 10px;
-    }
+.pacientesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
 
-    .bigNumber {
-      font-size: 64px;
-      font-weight: bold;
-      color: #0b1f3a;
-      margin: 10px 0;
-    }
+.pacienteCard {
+  background: rgba(245,240,230,0.96);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: left;
+  border-left: 6px solid #0b1f3a;
+}
 
-    .statusEmoji {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 44px;
-    }
+.badgeTempo {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+}
 
-    .pacientesGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
+.verde { background:#1b5e20; }
+.amarelo { background:#b58900; }
+.vermelho { background:#b71c1c; }
 
-    .pacienteCard {
-      background: rgba(245, 240, 230, 0.96);
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      text-align: left;
-      border-left: 6px solid #0b1f3a;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .linhaTop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nome {
-      font-weight: bold;
-      font-size: 15px;
-      color: #0b1f3a;
-    }
-
-    .badgeTempo {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: white;
-    }
-
-    .verde { background: #1b5e20; }
-    .amarelo { background: #b58900; }
-    .vermelho { background: #b71c1c; }
-
-    .uti { background: #4a148c; }
-    .apartamento { background: #0b3c6f; }
-
-    canvas { max-width: 280px; }
-
-    .tempoTexto {
-      margin-top: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0b1f3a;
-    }
-
-    @media (max-width: 700px) {
-      .container { grid-template-columns: 1fr; }
-    }
-  </style>
+</style>
 </head>
 
 <body>
@@ -145,222 +90,123 @@
 
 <div class="container">
 
-  <div class="leftCol">
+<div class="box">
+<h2>Total de Pacientes</h2>
+<div id="total" class="bigNumber">0</div>
+</div>
 
-    <div class="box">
-      <h2>Total de Pacientes</h2>
-      <div id="total" class="bigNumber">0</div>
-    </div>
-
-    <div class="box">
-      <h2>Tempo Médio de Espera</h2>
-      <div id="emojiStatus" class="statusEmoji">😃</div>
-
-      <canvas id="gauge" width="280" height="200"></canvas>
-      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
-    </div>
-
-  </div>
-
-  <div class="rightCol">
-
-    <div class="box">
-      <h2>Leitos Livres UTI</h2>
-      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
-
-    <div class="box">
-      <h2>Leitos Livres Apartamento</h2>
-      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
-
-  </div>
-
-  <div class="box" style="grid-column: 1 / -1;">
-    <h2>Tempo de Espera por Paciente</h2>
-    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
-  </div>
+<div class="box">
+<h2>Tempo Médio de Espera</h2>
+<div id="tempoMedio" class="bigNumber">0h 0min</div>
+</div>
 
 </div>
 
+<div class="box">
+<h2>Tempo por Paciente</h2>
+<div id="lista" class="pacientesGrid"></div>
+</div>
+
 <script>
-function getEmoji(minutes) {
-  if (minutes <= 60) return "😃";
-  if (minutes <= 120) return "😐";
-  return "😡";
-}
 
-function parseDataHora(dataStr, horaStr) {
-  if (!dataStr || !horaStr) return null;
+function parseDateTime(data, hora) {
+  if (!data || !hora) return null;
 
-  let d = dataStr.split("/");
-  let h = horaStr.split(":");
+  let d, m, y;
 
-  if (d.length !== 3 || h.length < 2) return null;
-
-  let dia = parseInt(d[0]);
-  let mes = parseInt(d[1]) - 1;
-  let ano = parseInt(d[2]);
-
-  let hora = parseInt(h[0]);
-  let minuto = parseInt(h[1]);
-
-  return new Date(ano, mes, dia, hora, minuto, 0);
-}
-
-function drawGauge(minutes) {
-  const canvas = document.getElementById("gauge");
-  const ctx = canvas.getContext("2d");
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const cx = canvas.width / 2;
-  const cy = canvas.height - 20;
-  const radius = 110;
-  const max = 180;
-
-  function angle(v) {
-    return Math.PI + (v / max) * Math.PI;
+  // formato ISO
+  if (data.includes("-")) {
+    let p = data.split("-");
+    y = +p[0]; m = +p[1]-1; d = +p[2];
+  } else {
+    let p = data.split("/");
+    if (p.length !== 3) return null;
+    d = +p[0]; m = +p[1]-1; y = +p[2];
   }
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, 0);
-  ctx.strokeStyle = "#d8cfc0";
-  ctx.lineWidth = 18;
-  ctx.stroke();
+  let h = hora.split(":");
+  if (h.length < 2) return null;
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angle(60));
-  ctx.strokeStyle = "#0b3c6f";
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(60), angle(120));
-  ctx.strokeStyle = "#b58900";
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(120), 0);
-  ctx.strokeStyle = "#b71c1c";
-  ctx.stroke();
-
-  const a = angle(Math.min(minutes, max));
-
-  const tipX = cx + (radius - 15) * Math.cos(a);
-  const tipY = cy + (radius - 15) * Math.sin(a);
-
-  const baseX = cx + (radius - 30) * Math.cos(a);
-  const baseY = cy + (radius - 30) * Math.sin(a);
-
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY);
-  ctx.strokeStyle = "#0b1f3a";
-  ctx.lineWidth = 7;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.fillStyle = "#0b1f3a";
-  ctx.moveTo(tipX, tipY);
-  ctx.lineTo(tipX - 16 * Math.cos(a - 0.6), tipY - 16 * Math.sin(a - 0.6));
-  ctx.lineTo(tipX - 16 * Math.cos(a + 0.6), tipY - 16 * Math.sin(a + 0.6));
-  ctx.closePath();
-  ctx.fill();
+  return new Date(y, m, d, +h[0], +h[1], 0);
 }
 
-async function carregarDados() {
-  try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlP/pub?output=csv";
+async function carregar() {
 
-    const response = await fetch(url);
-    let texto = await response.text();
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlP/pub?output=csv";
 
-    const linhas = texto.replace(/\r/g, "").split("\n");
+  let res = await fetch(url);
+  let texto = await res.text();
 
-    let total = 0;
-    let tempos = [];
-    let listaPacientes = [];
+  let linhas = texto.replace(/\r/g,"").split("\n");
 
-    let leitosUTI = 0;
-    let leitosAPT = 0;
+  let tempos = [];
+  let pacientes = [];
+  let total = 0;
 
-    linhas.forEach((linha, index) => {
-      const colunas = linha.split(",");
-      if (colunas.length < 12) return;
+  linhas.forEach((linha, i) => {
 
-      let nome = colunas[1];
-      let local = colunas[3];
-      let hora = colunas[4];      // E
-      let data = colunas[5];      // F (AGORA USADO)
+    let c = linha.split(",");
 
-      if (index === 2) leitosUTI = colunas[11] || 0;
-      if (index === 3) leitosAPT = colunas[11] || 0;
+    let nome = c[1];
+    let hora = c[4]; // E
+    let data = c[5]; // F
 
-      if (index >= 2 && index <= 49) {
+    if (!nome) return;
 
-        if (nome && nome.trim() !== "") total++;
+    total++;
 
-        let entrada = parseDataHora(data, hora);
+    let entrada = parseDateTime(data, hora);
 
-        if (entrada) {
-          let diff = (new Date() - entrada) / 60000;
+    if (!entrada || isNaN(entrada.getTime())) return;
 
-          if (diff >= 0 && diff < 1440 * 30) {
-            tempos.push(diff);
+    let diff = (new Date() - entrada) / 60000;
 
-            listaPacientes.push({
-              nome,
-              local,
-              diff,
-              tempoFormatado: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
-            });
-          }
-        }
-      }
+    if (diff < 0) return;
+
+    tempos.push(diff);
+
+    pacientes.push({
+      nome,
+      diff,
+      texto: `${Math.floor(diff/60)}h ${Math.floor(diff%60)}min`
     });
 
-    listaPacientes.sort((a, b) => b.diff - a.diff);
+  });
 
-    document.getElementById("total").innerText = total;
-    document.getElementById("leitosUTI").innerText = leitosUTI;
-    document.getElementById("leitosAPT").innerText = leitosAPT;
+  // MÉDIA CORRIGIDA
+  let media = 0;
 
-    if (tempos.length > 0) {
-      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+  if (tempos.length > 0) {
+    media = tempos.reduce((a,b)=>a+b,0) / tempos.length;
+  }
 
-      document.getElementById("tempoTexto").innerText =
-        `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
+  document.getElementById("total").innerText = total;
 
-      document.getElementById("emojiStatus").innerText = getEmoji(media);
-      drawGauge(media);
-    }
+  document.getElementById("tempoMedio").innerText =
+    `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
 
-    let html = listaPacientes.map(p => {
-      let corTempo = p.diff > 120 ? "vermelho" : p.diff > 60 ? "amarelo" : "verde";
+  pacientes.sort((a,b)=>b.diff - a.diff);
+
+  document.getElementById("lista").innerHTML =
+    pacientes.map(p => {
+
+      let cor =
+        p.diff > 120 ? "vermelho" :
+        p.diff > 60 ? "amarelo" : "verde";
 
       return `
         <div class="pacienteCard">
-          <div class="linhaTop">
-            <div class="nome">${p.nome}</div>
-          </div>
-          <div>
-            <span class="badgeTempo ${corTempo}">
-              ${p.tempoFormatado}
-            </span>
-          </div>
+          <b>${p.nome}</b><br>
+          <span class="badgeTempo ${cor}">${p.texto}</span>
         </div>
       `;
     }).join("");
 
-    document.getElementById("listaPacientes").innerHTML = html;
-
-  } catch (e) {
-    console.error(e);
-  }
 }
 
-setInterval(carregarDados, 5000);
-carregarDados();
+setInterval(carregar, 5000);
+carregar();
+
 </script>
 
 </body>

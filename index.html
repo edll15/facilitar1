@@ -10,7 +10,6 @@
       margin: 0;
       text-align: center;
 
-      /* CORREDOR HOSPITALAR (URL ESTÁVEL) */
       background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
       background-size: cover;
       background-position: center;
@@ -170,11 +169,7 @@
     <div class="box">
       <h2>Tempo Médio de Espera</h2>
       <div id="emojiStatus" class="statusEmoji">😃</div>
-
-      <div class="gaugeContainer">
-        <canvas id="gauge" width="280" height="200"></canvas>
-        <div id="tempoTexto" class="tempoTexto">Carregando...</div>
-      </div>
+      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
     </div>
 
   </div>
@@ -207,84 +202,38 @@ function getEmoji(minutes) {
   return "😡";
 }
 
-function drawGauge(minutes) {
-  const canvas = document.getElementById("gauge");
-  const ctx = canvas.getContext("2d");
+/* ===== CORREÇÃO PRINCIPAL: DATA + HORA ===== */
+function parseDataHora(valor) {
+  if (!valor) return null;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // aceita "dd/mm/yyyy hh:mm" ou "yyyy-mm-dd hh:mm"
+  let partes = valor.trim().split(" ");
 
-  const cx = canvas.width / 2;
-  const cy = canvas.height - 20;
-  const radius = 110;
-  const max = 180;
+  if (partes.length < 2) return null;
 
-  function angle(v) {
-    return Math.PI + (v / max) * Math.PI;
+  let data = partes[0];
+  let hora = partes[1];
+
+  let d, m, y;
+
+  if (data.includes("/")) {
+    let p = data.split("/");
+    d = parseInt(p[0]);
+    m = parseInt(p[1]) - 1;
+    y = parseInt(p[2]);
+  } else if (data.includes("-")) {
+    let p = data.split("-");
+    y = parseInt(p[0]);
+    m = parseInt(p[1]) - 1;
+    d = parseInt(p[2]);
+  } else {
+    return null;
   }
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, 0);
-  ctx.strokeStyle = "#d8cfc0";
-  ctx.lineWidth = 18;
-  ctx.stroke();
+  let h = parseInt(hora.split(":")[0]);
+  let min = parseInt(hora.split(":")[1]);
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angle(60));
-  ctx.strokeStyle = "#0b3c6f";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(60), angle(120));
-  ctx.strokeStyle = "#b58900";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(120), 0);
-  ctx.strokeStyle = "#b71c1c";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  const a = angle(Math.min(minutes, max));
-
-  const tipX = cx + (radius - 15) * Math.cos(a);
-  const tipY = cy + (radius - 15) * Math.sin(a);
-
-  const baseX = cx + (radius - 30) * Math.cos(a);
-  const baseY = cy + (radius - 30) * Math.sin(a);
-
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY);
-  ctx.strokeStyle = "#0b1f3a";
-  ctx.lineWidth = 7;
-  ctx.lineCap = "round";
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.fillStyle = "#0b1f3a";
-  ctx.moveTo(tipX, tipY);
-  ctx.lineTo(
-    tipX - 16 * Math.cos(a - 0.6),
-    tipY - 16 * Math.sin(a - 0.6)
-  );
-  ctx.lineTo(
-    tipX - 16 * Math.cos(a + 0.6),
-    tipY - 16 * Math.sin(a + 0.6)
-  );
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-  ctx.fillStyle = "#0b1f3a";
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, 3, 0, 2 * Math.PI);
-  ctx.fillStyle = "#f5f0e6";
-  ctx.fill();
+  return new Date(y, m, d, h, min, 0);
 }
 
 async function carregarDados() {
@@ -312,7 +261,9 @@ async function carregarDados() {
 
       let nome = colunas[1];
       let local = colunas[3];
-      let horario = colunas[4];
+
+      // 🔥 AGORA A COLUNA PRECISA TER DATA + HORA
+      let dataHora = colunas[4];
 
       if (index === 2) leitosUTI = colunas[11] || 0;
       if (index === 3) leitosAPT = colunas[11] || 0;
@@ -321,32 +272,26 @@ async function carregarDados() {
 
         if (nome && nome.trim() !== "") total++;
 
-        if (horario && nome && nome.trim() !== "") {
-          let partes = horario.split(":");
+        let entrada = parseDataHora(dataHora);
 
-          if (partes.length === 2) {
-            let horas = parseInt(partes[0]);
-            let minutos = parseInt(partes[1]);
+        if (entrada && nome && nome.trim() !== "") {
 
-            let agora = new Date();
-            let entrada = new Date();
+          let agora = new Date();
+          let diff = (agora - entrada) / 60000;
 
-            entrada.setHours(horas);
-            entrada.setMinutes(minutos);
-            entrada.setSeconds(0);
+          if (diff >= 0 && diff < 10000) {
 
-            let diff = (agora - entrada) / 60000;
+            tempos.push(diff);
 
-            if (diff >= 0 && diff < 1440) {
-              tempos.push(diff);
+            let h = Math.floor(diff / 60);
+            let m = Math.floor(diff % 60);
 
-              let h = Math.floor(diff / 60);
-              let m = Math.floor(diff % 60);
-
-              let tempoFormatado = `${h}h ${m}min`;
-
-              listaPacientes.push({ nome, local, tempoFormatado, diff });
-            }
+            listaPacientes.push({
+              nome,
+              local,
+              tempoFormatado: `${h}h ${m}min`,
+              diff
+            });
           }
         }
       }
@@ -365,47 +310,39 @@ async function carregarDados() {
         `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
 
       document.getElementById("emojiStatus").innerText = getEmoji(media);
-
-      drawGauge(media);
-    } else {
-      document.getElementById("tempoTexto").innerText = "0h 0min";
-      document.getElementById("emojiStatus").innerText = "😃";
-      drawGauge(0);
     }
 
-    if (listaPacientes.length > 0) {
-      let html = listaPacientes.map(p => {
+    let html = listaPacientes.map(p => {
 
-        let corTempo = "verde";
-        if (p.diff > 120) corTempo = "vermelho";
-        else if (p.diff > 60) corTempo = "amarelo";
+      let corTempo = "verde";
+      if (p.diff > 120) corTempo = "vermelho";
+      else if (p.diff > 60) corTempo = "amarelo";
 
-        let localFormatado = (p.local || "").toLowerCase();
-        let corLocal = "apartamento";
-        let textoLocal = "Apartamento";
+      let localFormatado = (p.local || "").toLowerCase();
+      let corLocal = "apartamento";
+      let textoLocal = "Apartamento";
 
-        if (localFormatado.includes("uti")) {
-          corLocal = "uti";
-          textoLocal = "UTI";
-        }
+      if (localFormatado.includes("uti")) {
+        corLocal = "uti";
+        textoLocal = "UTI";
+      }
 
-        return `
-          <div class="pacienteCard">
-            <div class="linhaTop">
-              <div class="nome">${p.nome}</div>
-              <span class="badgeLocal ${corLocal}">${textoLocal}</span>
-            </div>
-            <div>
-              <span class="badgeTempo ${corTempo}">
-                ${p.tempoFormatado}
-              </span>
-            </div>
+      return `
+        <div class="pacienteCard">
+          <div class="linhaTop">
+            <div class="nome">${p.nome}</div>
+            <span class="badgeLocal ${corLocal}">${textoLocal}</span>
           </div>
-        `;
-      }).join("");
+          <div>
+            <span class="badgeTempo ${corTempo}">
+              ${p.tempoFormatado}
+            </span>
+          </div>
+        </div>
+      `;
+    }).join("");
 
-      document.getElementById("listaPacientes").innerHTML = html;
-    }
+    document.getElementById("listaPacientes").innerHTML = html;
 
   } catch (error) {
     console.error(error);

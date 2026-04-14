@@ -1,87 +1,157 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>São Luiz AF</title>
+  <meta charset="UTF-8">
+  <title>São Luiz AF</title>
 
-<style>
-body {
-  font-family: Arial;
-  margin: 0;
-  text-align: center;
-  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      text-align: center;
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(11,31,58,0.78);
-  z-index: -1;
-}
+      /* CORREDOR HOSPITALAR (URL ESTÁVEL) */
+      background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-header {
-  background-color: rgba(11,31,58,0.95);
-  color: #f5f0e6;
-  padding: 18px;
-  font-size: 26px;
-  font-family: "Times New Roman";
-  text-align: left;
-  padding-left: 25px;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 31, 58, 0.78);
+      z-index: -1;
+    }
 
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 18px;
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
-}
+    header {
+      background-color: rgba(11, 31, 58, 0.95);
+      color: #f5f0e6;
+      padding: 18px;
+      font-size: 26px;
+      font-family: "Times New Roman";
+      text-align: left;
+      padding-left: 25px;
+    }
 
-.box {
-  background: rgba(245,240,230,0.96);
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-.bigNumber {
-  font-size: 60px;
-  font-weight: bold;
-  color: #0b1f3a;
-}
+    .leftCol, .rightCol {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-.pacientesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
-}
+    .box {
+      background: rgba(245, 240, 230, 0.96);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      position: relative;
+    }
 
-.pacienteCard {
-  background: rgba(245,240,230,0.96);
-  padding: 12px;
-  border-radius: 10px;
-  text-align: left;
-  border-left: 6px solid #0b1f3a;
-}
+    h2 {
+      color: #0b1f3a;
+      margin-bottom: 10px;
+    }
 
-.badgeTempo {
-  padding: 4px 8px;
-  border-radius: 8px;
-  color: white;
-  font-size: 12px;
-}
+    .bigNumber {
+      font-size: 64px;
+      font-weight: bold;
+      color: #0b1f3a;
+      margin: 10px 0;
+    }
 
-.verde { background:#1b5e20; }
-.amarelo { background:#b58900; }
-.vermelho { background:#b71c1c; }
+    .statusEmoji {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 44px;
+    }
 
-</style>
+    .pacientesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .pacienteCard {
+      background: rgba(245, 240, 230, 0.96);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      text-align: left;
+      border-left: 6px solid #0b1f3a;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .linhaTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nome {
+      font-weight: bold;
+      font-size: 15px;
+      color: #0b1f3a;
+    }
+
+    .badgeTempo {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .badgeLocal {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .verde { background: #1b5e20; }
+    .amarelo { background: #b58900; }
+    .vermelho { background: #b71c1c; }
+
+    .uti { background: #4a148c; }
+    .apartamento { background: #0b3c6f; }
+
+    canvas {
+      max-width: 280px;
+    }
+
+    .tempoTexto {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0b1f3a;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -90,123 +160,260 @@ header {
 
 <div class="container">
 
-<div class="box">
-<h2>Total de Pacientes</h2>
-<div id="total" class="bigNumber">0</div>
-</div>
+  <div class="leftCol">
 
-<div class="box">
-<h2>Tempo Médio de Espera</h2>
-<div id="tempoMedio" class="bigNumber">0h 0min</div>
-</div>
+    <div class="box">
+      <h2>Total de Pacientes</h2>
+      <div id="total" class="bigNumber">0</div>
+    </div>
 
-</div>
+    <div class="box">
+      <h2>Tempo Médio de Espera</h2>
+      <div id="emojiStatus" class="statusEmoji">😃</div>
 
-<div class="box">
-<h2>Tempo por Paciente</h2>
-<div id="lista" class="pacientesGrid"></div>
+      <div class="gaugeContainer">
+        <canvas id="gauge" width="280" height="200"></canvas>
+        <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rightCol">
+
+    <div class="box">
+      <h2>Leitos Livres UTI</h2>
+      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
+    <div class="box">
+      <h2>Leitos Livres Apartamento</h2>
+      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
+  </div>
+
+  <div class="box" style="grid-column: 1 / -1;">
+    <h2>Tempo de Espera por Paciente</h2>
+    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
+  </div>
+
 </div>
 
 <script>
-
-function parseDateTime(data, hora) {
-  if (!data || !hora) return null;
-
-  let d, m, y;
-
-  // formato ISO
-  if (data.includes("-")) {
-    let p = data.split("-");
-    y = +p[0]; m = +p[1]-1; d = +p[2];
-  } else {
-    let p = data.split("/");
-    if (p.length !== 3) return null;
-    d = +p[0]; m = +p[1]-1; y = +p[2];
-  }
-
-  let h = hora.split(":");
-  if (h.length < 2) return null;
-
-  return new Date(y, m, d, +h[0], +h[1], 0);
+function getEmoji(minutes) {
+  if (minutes <= 60) return "😃";
+  if (minutes <= 120) return "😐";
+  return "😡";
 }
 
-async function carregar() {
+function drawGauge(minutes) {
+  const canvas = document.getElementById("gauge");
+  const ctx = canvas.getContext("2d");
 
-  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlP/pub?output=csv";
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  let res = await fetch(url);
-  let texto = await res.text();
+  const cx = canvas.width / 2;
+  const cy = canvas.height - 20;
+  const radius = 110;
+  const max = 180;
 
-  let linhas = texto.replace(/\r/g,"").split("\n");
+  function angle(v) {
+    return Math.PI + (v / max) * Math.PI;
+  }
 
-  let tempos = [];
-  let pacientes = [];
-  let total = 0;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, Math.PI, 0);
+  ctx.strokeStyle = "#d8cfc0";
+  ctx.lineWidth = 18;
+  ctx.stroke();
 
-  linhas.forEach((linha, i) => {
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, Math.PI, angle(60));
+  ctx.strokeStyle = "#0b3c6f";
+  ctx.lineWidth = 18;
+  ctx.stroke();
 
-    let c = linha.split(",");
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, angle(60), angle(120));
+  ctx.strokeStyle = "#b58900";
+  ctx.lineWidth = 18;
+  ctx.stroke();
 
-    let nome = c[1];
-    let hora = c[4]; // E
-    let data = c[5]; // F
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, angle(120), 0);
+  ctx.strokeStyle = "#b71c1c";
+  ctx.lineWidth = 18;
+  ctx.stroke();
 
-    if (!nome) return;
+  const a = angle(Math.min(minutes, max));
 
-    total++;
+  const tipX = cx + (radius - 15) * Math.cos(a);
+  const tipY = cy + (radius - 15) * Math.sin(a);
 
-    let entrada = parseDateTime(data, hora);
+  const baseX = cx + (radius - 30) * Math.cos(a);
+  const baseY = cy + (radius - 30) * Math.sin(a);
 
-    if (!entrada || isNaN(entrada.getTime())) return;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(baseX, baseY);
+  ctx.strokeStyle = "#0b1f3a";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.stroke();
 
-    let diff = (new Date() - entrada) / 60000;
+  ctx.beginPath();
+  ctx.fillStyle = "#0b1f3a";
+  ctx.moveTo(tipX, tipY);
+  ctx.lineTo(
+    tipX - 16 * Math.cos(a - 0.6),
+    tipY - 16 * Math.sin(a - 0.6)
+  );
+  ctx.lineTo(
+    tipX - 16 * Math.cos(a + 0.6),
+    tipY - 16 * Math.sin(a + 0.6)
+  );
+  ctx.closePath();
+  ctx.fill();
 
-    if (diff < 0) return;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
+  ctx.fillStyle = "#0b1f3a";
+  ctx.fill();
 
-    tempos.push(diff);
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3, 0, 2 * Math.PI);
+  ctx.fillStyle = "#f5f0e6";
+  ctx.fill();
+}
 
-    pacientes.push({
-      nome,
-      diff,
-      texto: `${Math.floor(diff/60)}h ${Math.floor(diff%60)}min`
+async function carregarDados() {
+  try {
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+
+    const response = await fetch(url);
+    let texto = await response.text();
+
+    texto = texto.replace(/\r/g, "");
+    const linhas = texto.split("\n");
+
+    let total = 0;
+    let tempos = [];
+    let listaPacientes = [];
+
+    let leitosUTI = 0;
+    let leitosAPT = 0;
+
+    linhas.forEach((linha, index) => {
+      if (!linha) return;
+
+      const colunas = linha.split(",");
+      if (colunas.length < 12) return;
+
+      let nome = colunas[1];
+      let local = colunas[3];
+      let horario = colunas[4];
+
+      if (index === 2) leitosUTI = colunas[11] || 0;
+      if (index === 3) leitosAPT = colunas[11] || 0;
+
+      if (index >= 2 && index <= 49) {
+
+        if (nome && nome.trim() !== "") total++;
+
+        if (horario && nome && nome.trim() !== "") {
+          let partes = horario.split(":");
+
+          if (partes.length === 2) {
+            let horas = parseInt(partes[0]);
+            let minutos = parseInt(partes[1]);
+
+            let agora = new Date();
+            let entrada = new Date();
+
+            entrada.setHours(horas);
+            entrada.setMinutes(minutos);
+            entrada.setSeconds(0);
+
+            let diff = (agora - entrada) / 60000;
+
+            if (diff >= 0 && diff < 1440) {
+              tempos.push(diff);
+
+              let h = Math.floor(diff / 60);
+              let m = Math.floor(diff % 60);
+
+              let tempoFormatado = `${h}h ${m}min`;
+
+              listaPacientes.push({ nome, local, tempoFormatado, diff });
+            }
+          }
+        }
+      }
     });
 
-  });
+    listaPacientes.sort((a, b) => b.diff - a.diff);
 
-  // MÉDIA CORRIGIDA
-  let media = 0;
+    document.getElementById("total").innerText = total;
+    document.getElementById("leitosUTI").innerText = leitosUTI;
+    document.getElementById("leitosAPT").innerText = leitosAPT;
 
-  if (tempos.length > 0) {
-    media = tempos.reduce((a,b)=>a+b,0) / tempos.length;
+    if (tempos.length > 0) {
+      let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+
+      document.getElementById("tempoTexto").innerText =
+        `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
+
+      document.getElementById("emojiStatus").innerText = getEmoji(media);
+
+      drawGauge(media);
+    } else {
+      document.getElementById("tempoTexto").innerText = "0h 0min";
+      document.getElementById("emojiStatus").innerText = "😃";
+      drawGauge(0);
+    }
+
+    if (listaPacientes.length > 0) {
+      let html = listaPacientes.map(p => {
+
+        let corTempo = "verde";
+        if (p.diff > 120) corTempo = "vermelho";
+        else if (p.diff > 60) corTempo = "amarelo";
+
+        let localFormatado = (p.local || "").toLowerCase();
+        let corLocal = "apartamento";
+        let textoLocal = "Apartamento";
+
+        if (localFormatado.includes("uti")) {
+          corLocal = "uti";
+          textoLocal = "UTI";
+        }
+
+        return `
+          <div class="pacienteCard">
+            <div class="linhaTop">
+              <div class="nome">${p.nome}</div>
+              <span class="badgeLocal ${corLocal}">${textoLocal}</span>
+            </div>
+            <div>
+              <span class="badgeTempo ${corTempo}">
+                ${p.tempoFormatado}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("listaPacientes").innerHTML = html;
+    }
+
+  } catch (error) {
+    console.error(error);
   }
-
-  document.getElementById("total").innerText = total;
-
-  document.getElementById("tempoMedio").innerText =
-    `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-
-  pacientes.sort((a,b)=>b.diff - a.diff);
-
-  document.getElementById("lista").innerHTML =
-    pacientes.map(p => {
-
-      let cor =
-        p.diff > 120 ? "vermelho" :
-        p.diff > 60 ? "amarelo" : "verde";
-
-      return `
-        <div class="pacienteCard">
-          <b>${p.nome}</b><br>
-          <span class="badgeTempo ${cor}">${p.texto}</span>
-        </div>
-      `;
-    }).join("");
-
 }
 
-setInterval(carregar, 5000);
-carregar();
-
+setInterval(carregarDados, 5000);
+carregarDados();
 </script>
 
 </body>

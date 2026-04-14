@@ -5,26 +5,26 @@ function getEmoji(minutes) {
   return "😡";
 }
 
-// agora interpreta a coluna F corretamente
-function parseDataHora(valor) {
+// parser seguro de data
+function parseData(valor) {
   if (!valor) return null;
 
   valor = valor.trim();
 
-  // formato: dd/mm/yyyy hh:mm
+  // dd/mm/yyyy hh:mm
   if (valor.includes("/")) {
-    let [data, hora] = valor.split(" ");
-    let [d, m, y] = data.split("/").map(Number);
+    let partes = valor.split(" ");
+    let [d, m, y] = partes[0].split("/").map(Number);
 
     let h = 0, min = 0;
-    if (hora) {
-      [h, min] = hora.split(":").map(Number);
+    if (partes[1]) {
+      [h, min] = partes[1].split(":").map(Number);
     }
 
     return new Date(y, m - 1, d, h, min, 0);
   }
 
-  // formato: hh:mm (assume hoje)
+  // hh:mm (hoje)
   if (valor.includes(":")) {
     let [h, m] = valor.split(":").map(Number);
     let d = new Date();
@@ -33,6 +33,28 @@ function parseDataHora(valor) {
   }
 
   return null;
+}
+
+// CSV parser mais seguro (resolve vírgula quebrando colunas)
+function parseCSV(text) {
+  const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+  return lines.map(line => {
+    let result = [];
+    let current = "";
+    let inQuotes = false;
+
+    for (let char of line) {
+      if (char === '"') inQuotes = !inQuotes;
+      else if (char === "," && !inQuotes) {
+        result.push(current);
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+    result.push(current);
+    return result;
+  });
 }
 
 function drawGauge(minutes) {
@@ -56,20 +78,19 @@ function drawGauge(minutes) {
   ctx.lineWidth = 18;
   ctx.stroke();
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angle(60));
-  ctx.strokeStyle = "#0b3c6f";
-  ctx.stroke();
+  const zones = [
+    { from: 0, to: 60, color: "#0b3c6f" },
+    { from: 60, to: 120, color: "#b58900" },
+    { from: 120, to: 180, color: "#b71c1c" }
+  ];
 
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(60), angle(120));
-  ctx.strokeStyle = "#b58900";
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(120), 0);
-  ctx.strokeStyle = "#b71c1c";
-  ctx.stroke();
+  zones.forEach(z => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, angle(z.from), angle(z.to));
+    ctx.strokeStyle = z.color;
+    ctx.lineWidth = 18;
+    ctx.stroke();
+  });
 
   const a = angle(Math.min(minutes, max));
 
@@ -97,67 +118,60 @@ function drawGauge(minutes) {
 
 async function carregarDados() {
   try {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+    const url =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
     const response = await fetch(url);
-    let texto = await response.text();
+    const text = await response.text();
 
-    texto = texto.replace(/\r/g, "");
-    const linhas = texto.split("\n");
+    const linhas = parseCSV(text);
 
     let total = 0;
     let tempos = [];
-    let listaPacientes = [];
+    let lista = [];
 
     let leitosUTI = 0;
     let leitosAPT = 0;
 
-    linhas.forEach((linha, index) => {
-      if (!linha) return;
-
-      const colunas = linha.split(",");
-
-      if (colunas.length < 6) return;
+    linhas.forEach((colunas, index) => {
+      if (!colunas || colunas.length < 6) return;
 
       let nome = colunas[1];
       let local = colunas[3];
 
-      // 🔥 AGORA USANDO COLUNA F (ÍNDICE 5)
-      let dataEntrada = parseDataHora(colunas[5]);
+      // 🔥 COLUNA F = índice 5
+      let dataEntrada = parseData(colunas[5]);
 
       if (index === 2) leitosUTI = colunas[11] || 0;
       if (index === 3) leitosAPT = colunas[11] || 0;
 
-      if (index >= 2 && index <= 49) {
+      if (index >= 2 && index <= 100) {
+        if (nome) total++;
 
-        if (nome && nome.trim() !== "") total++;
+        if (dataEntrada && nome) {
+          let diff = (new Date() - dataEntrada) / 60000;
 
-        if (dataEntrada && nome && nome.trim() !== "") {
-
-          let agora = new Date();
-          let diff = (agora - dataEntrada) / 60000;
-
-          if (diff >= 0 && diff < 10000) {
+          if (diff >= 0) {
             tempos.push(diff);
 
-            listaPacientes.push({
+            lista.push({
               nome,
               local,
-              tempoFormatado: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`,
-              diff
+              diff,
+              tempo: `${Math.floor(diff / 60)}h ${Math.floor(diff % 60)}min`
             });
           }
         }
       }
     });
 
-    listaPacientes.sort((a, b) => b.diff - a.diff);
+    lista.sort((a, b) => b.diff - a.diff);
 
     document.getElementById("total").innerText = total;
     document.getElementById("leitosUTI").innerText = leitosUTI;
     document.getElementById("leitosAPT").innerText = leitosAPT;
 
-    if (tempos.length > 0) {
+    if (tempos.length) {
       let media = tempos.reduce((a, b) => a + b, 0) / tempos.length;
 
       document.getElementById("tempoTexto").innerText =
@@ -165,27 +179,25 @@ async function carregarDados() {
 
       document.getElementById("emojiStatus").innerText = getEmoji(media);
       drawGauge(media);
-    } else {
-      document.getElementById("tempoTexto").innerText = "0h 0min";
-      document.getElementById("emojiStatus").innerText = "😃";
-      drawGauge(0);
     }
 
-    document.getElementById("listaPacientes").innerHTML =
-      listaPacientes.map(p => `
+    document.getElementById("listaPacientes").innerHTML = lista
+      .map(p => {
+        let cor =
+          p.diff > 120 ? "vermelho" : p.diff > 60 ? "amarelo" : "verde";
+
+        return `
         <div class="pacienteCard">
           <div class="linhaTop">
             <div class="nome">${p.nome}</div>
-            <span class="badgeLocal">${p.local}</span>
+            <span class="badgeTempo ${cor}">${p.tempo}</span>
           </div>
-          <div class="badgeTempo ${p.diff > 120 ? "vermelho" : p.diff > 60 ? "amarelo" : "verde"}">
-            ${p.tempoFormatado}
-          </div>
-        </div>
-      `).join("");
-
-  } catch (error) {
-    console.error(error);
+          <div class="badgeLocal">${p.local || ""}</div>
+        </div>`;
+      })
+      .join("");
+  } catch (e) {
+    console.error("Erro:", e);
   }
 }
 

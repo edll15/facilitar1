@@ -218,16 +218,20 @@ function parseDataHora(data,hora){
 }
 
 function drawGaugeAnimated(minutes){
+
   const c=document.getElementById("gauge");
   const ctx=c.getContext("2d");
 
   const cx=c.width/2;
   const cy=c.height-20;
   const r=110;
+  const max=180;
 
-  function ang(v){return Math.PI+(v/180)*Math.PI;}
+  function ang(v){
+    return Math.PI+(v/max)*Math.PI;
+  }
 
-  let target=ang(Math.min(minutes,180));
+  let target=ang(Math.min(minutes,max));
   if(currentAngle===null)currentAngle=target;
 
   function anim(){
@@ -235,30 +239,95 @@ function drawGaugeAnimated(minutes){
 
     currentAngle += (target-currentAngle)*0.08;
 
-    // arco
+    // base
     ctx.beginPath();
     ctx.arc(cx,cy,r,Math.PI,0);
     ctx.strokeStyle="#d8cfc0";
     ctx.lineWidth=18;
     ctx.stroke();
 
-    // ponteiro sombra
+    // verde
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,Math.PI,ang(60));
+    ctx.strokeStyle="#1b5e20";
+    ctx.lineWidth=18;
+    ctx.stroke();
+
+    // amarelo
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,ang(60),ang(120));
+    ctx.strokeStyle="#b58900";
+    ctx.lineWidth=18;
+    ctx.stroke();
+
+    // vermelho
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,ang(120),0);
+    ctx.strokeStyle="#b71c1c";
+    ctx.lineWidth=18;
+    ctx.stroke();
+
+    // números
+    function label(v,t){
+      let a=ang(v);
+      ctx.fillStyle="#0b1f3a";
+      ctx.font="bold 14px Arial";
+      ctx.textAlign="center";
+      ctx.fillText(t,
+        cx+(r-35)*Math.cos(a),
+        cy+(r-35)*Math.sin(a)
+      );
+    }
+
+    label(60,"1h");
+    label(120,"2h");
+    label(180,">3h");
+
+    const a=currentAngle;
+
+    const tipX=cx+(r-15)*Math.cos(a);
+    const tipY=cy+(r-15)*Math.sin(a);
+
+    const baseX=cx+(r-30)*Math.cos(a);
+    const baseY=cy+(r-30)*Math.sin(a);
+
+    // sombra
     ctx.beginPath();
     ctx.moveTo(cx+3,cy+3);
-    ctx.lineTo(cx+(r-30)*Math.cos(currentAngle)+3,
-               cy+(r-30)*Math.sin(currentAngle)+3);
+    ctx.lineTo(baseX+3,baseY+3);
     ctx.strokeStyle="rgba(0,0,0,0.3)";
     ctx.lineWidth=8;
     ctx.stroke();
 
-    // ponteiro
+    // haste
     ctx.beginPath();
     ctx.moveTo(cx,cy);
-    ctx.lineTo(cx+(r-30)*Math.cos(currentAngle),
-               cy+(r-30)*Math.sin(currentAngle));
+    ctx.lineTo(baseX,baseY);
     ctx.strokeStyle="#0b1f3a";
     ctx.lineWidth=7;
+    ctx.lineCap="round";
     ctx.stroke();
+
+    // seta
+    ctx.beginPath();
+    ctx.moveTo(tipX,tipY);
+    ctx.lineTo(
+      tipX-16*Math.cos(a-0.6),
+      tipY-16*Math.sin(a-0.6)
+    );
+    ctx.lineTo(
+      tipX-16*Math.cos(a+0.6),
+      tipY-16*Math.sin(a+0.6)
+    );
+    ctx.closePath();
+    ctx.fillStyle="#0b1f3a";
+    ctx.fill();
+
+    // centro
+    ctx.beginPath();
+    ctx.arc(cx,cy,6,0,2*Math.PI);
+    ctx.fillStyle="#0b1f3a";
+    ctx.fill();
 
     requestAnimationFrame(anim);
   }

@@ -160,11 +160,14 @@ canvas {max-width:280px;}
 }
 
 .duoTempo {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  width:100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
 }
+
+/* remove setas antigas duplicadas se houver */
+canvas { display:block; margin:auto; }
 
 @media (max-width:700px){
   .container {grid-template-columns:1fr;}
@@ -295,13 +298,7 @@ function parseDataHora(data,hora){
   return new Date(ano,mes,dia,h,m);
 }
 
-function getCor(diff){
-  if(diff>120) return "#b71c1c";
-  if(diff>60) return "#b58900";
-  return "#1b5e20";
-}
-
-function drawGaugeAnimated(id, minutes, ref){
+function drawGauge(id, value, ref){
   const c=document.getElementById(id);
   const ctx=c.getContext("2d");
 
@@ -314,35 +311,49 @@ function drawGaugeAnimated(id, minutes, ref){
     return Math.PI+(v/max)*Math.PI;
   }
 
-  let target=ang(Math.min(minutes,max));
+  let target=ang(Math.min(value,max));
   if(ref.value===null)ref.value=target;
 
   function anim(){
     ctx.clearRect(0,0,c.width,c.height);
     ref.value += (target-ref.value)*0.08;
 
-    let g=ctx.createLinearGradient(0,0,c.width,0);
-    g.addColorStop(0,"#1b5e20");
-    g.addColorStop(0.5,"#b58900");
-    g.addColorStop(1,"#b71c1c");
+    const a=ref.value;
 
     ctx.beginPath();
     ctx.arc(cx,cy,r,Math.PI,0);
-    ctx.strokeStyle=g;
+    ctx.strokeStyle="#0b1f3a";
     ctx.lineWidth=18;
     ctx.stroke();
 
-    const a=ref.value;
+    const endX=cx+(r-25)*Math.cos(a);
+    const endY=cy+(r-25)*Math.sin(a);
 
-    const shaftEndX=cx+(r-25)*Math.cos(a);
-    const shaftEndY=cy+(r-25)*Math.sin(a);
+    const backX=cx;
+    const backY=cy;
 
     ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.lineTo(shaftEndX,shaftEndY);
+    ctx.moveTo(backX,backY);
+    ctx.lineTo(endX,endY);
     ctx.strokeStyle="#0b1f3a";
     ctx.lineWidth=7;
     ctx.stroke();
+
+    /* 🔺 SETA ADICIONADA */
+    const size=14;
+    ctx.beginPath();
+    ctx.moveTo(endX,endY);
+    ctx.lineTo(
+      endX - size*Math.cos(a-0.6),
+      endY - size*Math.sin(a-0.6)
+    );
+    ctx.lineTo(
+      endX - size*Math.cos(a+0.6),
+      endY - size*Math.sin(a+0.6)
+    );
+    ctx.closePath();
+    ctx.fillStyle="#0b1f3a";
+    ctx.fill();
 
     ctx.beginPath();
     ctx.arc(cx,cy,6,0,2*Math.PI);
@@ -417,11 +428,8 @@ async function carregarDados(){
     document.getElementById("tempoMedianaTexto").innerText =
       `${Math.floor(mediana/60)}h ${Math.floor(mediana%60)}min`;
 
-    document.getElementById("emojiStatus").innerText=getEmoji(media);
-    document.getElementById("emojiMediana").innerText=getEmoji(mediana);
-
-    drawGaugeAnimated("gauge",media,{value:currentAngle});
-    drawGaugeAnimated("gaugeMediana",mediana,{value:currentAngleMediana});
+    drawGauge("gauge", media, {value:currentAngle});
+    drawGauge("gaugeMediana", mediana, {value:currentAngleMediana});
   }
 
   document.getElementById("listaPacientes").innerHTML =

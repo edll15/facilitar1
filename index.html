@@ -44,13 +44,19 @@ header {
   grid-template-columns: 2fr 1fr;
   gap: 18px;
   padding: 20px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
 }
 
 .leftCol,.rightCol {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+}
+
+.dualBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
 
@@ -75,6 +81,15 @@ h2 { color:#0b1f3a; }
   top:8px;
   right:12px;
   font-size:44px;
+}
+
+canvas {max-width:280px;}
+
+.tempoTexto {
+  margin-top:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:#0b1f3a;
 }
 
 .pacientesGrid {
@@ -121,7 +136,6 @@ h2 { color:#0b1f3a; }
 
 .verde {background:#1b5e20;}
 .amarelo {background:#b58900;}
-
 .vermelho {
   background:#b71c1c;
   animation:piscar 2s infinite;
@@ -136,17 +150,9 @@ h2 { color:#0b1f3a; }
 .uti {background:#4a148c;}
 .apartamento {background:#0b3c6f;}
 
-canvas {max-width:280px;}
-
-.tempoTexto {
-  margin-top:10px;
-  font-size:20px;
-  font-weight:bold;
-  color:#0b1f3a;
-}
-
 @media (max-width:700px){
   .container {grid-template-columns:1fr;}
+  .dualBox {grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -164,11 +170,22 @@ canvas {max-width:280px;}
 <div id="total" class="bigNumber">0</div>
 </div>
 
+<div class="dualBox">
+
 <div class="box">
 <h2>Tempo Médio de Espera</h2>
 <div id="emojiStatus" class="statusEmoji">😃</div>
 <canvas id="gauge" width="280" height="200"></canvas>
 <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+</div>
+
+<div class="box">
+<h2>Tempo Mediano de Espera</h2>
+<div id="emojiMediana" class="statusEmoji">😃</div>
+<canvas id="gaugeMediana" width="280" height="200"></canvas>
+<div id="tempoMedianaTexto" class="tempoTexto">Carregando...</div>
+</div>
+
 </div>
 
 </div>
@@ -192,45 +209,10 @@ canvas {max-width:280px;}
 <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
 </div>
 
-<div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px;">
-
-  <div class="box">
-    <h2>Internações em UTI</h2>
-    <div style="text-align:left; line-height:1.8;">
-      <div>• Geral Efetivado: <strong>0</strong></div>
-      <div>• Respiratório Efetivado: <strong>0</strong></div>
-      <div>• Desistência/Evasão: <strong>0</strong></div>
-      <div style="margin-top:8px;">Total: <strong>0</strong></div>
-    </div>
-  </div>
-
-  <div class="box">
-    <h2>Internações em Apartamento</h2>
-    <div style="text-align:left; line-height:1.8;">
-      <div>• Clínico: <strong>0</strong></div>
-      <div>• Cirúrgico: <strong>0</strong></div>
-      <div>• Desistência/Evasão: <strong>0</strong></div>
-      <div style="margin-top:8px;">Total: <strong>0</strong></div>
-    </div>
-  </div>
-
-  <div class="box">
-    <h2>Aguardando Observação</h2>
-    <div style="text-align:left; line-height:1.8;">
-      <div>• UTI Geral: <strong>0</strong></div>
-      <div>• UTI Respiratória: <strong>0</strong></div>
-      <div>• Apartamento Clínico: <strong>0</strong></div>
-      <div>• Apartamento Cirúrgico: <strong>0</strong></div>
-    </div>
-  </div>
-
-</div>
-
-</div>
-
 <script>
 
 let currentAngle=null;
+let currentAngleMediana=null;
 
 function getEmoji(m){
   if(m<=60)return "😃";
@@ -238,32 +220,8 @@ function getEmoji(m){
   return "😡";
 }
 
-function parseDataHora(data,hora){
-  if(!data||!hora)return null;
-
-  data=data.replace(/"/g,"").trim();
-  hora=hora.replace(/"/g,"").trim();
-
-  let [h,m]=hora.split(":");
-  if(!h||!m)return null;
-
-  let p=data.split("/");
-  let dia=parseInt(p[0]);
-  let mes=parseInt(p[1])-1;
-  let ano=parseInt(p[2]);
-  if(ano<100)ano+=2000;
-
-  return new Date(ano,mes,dia,h,m);
-}
-
-function getCor(diff){
-  if(diff>120) return "#b71c1c";
-  if(diff>60) return "#b58900";
-  return "#1b5e20";
-}
-
-function drawGaugeAnimated(minutes){
-  const c=document.getElementById("gauge");
+function drawGauge(id, minutes, ref){
+  const c=document.getElementById(id);
   const ctx=c.getContext("2d");
 
   const cx=c.width/2;
@@ -276,11 +234,11 @@ function drawGaugeAnimated(minutes){
   }
 
   let target=ang(Math.min(minutes,max));
-  if(currentAngle===null)currentAngle=target;
+  if(ref.value===null)ref.value=target;
 
   function anim(){
     ctx.clearRect(0,0,c.width,c.height);
-    currentAngle += (target-currentAngle)*0.08;
+    ref.value += (target-ref.value)*0.08;
 
     let g=ctx.createLinearGradient(0,0,c.width,0);
     g.addColorStop(0,"#1b5e20");
@@ -293,22 +251,7 @@ function drawGaugeAnimated(minutes){
     ctx.lineWidth=18;
     ctx.stroke();
 
-    function txt(v,t){
-      let a=ang(v);
-      ctx.fillStyle="#0b1f3a";
-      ctx.font="bold 14px Arial";
-      ctx.textAlign="center";
-      ctx.fillText(t,
-        cx+(r-35)*Math.cos(a),
-        cy+(r-35)*Math.sin(a)
-      );
-    }
-
-    txt(60,"1h");
-    txt(120,"2h");
-    txt(180,">3h");
-
-    const a=currentAngle;
+    const a=ref.value;
 
     const tipX=cx+(r-15)*Math.cos(a);
     const tipY=cy+(r-15)*Math.sin(a);
@@ -351,75 +294,42 @@ async function carregarDados(){
   let sep=txt.includes(";")?";":",";
   let linhas=txt.split("\n");
 
-  let total=0,tempos=[],lista=[];
-  let leitosUTI=0,leitosAPT=0;
+  let tempos=[];
 
   linhas.forEach((l,i)=>{
     let c=l.split(sep);
     if(c.length<12)return;
 
-    let nome=c[1]?.trim();
-    let local=c[3]?.trim();
     let hora=c[4];
     let data=c[5];
 
-    if(i===2)leitosUTI=c[11]||0;
-    if(i===3)leitosAPT=c[11]||0;
-
-    if(i>=2&&i<=49&&nome){
-      total++;
-
-      let entrada=parseDataHora(data,hora);
-      if(!entrada)return;
-
+    if(i>=2&&i<=49){
+      let entrada=new Date(data.split("/").reverse().join("-")+"T"+hora);
       let diff=(new Date()-entrada)/60000;
-      if(diff<0||diff>10000)return;
-
-      tempos.push(diff);
-
-      let h=Math.floor(diff/60);
-      let m=Math.floor(diff%60);
-
-      lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
+      if(diff>0 && diff<10000)tempos.push(diff);
     }
   });
 
-  lista.sort((a,b)=>b.diff-a.diff);
-
-  document.getElementById("total").innerText=total;
-  document.getElementById("leitosUTI").innerText=leitosUTI;
-  document.getElementById("leitosAPT").innerText=leitosAPT;
-
   if(tempos.length){
-    let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
 
+    // MÉDIA
+    let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
     document.getElementById("tempoTexto").innerText =
       `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-
     document.getElementById("emojiStatus").innerText=getEmoji(media);
+    drawGauge("gauge",media,{value:currentAngle});
 
-    drawGaugeAnimated(media);
+    // MEDIANA
+    tempos.sort((a,b)=>a-b);
+    let mediana;
+    let mid=Math.floor(tempos.length/2);
+    mediana = tempos.length%2 !==0 ? tempos[mid] : (tempos[mid-1]+tempos[mid])/2;
+
+    document.getElementById("tempoMedianaTexto").innerText =
+      `${Math.floor(mediana/60)}h ${Math.floor(mediana%60)}min`;
+    document.getElementById("emojiMediana").innerText=getEmoji(mediana);
+    drawGauge("gaugeMediana",mediana,{value:currentAngleMediana});
   }
-
-  document.getElementById("listaPacientes").innerHTML =
-    lista.map(p=>{
-      let cor=getCor(p.diff);
-      return `
-      <div class="pacienteCard" style="border-left:6px solid ${cor}">
-        <div class="linhaTop">
-          <div class="nomeTempo">
-            <div class="nome">${p.nome}</div>
-            <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
-              ${p.tempo}
-            </span>
-          </div>
-          <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
-            ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
-          </span>
-        </div>
-      </div>
-    `;
-    }).join("");
 }
 
 setInterval(carregarDados,5000);

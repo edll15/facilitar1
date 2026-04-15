@@ -1,150 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Observação</title>
+<meta charset="UTF-8">
+<title>Observação</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      text-align: center;
-      background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  text-align: center;
+  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
+  background-size: cover;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 31, 58, 0.78);
-      z-index: -1;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(11,31,58,0.78);
+  z-index: -1;
+}
 
-    header {
-      background-color: rgba(11, 31, 58, 0.95);
-      color: #f5f0e6;
-      padding: 18px;
-      font-size: 26px;
-      font-family: "Times New Roman";
-      text-align: left;
-      padding-left: 25px;
-    }
+header {
+  background: rgba(11,31,58,0.95);
+  color: #f5f0e6;
+  padding: 18px;
+  font-size: 26px;
+  font-family: "Times New Roman";
+  text-align: left;
+  padding-left: 25px;
+}
 
-    .container {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
 
-    .leftCol, .rightCol {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+.leftCol,.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-    .box {
-      background: rgba(245, 240, 230, 0.96);
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      position: relative;
-    }
+.box {
+  background: rgba(245,240,230,0.96);
+  padding: 18px;
+  border-radius: 12px;
+}
 
-    h2 { color: #0b1f3a; }
+.bigNumber {
+  font-size: 64px;
+  font-weight: bold;
+}
 
-    .bigNumber {
-      font-size: 64px;
-      font-weight: bold;
-      color: #0b1f3a;
-    }
+.statusEmoji {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 40px;
+}
 
-    .statusEmoji {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 44px;
-    }
+.pacientesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 12px;
+}
 
-    .pacientesGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-    }
+.pacienteCard {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}
 
-    .pacienteCard {
-      background: rgba(245, 240, 230, 0.96);
-      border-radius: 10px;
-      padding: 12px;
-      border-left: 6px solid #0b1f3a;
-    }
+.linhaTop {
+  display: flex;
+  justify-content: space-between;
+}
 
-    .linhaTop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.nomeTempo {
+  display: flex;
+  gap: 8px;
+}
 
-    .nomeTempo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+.badgeTempo {
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+}
 
-    .nome { font-weight: bold; }
+.verde {background:#1b5e20;}
+.amarelo {background:#b58900;}
 
-    .badgeTempo {
-      padding: 4px 8px;
-      border-radius: 8px;
-      color: white;
-      font-size: 12px;
-    }
+.vermelho {
+  background:#b71c1c;
+  animation: piscar 2s infinite;
+}
 
-    .badgeLocal {
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 11px;
-      color: white;
-      font-weight: bold;
-    }
+@keyframes piscar {
+  0%{opacity:1;}
+  50%{opacity:0.5;}
+  100%{opacity:1;}
+}
 
-    .verde { background: #1b5e20; }
-    .amarelo { background: #b58900; }
+.badgeLocal {
+  padding: 3px 8px;
+  border-radius: 10px;
+  color:white;
+  font-size:11px;
+}
 
-    /* 🔥 vermelho piscando */
-    .vermelho {
-      background: #b71c1c;
-      animation: piscar 2s infinite;
-    }
+.uti{background:#4a148c;}
+.apartamento{background:#0b3c6f;}
 
-    @keyframes piscar {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
+canvas{max-width:280px;}
 
-    .uti { background: #4a148c; }
-    .apartamento { background: #0b3c6f; }
-
-    canvas { max-width: 280px; }
-
-    .tempoTexto {
-      margin-top: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0b1f3a;
-    }
-
-    @media (max-width: 700px) {
-      .container { grid-template-columns: 1fr; }
-    }
-  </style>
+</style>
 </head>
 
 <body>
@@ -153,56 +129,177 @@
 
 <div class="container">
 
-  <div class="leftCol">
+<div class="leftCol">
 
-    <div class="box">
-      <h2>Total de Pacientes</h2>
-      <div id="total" class="bigNumber">0</div>
-    </div>
+<div class="box">
+<h2>Total</h2>
+<div id="total" class="bigNumber">0</div>
+</div>
 
-    <div class="box">
-      <h2>Tempo Médio de Espera</h2>
-      <div id="emojiStatus" class="statusEmoji">😃</div>
-      <canvas id="gauge" width="280" height="200"></canvas>
-      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
-    </div>
+<div class="box">
+<h2>Tempo Médio</h2>
+<div id="emojiStatus" class="statusEmoji">😃</div>
+<canvas id="gauge" width="280" height="200"></canvas>
+<div id="tempoTexto">Carregando...</div>
+</div>
 
-  </div>
+</div>
 
-  <div class="rightCol">
+<div class="rightCol">
 
-    <div class="box">
-      <h2>Leitos Livres UTI</h2>
-      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
+<div class="box">
+<h2>UTI</h2>
+<div id="leitosUTI" class="bigNumber">0</div>
+</div>
 
-    <div class="box">
-      <h2>Leitos Livres Apartamento</h2>
-      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
+<div class="box">
+<h2>Apartamento</h2>
+<div id="leitosAPT" class="bigNumber">0</div>
+</div>
 
-  </div>
+</div>
 
-  <div class="box" style="grid-column: 1 / -1;">
-    <h2>Tempo de Espera por Paciente</h2>
-    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
-  </div>
+<div class="box" style="grid-column:1/-1;">
+<h2>Pacientes</h2>
+<div id="listaPacientes">Carregando...</div>
+</div>
 
 </div>
 
 <script>
 
-// (JS permanece igual — apenas usa classe vermelho normalmente)
-
-let currentAngle = null;
+let currentAngle=null;
 
 function getEmoji(m){
-  if(m<=60) return "😃";
-  if(m<=120) return "😐";
+  if(m<=60)return "😃";
+  if(m<=120)return "😐";
   return "😡";
 }
 
-// 👉 restante do JS IGUAL ao anterior (não precisa alterar)
+function parseDataHora(data,hora){
+  if(!data||!hora)return null;
+
+  data=data.replace(/"/g,"").trim();
+  hora=hora.replace(/"/g,"").trim();
+
+  let [h,m]=hora.split(":");
+  if(!h||!m)return null;
+
+  let d=data.split("/");
+
+  return new Date(2000+parseInt(d[2]),d[1]-1,d[0],h,m);
+}
+
+function drawGauge(m){
+  const c=document.getElementById("gauge");
+  const ctx=c.getContext("2d");
+
+  const cx=140,cy=180,r=110;
+
+  function ang(v){return Math.PI+(v/180)*Math.PI;}
+
+  let a=ang(Math.min(m,180));
+
+  ctx.clearRect(0,0,300,200);
+
+  ctx.beginPath();
+  ctx.arc(cx,cy,r,Math.PI,0);
+  ctx.strokeStyle="#ccc";
+  ctx.lineWidth=18;
+  ctx.stroke();
+
+  // sombra
+  ctx.beginPath();
+  ctx.moveTo(cx+3,cy+3);
+  ctx.lineTo(cx+(r-30)*Math.cos(a)+3,cy+(r-30)*Math.sin(a)+3);
+  ctx.strokeStyle="rgba(0,0,0,0.3)";
+  ctx.lineWidth=8;
+  ctx.stroke();
+
+  // ponteiro
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.lineTo(cx+(r-30)*Math.cos(a),cy+(r-30)*Math.sin(a));
+  ctx.strokeStyle="#000";
+  ctx.lineWidth=6;
+  ctx.stroke();
+
+}
+
+async function carregarDados(){
+
+  const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+
+  let txt=await (await fetch(url)).text();
+
+  let linhas=txt.split("\n");
+
+  let total=0,tempos=[],lista="";
+
+  linhas.forEach((l,i)=>{
+    let c=l.split(",");
+
+    if(i<2)return;
+
+    let nome=c[1];
+    let local=c[3];
+    let hora=c[4];
+    let data=c[5];
+
+    if(nome){
+
+      total++;
+
+      let entrada=parseDataHora(data,hora);
+      if(!entrada)return;
+
+      let diff=(new Date()-entrada)/60000;
+
+      let h=Math.floor(diff/60);
+      let m=Math.floor(diff%60);
+
+      let cor="verde";
+      if(diff>120)cor="vermelho";
+      else if(diff>60)cor="amarelo";
+
+      lista+=`
+      <div class="pacienteCard">
+        <div class="linhaTop">
+          <div class="nomeTempo">
+            ${nome}
+            <span class="badgeTempo ${cor}">
+              ${h}h ${m}min
+            </span>
+          </div>
+          <span class="badgeLocal ${(local||"").includes("UTI")?"uti":"apartamento"}">
+            ${(local||"").includes("UTI")?"UTI":"Apartamento"}
+          </span>
+        </div>
+      </div>`;
+
+      tempos.push(diff);
+    }
+
+  });
+
+  document.getElementById("total").innerText=total;
+  document.getElementById("listaPacientes").innerHTML=lista;
+
+  if(tempos.length){
+    let media=tempos.reduce((a,b)=>a+b)/tempos.length;
+
+    document.getElementById("tempoTexto").innerText =
+      Math.floor(media/60)+"h "+Math.floor(media%60)+"min";
+
+    document.getElementById("emojiStatus").innerText=getEmoji(media);
+
+    drawGauge(media);
+  }
+
+}
+
+setInterval(carregarDados,5000);
+carregarDados();
 
 </script>
 

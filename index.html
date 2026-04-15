@@ -1,292 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Observação</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      text-align: center;
-
-      /* CORREDOR HOSPITALAR (URL ESTÁVEL) */
-      background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 31, 58, 0.78);
-      z-index: -1;
-    }
-
-    header {
-      background-color: rgba(11, 31, 58, 0.95);
-      color: #f5f0e6;
-      padding: 18px;
-      font-size: 26px;
-      font-family: "Times New Roman";
-      text-align: left;
-      padding-left: 25px;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .leftCol, .rightCol {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .box {
-      background: rgba(245, 240, 230, 0.96);
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      position: relative;
-    }
-
-    h2 {
-      color: #0b1f3a;
-      margin-bottom: 10px;
-    }
-
-    .bigNumber {
-      font-size: 64px;
-      font-weight: bold;
-      color: #0b1f3a;
-      margin: 10px 0;
-    }
-
-    .statusEmoji {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 44px;
-    }
-
-    .pacientesGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .pacienteCard {
-      background: rgba(245, 240, 230, 0.96);
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      text-align: left;
-      border-left: 6px solid #0b1f3a;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .linhaTop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nome {
-      font-weight: bold;
-      font-size: 15px;
-      color: #0b1f3a;
-    }
-
-    .badgeTempo {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: white;
-    }
-
-    .badgeLocal {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 11px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .verde { background: #1b5e20; }
-    .amarelo { background: #b58900; }
-    .vermelho { background: #b71c1c; }
-
-    .uti { background: #4a148c; }
-    .apartamento { background: #0b3c6f; }
-
-    canvas {
-      max-width: 280px;
-    }
-
-    .tempoTexto {
-      margin-top: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0b1f3a;
-    }
-
-    @media (max-width: 700px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>Observação</header>
-
-<div class="container">
-
-  <div class="leftCol">
-
-    <div class="box">
-      <h2>Total de Pacientes</h2>
-      <div id="total" class="bigNumber">0</div>
-    </div>
-
-    <div class="box">
-      <h2>Tempo Médio de Espera</h2>
-      <div id="emojiStatus" class="statusEmoji">😃</div>
-
-      <div class="gaugeContainer">
-        <canvas id="gauge" width="280" height="200"></canvas>
-        <div id="tempoTexto" class="tempoTexto">Carregando...</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="rightCol">
-
-    <div class="box">
-      <h2>Leitos Livres UTI</h2>
-      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
-
-    <div class="box">
-      <h2>Leitos Livres Apartamento</h2>
-      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
-    </div>
-
-  </div>
-
-  <div class="box" style="grid-column: 1 / -1;">
-    <h2>Tempo de Espera por Paciente</h2>
-    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
-  </div>
-
-</div>
-
-<script>
-function getEmoji(minutes) {
-  if (minutes <= 60) return "😃";
-  if (minutes <= 120) return "😐";
-  return "😡";
-}
-
-function drawGauge(minutes) {
-  const canvas = document.getElementById("gauge");
-  const ctx = canvas.getContext("2d");
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const cx = canvas.width / 2;
-  const cy = canvas.height - 20;
-  const radius = 110;
-  const max = 180;
-
-  function angle(v) {
-    return Math.PI + (v / max) * Math.PI;
-  }
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, 0);
-  ctx.strokeStyle = "#d8cfc0";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, Math.PI, angle(60));
-  ctx.strokeStyle = "#0b3c6f";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(60), angle(120));
-  ctx.strokeStyle = "#b58900";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, angle(120), 0);
-  ctx.strokeStyle = "#b71c1c";
-  ctx.lineWidth = 18;
-  ctx.stroke();
-
-  const a = angle(Math.min(minutes, max));
-
-  const tipX = cx + (radius - 15) * Math.cos(a);
-  const tipY = cy + (radius - 15) * Math.sin(a);
-
-  const baseX = cx + (radius - 30) * Math.cos(a);
-  const baseY = cy + (radius - 30) * Math.sin(a);
-
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(baseX, baseY);
-  ctx.strokeStyle = "#0b1f3a";
-  ctx.lineWidth = 7;
-  ctx.lineCap = "round";
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.fillStyle = "#0b1f3a";
-  ctx.moveTo(tipX, tipY);
-  ctx.lineTo(
-    tipX - 16 * Math.cos(a - 0.6),
-    tipY - 16 * Math.sin(a - 0.6)
-  );
-  ctx.lineTo(
-    tipX - 16 * Math.cos(a + 0.6),
-    tipY - 16 * Math.sin(a + 0.6)
-  );
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-  ctx.fillStyle = "#0b1f3a";
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, 3, 0, 2 * Math.PI);
-  ctx.fillStyle = "#f5f0e6";
-  ctx.fill();
-}
-
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
@@ -312,7 +23,8 @@ async function carregarDados() {
 
       let nome = colunas[1];
       let local = colunas[3];
-      let horario = colunas[4];
+      let horario = colunas[4]; // hora
+      let dataAdmissao = colunas[5]; // data
 
       if (index === 2) leitosUTI = colunas[11] || 0;
       if (index === 3) leitosAPT = colunas[11] || 0;
@@ -321,23 +33,31 @@ async function carregarDados() {
 
         if (nome && nome.trim() !== "") total++;
 
-        if (horario && nome && nome.trim() !== "") {
-          let partes = horario.split(":");
+        if (horario && dataAdmissao && nome && nome.trim() !== "") {
 
-          if (partes.length === 2) {
-            let horas = parseInt(partes[0]);
-            let minutos = parseInt(partes[1]);
+          // monta data completa corretamente
+          let dataHoraStr = dataAdmissao.trim() + " " + horario.trim();
 
+          // tenta converter (formato brasileiro dd/mm/yyyy HH:mm)
+          let partesData = dataAdmissao.split("/");
+          let partesHora = horario.split(":");
+
+          if (partesData.length === 3 && partesHora.length === 2) {
+
+            let dia = parseInt(partesData[0]);
+            let mes = parseInt(partesData[1]) - 1;
+            let ano = parseInt(partesData[2]);
+
+            let horas = parseInt(partesHora[0]);
+            let minutos = parseInt(partesHora[1]);
+
+            let entrada = new Date(ano, mes, dia, horas, minutos, 0);
             let agora = new Date();
-            let entrada = new Date();
-
-            entrada.setHours(horas);
-            entrada.setMinutes(minutos);
-            entrada.setSeconds(0);
 
             let diff = (agora - entrada) / 60000;
 
-            if (diff >= 0 && diff < 1440) {
+            if (diff >= 0) {
+
               tempos.push(diff);
 
               let h = Math.floor(diff / 60);
@@ -345,7 +65,12 @@ async function carregarDados() {
 
               let tempoFormatado = `${h}h ${m}min`;
 
-              listaPacientes.push({ nome, local, tempoFormatado, diff });
+              listaPacientes.push({
+                nome,
+                local,
+                tempoFormatado,
+                diff
+              });
             }
           }
         }
@@ -411,10 +136,3 @@ async function carregarDados() {
     console.error(error);
   }
 }
-
-setInterval(carregarDados, 5000);
-carregarDados();
-</script>
-
-</body>
-</html>

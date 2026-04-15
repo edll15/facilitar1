@@ -187,7 +187,6 @@ canvas {max-width:280px;}
 <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
 </div>
 
-<!-- UTI + APARTAMENTO -->
 <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
 
   <div class="box">
@@ -264,7 +263,6 @@ function drawGaugeAnimated(minutes){
     ctx.clearRect(0,0,c.width,c.height);
     currentAngle += (target-currentAngle)*0.08;
 
-    // GRADIENTE
     let g=ctx.createLinearGradient(0,0,c.width,0);
     g.addColorStop(0,"#1b5e20");
     g.addColorStop(0.5,"#b58900");
@@ -276,7 +274,6 @@ function drawGaugeAnimated(minutes){
     ctx.lineWidth=18;
     ctx.stroke();
 
-    // NÚMEROS
     function txt(v,t){
       let a=ang(v);
       ctx.fillStyle="#0b1f3a";
@@ -308,7 +305,7 @@ function drawGaugeAnimated(minutes){
     ctx.lineWidth=8;
     ctx.stroke();
 
-    // ponteiro
+    // haste ligada direto na seta
     ctx.beginPath();
     ctx.moveTo(cx,cy);
     ctx.lineTo(baseX,baseY);
@@ -316,11 +313,11 @@ function drawGaugeAnimated(minutes){
     ctx.lineWidth=7;
     ctx.stroke();
 
-    // seta
+    // seta conectada
     ctx.beginPath();
     ctx.moveTo(tipX,tipY);
-    ctx.lineTo(tipX-16*Math.cos(a-0.6),tipY-16*Math.sin(a-0.6));
-    ctx.lineTo(tipX-16*Math.cos(a+0.6),tipY-16*Math.sin(a+0.6));
+    ctx.lineTo(baseX-16*Math.cos(a-0.6),baseY-16*Math.sin(a-0.6));
+    ctx.lineTo(baseX-16*Math.cos(a+0.6),baseY-16*Math.sin(a+0.6));
     ctx.closePath();
     ctx.fillStyle="#0b1f3a";
     ctx.fill();

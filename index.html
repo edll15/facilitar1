@@ -1,3 +1,11 @@
+<script>
+
+function getEmoji(minutes) {
+  if (minutes <= 60) return "😃";
+  if (minutes <= 120) return "😐";
+  return "😡";
+}
+
 async function carregarDados() {
   try {
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
@@ -7,9 +15,7 @@ async function carregarDados() {
 
     texto = texto.replace(/\r/g, "");
 
-    // DETECTA SEPARADOR AUTOMATICAMENTE
     let separador = texto.includes(";") ? ";" : ",";
-
     const linhas = texto.split("\n");
 
     let total = 0;
@@ -31,20 +37,14 @@ async function carregarDados() {
       let h = parseInt(partesHora[0]);
       let m = parseInt(partesHora[1]);
 
-      // FORMATO BR (dd/mm/yyyy)
       if (dataStr.includes("/")) {
         let p = dataStr.split("/");
-        if (p.length === 3) {
-          return new Date(p[2], p[1] - 1, p[0], h, m);
-        }
+        return new Date(p[2], p[1] - 1, p[0], h, m);
       }
 
-      // FORMATO ISO (yyyy-mm-dd)
       if (dataStr.includes("-")) {
         let p = dataStr.split("-");
-        if (p.length === 3) {
-          return new Date(p[0], p[1] - 1, p[2], h, m);
-        }
+        return new Date(p[0], p[1] - 1, p[2], h, m);
       }
 
       return null;
@@ -54,7 +54,6 @@ async function carregarDados() {
       if (!linha) return;
 
       const colunas = linha.split(separador);
-
       if (colunas.length < 12) return;
 
       let nome = colunas[1]?.replace(/"/g, "").trim();
@@ -75,7 +74,6 @@ async function carregarDados() {
           let agora = new Date();
           let diff = (agora - entrada) / 60000;
 
-          // ignora datas absurdas (erro de leitura)
           if (diff >= 0 && diff < 10000) {
 
             tempos.push(diff);
@@ -153,3 +151,8 @@ async function carregarDados() {
     console.error("Erro:", error);
   }
 }
+
+setInterval(carregarDados, 5000);
+carregarDados();
+
+</script>

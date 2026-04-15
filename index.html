@@ -172,23 +172,148 @@
 
 <script>
 
-function getEmoji(m) {
-  if (m <= 60) return "😃";
-  if (m <= 120) return "😐";
+function parseCSVLine(line) {
+  const result = [];
+  let current = "";
+  let insideQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    let char = line[i];
+
+    if (char === '"') {
+      insideQuotes = !insideQuotes;
+    } else if ((char === "," || char === ";") && !insideQuotes) {
+      result.push(current);
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+function parseDataHora(data, hora) {
+  if (!data || !hora) return null;
+
+  data = data.replace(/"/g,"").trim();
+  hora = hora.replace(/"/g,"").trim();
+
+  let [h,m] = hora.split(":");
+  if (!h || !m) return null;
+
+  let dia,mes,ano;
+
+  if (data.includes("/")) {
+    [dia,mes,ano] = data.split("/");
+  } else if (data.includes("-")) {
+    [ano,mes,dia] = data.split("-");
+  } else return null;
+
+  let d = new Date(ano, mes-1, dia, h, m);
+  if (isNaN(d)) return null;
+
+  return d;
+}
+
+async function carregarDados() {
+
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+
+  let txt = await (await fetch(url)).text();
+  txt = txt.replace(/\r/g,"");
+
+  let linhas = txt.split("\n");
+
+  let total=0, tempos=[], lista=[];
+  let leitosUTI=0, leitosAPT=0;
+
+  linhas.forEach((linha,i)=>{
+
+    let c = parseCSVLine(linha);
+    if (c.length < 12) return;
+
+    let nome = c[1]?.trim();
+    let local = c[3]?.trim();
+    let hora = c[4];
+    let data = c[5];
+
+    if (i === 2) leitosUTI = c[11] || 0;
+    if (i === 3) leitosAPT = c[11] || 0;
+
+    if (i>=2 && i<=49 && nome){
+
+      total++;
+
+      let entrada = parseDataHora(data,hora);
+      if (!entrada) return;
+
+      let diff = (new Date() - entrada) / 60000;
+
+      if (diff < 0 || diff > 10000) return;
+
+      tempos.push(diff);
+
+      let h = Math.floor(diff/60);
+      let m = Math.floor(diff%60);
+
+      lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
+    }
+
+  });
+
+  lista.sort((a,b)=>b.diff-a.diff);
+
+  document.getElementById("total").innerText = total;
+  document.getElementById("leitosUTI").innerText = leitosUTI;
+  document.getElementById("leitosAPT").innerText = leitosAPT;
+
+  if (tempos.length){
+    let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
+    document.getElementById("tempoTexto").innerText =
+      `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
+    document.getElementById("emojiStatus").innerText = getEmoji(media);
+    drawGauge(media);
+  } else {
+    document.getElementById("tempoTexto").innerText = "0h 0min";
+    drawGauge(0);
+  }
+
+  document.getElementById("listaPacientes").innerHTML =
+    lista.map(p=>`
+      <div class="pacienteCard">
+        <div class="linhaTop">
+          <div class="nome">${p.nome}</div>
+          <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
+            ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
+          </span>
+        </div>
+        <div>
+          <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
+            ${p.tempo}
+          </span>
+        </div>
+      </div>
+    `).join("");
+}
+
+function getEmoji(m){
+  if(m<=60) return "😃";
+  if(m<=120) return "😐";
   return "😡";
 }
 
-function drawGauge(m) {
-  const c = document.getElementById("gauge");
-  const ctx = c.getContext("2d");
+function drawGauge(m){
+  const c=document.getElementById("gauge");
+  const ctx=c.getContext("2d");
 
   ctx.clearRect(0,0,c.width,c.height);
 
-  const cx = c.width/2;
-  const cy = c.height-20;
-  const r = 110;
+  const cx=c.width/2;
+  const cy=c.height-20;
+  const r=110;
 
-  const ang = Math.PI + (Math.min(m,180)/180)*Math.PI;
+  const ang=Math.PI+(Math.min(m,180)/180)*Math.PI;
 
   ctx.beginPath();
   ctx.arc(cx,cy,r,Math.PI,0);
@@ -202,110 +327,6 @@ function drawGauge(m) {
   ctx.strokeStyle="#0b1f3a";
   ctx.lineWidth=6;
   ctx.stroke();
-}
-
-function parseDataHora(data,hora){
-  if(!data||!hora) return null;
-
-  data=data.replace(/"/g,"").trim();
-  hora=hora.replace(/"/g,"").trim();
-
-  let [hh,mm]=hora.split(":");
-  if(!hh||!mm) return null;
-
-  let dia,mes,ano;
-
-  if(data.includes("/")){
-    [dia,mes,ano]=data.split("/");
-  } else if(data.includes("-")){
-    [ano,mes,dia]=data.split("-");
-  } else return null;
-
-  let d=new Date(ano,mes-1,dia,hh,mm);
-  if(isNaN(d)) return null;
-
-  return d;
-}
-
-async function carregarDados(){
-  try{
-    const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
-
-    let txt=await (await fetch(url)).text();
-    txt=txt.replace(/\r/g,"");
-
-    let sep=txt.includes(";")?";":",";
-    let linhas=txt.split("\n");
-
-    let total=0,tempos=[],lista=[];
-    let leitosUTI=0,leitosAPT=0;
-
-    linhas.forEach((l,i)=>{
-      let c=l.split(sep);
-      if(c.length<12) return;
-
-      let nome=c[1]?.trim();
-      let local=c[3]?.trim();
-      let hora=c[4];
-      let data=c[5];
-
-      if(i===2) leitosUTI=c[11]||0;
-      if(i===3) leitosAPT=c[11]||0;
-
-      if(i>=2 && i<=49 && nome){
-
-        total++;
-
-        let entrada=parseDataHora(data,hora);
-        if(!entrada) return;
-
-        let diff=(new Date()-entrada)/60000;
-        if(diff<0||diff>10000||isNaN(diff)) return;
-
-        tempos.push(diff);
-
-        let h=Math.floor(diff/60);
-        let m=Math.floor(diff%60);
-
-        lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
-      }
-    });
-
-    lista.sort((a,b)=>b.diff-a.diff);
-
-    document.getElementById("total").innerText=total;
-    document.getElementById("leitosUTI").innerText=leitosUTI;
-    document.getElementById("leitosAPT").innerText=leitosAPT;
-
-    if(tempos.length){
-      let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
-      document.getElementById("tempoTexto").innerText=
-        `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-      document.getElementById("emojiStatus").innerText=getEmoji(media);
-      drawGauge(media);
-    } else {
-      document.getElementById("tempoTexto").innerText="0h 0min";
-      drawGauge(0);
-    }
-
-    document.getElementById("listaPacientes").innerHTML=
-      lista.map(p=>`
-        <div class="pacienteCard">
-          <div class="linhaTop">
-            <div class="nome">${p.nome}</div>
-            <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
-              ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
-            </span>
-          </div>
-          <div>
-            <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
-              ${p.tempo}
-            </span>
-          </div>
-        </div>
-      `).join("");
-
-  }catch(e){console.error(e);}
 }
 
 setInterval(carregarDados,5000);

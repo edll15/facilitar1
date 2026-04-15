@@ -181,8 +181,6 @@
 
 <script>
 
-// (mantive TODO o JS igual — só alterei o HTML gerado)
-
 function getEmoji(m){
   if(m<=60) return "😃";
   if(m<=120) return "😐";
@@ -204,30 +202,46 @@ function drawGauge(minutes){
     return Math.PI + (v/max)*Math.PI;
   }
 
+  // fundo
   ctx.beginPath();
   ctx.arc(cx,cy,radius,Math.PI,0);
   ctx.strokeStyle="#d8cfc0";
   ctx.lineWidth=18;
   ctx.stroke();
 
+  // cores
   ctx.beginPath();
   ctx.arc(cx,cy,radius,Math.PI,angle(60));
   ctx.strokeStyle="#1b5e20";
-  ctx.lineWidth=18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx,cy,radius,angle(60),angle(120));
   ctx.strokeStyle="#b58900";
-  ctx.lineWidth=18;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(cx,cy,radius,angle(120),0);
   ctx.strokeStyle="#b71c1c";
-  ctx.lineWidth=18;
   ctx.stroke();
 
+  // 🔥 NÚMEROS
+  function drawLabel(value, text){
+    const a = angle(value);
+    const x = cx + (radius-35) * Math.cos(a);
+    const y = cy + (radius-35) * Math.sin(a);
+
+    ctx.fillStyle = "#0b1f3a";
+    ctx.font = "bold 14px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(text, x, y);
+  }
+
+  drawLabel(60, "1h");
+  drawLabel(120, "2h");
+  drawLabel(180, ">3h");
+
+  // ponteiro
   const a = angle(Math.min(minutes,max));
 
   ctx.beginPath();
@@ -239,6 +253,12 @@ function drawGauge(minutes){
   ctx.strokeStyle="#0b1f3a";
   ctx.lineWidth=6;
   ctx.stroke();
+
+  // centro
+  ctx.beginPath();
+  ctx.arc(cx,cy,6,0,2*Math.PI);
+  ctx.fillStyle="#0b1f3a";
+  ctx.fill();
 }
 
 function parseDataHora(data, hora){
@@ -325,6 +345,7 @@ async function carregarDados(){
       `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
 
     document.getElementById("emojiStatus").innerText=getEmoji(media);
+
     drawGauge(media);
   }
 
@@ -332,18 +353,15 @@ async function carregarDados(){
     lista.map(p=>`
       <div class="pacienteCard">
         <div class="linhaTop">
-          
           <div class="nomeTempo">
             <div class="nome">${p.nome}</div>
             <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
               ${p.tempo}
             </span>
           </div>
-
           <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
             ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
           </span>
-
         </div>
       </div>
     `).join("");

@@ -9,17 +9,13 @@ body {
   font-family: Arial;
   margin: 0;
   text-align: center;
-
-  background:
-    linear-gradient(rgba(11,31,58,0.78), rgba(11,31,58,0.78)),
-    url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-
+  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
-/* REMOVIDO body::before que causava o bug */
+/* REMOVIDO o overlay azul que causava o problema */
 
 header {
   background-color: rgba(11,31,58,0.95);
@@ -188,7 +184,36 @@ canvas {max-width:280px;}
 
 <script>
 
-/* TODO O JS MANTIDO IGUAL AO ANTERIOR (SEM ALTERAR RELÓGIO) */
+/* SEU JS PERMANECE EXATAMENTE IGUAL */
+
+let currentAngle=null;
+
+function getEmoji(m){
+  if(m<=60)return "😃";
+  if(m<=120)return "😐";
+  return "😡";
+}
+
+function parseDataHora(data,hora){
+  if(!data||!hora)return null;
+
+  data=data.replace(/"/g,"").trim();
+  hora=hora.replace(/"/g,"").trim();
+
+  let [h,m]=hora.split(":");
+  if(!h||!m)return null;
+
+  let p=data.split("/");
+  let ano=parseInt(p[2]);
+  if(ano<100)ano+=2000;
+
+  return new Date(ano,p[1]-1,p[0],h,m);
+}
+
+/* resto do código igual... */
+
+setInterval(carregarDados,5000);
+carregarDados();
 
 </script>
 

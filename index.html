@@ -1,33 +1,423 @@
-<!-- SUBSTITUA APENAS A PARTE DAS CAIXAS DE UTI POR ISSO -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Observação</title>
 
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  text-align: center;
+  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(11,31,58,0.78);
+  z-index: -1;
+}
+
+header {
+  background-color: rgba(11,31,58,0.95);
+  color: #f5f0e6;
+  padding: 18px;
+  font-size: 26px;
+  font-family: "Times New Roman";
+  text-align: left;
+  padding-left: 25px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.leftCol,.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.box {
+  background: rgba(245,240,230,0.96);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+h2 { color:#0b1f3a; }
+
+.bigNumber {
+  font-size: 64px;
+  font-weight: bold;
+  color:#0b1f3a;
+}
+
+.statusEmoji {
+  position:absolute;
+  top:8px;
+  right:12px;
+  font-size:44px;
+}
+
+.pacientesGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
+
+.pacienteCard {
+  background: rgba(245,240,230,0.96);
+  border-radius:10px;
+  padding:12px;
+  border-left:6px solid #0b1f3a;
+}
+
+.linhaTop {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nomeTempo {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nome { font-weight:bold; }
+
+.badgeTempo {
+  padding:4px 8px;
+  border-radius:8px;
+  color:white;
+  font-size:12px;
+}
+
+.badgeLocal {
+  padding:3px 8px;
+  border-radius:20px;
+  font-size:11px;
+  color:white;
+  font-weight:bold;
+}
+
+.verde {background:#1b5e20;}
+.amarelo {background:#b58900;}
+
+.vermelho {
+  background:#b71c1c;
+  animation:piscar 2s infinite;
+}
+
+@keyframes piscar {
+  0%{opacity:1;}
+  50%{opacity:0.5;}
+  100%{opacity:1;}
+}
+
+.uti {background:#4a148c;}
+.apartamento {background:#0b3c6f;}
+
+canvas {max-width:280px;}
+
+.tempoTexto {
+  margin-top:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:#0b1f3a;
+}
+
+@media (max-width:700px){
+  .container {grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<header>Observação</header>
+
+<div class="container">
+
+<div class="leftCol">
+
+<div class="box">
+<h2>Total de Pacientes</h2>
+<div id="total" class="bigNumber">0</div>
+</div>
+
+<div class="box">
+<h2>Tempo Médio de Espera</h2>
+<div id="emojiStatus" class="statusEmoji">😃</div>
+<canvas id="gauge" width="280" height="200"></canvas>
+<div id="tempoTexto" class="tempoTexto">Carregando...</div>
+</div>
+
+</div>
+
+<div class="rightCol">
+
+<div class="box">
+<h2>Leitos Livres UTI</h2>
+<div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+</div>
+
+<div class="box">
+<h2>Leitos Livres Apartamento</h2>
+<div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+</div>
+
+</div>
+
+<div class="box" style="grid-column:1/-1;">
+<h2>Tempo de Espera por Paciente</h2>
+<div id="listaPacientes" class="pacientesGrid">Carregando...</div>
+</div>
+
+<!-- UTI + APARTAMENTO -->
 <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
 
-  <!-- UTI -->
   <div class="box">
     <h2>Internações em UTI</h2>
-
-    <div style="text-align:left; font-size:16px; line-height:1.8; color:#0b1f3a;">
-      <div>• Geral Efetivado: <strong id="geralUTI">0</strong></div>
-      <div>• Respiratório Efetivado: <strong id="respUTI">0</strong></div>
-      <div>• Desistência/Evasão: <strong id="evasaoUTI">0</strong></div>
-      <div style="margin-top:8px; font-size:18px;">
-        Total: <strong id="totalUTI">0</strong>
-      </div>
+    <div style="text-align:left; line-height:1.8;">
+      <div>• Geral Efetivado: <strong>0</strong></div>
+      <div>• Respiratório Efetivado: <strong>0</strong></div>
+      <div>• Desistência/Evasão: <strong>0</strong></div>
+      <div style="margin-top:8px;">Total: <strong>0</strong></div>
     </div>
   </div>
 
-  <!-- APARTAMENTO -->
   <div class="box">
     <h2>Internações em Apartamento</h2>
-
-    <div style="text-align:left; font-size:16px; line-height:1.8; color:#0b1f3a;">
-      <div>• Clínico: <strong id="clinicoAPT">0</strong></div>
-      <div>• Cirúrgico: <strong id="cirurgicoAPT">0</strong></div>
-      <div>• Desistência/Evasão: <strong id="evasaoAPT">0</strong></div>
-      <div style="margin-top:8px; font-size:18px;">
-        Total: <strong id="totalAPT">0</strong>
-      </div>
+    <div style="text-align:left; line-height:1.8;">
+      <div>• Clínico: <strong>0</strong></div>
+      <div>• Cirúrgico: <strong>0</strong></div>
+      <div>• Desistência/Evasão: <strong>0</strong></div>
+      <div style="margin-top:8px;">Total: <strong>0</strong></div>
     </div>
   </div>
 
 </div>
+
+</div>
+
+<script>
+
+let currentAngle=null;
+
+function getEmoji(m){
+  if(m<=60)return "😃";
+  if(m<=120)return "😐";
+  return "😡";
+}
+
+function parseDataHora(data,hora){
+  if(!data||!hora)return null;
+
+  data=data.replace(/"/g,"").trim();
+  hora=hora.replace(/"/g,"").trim();
+
+  let [h,m]=hora.split(":");
+  if(!h||!m)return null;
+
+  let p=data.split("/");
+  let dia=parseInt(p[0]);
+  let mes=parseInt(p[1])-1;
+  let ano=parseInt(p[2]);
+  if(ano<100)ano+=2000;
+
+  return new Date(ano,mes,dia,h,m);
+}
+
+function drawGaugeAnimated(minutes){
+
+  const c=document.getElementById("gauge");
+  const ctx=c.getContext("2d");
+
+  const cx=c.width/2;
+  const cy=c.height-20;
+  const r=110;
+  const max=180;
+
+  function ang(v){
+    return Math.PI+(v/max)*Math.PI;
+  }
+
+  let target=ang(Math.min(minutes,max));
+  if(currentAngle===null)currentAngle=target;
+
+  function anim(){
+
+    ctx.clearRect(0,0,c.width,c.height);
+    currentAngle += (target-currentAngle)*0.08;
+
+    // GRADIENTE
+    let g=ctx.createLinearGradient(0,0,c.width,0);
+    g.addColorStop(0,"#1b5e20");
+    g.addColorStop(0.5,"#b58900");
+    g.addColorStop(1,"#b71c1c");
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,Math.PI,0);
+    ctx.strokeStyle=g;
+    ctx.lineWidth=18;
+    ctx.stroke();
+
+    // NÚMEROS
+    function txt(v,t){
+      let a=ang(v);
+      ctx.fillStyle="#0b1f3a";
+      ctx.font="bold 14px Arial";
+      ctx.textAlign="center";
+      ctx.fillText(t,
+        cx+(r-35)*Math.cos(a),
+        cy+(r-35)*Math.sin(a)
+      );
+    }
+
+    txt(60,"1h");
+    txt(120,"2h");
+    txt(180,">3h");
+
+    const a=currentAngle;
+
+    const tipX=cx+(r-15)*Math.cos(a);
+    const tipY=cy+(r-15)*Math.sin(a);
+
+    const baseX=cx+(r-30)*Math.cos(a);
+    const baseY=cy+(r-30)*Math.sin(a);
+
+    // sombra
+    ctx.beginPath();
+    ctx.moveTo(cx+3,cy+3);
+    ctx.lineTo(baseX+3,baseY+3);
+    ctx.strokeStyle="rgba(0,0,0,0.3)";
+    ctx.lineWidth=8;
+    ctx.stroke();
+
+    // ponteiro
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(baseX,baseY);
+    ctx.strokeStyle="#0b1f3a";
+    ctx.lineWidth=7;
+    ctx.stroke();
+
+    // seta
+    ctx.beginPath();
+    ctx.moveTo(tipX,tipY);
+    ctx.lineTo(tipX-16*Math.cos(a-0.6),tipY-16*Math.sin(a-0.6));
+    ctx.lineTo(tipX-16*Math.cos(a+0.6),tipY-16*Math.sin(a+0.6));
+    ctx.closePath();
+    ctx.fillStyle="#0b1f3a";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,6,0,2*Math.PI);
+    ctx.fillStyle="#0b1f3a";
+    ctx.fill();
+
+    requestAnimationFrame(anim);
+  }
+
+  anim();
+}
+
+async function carregarDados(){
+  const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+
+  let txt=await (await fetch(url)).text();
+  txt=txt.replace(/\r/g,"");
+
+  let sep=txt.includes(";")?";":",";
+  let linhas=txt.split("\n");
+
+  let total=0,tempos=[],lista=[];
+  let leitosUTI=0,leitosAPT=0;
+
+  linhas.forEach((l,i)=>{
+    let c=l.split(sep);
+    if(c.length<12)return;
+
+    let nome=c[1]?.trim();
+    let local=c[3]?.trim();
+    let hora=c[4];
+    let data=c[5];
+
+    if(i===2)leitosUTI=c[11]||0;
+    if(i===3)leitosAPT=c[11]||0;
+
+    if(i>=2&&i<=49&&nome){
+
+      total++;
+
+      let entrada=parseDataHora(data,hora);
+      if(!entrada)return;
+
+      let diff=(new Date()-entrada)/60000;
+      if(diff<0||diff>10000)return;
+
+      tempos.push(diff);
+
+      let h=Math.floor(diff/60);
+      let m=Math.floor(diff%60);
+
+      lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
+    }
+  });
+
+  lista.sort((a,b)=>b.diff-a.diff);
+
+  document.getElementById("total").innerText=total;
+  document.getElementById("leitosUTI").innerText=leitosUTI;
+  document.getElementById("leitosAPT").innerText=leitosAPT;
+
+  if(tempos.length){
+    let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
+
+    document.getElementById("tempoTexto").innerText =
+      `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
+
+    document.getElementById("emojiStatus").innerText=getEmoji(media);
+
+    drawGaugeAnimated(media);
+  }
+
+  document.getElementById("listaPacientes").innerHTML =
+    lista.map(p=>`
+      <div class="pacienteCard">
+        <div class="linhaTop">
+          <div class="nomeTempo">
+            <div class="nome">${p.nome}</div>
+            <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
+              ${p.tempo}
+            </span>
+          </div>
+          <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
+            ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
+          </span>
+        </div>
+      </div>
+    `).join("");
+}
+
+setInterval(carregarDados,5000);
+carregarDados();
+
+</script>
+
+</body>
+</html>

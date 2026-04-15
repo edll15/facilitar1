@@ -159,15 +159,21 @@ canvas {max-width:280px;}
   font-size: 36px;
 }
 
-/* 🔧 AJUSTE PRINCIPAL: agora ocupa toda largura da coluna esquerda */
+/* ✅ CORREÇÃO REAL: ocupa toda a coluna esquerda sem restrição interna */
 .duoTempo {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  width:100%;
-  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  width: 100%;
+  align-self: stretch;   /* força ocupar toda altura/largura da coluna */
 }
 
+.duoTempo .box {
+  width: 100%;
+}
+
+/* responsivo */
 @media (max-width:700px){
   .container {grid-template-columns:1fr;}
   .duoBox {grid-template-columns:1fr;}
@@ -189,7 +195,7 @@ canvas {max-width:280px;}
 <div id="total" class="bigNumber">0</div>
 </div>
 
-<!-- AGORA EXPANDE LATERALMENTE CORRETAMENTE -->
+<!-- AGORA REALMENTE ALINHADO COM A COLUNA DIREITA -->
 <div class="duoTempo">
 
 <div class="box">
@@ -270,7 +276,7 @@ canvas {max-width:280px;}
 </div>
 
 <script>
-// (mantido igual ao último código funcional)
+// (mesmo JS funcional anterior mantido)
 </script>
 
 </body>

@@ -230,8 +230,6 @@ canvas {max-width:280px;}
 
 <script>
 
-// (SEU SCRIPT ORIGINAL RESTAURADO — COMPLETO)
-
 let currentAngle=null;
 
 function getEmoji(m){
@@ -258,8 +256,13 @@ function parseDataHora(data,hora){
   return new Date(ano,mes,dia,h,m);
 }
 
-function drawGaugeAnimated(minutes){
+function getCor(diff){
+  if(diff>120) return "#b71c1c";
+  if(diff>60) return "#b58900";
+  return "#1b5e20";
+}
 
+function drawGaugeAnimated(minutes){
   const c=document.getElementById("gauge");
   const ctx=c.getContext("2d");
 
@@ -276,7 +279,6 @@ function drawGaugeAnimated(minutes){
   if(currentAngle===null)currentAngle=target;
 
   function anim(){
-
     ctx.clearRect(0,0,c.width,c.height);
     currentAngle += (target-currentAngle)*0.08;
 
@@ -313,13 +315,6 @@ function drawGaugeAnimated(minutes){
 
     const shaftEndX=cx+(r-25)*Math.cos(a);
     const shaftEndY=cy+(r-25)*Math.sin(a);
-
-    ctx.beginPath();
-    ctx.moveTo(cx+3,cy+3);
-    ctx.lineTo(shaftEndX+3,shaftEndY+3);
-    ctx.strokeStyle="rgba(0,0,0,0.3)";
-    ctx.lineWidth=8;
-    ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(cx,cy);
@@ -372,7 +367,6 @@ async function carregarDados(){
     if(i===3)leitosAPT=c[11]||0;
 
     if(i>=2&&i<=49&&nome){
-
       total++;
 
       let entrada=parseDataHora(data,hora);
@@ -408,8 +402,10 @@ async function carregarDados(){
   }
 
   document.getElementById("listaPacientes").innerHTML =
-    lista.map(p=>`
-      <div class="pacienteCard">
+    lista.map(p=>{
+      let cor=getCor(p.diff);
+      return `
+      <div class="pacienteCard" style="border-left:6px solid ${cor}">
         <div class="linhaTop">
           <div class="nomeTempo">
             <div class="nome">${p.nome}</div>
@@ -422,7 +418,8 @@ async function carregarDados(){
           </span>
         </div>
       </div>
-    `).join("");
+    `;
+    }).join("");
 }
 
 setInterval(carregarDados,5000);

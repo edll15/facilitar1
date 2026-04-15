@@ -145,16 +145,23 @@ canvas {max-width:280px;}
   color:#0b1f3a;
 }
 
-/* NOVO: container para deixar UTI e APT lado a lado */
 .duoBox {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
 
+/* NOVO: lado a lado média + mediana */
+.duoTempo {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
 @media (max-width:700px){
   .container {grid-template-columns:1fr;}
   .duoBox {grid-template-columns:1fr;}
+  .duoTempo {grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -172,6 +179,9 @@ canvas {max-width:280px;}
 <div id="total" class="bigNumber">0</div>
 </div>
 
+<!-- ALTERAÇÃO: bloco de tempo agora com 2 caixas -->
+<div class="duoTempo">
+
 <div class="box">
 <h2>Tempo Médio de Espera</h2>
 <div id="emojiStatus" class="statusEmoji">😃</div>
@@ -179,11 +189,19 @@ canvas {max-width:280px;}
 <div id="tempoTexto" class="tempoTexto">Carregando...</div>
 </div>
 
+<div class="box">
+<h2>Tempo Mediano de Espera</h2>
+<div id="emojiMediana" class="statusEmoji">😃</div>
+<canvas id="gaugeMediana" width="280" height="200"></canvas>
+<div id="tempoMedianaTexto" class="tempoTexto">Carregando...</div>
+</div>
+
+</div>
+
 </div>
 
 <div class="rightCol">
 
-<!-- ALTERAÇÃO AQUI -->
 <div class="duoBox">
 
 <div class="box">
@@ -244,6 +262,7 @@ canvas {max-width:280px;}
 <script>
 
 let currentAngle=null;
+let currentAngleMediana=null;
 
 function getEmoji(m){
   if(m<=60)return "😃";
@@ -275,8 +294,8 @@ function getCor(diff){
   return "#1b5e20";
 }
 
-function drawGaugeAnimated(minutes){
-  const c=document.getElementById("gauge");
+function drawGaugeAnimatedCustom(id, minutes, ref){
+  const c=document.getElementById(id);
   const ctx=c.getContext("2d");
 
   const cx=c.width/2;
@@ -289,11 +308,11 @@ function drawGaugeAnimated(minutes){
   }
 
   let target=ang(Math.min(minutes,max));
-  if(currentAngle===null)currentAngle=target;
+  if(ref.value===null)ref.value=target;
 
   function anim(){
     ctx.clearRect(0,0,c.width,c.height);
-    currentAngle += (target-currentAngle)*0.08;
+    ref.value += (target-ref.value)*0.08;
 
     let g=ctx.createLinearGradient(0,0,c.width,0);
     g.addColorStop(0,"#1b5e20");
@@ -321,7 +340,7 @@ function drawGaugeAnimated(minutes){
     txt(120,"2h");
     txt(180,">3h");
 
-    const a=currentAngle;
+    const a=ref.value;
 
     const tipX=cx+(r-15)*Math.cos(a);
     const tipY=cy+(r-15)*Math.sin(a);
@@ -404,14 +423,28 @@ async function carregarDados(){
   document.getElementById("leitosAPT").innerText=leitosAPT;
 
   if(tempos.length){
+
     let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
+
+    let ordenado=[...tempos].sort((a,b)=>a-b);
+    let meio=Math.floor(ordenado.length/2);
+    let mediana = ordenado.length%2!==0
+      ? ordenado[meio]
+      : (ordenado[meio-1]+ordenado[meio])/2;
 
     document.getElementById("tempoTexto").innerText =
       `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
 
     document.getElementById("emojiStatus").innerText=getEmoji(media);
 
-    drawGaugeAnimated(media);
+    drawGaugeAnimatedCustom("gauge",media,{value:currentAngle});
+
+    document.getElementById("tempoMedianaTexto").innerText =
+      `${Math.floor(mediana/60)}h ${Math.floor(mediana%60)}min`;
+
+    document.getElementById("emojiMediana").innerText=getEmoji(mediana);
+
+    drawGaugeAnimatedCustom("gaugeMediana",mediana,{value:currentAngleMediana});
   }
 
   document.getElementById("listaPacientes").innerHTML =

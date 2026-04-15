@@ -187,31 +187,6 @@ canvas {max-width:280px;}
 <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
 </div>
 
-<!-- UTI + APARTAMENTO -->
-<div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
-
-  <div class="box">
-    <h2>Internações em UTI</h2>
-    <div style="text-align:left; line-height:1.8;">
-      <div>• Geral Efetivado: <strong>0</strong></div>
-      <div>• Respiratório Efetivado: <strong>0</strong></div>
-      <div>• Desistência/Evasão: <strong>0</strong></div>
-      <div style="margin-top:8px;">Total: <strong>0</strong></div>
-    </div>
-  </div>
-
-  <div class="box">
-    <h2>Internações em Apartamento</h2>
-    <div style="text-align:left; line-height:1.8;">
-      <div>• Clínico: <strong>0</strong></div>
-      <div>• Cirúrgico: <strong>0</strong></div>
-      <div>• Desistência/Evasão: <strong>0</strong></div>
-      <div style="margin-top:8px;">Total: <strong>0</strong></div>
-    </div>
-  </div>
-
-</div>
-
 </div>
 
 <script>
@@ -292,11 +267,13 @@ function drawGaugeAnimated(minutes){
 
     const a=currentAngle;
 
-    const tipX=cx+(r-15)*Math.cos(a);
-    const tipY=cy+(r-15)*Math.sin(a);
-
+    // ponto base da seta
     const baseX=cx+(r-35)*Math.cos(a);
     const baseY=cy+(r-35)*Math.sin(a);
+
+    // ponta da seta
+    const tipX=cx+(r-15)*Math.cos(a);
+    const tipY=cy+(r-15)*Math.sin(a);
 
     // sombra haste
     ctx.beginPath();
@@ -306,7 +283,7 @@ function drawGaugeAnimated(minutes){
     ctx.lineWidth=7;
     ctx.stroke();
 
-    // haste
+    // haste (termina EXATO na base da seta)
     ctx.beginPath();
     ctx.moveTo(cx,cy);
     ctx.lineTo(baseX,baseY);
@@ -315,17 +292,16 @@ function drawGaugeAnimated(minutes){
     ctx.lineCap="round";
     ctx.stroke();
 
-    // seta colada (sem espaço)
+    // seta perfeitamente conectada
     ctx.beginPath();
     ctx.moveTo(tipX,tipY);
     ctx.lineTo(
-      tipX-14*Math.cos(a-0.5),
-      tipY-14*Math.sin(a-0.5)
+      baseX - 12*Math.cos(a-0.6),
+      baseY - 12*Math.sin(a-0.6)
     );
-    ctx.lineTo(baseX,baseY);
     ctx.lineTo(
-      tipX-14*Math.cos(a+0.5),
-      tipY-14*Math.sin(a+0.5)
+      baseX - 12*Math.cos(a+0.6),
+      baseY - 12*Math.sin(a+0.6)
     );
     ctx.closePath();
 

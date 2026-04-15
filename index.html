@@ -5,6 +5,7 @@
 <title>Observação</title>
 
 <style>
+/* (TUDO IGUAL — NÃO ALTERADO) */
 body {
   font-family: Arial;
   margin: 0;
@@ -239,31 +240,15 @@ function drawGaugeAnimated(minutes){
 
     currentAngle += (target-currentAngle)*0.08;
 
-    // base
+    // 🔥 GRADIENTE SUAVE
+    let gradient = ctx.createLinearGradient(0, 0, c.width, 0);
+    gradient.addColorStop(0, "#1b5e20");   // verde
+    gradient.addColorStop(0.5, "#b58900"); // amarelo
+    gradient.addColorStop(1, "#b71c1c");   // vermelho
+
     ctx.beginPath();
     ctx.arc(cx,cy,r,Math.PI,0);
-    ctx.strokeStyle="#d8cfc0";
-    ctx.lineWidth=18;
-    ctx.stroke();
-
-    // verde
-    ctx.beginPath();
-    ctx.arc(cx,cy,r,Math.PI,ang(60));
-    ctx.strokeStyle="#1b5e20";
-    ctx.lineWidth=18;
-    ctx.stroke();
-
-    // amarelo
-    ctx.beginPath();
-    ctx.arc(cx,cy,r,ang(60),ang(120));
-    ctx.strokeStyle="#b58900";
-    ctx.lineWidth=18;
-    ctx.stroke();
-
-    // vermelho
-    ctx.beginPath();
-    ctx.arc(cx,cy,r,ang(120),0);
-    ctx.strokeStyle="#b71c1c";
+    ctx.strokeStyle = gradient;
     ctx.lineWidth=18;
     ctx.stroke();
 

@@ -291,33 +291,35 @@ function drawGaugeAnimated(minutes){
 
     const a=currentAngle;
 
+    // ponta da seta
     const tipX=cx+(r-15)*Math.cos(a);
     const tipY=cy+(r-15)*Math.sin(a);
 
-    const baseX=cx+(r-15)*Math.cos(a);
-    const baseY=cy+(r-15)*Math.sin(a);
+    // BASE REAL DA SETA
+    const shaftEndX=cx+(r-25)*Math.cos(a);
+    const shaftEndY=cy+(r-25)*Math.sin(a);
 
     // sombra
     ctx.beginPath();
     ctx.moveTo(cx+3,cy+3);
-    ctx.lineTo(baseX+3,baseY+3);
+    ctx.lineTo(shaftEndX+3,shaftEndY+3);
     ctx.strokeStyle="rgba(0,0,0,0.3)";
     ctx.lineWidth=8;
     ctx.stroke();
 
-    // haste ligada direto na seta
+    // haste (PARA EXATAMENTE NA BASE)
     ctx.beginPath();
     ctx.moveTo(cx,cy);
-    ctx.lineTo(baseX,baseY);
+    ctx.lineTo(shaftEndX,shaftEndY);
     ctx.strokeStyle="#0b1f3a";
     ctx.lineWidth=7;
     ctx.stroke();
 
-    // seta conectada
+    // seta (começa da base correta)
     ctx.beginPath();
     ctx.moveTo(tipX,tipY);
-    ctx.lineTo(baseX-16*Math.cos(a-0.6),baseY-16*Math.sin(a-0.6));
-    ctx.lineTo(baseX-16*Math.cos(a+0.6),baseY-16*Math.sin(a+0.6));
+    ctx.lineTo(shaftEndX-14*Math.cos(a-0.6),shaftEndY-14*Math.sin(a-0.6));
+    ctx.lineTo(shaftEndX-14*Math.cos(a+0.6),shaftEndY-14*Math.sin(a+0.6));
     ctx.closePath();
     ctx.fillStyle="#0b1f3a";
     ctx.fill();

@@ -1,55 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Observação</title>
+  <meta charset="UTF-8">
+  <title>Observação</title>
 
-<style>
-body {
-  font-family: Arial;
-  margin: 0;
-  text-align: center;
-  background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
-  background-size: cover;
-}
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      text-align: center;
+      background-image: url("https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-header {
-  background: #0b1f3a;
-  color: white;
-  padding: 15px;
-  text-align: left;
-  font-family: "Times New Roman";
-}
+    body::before {
+      content: "";
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 31, 58, 0.78);
+      z-index: -1;
+    }
 
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 15px;
-  padding: 20px;
-}
+    header {
+      background-color: rgba(11, 31, 58, 0.95);
+      color: #f5f0e6;
+      padding: 18px;
+      font-size: 26px;
+      font-family: "Times New Roman";
+      text-align: left;
+      padding-left: 25px;
+    }
 
-.box {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-}
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-.pacientesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 10px;
-}
+    .leftCol, .rightCol {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-.pacienteCard {
-  background: #f5f0e6;
-  padding: 10px;
-  border-radius: 8px;
-}
+    .box {
+      background: rgba(245, 240, 230, 0.96);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      position: relative;
+    }
 
-.verde {background: green; color:white; padding:4px; border-radius:6px;}
-.amarelo {background: orange; color:white; padding:4px; border-radius:6px;}
-.vermelho {background: red; color:white; padding:4px; border-radius:6px;}
-</style>
+    h2 { color: #0b1f3a; }
+
+    .bigNumber {
+      font-size: 64px;
+      font-weight: bold;
+      color: #0b1f3a;
+    }
+
+    .statusEmoji {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 44px;
+    }
+
+    .pacientesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .pacienteCard {
+      background: rgba(245, 240, 230, 0.96);
+      border-radius: 10px;
+      padding: 12px;
+      border-left: 6px solid #0b1f3a;
+    }
+
+    .linhaTop {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .nome { font-weight: bold; }
+
+    .badgeTempo {
+      padding: 4px 8px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .badgeLocal {
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .verde { background: #1b5e20; }
+    .amarelo { background: #b58900; }
+    .vermelho { background: #b71c1c; }
+
+    .uti { background: #4a148c; }
+    .apartamento { background: #0b3c6f; }
+
+    canvas { max-width: 280px; }
+
+    .tempoTexto {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
@@ -58,122 +133,179 @@ header {
 
 <div class="container">
 
-<div class="box">
-<h2>Total</h2>
-<div id="total">0</div>
-</div>
+  <div class="leftCol">
 
-<div class="box">
-<h2>Tempo Médio</h2>
-<div id="tempoTexto">0h</div>
-</div>
+    <div class="box">
+      <h2>Total de Pacientes</h2>
+      <div id="total" class="bigNumber">0</div>
+    </div>
 
-<div class="box" style="grid-column:1/-1;">
-<h2>Pacientes</h2>
-<div id="listaPacientes" class="pacientesGrid"></div>
-</div>
+    <div class="box">
+      <h2>Tempo Médio de Espera</h2>
+      <div id="emojiStatus" class="statusEmoji">😃</div>
+      <canvas id="gauge" width="280" height="200"></canvas>
+      <div id="tempoTexto" class="tempoTexto">Carregando...</div>
+    </div>
+
+  </div>
+
+  <div class="rightCol">
+
+    <div class="box">
+      <h2>Leitos Livres UTI</h2>
+      <div id="leitosUTI" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
+    <div class="box">
+      <h2>Leitos Livres Apartamento</h2>
+      <div id="leitosAPT" class="bigNumber" style="font-size:42px;">0</div>
+    </div>
+
+  </div>
+
+  <div class="box" style="grid-column: 1 / -1;">
+    <h2>Tempo de Espera por Paciente</h2>
+    <div id="listaPacientes" class="pacientesGrid">Carregando...</div>
+  </div>
 
 </div>
 
 <script>
 
-function parseDataHora(data, hora) {
-  if (!data || !hora) return null;
+function getEmoji(m) {
+  if (m <= 60) return "😃";
+  if (m <= 120) return "😐";
+  return "😡";
+}
 
-  data = data.replace(/"/g,"").trim();
-  hora = hora.replace(/"/g,"").trim();
+function drawGauge(m) {
+  const c = document.getElementById("gauge");
+  const ctx = c.getContext("2d");
 
-  let partesHora = hora.split(":");
-  if (partesHora.length < 2) return null;
+  ctx.clearRect(0,0,c.width,c.height);
 
-  let h = parseInt(partesHora[0]);
-  let m = parseInt(partesHora[1]);
+  const cx = c.width/2;
+  const cy = c.height-20;
+  const r = 110;
 
-  let dia, mes, ano;
+  const ang = Math.PI + (Math.min(m,180)/180)*Math.PI;
 
-  if (data.includes("/")) {
-    [dia, mes, ano] = data.split("/");
-  } else if (data.includes("-")) {
-    [ano, mes, dia] = data.split("-");
-  } else {
-    return null;
-  }
+  ctx.beginPath();
+  ctx.arc(cx,cy,r,Math.PI,0);
+  ctx.strokeStyle="#ccc";
+  ctx.lineWidth=18;
+  ctx.stroke();
 
-  let d = new Date(ano, mes - 1, dia, h, m);
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.lineTo(cx+(r-20)*Math.cos(ang),cy+(r-20)*Math.sin(ang));
+  ctx.strokeStyle="#0b1f3a";
+  ctx.lineWidth=6;
+  ctx.stroke();
+}
 
-  if (isNaN(d)) return null;
+function parseDataHora(data,hora){
+  if(!data||!hora) return null;
+
+  data=data.replace(/"/g,"").trim();
+  hora=hora.replace(/"/g,"").trim();
+
+  let [hh,mm]=hora.split(":");
+  if(!hh||!mm) return null;
+
+  let dia,mes,ano;
+
+  if(data.includes("/")){
+    [dia,mes,ano]=data.split("/");
+  } else if(data.includes("-")){
+    [ano,mes,dia]=data.split("-");
+  } else return null;
+
+  let d=new Date(ano,mes-1,dia,hh,mm);
+  if(isNaN(d)) return null;
 
   return d;
 }
 
-async function carregarDados() {
+async function carregarDados(){
+  try{
+    const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
-  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
+    let txt=await (await fetch(url)).text();
+    txt=txt.replace(/\r/g,"");
 
-  const res = await fetch(url);
-  let txt = await res.text();
+    let sep=txt.includes(";")?";":",";
+    let linhas=txt.split("\n");
 
-  let sep = txt.includes(";") ? ";" : ",";
-  let linhas = txt.split("\n");
+    let total=0,tempos=[],lista=[];
+    let leitosUTI=0,leitosAPT=0;
 
-  let total = 0;
-  let tempos = [];
-  let lista = [];
+    linhas.forEach((l,i)=>{
+      let c=l.split(sep);
+      if(c.length<12) return;
 
-  linhas.forEach((l, i) => {
+      let nome=c[1]?.trim();
+      let local=c[3]?.trim();
+      let hora=c[4];
+      let data=c[5];
 
-    let c = l.split(sep);
-    if (c.length < 6) return;
+      if(i===2) leitosUTI=c[11]||0;
+      if(i===3) leitosAPT=c[11]||0;
 
-    let nome = c[1]?.trim();
-    let hora = c[4];
-    let data = c[5];
+      if(i>=2 && i<=49 && nome){
 
-    if (i >= 2 && nome) {
+        total++;
 
-      total++;
+        let entrada=parseDataHora(data,hora);
+        if(!entrada) return;
 
-      let entrada = parseDataHora(data, hora);
-      if (!entrada) return;
+        let diff=(new Date()-entrada)/60000;
+        if(diff<0||diff>10000||isNaN(diff)) return;
 
-      let diff = (new Date() - entrada) / 60000;
+        tempos.push(diff);
 
-      if (diff < 0 || isNaN(diff)) return;
+        let h=Math.floor(diff/60);
+        let m=Math.floor(diff%60);
 
-      tempos.push(diff);
+        lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
+      }
+    });
 
-      let h = Math.floor(diff / 60);
-      let m = Math.floor(diff % 60);
+    lista.sort((a,b)=>b.diff-a.diff);
 
-      lista.push({
-        nome,
-        tempo: `${h}h ${m}min`,
-        diff
-      });
+    document.getElementById("total").innerText=total;
+    document.getElementById("leitosUTI").innerText=leitosUTI;
+    document.getElementById("leitosAPT").innerText=leitosAPT;
+
+    if(tempos.length){
+      let media=tempos.reduce((a,b)=>a+b,0)/tempos.length;
+      document.getElementById("tempoTexto").innerText=
+        `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
+      document.getElementById("emojiStatus").innerText=getEmoji(media);
+      drawGauge(media);
+    } else {
+      document.getElementById("tempoTexto").innerText="0h 0min";
+      drawGauge(0);
     }
 
-  });
+    document.getElementById("listaPacientes").innerHTML=
+      lista.map(p=>`
+        <div class="pacienteCard">
+          <div class="linhaTop">
+            <div class="nome">${p.nome}</div>
+            <span class="badgeLocal ${(p.local||"").toLowerCase().includes("uti")?"uti":"apartamento"}">
+              ${(p.local||"").toLowerCase().includes("uti")?"UTI":"Apartamento"}
+            </span>
+          </div>
+          <div>
+            <span class="badgeTempo ${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
+              ${p.tempo}
+            </span>
+          </div>
+        </div>
+      `).join("");
 
-  lista.sort((a,b)=>b.diff-a.diff);
-
-  document.getElementById("total").innerText = total;
-
-  if (tempos.length) {
-    let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
-    document.getElementById("tempoTexto").innerText =
-      `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-  }
-
-  document.getElementById("listaPacientes").innerHTML =
-    lista.map(p => `
-      <div class="pacienteCard">
-        <b>${p.nome}</b><br>
-        <span class="${p.diff>120?"vermelho":p.diff>60?"amarelo":"verde"}">
-          ${p.tempo}
-        </span>
-      </div>
-    `).join("");
-
+  }catch(e){console.error(e);}
 }
 
 setInterval(carregarDados,5000);

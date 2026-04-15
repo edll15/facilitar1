@@ -172,25 +172,10 @@
 
 <script>
 
-function parseCSVLine(line) {
-  const result = [];
-  let current = "";
-  let insideQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    let char = line[i];
-
-    if (char === '"') {
-      insideQuotes = !insideQuotes;
-    } else if ((char === "," || char === ";") && !insideQuotes) {
-      result.push(current);
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-  result.push(current);
-  return result;
+function excelDateToJSDate(serial) {
+  let utc_days = Math.floor(serial - 25569);
+  let utc_value = utc_days * 86400;
+  return new Date(utc_value * 1000);
 }
 
 function parseDataHora(data, hora) {
@@ -201,6 +186,14 @@ function parseDataHora(data, hora) {
 
   let [h,m] = hora.split(":");
   if (!h || !m) return null;
+
+  // DATA NUMÉRICA (EXCEL)
+  if (!isNaN(data)) {
+    let d = excelDateToJSDate(parseFloat(data));
+    d.setHours(h);
+    d.setMinutes(m);
+    return d;
+  }
 
   let dia,mes,ano;
 
@@ -217,20 +210,19 @@ function parseDataHora(data, hora) {
 }
 
 async function carregarDados() {
-
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
   let txt = await (await fetch(url)).text();
   txt = txt.replace(/\r/g,"");
 
+  let sep = txt.includes(";") ? ";" : ",";
   let linhas = txt.split("\n");
 
   let total=0, tempos=[], lista=[];
   let leitosUTI=0, leitosAPT=0;
 
-  linhas.forEach((linha,i)=>{
-
-    let c = parseCSVLine(linha);
+  linhas.forEach((l,i)=>{
+    let c = l.split(sep);
     if (c.length < 12) return;
 
     let nome = c[1]?.trim();
@@ -242,14 +234,12 @@ async function carregarDados() {
     if (i === 3) leitosAPT = c[11] || 0;
 
     if (i>=2 && i<=49 && nome){
-
       total++;
 
       let entrada = parseDataHora(data,hora);
       if (!entrada) return;
 
       let diff = (new Date() - entrada) / 60000;
-
       if (diff < 0 || diff > 10000) return;
 
       tempos.push(diff);
@@ -259,7 +249,6 @@ async function carregarDados() {
 
       lista.push({nome,local,diff,tempo:`${h}h ${m}min`});
     }
-
   });
 
   lista.sort((a,b)=>b.diff-a.diff);
@@ -272,11 +261,7 @@ async function carregarDados() {
     let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
     document.getElementById("tempoTexto").innerText =
       `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-    document.getElementById("emojiStatus").innerText = getEmoji(media);
-    drawGauge(media);
-  } else {
-    document.getElementById("tempoTexto").innerText = "0h 0min";
-    drawGauge(0);
+    document.getElementById("emojiStatus").innerText = media<=60?"😃":media<=120?"😐":"😡";
   }
 
   document.getElementById("listaPacientes").innerHTML =
@@ -295,38 +280,6 @@ async function carregarDados() {
         </div>
       </div>
     `).join("");
-}
-
-function getEmoji(m){
-  if(m<=60) return "😃";
-  if(m<=120) return "😐";
-  return "😡";
-}
-
-function drawGauge(m){
-  const c=document.getElementById("gauge");
-  const ctx=c.getContext("2d");
-
-  ctx.clearRect(0,0,c.width,c.height);
-
-  const cx=c.width/2;
-  const cy=c.height-20;
-  const r=110;
-
-  const ang=Math.PI+(Math.min(m,180)/180)*Math.PI;
-
-  ctx.beginPath();
-  ctx.arc(cx,cy,r,Math.PI,0);
-  ctx.strokeStyle="#ccc";
-  ctx.lineWidth=18;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(cx,cy);
-  ctx.lineTo(cx+(r-20)*Math.cos(ang),cy+(r-20)*Math.sin(ang));
-  ctx.strokeStyle="#0b1f3a";
-  ctx.lineWidth=6;
-  ctx.stroke();
 }
 
 setInterval(carregarDados,5000);

@@ -172,12 +172,6 @@
 
 <script>
 
-function excelDateToJSDate(serial) {
-  let utc_days = Math.floor(serial - 25569);
-  let utc_value = utc_days * 86400;
-  return new Date(utc_value * 1000);
-}
-
 function parseDataHora(data, hora) {
   if (!data || !hora) return null;
 
@@ -187,29 +181,31 @@ function parseDataHora(data, hora) {
   let [h,m] = hora.split(":");
   if (!h || !m) return null;
 
-  // DATA NUMÉRICA (EXCEL)
-  if (!isNaN(data)) {
-    let d = excelDateToJSDate(parseFloat(data));
-    d.setHours(h);
-    d.setMinutes(m);
-    return d;
-  }
-
   let dia,mes,ano;
 
   if (data.includes("/")) {
-    [dia,mes,ano] = data.split("/");
+    let p = data.split("/");
+    dia = parseInt(p[0]);
+    mes = parseInt(p[1]) - 1;
+    ano = parseInt(p[2]);
+
+    // 🔥 CORREÇÃO AQUI
+    if (ano < 100) ano += 2000;
   } else if (data.includes("-")) {
-    [ano,mes,dia] = data.split("-");
+    let p = data.split("-");
+    ano = parseInt(p[0]);
+    mes = parseInt(p[1]) - 1;
+    dia = parseInt(p[2]);
   } else return null;
 
-  let d = new Date(ano, mes-1, dia, h, m);
+  let d = new Date(ano, mes, dia, parseInt(h), parseInt(m));
   if (isNaN(d)) return null;
 
   return d;
 }
 
 async function carregarDados() {
+
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbMIAkflrN4vjDu9QnRFXfMaeIK525JimKOX_Ws3gSZwB2iGgvD8oEchUuIB8uGijnu0uyICbxJZlL/pub?output=csv";
 
   let txt = await (await fetch(url)).text();
@@ -234,12 +230,14 @@ async function carregarDados() {
     if (i === 3) leitosAPT = c[11] || 0;
 
     if (i>=2 && i<=49 && nome){
+
       total++;
 
       let entrada = parseDataHora(data,hora);
       if (!entrada) return;
 
       let diff = (new Date() - entrada) / 60000;
+
       if (diff < 0 || diff > 10000) return;
 
       tempos.push(diff);
@@ -261,7 +259,8 @@ async function carregarDados() {
     let media = tempos.reduce((a,b)=>a+b,0)/tempos.length;
     document.getElementById("tempoTexto").innerText =
       `${Math.floor(media/60)}h ${Math.floor(media%60)}min`;
-    document.getElementById("emojiStatus").innerText = media<=60?"😃":media<=120?"😐":"😡";
+    document.getElementById("emojiStatus").innerText =
+      media<=60?"😃":media<=120?"😐":"😡";
   }
 
   document.getElementById("listaPacientes").innerHTML =

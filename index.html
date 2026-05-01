@@ -8,21 +8,21 @@
         /* Estilos Globais */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #f4f7f4; /* Fundo levemente acinzentado esverdeado */
             color: #2d3436;
             margin: 0;
             padding: 0;
         }
 
-        /* Cabeçalho */
+        /* Cabeçalho - Verde Escuro */
         header {
-            background-color: #0984e3; /* Azul Médico */
-            color: white;
+            background-color: #1b4332; /* Verde Escuro Profundo */
+            color: #ffffff;
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         header h1 {
@@ -36,8 +36,8 @@
 
         .search-bar {
             padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            border: none;
+            border-radius: 4px; /* Estilo mais quadrado e sério */
+            border: 1px solid #2d6a4f;
             width: 350px;
             outline: none;
             font-size: 0.9rem;
@@ -53,19 +53,21 @@
         /* Barra Lateral de Filtros */
         aside {
             flex: 1;
-            background: white;
+            background: #ffffff;
             padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             height: fit-content;
+            border-top: 4px solid #1b4332;
         }
 
         aside h3 {
             margin-top: 0;
-            color: #0984e3;
-            border-bottom: 2px solid #f0f4f8;
+            color: #1b4332;
+            border-bottom: 1px solid #e9ecef;
             padding-bottom: 0.5rem;
             font-size: 1.2rem;
+            text-transform: uppercase;
         }
 
         .filter-group {
@@ -76,15 +78,15 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            color: #636e72;
+            font-size: 0.85rem;
+            color: #40916c; /* Verde médio para labels */
         }
 
         .filter-group select {
             width: 100%;
             padding: 0.6rem;
-            border-radius: 6px;
-            border: 1px solid #dfe6e9;
+            border-radius: 4px;
+            border: 1px solid #d8e2dc;
             background-color: #fff;
             color: #2d3436;
         }
@@ -95,11 +97,12 @@
         }
 
         .question-card {
-            background: white;
+            background: #ffffff;
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
         }
 
         .question-header {
@@ -108,10 +111,10 @@
             font-size: 0.85rem;
             color: #636e72;
             margin-bottom: 1.2rem;
-            background: #f9f9f9;
-            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            padding: 0.6rem 1rem;
             border-radius: 4px;
-            border-left: 4px solid #00cec9;
+            border-left: 5px solid #1b4332; /* Detalhe lateral em verde escuro */
         }
 
         .question-text {
@@ -134,39 +137,42 @@
         .options-list label {
             display: block;
             padding: 1rem;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s ease;
+            background-color: #fff;
         }
 
         .options-list label:hover {
-            border-color: #74b9ff;
-            background-color: #f7fbff;
+            border-color: #40916c;
+            background-color: #f0fff4; /* Verde muito claro ao passar o mouse */
         }
 
         .options-list input[type="radio"] {
             margin-right: 12px;
-            transform: scale(1.2);
+            accent-color: #1b4332; /* Cor do rádio button */
         }
 
-        /* Botão */
+        /* Botão Responder */
         .btn-answer {
-            background-color: #00cec9;
+            background-color: #1b4332;
             color: white;
             border: none;
             padding: 1rem 2rem;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
             margin-top: 1rem;
             transition: background 0.3s;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-answer:hover {
-            background-color: #00b894;
+            background-color: #2d6a4f;
         }
 
         /* Responsividade */
@@ -189,7 +195,7 @@
 
     <header>
         <h1>🩺 MedIA</h1>
-        <input type="text" class="search-bar" placeholder="Buscar temas, doenças ou condutas...">
+        <input type="text" class="search-bar" placeholder="O que você deseja estudar hoje?">
     </header>
 
     <main>
@@ -234,29 +240,29 @@
             
             <div class="question-card">
                 <div class="question-header">
-                    <span><strong>ID: 10293</strong> | Instituição: ENARE | Especialidade: Clínica Médica</span>
+                    <span><strong>QUESTÃO 4501</strong> | Especialidade: Pediatria | Ano: 2024</span>
                 </div>
                 
                 <div class="question-text">
-                    Paciente de 62 anos, masculino, hipertenso e tabagista, apresenta dor torácica opressiva de início há 2 horas. O eletrocardiograma demonstra supradesnivelamento do segmento ST em parede anterior (V1 a V4). Qual a conduta imediata mais adequada neste caso?
+                    Um lactente de 4 meses é levado à consulta de puericultura. A mãe relata que o bebê apresenta apenas aleitamento materno exclusivo. Sobre a suplementação de ferro profilática para este lactente termo e de peso adequado ao nascer, segundo a Sociedade Brasileira de Pediatria, deve-se:
                 </div>
 
                 <ul class="options-list">
                     <li>
-                        <label><input type="radio" name="q1" value="A"> A) Solicitar troponina e aguardar resultado para decidir conduta.</label>
+                        <label><input type="radio" name="q1" value="A"> A) Iniciar 1mg de ferro elementar/kg/dia apenas aos 6 meses de vida.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="B"> B) Iniciar antibioticoterapia por suspeita de pericardite infecciosa.</label>
+                        <label><input type="radio" name="q1" value="B"> B) Iniciar 1mg de ferro elementar/kg/dia a partir dos 3 meses de vida.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="C"> C) Administrar AAS, Clopidogrel e encaminhar para cineangiocoronariografia de urgência.</label>
+                        <label><input type="radio" name="q1" value="C"> C) Não realizar suplementação, pois o leite materno é suficiente até o primeiro ano.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="D"> D) Realizar apenas analgesia com morfina e repetir o ECG em 24 horas.</label>
+                        <label><input type="radio" name="q1" value="D"> D) Iniciar vitamina D e Ferro imediatamente após o nascimento.</label>
                     </li>
                 </ul>
 
-                <button class="btn-answer">Responder Questão</button>
+                <button class="btn-answer">Confirmar Resposta</button>
             </div>
 
         </section>

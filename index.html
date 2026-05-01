@@ -99,12 +99,12 @@
             color: #2d3436;
         }
 
-        /* Nova seção: Provas na Íntegra (Retrátil) */
+        /* Seção: Provas na Íntegra (Retrátil) */
         .provas-integra {
             margin-top: 2.5rem;
         }
 
-        details {
+        details.main-details {
             margin-bottom: 1rem;
         }
 
@@ -113,21 +113,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            list-style: none; /* Remove a seta padrão em navegadores modernos */
+            list-style: none;
         }
 
-        /* Remove a seta padrão do Chrome/Safari */
         .toggle-title::-webkit-details-marker {
             display: none;
         }
 
-        /* Animação da setinha customizada */
         .toggle-title span {
             font-size: 0.8rem;
             transition: transform 0.3s ease;
         }
 
-        details[open] .toggle-title span {
+        details[open] > .toggle-title span {
             transform: rotate(180deg);
         }
 
@@ -140,7 +138,8 @@
             gap: 0.5rem;
         }
 
-        .institution-list li a {
+        /* Estilos dos Submenus (Instituições e Anos) */
+        .institution-details .institution-name {
             display: block;
             padding: 0.8rem 1rem;
             background-color: #f8f9fa;
@@ -152,13 +151,65 @@
             font-weight: 600;
             font-size: 0.9rem;
             border-left: 4px solid #d8e2dc;
+            cursor: pointer;
+            position: relative;
+            list-style: none;
         }
 
-        .institution-list li a:hover {
+        .institution-details .institution-name::-webkit-details-marker {
+            display: none;
+        }
+
+        .institution-details .institution-name:hover {
             background-color: #f0fff4;
             border-left-color: #40916c;
             color: #1b4332;
-            transform: translateX(4px);
+        }
+
+        /* Setinha da instituição */
+        .institution-details .institution-name::after {
+            content: '▼';
+            font-size: 0.6rem;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            color: #636e72;
+        }
+
+        .institution-details[open] .institution-name::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Lista de anos em formato de pílulas */
+        .year-list {
+            list-style: none;
+            padding: 0.8rem 0.5rem 0.5rem 0.5rem;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-left: 2px dashed #d8e2dc;
+            margin-left: 1rem;
+        }
+
+        .year-list li a {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background-color: #e9ecef;
+            color: #2d3436;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .year-list li a:hover {
+            background-color: #40916c;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         .btn-delete {
@@ -432,16 +483,94 @@
             </div>
 
             <div class="provas-integra">
-                <details>
+                <details class="main-details">
                     <summary class="toggle-title" title="Clique para expandir/recolher">Provas na Íntegra <span>▼</span></summary>
                     <ul class="institution-list">
-                        <li><a href="#" onclick="alert('Área de provas da USP-SP em desenvolvimento!')">USP-SP</a></li>
-                        <li><a href="#" onclick="alert('Área de provas da USP-RP em desenvolvimento!')">USP-RP</a></li>
-                        <li><a href="#" onclick="alert('Área de provas da UNIFESP em desenvolvimento!')">UNIFESP</a></li>
-                        <li><a href="#" onclick="alert('Área de provas do IAMSPE em desenvolvimento!')">IAMSPE</a></li>
-                        <li><a href="#" onclick="alert('Área de provas da UNICAMP em desenvolvimento!')">UNICAMP</a></li>
-                        <li><a href="#" onclick="alert('Área de provas do HIAE em desenvolvimento!')">HIAE</a></li>
-                        <li><a href="#" onclick="alert('Área de provas do Sírio-Libanês (SP) em desenvolvimento!')">Sírio-Libanês (SP)</a></li>
+                        
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">USP-SP</summary>
+                                <ul class="year-list">
+                                    <li><a href="#" onclick="alert('Prova USP-SP 2024 em breve!')">2024</a></li>
+                                    <li><a href="#" onclick="alert('Prova USP-SP 2023 em breve!')">2023</a></li>
+                                    <li><a href="#" onclick="alert('Prova USP-SP 2022 em breve!')">2022</a></li>
+                                    <li><a href="#" onclick="alert('Prova USP-SP 2021 em breve!')">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">USP-RP</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">UNIFESP</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">IAMSPE</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">UNICAMP</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">HIAE</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details class="institution-details">
+                                <summary class="institution-name">Sírio-Libanês (SP)</summary>
+                                <ul class="year-list">
+                                    <li><a href="#">2024</a></li>
+                                    <li><a href="#">2023</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2021</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
                     </ul>
                 </details>
             </div>

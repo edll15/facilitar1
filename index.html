@@ -106,7 +106,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid #e0e0e0;
-            border-top: 4px solid #40916c; /* Verde um pouco mais claro para diferenciar */
+            border-top: 4px solid #40916c;
         }
 
         .add-question-panel h2 {
@@ -204,6 +204,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid #e0e0e0;
             clear: both;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .question-header {
@@ -308,11 +314,11 @@
                 <label>Disciplina</label>
                 <select>
                     <option value="">Todas as Disciplinas</option>
-                    <option value="clinica">Clínica Médica</option>
-                    <option value="cirurgia">Cirurgia Geral</option>
-                    <option value="go">Ginecologia e Obstetrícia</option>
-                    <option value="preventiva">Medicina Preventiva</option>
-                    <option value="pediatria">Pediatria</option>
+                    <option value="Clínica Médica">Clínica Médica</option>
+                    <option value="Cirurgia Geral">Cirurgia Geral</option>
+                    <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
+                    <option value="Medicina Preventiva">Medicina Preventiva</option>
+                    <option value="Pediatria">Pediatria</option>
                 </select>
             </div>
 
@@ -342,33 +348,33 @@
             
             <div class="add-question-panel">
                 <h2>➕ Cadastrar Nova Questão</h2>
-                <form action="#" method="POST">
+                <form id="form-questao">
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Grande Área (Disciplina)</label>
-                            <select required>
+                            <select id="input-disciplina" required>
                                 <option value="" disabled selected>Selecione a área...</option>
-                                <option value="clinica">Clínica Médica</option>
-                                <option value="cirurgia">Cirurgia Geral</option>
-                                <option value="go">Ginecologia e Obstetrícia</option>
-                                <option value="preventiva">Medicina Preventiva</option>
-                                <option value="pediatria">Pediatria</option>
+                                <option value="Clínica Médica">Clínica Médica</option>
+                                <option value="Cirurgia Geral">Cirurgia Geral</option>
+                                <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
+                                <option value="Medicina Preventiva">Medicina Preventiva</option>
+                                <option value="Pediatria">Pediatria</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Instituição / Banca</label>
-                            <input type="text" placeholder="Ex: SUS-SP, ENARE..." required>
+                            <input type="text" id="input-banca" placeholder="Ex: SUS-SP, ENARE..." required>
                         </div>
                         <div class="form-group">
                             <label>Ano</label>
-                            <input type="text" placeholder="Ex: 2024" required>
+                            <input type="text" id="input-ano" placeholder="Ex: 2024" required>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 1rem;">
                         <label>Enunciado da Questão</label>
-                        <textarea placeholder="Digite o caso clínico ou a pergunta principal aqui..." required></textarea>
+                        <textarea id="input-enunciado" placeholder="Digite o caso clínico ou a pergunta principal aqui..." required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -377,22 +383,22 @@
                             <div class="option-row">
                                 <input type="radio" name="correct_answer" value="A" required title="Marcar como correta">
                                 <strong>A)</strong>
-                                <input type="text" placeholder="Texto da alternativa A" required>
+                                <input type="text" id="input-alt-a" placeholder="Texto da alternativa A" required>
                             </div>
                             <div class="option-row">
                                 <input type="radio" name="correct_answer" value="B">
                                 <strong>B)</strong>
-                                <input type="text" placeholder="Texto da alternativa B" required>
+                                <input type="text" id="input-alt-b" placeholder="Texto da alternativa B" required>
                             </div>
                             <div class="option-row">
                                 <input type="radio" name="correct_answer" value="C">
                                 <strong>C)</strong>
-                                <input type="text" placeholder="Texto da alternativa C" required>
+                                <input type="text" id="input-alt-c" placeholder="Texto da alternativa C" required>
                             </div>
                             <div class="option-row">
                                 <input type="radio" name="correct_answer" value="D">
                                 <strong>D)</strong>
-                                <input type="text" placeholder="Texto da alternativa D" required>
+                                <input type="text" id="input-alt-d" placeholder="Texto da alternativa D" required>
                             </div>
                         </div>
                     </div>
@@ -402,35 +408,103 @@
                 </form>
             </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span><strong>QUESTÃO 4501</strong> | Especialidade: Pediatria | Ano: 2024</span>
-                </div>
-                
-                <div class="question-text">
-                    Um lactente de 4 meses é levado à consulta de puericultura. A mãe relata que o bebê apresenta apenas aleitamento materno exclusivo. Sobre a suplementação de ferro profilática para este lactente termo e de peso adequado ao nascer, segundo a Sociedade Brasileira de Pediatria, deve-se:
-                </div>
+            <div id="lista-questoes">
+                <div class="question-card">
+                    <div class="question-header">
+                        <span><strong>QUESTÃO 4501</strong> | Especialidade: Pediatria | Ano: 2024</span>
+                    </div>
+                    
+                    <div class="question-text">
+                        Um lactente de 4 meses é levado à consulta de puericultura. A mãe relata que o bebê apresenta apenas aleitamento materno exclusivo. Sobre a suplementação de ferro profilática para este lactente termo e de peso adequado ao nascer, segundo a Sociedade Brasileira de Pediatria, deve-se:
+                    </div>
 
-                <ul class="options-list">
-                    <li>
-                        <label><input type="radio" name="q1" value="A"> A) Iniciar 1mg de ferro elementar/kg/dia apenas aos 6 meses de vida.</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="q1" value="B"> B) Iniciar 1mg de ferro elementar/kg/dia a partir dos 3 meses de vida.</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="q1" value="C"> C) Não realizar suplementação, pois o leite materno é suficiente até o primeiro ano.</label>
-                    </li>
-                    <li>
-                        <label><input type="radio" name="q1" value="D"> D) Iniciar vitamina D e Ferro imediatamente após o nascimento.</label>
-                    </li>
-                </ul>
+                    <ul class="options-list">
+                        <li>
+                            <label><input type="radio" name="q_exemplo" value="A"> A) Iniciar 1mg de ferro elementar/kg/dia apenas aos 6 meses de vida.</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_exemplo" value="B"> B) Iniciar 1mg de ferro elementar/kg/dia a partir dos 3 meses de vida.</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_exemplo" value="C"> C) Não realizar suplementação, pois o leite materno é suficiente até o primeiro ano.</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_exemplo" value="D"> D) Iniciar vitamina D e Ferro imediatamente após o nascimento.</label>
+                        </li>
+                    </ul>
 
-                <button class="btn-answer">Confirmar Resposta</button>
+                    <button class="btn-answer" onclick="alert('Funcionalidade de correção em desenvolvimento!')">Confirmar Resposta</button>
+                </div>
             </div>
 
         </section>
     </main>
 
+    <script>
+        // Cria um gerador de IDs para as novas questões não terem nomes iguais
+        let questionCounter = 4502; 
+
+        // Captura o formulário
+        const form = document.getElementById('form-questao');
+        const listaQuestoes = document.getElementById('lista-questoes');
+
+        // Escuta o evento de "submit" (quando clica em salvar)
+        form.addEventListener('submit', function(evento) {
+            // Isso impede a página de recarregar
+            evento.preventDefault();
+
+            // Pegando os valores digitados
+            const disciplina = document.getElementById('input-disciplina').value;
+            const banca = document.getElementById('input-banca').value;
+            const ano = document.getElementById('input-ano').value;
+            const enunciado = document.getElementById('input-enunciado').value;
+            const altA = document.getElementById('input-alt-a').value;
+            const altB = document.getElementById('input-alt-b').value;
+            const altC = document.getElementById('input-alt-c').value;
+            const altD = document.getElementById('input-alt-d').value;
+
+            // Criando o HTML da nova questão
+            const novaQuestaoHTML = `
+                <div class="question-card">
+                    <div class="question-header">
+                        <span><strong>QUESTÃO ${questionCounter}</strong> | Especialidade: ${disciplina} | Ano: ${ano} | Banca: ${banca}</span>
+                    </div>
+                    
+                    <div class="question-text">
+                        ${enunciado}
+                    </div>
+
+                    <ul class="options-list">
+                        <li>
+                            <label><input type="radio" name="q_${questionCounter}" value="A"> A) ${altA}</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_${questionCounter}" value="B"> B) ${altB}</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_${questionCounter}" value="C"> C) ${altC}</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="q_${questionCounter}" value="D"> D) ${altD}</label>
+                        </li>
+                    </ul>
+
+                    <button class="btn-answer" onclick="alert('Funcionalidade de correção em desenvolvimento!')">Confirmar Resposta</button>
+                </div>
+            `;
+
+            // Adicionando a nova questão no topo da lista (logo abaixo do form)
+            listaQuestoes.insertAdjacentHTML('afterbegin', novaQuestaoHTML);
+
+            // Aumenta o contador para a próxima questão
+            questionCounter++;
+
+            // Limpa o formulário
+            form.reset();
+
+            // Avisa o usuário que deu certo
+            alert("Questão adicionada com sucesso à sua página (Modo Visual)!");
+        });
+    </script>
 </body>
 </html>

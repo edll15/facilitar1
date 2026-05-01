@@ -205,6 +205,7 @@
             border: 1px solid #e0e0e0;
             clear: both;
             margin-bottom: 1.5rem;
+            position: relative; /* Adicionado para posicionamento */
         }
 
         .question-header {
@@ -259,6 +260,15 @@
             color: #721c24;
         }
 
+        /* Rodapé do Cartão (Botões) */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
         .btn-answer {
             background-color: #1b4332;
             color: white;
@@ -268,14 +278,40 @@
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
-            margin-top: 1rem;
-            width: 100%;
+            flex: 1; /* Ocupa a maior parte do espaço */
             text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-answer:hover:not(:disabled) {
+            background-color: #2d6a4f;
         }
 
         .btn-answer:disabled {
             background-color: #636e72;
             cursor: not-allowed;
+        }
+
+        /* Novo Botão de Copiar para IA */
+        .btn-copy {
+            background: none;
+            border: 1px solid #d8e2dc;
+            color: #636e72;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .btn-copy:hover {
+            color: #1b4332;
+            border-color: #1b4332;
+            background-color: #f0fff4;
         }
 
         .btn-delete {
@@ -294,13 +330,14 @@
             .form-row { flex-direction: column; }
             .search-bar { width: 100%; margin-top: 1rem; }
             header { flex-direction: column; align-items: flex-start; }
+            .card-footer { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>命 MedIA</h1>
+        <h1>🩺 MedIA</h1>
         <input type="text" class="search-bar" placeholder="Buscar questões...">
     </header>
 
@@ -318,7 +355,7 @@
                     <option value="Pediatria">Pediatria</option>
                 </select>
             </div>
-            <button onclick="limparBanco()" class="btn-delete" style="color: #666">Limpar todas as questões salvas</button>
+            <button onclick="limparBanco()" class="btn-delete" style="color: #666; margin-top: 20px;">Limpar todas as questões salvas</button>
         </aside>
 
         <section class="content-area">
@@ -393,7 +430,7 @@
 
             // Criar objeto da questão
             const novaQuestao = {
-                id: Date.now(), // ID único baseado no tempo
+                id: Date.now(),
                 disciplina: document.getElementById('input-disciplina').value,
                 banca: document.getElementById('input-banca').value,
                 ano: document.getElementById('input-ano').value,
@@ -407,12 +444,11 @@
 
             // Salvar no LocalStorage
             let banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            banco.unshift(novaQuestao); // Adiciona no início da lista
+            banco.unshift(novaQuestao);
             localStorage.setItem('media_db', JSON.stringify(banco));
 
             form.reset();
             renderizarQuestoes();
-            alert("Questão da " + novaQuestao.banca + " salva permanentemente!");
         });
 
         function renderizarQuestoes() {
@@ -429,7 +465,7 @@
                     <div class="question-card">
                         <div class="question-header">
                             <span><strong>${q.banca}</strong> | ${q.disciplina} | ${q.ano}</span>
-                            <button onclick="deletarQuestao(${q.id})" style="background:none; border:none; color:red; cursor:pointer">Remover</button>
+                            <button onclick="deletarQuestao(${q.id})" style="background:none; border:none; color:red; cursor:pointer" title="Apagar questão">Remover</button>
                         </div>
                         <div class="question-text">${q.enunciado}</div>
                         <ul class="options-list">
@@ -438,7 +474,13 @@
                             <li><label id="label-${q.id}-C"><input type="radio" name="radio-${q.id}" value="C"> C) ${q.altC}</label></li>
                             <li><label id="label-${q.id}-D"><input type="radio" name="radio-${q.id}" value="D"> D) ${q.altD}</label></li>
                         </ul>
-                        <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                        
+                        <div class="card-footer">
+                            <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                            <button class="btn-copy" id="copy-${q.id}" onclick="copiarParaIA(${q.id})" title="Copiar texto para colar em uma IA">
+                                📋 Copiar
+                            </button>
+                        </div>
                     </div>
                 `;
                 listaDiv.insertAdjacentHTML('beforeend', html);
@@ -457,16 +499,55 @@
                 return;
             }
 
-            // Pintar a correta de verde
             document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
 
-            // Se errou, pintar a do usuário de vermelho
             if (selecionado !== correta) {
                 document.getElementById(`label-${id}-${selecionado}`).classList.add('incorrect-answer');
             }
 
             document.getElementById('btn-' + id).disabled = true;
             document.getElementById('btn-' + id).innerText = "Respondida";
+        }
+
+        // NOVA FUNÇÃO: Copiar dados formatados
+        function copiarParaIA(id) {
+            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
+            const q = banco.find(item => item.id === id);
+            
+            if (!q) return;
+
+            // Formata o texto perfeitamente para a IA ler
+            const textoParaCopiar = `Instituição/Banca: ${q.banca}
+Disciplina: ${q.disciplina}
+Ano: ${q.ano}
+
+Enunciado:
+${q.enunciado}
+
+Alternativas:
+A) ${q.altA}
+B) ${q.altB}
+C) ${q.altC}
+D) ${q.altD}`;
+
+            // Comando moderno para copiar para a área de transferência
+            navigator.clipboard.writeText(textoParaCopiar).then(() => {
+                const btnCopy = document.getElementById(`copy-${id}`);
+                // Dá um feedback visual para o usuário saber que funcionou
+                btnCopy.innerHTML = "✅ Copiado!";
+                btnCopy.style.borderColor = "#28a745";
+                btnCopy.style.color = "#28a745";
+                
+                // Volta ao normal depois de 2 segundos
+                setTimeout(() => {
+                    btnCopy.innerHTML = "📋 Copiar";
+                    btnCopy.style.borderColor = "#d8e2dc";
+                    btnCopy.style.color = "#636e72";
+                }, 2000);
+            }).catch(err => {
+                alert("Erro ao copiar. O seu navegador pode ter bloqueado essa ação.");
+                console.error(err);
+            });
         }
 
         function deletarQuestao(id) {

@@ -91,7 +91,7 @@
             color: #2d3436;
         }
 
-        /* Área Central (Formulário + Questões) */
+        /* Área Central */
         .content-area {
             flex: 3;
             display: flex;
@@ -204,12 +204,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid #e0e0e0;
             clear: both;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 1.5rem;
         }
 
         .question-header {
@@ -250,12 +245,7 @@
             background-color: #fff;
         }
 
-        /* ESTILOS DE CORREÇÃO (ACERTO E ERRO) */
-        .options-list label:hover:not(.answered) {
-            border-color: #40916c;
-            background-color: #f0fff4;
-        }
-
+        /* Cores de Correção */
         .options-list label.correct-answer {
             background-color: #d4edda !important;
             border-color: #28a745 !important;
@@ -269,15 +259,6 @@
             color: #721c24;
         }
 
-        .options-list label.answered {
-            cursor: default;
-        }
-
-        .options-list input[type="radio"] {
-            margin-right: 12px;
-            accent-color: #1b4332;
-        }
-
         .btn-answer {
             background-color: #1b4332;
             color: white;
@@ -288,56 +269,48 @@
             font-size: 1rem;
             font-weight: bold;
             margin-top: 1rem;
-            transition: background 0.3s;
             width: 100%;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-answer:hover:not(:disabled) {
-            background-color: #2d6a4f;
         }
 
         .btn-answer:disabled {
             background-color: #636e72;
             cursor: not-allowed;
-            opacity: 0.8;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            margin-top: 10px;
         }
 
         /* Responsividade */
         @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-            .form-row {
-                flex-direction: column;
-            }
-            .search-bar {
-                width: 100%;
-                margin-top: 1rem;
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            main { flex-direction: column; }
+            .form-row { flex-direction: column; }
+            .search-bar { width: 100%; margin-top: 1rem; }
+            header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🩺 MedIA</h1>
-        <input type="text" class="search-bar" placeholder="O que você deseja estudar hoje?">
+        <h1>命 MedIA</h1>
+        <input type="text" class="search-bar" placeholder="Buscar questões...">
     </header>
 
     <main>
         <aside>
             <h3>Filtros</h3>
-            
             <div class="filter-group">
                 <label>Disciplina</label>
-                <select>
-                    <option value="">Todas as Disciplinas</option>
+                <select id="filtro-disciplina">
+                    <option value="">Todas</option>
                     <option value="Clínica Médica">Clínica Médica</option>
                     <option value="Cirurgia Geral">Cirurgia Geral</option>
                     <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
@@ -345,40 +318,18 @@
                     <option value="Pediatria">Pediatria</option>
                 </select>
             </div>
-
-            <div class="filter-group">
-                <label>Instituição</label>
-                <select>
-                    <option value="">Todas</option>
-                    <option value="enare">ENARE</option>
-                    <option value="usp">USP</option>
-                    <option value="unifesp">UNIFESP</option>
-                    <option value="sus">SUS-SP</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Ano</label>
-                <select>
-                    <option value="">Todos</option>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                </select>
-            </div>
+            <button onclick="limparBanco()" class="btn-delete" style="color: #666">Limpar todas as questões salvas</button>
         </aside>
 
         <section class="content-area">
-            
             <div class="add-question-panel">
                 <h2>➕ Cadastrar Nova Questão</h2>
                 <form id="form-questao">
-                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Grande Área (Disciplina)</label>
+                            <label>Disciplina</label>
                             <select id="input-disciplina" required>
-                                <option value="" disabled selected>Selecione a área...</option>
+                                <option value="" disabled selected>Selecione...</option>
                                 <option value="Clínica Médica">Clínica Médica</option>
                                 <option value="Cirurgia Geral">Cirurgia Geral</option>
                                 <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
@@ -387,190 +338,151 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Instituição / Banca</label>
-                            <input type="text" id="input-banca" placeholder="Ex: SUS-SP, ENARE..." required>
+                            <label>Instituição</label>
+                            <input type="text" id="input-banca" placeholder="Ex: USP, ENARE" required>
                         </div>
                         <div class="form-group">
                             <label>Ano</label>
                             <input type="text" id="input-ano" placeholder="Ex: 2024" required>
                         </div>
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label>Enunciado da Questão</label>
-                        <textarea id="input-enunciado" placeholder="Digite o caso clínico ou a pergunta principal aqui..." required></textarea>
-                    </div>
-
                     <div class="form-group">
-                        <label>Alternativas <span style="font-weight: normal; font-size: 0.8rem; color: #636e72;">(Selecione o botão ao lado da alternativa correta)</span></label>
+                        <label>Enunciado</label>
+                        <textarea id="input-enunciado" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Alternativas (marque a correta)</label>
                         <div class="options-setup">
                             <div class="option-row">
-                                <input type="radio" name="form_correct_answer" value="A" required title="Marcar como correta">
-                                <strong>A)</strong>
-                                <input type="text" id="input-alt-a" placeholder="Texto da alternativa A" required>
+                                <input type="radio" name="gabarito" value="A" required> <strong>A</strong>
+                                <input type="text" id="input-a" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="form_correct_answer" value="B">
-                                <strong>B)</strong>
-                                <input type="text" id="input-alt-b" placeholder="Texto da alternativa B" required>
+                                <input type="radio" name="gabarito" value="B"> <strong>B</strong>
+                                <input type="text" id="input-b" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="form_correct_answer" value="C">
-                                <strong>C)</strong>
-                                <input type="text" id="input-alt-c" placeholder="Texto da alternativa C" required>
+                                <input type="radio" name="gabarito" value="C"> <strong>C</strong>
+                                <input type="text" id="input-c" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="form_correct_answer" value="D">
-                                <strong>D)</strong>
-                                <input type="text" id="input-alt-d" placeholder="Texto da alternativa D" required>
+                                <input type="radio" name="gabarito" value="D"> <strong>D</strong>
+                                <input type="text" id="input-d" required>
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn-submit">Salvar no Banco de Dados</button>
-                    <div style="clear: both;"></div>
+                    <button type="submit" class="btn-submit">Salvar Questão Permanente</button>
                 </form>
             </div>
 
-            <div id="lista-questoes">
-                <div class="question-card">
-                    <div class="question-header">
-                        <span><strong>QUESTÃO 4501</strong> | Especialidade: Pediatria | Ano: 2024</span>
-                    </div>
-                    
-                    <div class="question-text">
-                        Um lactente de 4 meses é levado à consulta de puericultura. A mãe relata que o bebê apresenta apenas aleitamento materno exclusivo. Sobre a suplementação de ferro profilática para este lactente termo e de peso adequado ao nascer, segundo a Sociedade Brasileira de Pediatria, deve-se:
-                    </div>
-
-                    <ul class="options-list">
-                        <li>
-                            <label><input type="radio" name="q_exemplo" value="A"> A) Iniciar 1mg de ferro elementar/kg/dia apenas aos 6 meses de vida.</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_exemplo" value="B"> B) Iniciar 1mg de ferro elementar/kg/dia a partir dos 3 meses de vida.</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_exemplo" value="C"> C) Não realizar suplementação, pois o leite materno é suficiente até o primeiro ano.</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_exemplo" value="D"> D) Iniciar vitamina D e Ferro imediatamente após o nascimento.</label>
-                        </li>
-                    </ul>
-                    
-                    <button type="button" class="btn-answer" onclick="verificarResposta(this, 'B', 'q_exemplo')">Confirmar Resposta</button>
-                </div>
-            </div>
-
+            <div id="lista-questoes"></div>
         </section>
     </main>
 
     <script>
-        // Cria um gerador de IDs para as novas questões não terem nomes iguais
-        let questionCounter = 4502; 
+        // Ao carregar a página, busca as questões salvas no "banco" do navegador
+        window.onload = function() {
+            renderizarQuestoes();
+        };
 
-        // Captura o formulário e a lista
         const form = document.getElementById('form-questao');
-        const listaQuestoes = document.getElementById('lista-questoes');
+        const listaDiv = document.getElementById('lista-questoes');
 
-        // Escuta o evento de "submit" do formulário
-        form.addEventListener('submit', function(evento) {
-            evento.preventDefault();
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-            // Pega qual alternativa o usuário marcou como correta no formulário
-            const radioCorreto = document.querySelector('input[name="form_correct_answer"]:checked');
-            if (!radioCorreto) {
-                alert("Por favor, marque qual alternativa é a correta no formulário.");
-                return;
-            }
-            const respostaCorreta = radioCorreto.value;
+            // Criar objeto da questão
+            const novaQuestao = {
+                id: Date.now(), // ID único baseado no tempo
+                disciplina: document.getElementById('input-disciplina').value,
+                banca: document.getElementById('input-banca').value,
+                ano: document.getElementById('input-ano').value,
+                enunciado: document.getElementById('input-enunciado').value,
+                altA: document.getElementById('input-a').value,
+                altB: document.getElementById('input-b').value,
+                altC: document.getElementById('input-c').value,
+                altD: document.getElementById('input-d').value,
+                correta: document.querySelector('input[name="gabarito"]:checked').value
+            };
 
-            // Pegando os textos digitados
-            const disciplina = document.getElementById('input-disciplina').value;
-            const banca = document.getElementById('input-banca').value;
-            const ano = document.getElementById('input-ano').value;
-            const enunciado = document.getElementById('input-enunciado').value;
-            const altA = document.getElementById('input-alt-a').value;
-            const altB = document.getElementById('input-alt-b').value;
-            const altC = document.getElementById('input-alt-c').value;
-            const altD = document.getElementById('input-alt-d').value;
+            // Salvar no LocalStorage
+            let banco = JSON.parse(localStorage.getItem('media_db')) || [];
+            banco.unshift(novaQuestao); // Adiciona no início da lista
+            localStorage.setItem('media_db', JSON.stringify(banco));
 
-            // Criando o HTML da nova questão, já passando a resposta correta para o botão
-            const novaQuestaoHTML = `
-                <div class="question-card">
-                    <div class="question-header">
-                        <span><strong>QUESTÃO ${questionCounter}</strong> | Especialidade: ${disciplina} | Ano: ${ano} | Banca: ${banca}</span>
-                    </div>
-                    
-                    <div class="question-text">
-                        ${enunciado}
-                    </div>
-
-                    <ul class="options-list">
-                        <li>
-                            <label><input type="radio" name="q_${questionCounter}" value="A"> A) ${altA}</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_${questionCounter}" value="B"> B) ${altB}</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_${questionCounter}" value="C"> C) ${altC}</label>
-                        </li>
-                        <li>
-                            <label><input type="radio" name="q_${questionCounter}" value="D"> D) ${altD}</label>
-                        </li>
-                    </ul>
-
-                    <button type="button" class="btn-answer" onclick="verificarResposta(this, '${respostaCorreta}', 'q_${questionCounter}')">Confirmar Resposta</button>
-                </div>
-            `;
-
-            // Adicionando a nova questão no topo da lista
-            listaQuestoes.insertAdjacentHTML('afterbegin', novaQuestaoHTML);
-            questionCounter++;
             form.reset();
+            renderizarQuestoes();
+            alert("Questão da " + novaQuestao.banca + " salva permanentemente!");
         });
 
-        // FUNÇÃO DE CORREÇÃO DAS QUESTÕES
-        function verificarResposta(botao, respostaCorreta, nomeRadio) {
-            // Pega todas as opções (A, B, C, D) dessa questão específica
-            const radios = document.getElementsByName(nomeRadio);
-            let selecionado = null;
+        function renderizarQuestoes() {
+            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
+            listaDiv.innerHTML = '';
 
-            // Verifica qual foi assinalada pelo estudante
-            for (let i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    selecionado = radios[i];
-                    break;
-                }
-            }
-
-            // Se não marcou nada, avisa
-            if (!selecionado) {
-                alert("Por favor, selecione uma alternativa antes de confirmar.");
+            if (banco.length === 0) {
+                listaDiv.innerHTML = '<p style="text-align:center; color:#666">Nenhuma questão cadastrada ainda.</p>';
                 return;
             }
 
-            // Aplica as cores
-            radios.forEach(radio => {
-                // Desabilita os radios para o usuário não mudar a resposta depois de ver o gabarito
-                radio.disabled = true;
-                const label = radio.closest('label');
-                label.classList.add('answered'); // Tira o efeito de passar o mouse
-                
-                // Se for a opção correta, pinta de verde (independente de ele ter marcado ou não, para mostrar o gabarito)
-                if (radio.value === respostaCorreta) {
-                    label.classList.add('correct-answer');
-                }
+            banco.forEach(q => {
+                const html = `
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span><strong>${q.banca}</strong> | ${q.disciplina} | ${q.ano}</span>
+                            <button onclick="deletarQuestao(${q.id})" style="background:none; border:none; color:red; cursor:pointer">Remover</button>
+                        </div>
+                        <div class="question-text">${q.enunciado}</div>
+                        <ul class="options-list">
+                            <li><label id="label-${q.id}-A"><input type="radio" name="radio-${q.id}" value="A"> A) ${q.altA}</label></li>
+                            <li><label id="label-${q.id}-B"><input type="radio" name="radio-${q.id}" value="B"> B) ${q.altB}</label></li>
+                            <li><label id="label-${q.id}-C"><input type="radio" name="radio-${q.id}" value="C"> C) ${q.altC}</label></li>
+                            <li><label id="label-${q.id}-D"><input type="radio" name="radio-${q.id}" value="D"> D) ${q.altD}</label></li>
+                        </ul>
+                        <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                    </div>
+                `;
+                listaDiv.insertAdjacentHTML('beforeend', html);
             });
+        }
 
-            // Se a opção que o usuário marcou for diferente da resposta correta, pinta ela de vermelho
-            if (selecionado.value !== respostaCorreta) {
-                selecionado.closest('label').classList.add('incorrect-answer');
+        function corrigir(id, correta) {
+            const radios = document.getElementsByName('radio-' + id);
+            let selecionado = null;
+            
+            radios.forEach(r => { if(r.checked) selecionado = r.value; r.disabled = true; });
+
+            if (!selecionado) {
+                alert("Escolha uma alternativa!");
+                radios.forEach(r => r.disabled = false);
+                return;
             }
 
-            // Desabilita o botão e muda o texto
-            botao.disabled = true;
-            botao.innerText = "Respondida";
+            // Pintar a correta de verde
+            document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
+
+            // Se errou, pintar a do usuário de vermelho
+            if (selecionado !== correta) {
+                document.getElementById(`label-${id}-${selecionado}`).classList.add('incorrect-answer');
+            }
+
+            document.getElementById('btn-' + id).disabled = true;
+            document.getElementById('btn-' + id).innerText = "Respondida";
+        }
+
+        function deletarQuestao(id) {
+            if(confirm("Deseja realmente apagar esta questão?")) {
+                let banco = JSON.parse(localStorage.getItem('media_db')) || [];
+                banco = banco.filter(q => q.id !== id);
+                localStorage.setItem('media_db', JSON.stringify(banco));
+                renderizarQuestoes();
+            }
+        }
+
+        function limparBanco() {
+            if(confirm("Isso apagará TODAS as questões que você salvou. Tem certeza?")) {
+                localStorage.removeItem('media_db');
+                renderizarQuestoes();
+            }
         }
     </script>
 </body>

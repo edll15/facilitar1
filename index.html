@@ -8,15 +8,15 @@
         /* Estilos Globais */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f4; /* Fundo levemente acinzentado esverdeado */
+            background-color: #f4f7f4;
             color: #2d3436;
             margin: 0;
             padding: 0;
         }
 
-        /* Cabeçalho - Verde Escuro */
+        /* Cabeçalho */
         header {
-            background-color: #1b4332; /* Verde Escuro Profundo */
+            background-color: #1b4332;
             color: #ffffff;
             padding: 1rem 5%;
             display: flex;
@@ -36,7 +36,7 @@
 
         .search-bar {
             padding: 0.6rem 1.2rem;
-            border-radius: 4px; /* Estilo mais quadrado e sério */
+            border-radius: 4px;
             border: 1px solid #2d6a4f;
             width: 350px;
             outline: none;
@@ -79,7 +79,7 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             font-size: 0.85rem;
-            color: #40916c; /* Verde médio para labels */
+            color: #40916c;
         }
 
         .filter-group select {
@@ -91,18 +91,119 @@
             color: #2d3436;
         }
 
-        /* Área de Questões */
-        .questions-container {
+        /* Área Central (Formulário + Questões) */
+        .content-area {
             flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
+        /* Painel de Adição de Questões */
+        .add-question-panel {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #40916c; /* Verde um pouco mais claro para diferenciar */
+        }
+
+        .add-question-panel h2 {
+            margin-top: 0;
+            color: #1b4332;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group textarea {
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #d8e2dc;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .options-setup {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .option-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-row input[type="radio"] {
+            accent-color: #1b4332;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .option-row input[type="text"] {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid #d8e2dc;
+            border-radius: 4px;
+        }
+
+        .btn-submit {
+            background-color: #40916c;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: background 0.3s;
+            float: right;
+        }
+
+        .btn-submit:hover {
+            background-color: #2d6a4f;
+        }
+
+        /* Cartão de Questão */
         .question-card {
             background: #ffffff;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
             border: 1px solid #e0e0e0;
+            clear: both;
         }
 
         .question-header {
@@ -114,7 +215,7 @@
             background: #f8f9fa;
             padding: 0.6rem 1rem;
             border-radius: 4px;
-            border-left: 5px solid #1b4332; /* Detalhe lateral em verde escuro */
+            border-left: 5px solid #1b4332;
         }
 
         .question-text {
@@ -124,7 +225,6 @@
             font-weight: 500;
         }
 
-        /* Opções de Resposta */
         .options-list {
             list-style: none;
             padding: 0;
@@ -146,15 +246,14 @@
 
         .options-list label:hover {
             border-color: #40916c;
-            background-color: #f0fff4; /* Verde muito claro ao passar o mouse */
+            background-color: #f0fff4;
         }
 
         .options-list input[type="radio"] {
             margin-right: 12px;
-            accent-color: #1b4332; /* Cor do rádio button */
+            accent-color: #1b4332;
         }
 
-        /* Botão Responder */
         .btn-answer {
             background-color: #1b4332;
             color: white;
@@ -178,6 +277,9 @@
         /* Responsividade */
         @media (max-width: 768px) {
             main {
+                flex-direction: column;
+            }
+            .form-row {
                 flex-direction: column;
             }
             .search-bar {
@@ -236,8 +338,70 @@
             </div>
         </aside>
 
-        <section class="questions-container">
+        <section class="content-area">
             
+            <div class="add-question-panel">
+                <h2>➕ Cadastrar Nova Questão</h2>
+                <form action="#" method="POST">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Grande Área (Disciplina)</label>
+                            <select required>
+                                <option value="" disabled selected>Selecione a área...</option>
+                                <option value="clinica">Clínica Médica</option>
+                                <option value="cirurgia">Cirurgia Geral</option>
+                                <option value="go">Ginecologia e Obstetrícia</option>
+                                <option value="preventiva">Medicina Preventiva</option>
+                                <option value="pediatria">Pediatria</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Instituição / Banca</label>
+                            <input type="text" placeholder="Ex: SUS-SP, ENARE..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ano</label>
+                            <input type="text" placeholder="Ex: 2024" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>Enunciado da Questão</label>
+                        <textarea placeholder="Digite o caso clínico ou a pergunta principal aqui..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Alternativas <span style="font-weight: normal; font-size: 0.8rem; color: #636e72;">(Selecione o botão ao lado da alternativa correta)</span></label>
+                        <div class="options-setup">
+                            <div class="option-row">
+                                <input type="radio" name="correct_answer" value="A" required title="Marcar como correta">
+                                <strong>A)</strong>
+                                <input type="text" placeholder="Texto da alternativa A" required>
+                            </div>
+                            <div class="option-row">
+                                <input type="radio" name="correct_answer" value="B">
+                                <strong>B)</strong>
+                                <input type="text" placeholder="Texto da alternativa B" required>
+                            </div>
+                            <div class="option-row">
+                                <input type="radio" name="correct_answer" value="C">
+                                <strong>C)</strong>
+                                <input type="text" placeholder="Texto da alternativa C" required>
+                            </div>
+                            <div class="option-row">
+                                <input type="radio" name="correct_answer" value="D">
+                                <strong>D)</strong>
+                                <input type="text" placeholder="Texto da alternativa D" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Salvar no Banco de Dados</button>
+                    <div style="clear: both;"></div>
+                </form>
+            </div>
+
             <div class="question-card">
                 <div class="question-header">
                     <span><strong>QUESTÃO 4501</strong> | Especialidade: Pediatria | Ano: 2024</span>

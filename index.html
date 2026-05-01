@@ -250,9 +250,27 @@
             background-color: #fff;
         }
 
-        .options-list label:hover {
+        /* ESTILOS DE CORREÇÃO (ACERTO E ERRO) */
+        .options-list label:hover:not(.answered) {
             border-color: #40916c;
             background-color: #f0fff4;
+        }
+
+        .options-list label.correct-answer {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .options-list label.incorrect-answer {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+
+        .options-list label.answered {
+            cursor: default;
         }
 
         .options-list input[type="radio"] {
@@ -276,8 +294,14 @@
             letter-spacing: 1px;
         }
 
-        .btn-answer:hover {
+        .btn-answer:hover:not(:disabled) {
             background-color: #2d6a4f;
+        }
+
+        .btn-answer:disabled {
+            background-color: #636e72;
+            cursor: not-allowed;
+            opacity: 0.8;
         }
 
         /* Responsividade */
@@ -381,22 +405,22 @@
                         <label>Alternativas <span style="font-weight: normal; font-size: 0.8rem; color: #636e72;">(Selecione o botão ao lado da alternativa correta)</span></label>
                         <div class="options-setup">
                             <div class="option-row">
-                                <input type="radio" name="correct_answer" value="A" required title="Marcar como correta">
+                                <input type="radio" name="form_correct_answer" value="A" required title="Marcar como correta">
                                 <strong>A)</strong>
                                 <input type="text" id="input-alt-a" placeholder="Texto da alternativa A" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="correct_answer" value="B">
+                                <input type="radio" name="form_correct_answer" value="B">
                                 <strong>B)</strong>
                                 <input type="text" id="input-alt-b" placeholder="Texto da alternativa B" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="correct_answer" value="C">
+                                <input type="radio" name="form_correct_answer" value="C">
                                 <strong>C)</strong>
                                 <input type="text" id="input-alt-c" placeholder="Texto da alternativa C" required>
                             </div>
                             <div class="option-row">
-                                <input type="radio" name="correct_answer" value="D">
+                                <input type="radio" name="form_correct_answer" value="D">
                                 <strong>D)</strong>
                                 <input type="text" id="input-alt-d" placeholder="Texto da alternativa D" required>
                             </div>
@@ -432,8 +456,8 @@
                             <label><input type="radio" name="q_exemplo" value="D"> D) Iniciar vitamina D e Ferro imediatamente após o nascimento.</label>
                         </li>
                     </ul>
-
-                    <button class="btn-answer" onclick="alert('Funcionalidade de correção em desenvolvimento!')">Confirmar Resposta</button>
+                    
+                    <button type="button" class="btn-answer" onclick="verificarResposta(this, 'B', 'q_exemplo')">Confirmar Resposta</button>
                 </div>
             </div>
 
@@ -444,16 +468,23 @@
         // Cria um gerador de IDs para as novas questões não terem nomes iguais
         let questionCounter = 4502; 
 
-        // Captura o formulário
+        // Captura o formulário e a lista
         const form = document.getElementById('form-questao');
         const listaQuestoes = document.getElementById('lista-questoes');
 
-        // Escuta o evento de "submit" (quando clica em salvar)
+        // Escuta o evento de "submit" do formulário
         form.addEventListener('submit', function(evento) {
-            // Isso impede a página de recarregar
             evento.preventDefault();
 
-            // Pegando os valores digitados
+            // Pega qual alternativa o usuário marcou como correta no formulário
+            const radioCorreto = document.querySelector('input[name="form_correct_answer"]:checked');
+            if (!radioCorreto) {
+                alert("Por favor, marque qual alternativa é a correta no formulário.");
+                return;
+            }
+            const respostaCorreta = radioCorreto.value;
+
+            // Pegando os textos digitados
             const disciplina = document.getElementById('input-disciplina').value;
             const banca = document.getElementById('input-banca').value;
             const ano = document.getElementById('input-ano').value;
@@ -463,7 +494,7 @@
             const altC = document.getElementById('input-alt-c').value;
             const altD = document.getElementById('input-alt-d').value;
 
-            // Criando o HTML da nova questão
+            // Criando o HTML da nova questão, já passando a resposta correta para o botão
             const novaQuestaoHTML = `
                 <div class="question-card">
                     <div class="question-header">
@@ -489,22 +520,58 @@
                         </li>
                     </ul>
 
-                    <button class="btn-answer" onclick="alert('Funcionalidade de correção em desenvolvimento!')">Confirmar Resposta</button>
+                    <button type="button" class="btn-answer" onclick="verificarResposta(this, '${respostaCorreta}', 'q_${questionCounter}')">Confirmar Resposta</button>
                 </div>
             `;
 
-            // Adicionando a nova questão no topo da lista (logo abaixo do form)
+            // Adicionando a nova questão no topo da lista
             listaQuestoes.insertAdjacentHTML('afterbegin', novaQuestaoHTML);
-
-            // Aumenta o contador para a próxima questão
             questionCounter++;
-
-            // Limpa o formulário
             form.reset();
-
-            // Avisa o usuário que deu certo
-            alert("Questão adicionada com sucesso à sua página (Modo Visual)!");
         });
+
+        // FUNÇÃO DE CORREÇÃO DAS QUESTÕES
+        function verificarResposta(botao, respostaCorreta, nomeRadio) {
+            // Pega todas as opções (A, B, C, D) dessa questão específica
+            const radios = document.getElementsByName(nomeRadio);
+            let selecionado = null;
+
+            // Verifica qual foi assinalada pelo estudante
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selecionado = radios[i];
+                    break;
+                }
+            }
+
+            // Se não marcou nada, avisa
+            if (!selecionado) {
+                alert("Por favor, selecione uma alternativa antes de confirmar.");
+                return;
+            }
+
+            // Aplica as cores
+            radios.forEach(radio => {
+                // Desabilita os radios para o usuário não mudar a resposta depois de ver o gabarito
+                radio.disabled = true;
+                const label = radio.closest('label');
+                label.classList.add('answered'); // Tira o efeito de passar o mouse
+                
+                // Se for a opção correta, pinta de verde (independente de ele ter marcado ou não, para mostrar o gabarito)
+                if (radio.value === respostaCorreta) {
+                    label.classList.add('correct-answer');
+                }
+            });
+
+            // Se a opção que o usuário marcou for diferente da resposta correta, pinta ela de vermelho
+            if (selecionado.value !== respostaCorreta) {
+                selecionado.closest('label').classList.add('incorrect-answer');
+            }
+
+            // Desabilita o botão e muda o texto
+            botao.disabled = true;
+            botao.innerText = "Respondida";
+        }
     </script>
 </body>
 </html>

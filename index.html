@@ -3,71 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banca de Questões</title>
+    <title>MedIA - Banca de Questões Médicas</title>
     <style>
-        /* Estilos básicos para deixar o site com cara de sistema */
+        /* Estilos Globais */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #f0f4f8;
+            color: #2d3436;
             margin: 0;
             padding: 0;
         }
 
+        /* Cabeçalho */
         header {
-            background-color: #2c3e50;
+            background-color: #0984e3; /* Azul Médico */
             color: white;
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .search-bar {
-            padding: 0.5rem;
-            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
             border: none;
-            width: 300px;
+            width: 350px;
+            outline: none;
+            font-size: 0.9rem;
         }
 
+        /* Layout Principal */
         main {
             padding: 2rem 5%;
             display: flex;
             gap: 2rem;
         }
 
-        /* Barra lateral para filtros */
+        /* Barra Lateral de Filtros */
         aside {
             flex: 1;
             background: white;
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             height: fit-content;
         }
 
         aside h3 {
             margin-top: 0;
-            color: #2c3e50;
+            color: #0984e3;
+            border-bottom: 2px solid #f0f4f8;
+            padding-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .filter-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #636e72;
         }
 
         .filter-group select {
             width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid #dfe6e9;
+            background-color: #fff;
+            color: #2d3436;
         }
 
-        /* Área principal das questões */
+        /* Área de Questões */
         .questions-container {
             flex: 3;
         }
@@ -75,100 +97,135 @@
         .question-card {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             margin-bottom: 1.5rem;
         }
 
         .question-header {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: #636e72;
+            margin-bottom: 1.2rem;
+            background: #f9f9f9;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #00cec9;
         }
 
         .question-text {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
+        /* Opções de Resposta */
         .options-list {
             list-style: none;
             padding: 0;
         }
 
         .options-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .options-list label {
             display: block;
             padding: 1rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
+            border: 2px solid #f0f4f8;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
 
         .options-list label:hover {
-            background-color: #f8f9fa;
+            border-color: #74b9ff;
+            background-color: #f7fbff;
         }
 
+        .options-list input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        /* Botão */
         .btn-answer {
-            background-color: #3498db;
+            background-color: #00cec9;
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
             margin-top: 1rem;
+            transition: background 0.3s;
+            width: 100%;
         }
 
         .btn-answer:hover {
-            background-color: #2980b9;
+            background-color: #00b894;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            .search-bar {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>📚 Minha Banca</h1>
-        <input type="text" class="search-bar" placeholder="Buscar por palavra-chave...">
+        <h1>🩺 MedIA</h1>
+        <input type="text" class="search-bar" placeholder="Buscar temas, doenças ou condutas...">
     </header>
 
     <main>
         <aside>
             <h3>Filtros</h3>
+            
             <div class="filter-group">
                 <label>Disciplina</label>
                 <select>
-                    <option value="">Todas</option>
-                    <option value="matematica">Matemática</option>
-                    <option value="portugues">Português</option>
-                    <option value="informatica">Informática</option>
+                    <option value="">Todas as Disciplinas</option>
+                    <option value="clinica">Clínica Médica</option>
+                    <option value="cirurgia">Cirurgia Geral</option>
+                    <option value="go">Ginecologia e Obstetrícia</option>
+                    <option value="preventiva">Medicina Preventiva</option>
+                    <option value="pediatria">Pediatria</option>
                 </select>
             </div>
+
             <div class="filter-group">
-                <label>Banca</label>
+                <label>Instituição</label>
                 <select>
                     <option value="">Todas</option>
-                    <option value="cebraspe">CEBRASPE</option>
-                    <option value="fcc">FCC</option>
-                    <option value="fgv">FGV</option>
+                    <option value="enare">ENARE</option>
+                    <option value="usp">USP</option>
+                    <option value="unifesp">UNIFESP</option>
+                    <option value="sus">SUS-SP</option>
                 </select>
             </div>
+
             <div class="filter-group">
                 <label>Ano</label>
                 <select>
                     <option value="">Todos</option>
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>
+                    <option value="2022">2022</option>
                 </select>
             </div>
         </aside>
@@ -177,32 +234,32 @@
             
             <div class="question-card">
                 <div class="question-header">
-                    <span><strong>Q12345</strong> | Ano: 2024 | Banca: FGV | Disciplina: Português</span>
+                    <span><strong>ID: 10293</strong> | Instituição: ENARE | Especialidade: Clínica Médica</span>
                 </div>
                 
                 <div class="question-text">
-                    Assinale a alternativa em que a palavra destacada está acentuada de acordo com as regras ortográficas vigentes:
+                    Paciente de 62 anos, masculino, hipertenso e tabagista, apresenta dor torácica opressiva de início há 2 horas. O eletrocardiograma demonstra supradesnivelamento do segmento ST em parede anterior (V1 a V4). Qual a conduta imediata mais adequada neste caso?
                 </div>
 
                 <ul class="options-list">
                     <li>
-                        <label><input type="radio" name="q1" value="A"> A) Ele mantém uma dieta estrita baseada em **raízes**.</label>
+                        <label><input type="radio" name="q1" value="A"> A) Solicitar troponina e aguardar resultado para decidir conduta.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="B"> B) O voo do **pássaro** foi longo.</label>
+                        <label><input type="radio" name="q1" value="B"> B) Iniciar antibioticoterapia por suspeita de pericardite infecciosa.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="C"> C) As **idéias** do autor são inovadoras.</label>
+                        <label><input type="radio" name="q1" value="C"> C) Administrar AAS, Clopidogrel e encaminhar para cineangiocoronariografia de urgência.</label>
                     </li>
                     <li>
-                        <label><input type="radio" name="q1" value="D"> D) Ele não **pôde** comparecer ontem.</label>
+                        <label><input type="radio" name="q1" value="D"> D) Realizar apenas analgesia com morfina e repetir o ECG em 24 horas.</label>
                     </li>
                 </ul>
 
-                <button class="btn-answer">Responder</button>
+                <button class="btn-answer">Responder Questão</button>
             </div>
 
-            </section>
+        </section>
     </main>
 
 </body>

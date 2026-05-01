@@ -64,10 +64,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border-top: 4px solid #1b4332;
             position: sticky;
-            top: 100px; /* Para acompanhar a rolagem da tela */
+            top: 100px;
         }
 
-        aside h3 {
+        aside h3, .toggle-title {
             margin-top: 0;
             color: #1b4332;
             border-bottom: 1px solid #e9ecef;
@@ -75,6 +75,7 @@
             font-size: 1.2rem;
             text-transform: uppercase;
             margin-bottom: 1rem;
+            font-weight: bold;
         }
 
         .filter-group {
@@ -98,15 +99,42 @@
             color: #2d3436;
         }
 
-        /* Nova seção: Provas na Íntegra */
+        /* Nova seção: Provas na Íntegra (Retrátil) */
         .provas-integra {
             margin-top: 2.5rem;
+        }
+
+        details {
+            margin-bottom: 1rem;
+        }
+
+        .toggle-title {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none; /* Remove a seta padrão em navegadores modernos */
+        }
+
+        /* Remove a seta padrão do Chrome/Safari */
+        .toggle-title::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Animação da setinha customizada */
+        .toggle-title span {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] .toggle-title span {
+            transform: rotate(180deg);
         }
 
         .institution-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 1rem 0 0 0;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -404,16 +432,18 @@
             </div>
 
             <div class="provas-integra">
-                <h3>Provas na Íntegra</h3>
-                <ul class="institution-list">
-                    <li><a href="#" onclick="alert('Área de provas da USP-SP em desenvolvimento!')">USP-SP</a></li>
-                    <li><a href="#" onclick="alert('Área de provas da USP-RP em desenvolvimento!')">USP-RP</a></li>
-                    <li><a href="#" onclick="alert('Área de provas da UNIFESP em desenvolvimento!')">UNIFESP</a></li>
-                    <li><a href="#" onclick="alert('Área de provas do IAMSPE em desenvolvimento!')">IAMSPE</a></li>
-                    <li><a href="#" onclick="alert('Área de provas da UNICAMP em desenvolvimento!')">UNICAMP</a></li>
-                    <li><a href="#" onclick="alert('Área de provas do HIAE em desenvolvimento!')">HIAE</a></li>
-                    <li><a href="#" onclick="alert('Área de provas do Sírio-Libanês (SP) em desenvolvimento!')">Sírio-Libanês (SP)</a></li>
-                </ul>
+                <details>
+                    <summary class="toggle-title" title="Clique para expandir/recolher">Provas na Íntegra <span>▼</span></summary>
+                    <ul class="institution-list">
+                        <li><a href="#" onclick="alert('Área de provas da USP-SP em desenvolvimento!')">USP-SP</a></li>
+                        <li><a href="#" onclick="alert('Área de provas da USP-RP em desenvolvimento!')">USP-RP</a></li>
+                        <li><a href="#" onclick="alert('Área de provas da UNIFESP em desenvolvimento!')">UNIFESP</a></li>
+                        <li><a href="#" onclick="alert('Área de provas do IAMSPE em desenvolvimento!')">IAMSPE</a></li>
+                        <li><a href="#" onclick="alert('Área de provas da UNICAMP em desenvolvimento!')">UNICAMP</a></li>
+                        <li><a href="#" onclick="alert('Área de provas do HIAE em desenvolvimento!')">HIAE</a></li>
+                        <li><a href="#" onclick="alert('Área de provas do Sírio-Libanês (SP) em desenvolvimento!')">Sírio-Libanês (SP)</a></li>
+                    </ul>
+                </details>
             </div>
 
             <button onclick="limparBanco()" class="btn-delete" title="Apagar todos os dados salvos">Limpar todas as questões salvas</button>
@@ -480,7 +510,6 @@
     </main>
 
     <script>
-        // Carrega as questões salvas no LocalStorage ao abrir a página
         window.onload = function() {
             renderizarQuestoes();
         };
@@ -488,7 +517,6 @@
         const form = document.getElementById('form-questao');
         const listaDiv = document.getElementById('lista-questoes');
 
-        // Evento de salvar a questão
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -513,7 +541,6 @@
             renderizarQuestoes();
         });
 
-        // Função para desenhar as questões na tela
         function renderizarQuestoes() {
             const banco = JSON.parse(localStorage.getItem('media_db')) || [];
             listaDiv.innerHTML = '';
@@ -550,7 +577,6 @@
             });
         }
 
-        // Função para validar acerto ou erro
         function corrigir(id, correta) {
             const radios = document.getElementsByName('radio-' + id);
             let selecionado = null;
@@ -573,7 +599,6 @@
             document.getElementById('btn-' + id).innerText = "Respondida";
         }
 
-        // Função para copiar os dados para uma IA
         function copiarParaIA(id) {
             const banco = JSON.parse(localStorage.getItem('media_db')) || [];
             const q = banco.find(item => item.id === id);
@@ -610,7 +635,6 @@ D) ${q.altD}`;
             });
         }
 
-        // Função para deletar uma questão específica
         function deletarQuestao(id) {
             if(confirm("Deseja realmente apagar esta questão?")) {
                 let banco = JSON.parse(localStorage.getItem('media_db')) || [];
@@ -620,7 +644,6 @@ D) ${q.altD}`;
             }
         }
 
-        // Função para limpar todas as questões
         function limparBanco() {
             if(confirm("Isso apagará TODAS as questões que você salvou. Tem certeza?")) {
                 localStorage.removeItem('media_db');

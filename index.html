@@ -300,12 +300,43 @@
             transition: 0.2s;
             font-weight: 600;
             color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
         }
 
         .topico-item:hover {
             background: #e9f5ef;
             transform: translateY(-2px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+
+        .topico-nome {
+            flex: 1;
+            line-height: 1.3;
+        }
+
+        .btn-lixeira-tema {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 50%;
+            border: none;
+            background: #fff0f0;
+            color: #c1121f;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .btn-lixeira-tema:hover {
+            background: #c1121f;
+            color: white;
+            transform: scale(1.08);
         }
 
         .empty-temas {
@@ -492,7 +523,7 @@
         
         especialidadesClinica.forEach(esp => {
             menuClinc.innerHTML += `
-                <div class="filter-item" onclick="mostrarTemasEspecialidade('${esp}')">
+                <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
                     ${esp}
                 </div>
             `;
@@ -514,15 +545,25 @@
         localStorage.setItem('media_temas', JSON.stringify(temas));
     }
 
+    function carregarTemasOcultos() {
+        return JSON.parse(localStorage.getItem('media_temas_ocultos') || '{}');
+    }
+
+    function salvarTemasOcultos(temasOcultos) {
+        localStorage.setItem('media_temas_ocultos', JSON.stringify(temasOcultos));
+    }
+
     function getTemasEspecialidade(especialidade) {
         const temasUsuario = carregarTemasUsuario();
+        const temasOcultos = carregarTemasOcultos();
 
         const padrao = temasPadrao[especialidade] || [];
         const personalizados = temasUsuario[especialidade] || [];
+        const ocultos = temasOcultos[especialidade] || [];
 
         const todos = [...padrao, ...personalizados];
 
-        return [...new Set(todos)];
+        return [...new Set(todos)].filter(tema => !ocultos.includes(tema));
     }
 
     function mostrarTemasEspecialidade(especialidade) {
@@ -545,7 +586,7 @@
 
                 <div class="add-tema-box">
                     <input type="text" id="novo-tema-${especialidade}" placeholder="Adicionar tema. Ex: Hanseníase">
-                    <button class="btn-tema" onclick="adicionarTema('${especialidade}')">Adicionar tema</button>
+                    <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>Adicionar tema</button>
                 </div>
 
                 ${
@@ -553,8 +594,14 @@
                     ? `
                         <div class="topicos-grid">
                             ${temas.map(tema => `
-                                <div class="topico-item" onclick="filtrarTema('${especialidade}', '${tema}')">
-                                    ${tema}
+                                <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                    <span class="topico-nome">${tema}</span>
+                                    <button 
+                                        class="btn-lixeira-tema" 
+                                        title="Excluir tema"
+                                        onclick='event.stopPropagation(); excluirTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                        🗑️
+                                    </button>
                                 </div>
                             `).join('')}
                         </div>
@@ -595,6 +642,51 @@
 
         temasUsuario[especialidade].push(novoTema);
         salvarTemasUsuario(temasUsuario);
+
+        mostrarTemasEspecialidade(especialidade);
+        atualizarSelectTemas();
+    }
+
+    function excluirTema(especialidade, tema) {
+        if (!confirm(`Deseja realmente excluir o tema "${tema}" de ${especialidade}?`)) {
+            return;
+        }
+
+        const temasUsuario = carregarTemasUsuario();
+        const temasOcultos = carregarTemasOcultos();
+
+        const personalizados = temasUsuario[especialidade] || [];
+        const padrao = temasPadrao[especialidade] || [];
+
+        if (personalizados.includes(tema)) {
+            temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
+
+            if (temasUsuario[especialidade].length === 0) {
+                delete temasUsuario[especialidade];
+            }
+
+            salvarTemasUsuario(temasUsuario);
+        }
+
+        if (padrao.includes(tema)) {
+            if (!temasOcultos[especialidade]) {
+                temasOcultos[especialidade] = [];
+            }
+
+            if (!temasOcultos[especialidade].includes(tema)) {
+                temasOcultos[especialidade].push(tema);
+            }
+
+            salvarTemasOcultos(temasOcultos);
+        }
+
+        if (filtroAtual.tipo === 'tema' && filtroAtual.especialidade === especialidade && filtroAtual.valor === tema) {
+            filtroAtual = {
+                tipo: 'disciplina',
+                valor: especialidade,
+                especialidade: especialidade
+            };
+        }
 
         mostrarTemasEspecialidade(especialidade);
         atualizarSelectTemas();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedIA - Banco de Questões Especializado</title>
+    <title>MedIA - Banco de Questões Inteligente</title>
     <style>
         :root {
             --primary: #1b4332;
@@ -39,7 +39,7 @@
             align-items: flex-start;
         }
 
-        /* Barra Lateral com Scroll */
+        /* Barra Lateral */
         aside {
             flex: 1;
             min-width: 300px;
@@ -61,31 +61,56 @@
             font-weight: bold; margin-bottom: 1.5rem;
         }
 
-        .section-title {
+        /* Estilo do Menu Retrátil */
+        details { margin-bottom: 5px; }
+        
+        summary {
+            list-style: none;
+            background: #f1f3f1;
+            padding: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '▾'; }
+        details[open] summary::after { content: '▴'; }
+
+        .section-title-static {
             color: var(--primary);
             border-bottom: 1px solid #eee;
             padding-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             margin: 1.5rem 0 0.8rem 0;
             font-weight: bold;
-            display: flex; justify-content: space-between;
         }
 
         .filter-item {
-            padding: 0.6rem 0.8rem;
-            margin-bottom: 2px;
+            padding: 0.6rem 1rem;
+            margin: 2px 0;
             background: #f8f9fa;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: 0.2s;
+            border-left: 2px solid transparent;
         }
 
-        .filter-item:hover { background: #e9ecef; color: var(--secondary); }
-        .filter-item.active { background: var(--secondary); color: white; }
+        .filter-item:hover { 
+            background: #e9ecef; 
+            border-left: 2px solid var(--secondary);
+            color: var(--secondary); 
+        }
 
-        /* Estilo da Área de Conteúdo */
+        /* Área de Conteúdo */
         .content-area { flex: 3; min-width: 0; }
 
         .filter-status {
@@ -114,7 +139,7 @@
 
         .q-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
         .q-img { text-align: center; margin: 1rem 0; }
-        .q-img img { max-width: 100%; border-radius: 4px; }
+        .q-img img { max-width: 100%; border-radius: 4px; max-height: 400px;}
         
         .opt-list { list-style: none; padding: 0; }
         .opt-list li { margin-bottom: 8px; }
@@ -134,17 +159,19 @@
     <aside>
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
-        <div class="section-title">Clínica Médica</div>
-        <div id="menu-clinica">
-            </div>
+        <details>
+            <summary>Clínica Médica</summary>
+            <div id="menu-clinica" style="padding-top: 5px;">
+                </div>
+        </details>
 
-        <div class="section-title">Outras Áreas</div>
+        <div class="section-title-static">Outras Áreas</div>
         <div class="filter-item" onclick="filtrar('disciplina', 'Cirurgia Geral')">Cirurgia Geral</div>
         <div class="filter-item" onclick="filtrar('disciplina', 'Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
         <div class="filter-item" onclick="filtrar('disciplina', 'Medicina Preventiva')">Medicina Preventiva</div>
         <div class="filter-item" onclick="filtrar('disciplina', 'Pediatria')">Pediatria</div>
         
-        <div class="section-title">Provas (USP-SP)</div>
+        <div class="section-title-static">Provas</div>
         <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2026')">USP-SP 2026</div>
         <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2025')">USP-SP 2025</div>
     </aside>
@@ -155,7 +182,7 @@
             <form id="form-q">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Disciplina / Especialidade</label>
+                        <label>Especialidade</label>
                         <select id="in-disc" required></select>
                     </div>
                     <div class="form-group">
@@ -168,7 +195,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Imagem (opcional)</label>
+                    <label>Imagem (Opcional)</label>
                     <input type="file" id="in-img" accept="image/*">
                 </div>
                 <div class="form-group">
@@ -193,8 +220,8 @@
         </div>
 
         <div class="filter-status">
-            <span id="txt-filtro">Mostrando: <strong>Todas</strong></span>
-            <button onclick="filtrar('todos')">Limpar</button>
+            <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
+            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">Ver Todas</button>
         </div>
 
         <div id="lista"></div>
@@ -202,28 +229,28 @@
 </main>
 
 <script>
-    const especialidades = [
+    const especialidadesClinica = [
         "Cardiologia", "Clínica Médica Geral", "Dermatologia", "Emergências Clínicas", 
         "Endocrinologia", "Reumatologia", "Hematologia", "Oncologia", "Geriatria", 
         "Gastroenterologia", "Imunologia", "Infectologia", "Nefrologia", "Neurologia", 
-        "Nutrologia", "Oftalmologia", "Pneumologia", "Otorrinolaringologia", "UTI",
-        "Cirurgia Geral", "Ginecologia e Obstetrícia", "Medicina Preventiva", "Pediatria"
+        "Nutrologia", "Oftalmologia", "Pneumologia", "Otorrinolaringologia", "UTI"
     ];
+
+    const outrasAreas = ["Cirurgia Geral", "Ginecologia e Obstetrícia", "Medicina Preventiva", "Pediatria"];
 
     let filtroAtual = { tipo: 'todos', valor: null };
 
-    // Inicializar Menus
     window.onload = () => {
         const menuClinc = document.getElementById('menu-clinica');
         const selectDisc = document.getElementById('in-disc');
         
-        // Popular apenas as de Clínica Médica no Menu Lateral (as 19 primeiras da sua lista)
-        especialidades.slice(0, 19).forEach(esp => {
+        // Popular Menu Lateral da Clínica Médica
+        especialidadesClinica.forEach(esp => {
             menuClinc.innerHTML += `<div class="filter-item" onclick="filtrar('disciplina', '${esp}')">${esp}</div>`;
         });
 
-        // Popular todas no Select do formulário
-        especialidades.forEach(esp => {
+        // Popular o Select do formulário com TUDO
+        [...especialidadesClinica, ...outrasAreas].forEach(esp => {
             selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
         });
 
@@ -237,7 +264,7 @@
 
     function filtrar(tipo, valor) {
         filtroAtual = { tipo, valor };
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas'}</strong>`;
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas as Questões'}</strong>`;
         render();
     }
 
@@ -291,6 +318,11 @@
             }
         });
 
+        if(filtrados.length === 0) {
+            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
+            return;
+        }
+
         filtrados.forEach(q => {
             lista.innerHTML += `
                 <div class="question-card">
@@ -299,7 +331,7 @@
                         <button onclick="excluir(${q.id})" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
                     </div>
                     ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ''}
-                    <p>${q.enun}</p>
+                    <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
                     <ul class="opt-list">
                         <li><label id="l-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}</label></li>
                         <li><label id="l-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}</label></li>
@@ -318,10 +350,12 @@
         document.getElementById(`l-${id}-${correta}`).classList.add('correct');
         if(sel.value !== correta) document.getElementById(`l-${id}-${sel.value}`).classList.add('wrong');
         document.getElementById(`btn-${id}`).disabled = true;
+        document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
+        document.getElementById(`btn-${id}`).style.background = "#666";
     }
 
     function excluir(id) {
-        if(confirm("Excluir questão?")) {
+        if(confirm("Deseja realmente excluir esta questão?")) {
             const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
             localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
             render();

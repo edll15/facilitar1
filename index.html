@@ -17,7 +17,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
         }
 
         header {
@@ -28,18 +29,24 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: sticky; top: 0; z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 { cursor: pointer; margin: 0; font-size: 1.8rem; }
+        header h1 {
+            cursor: pointer;
+            margin: 0;
+            font-size: 1.8rem;
+        }
 
         main {
             padding: 2rem 5%;
-            display: flex; gap: 2rem;
+            display: flex;
+            gap: 2rem;
             align-items: flex-start;
         }
 
-        /* Barra Lateral */
         aside {
             flex: 1;
             min-width: 300px;
@@ -49,20 +56,26 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border-top: 4px solid var(--primary);
-            position: sticky; top: 90px;
+            position: sticky;
+            top: 90px;
             overflow-y: auto;
         }
 
         .btn-add {
             background-color: var(--primary);
-            color: white; border: none;
-            padding: 0.8rem; border-radius: 4px;
-            width: 100%; cursor: pointer;
-            font-weight: bold; margin-bottom: 1.5rem;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
         }
 
-        /* Estilo do Menu Retrátil */
-        details { margin-bottom: 5px; }
+        details {
+            margin-bottom: 5px;
+        }
         
         summary {
             list-style: none;
@@ -79,9 +92,17 @@
             font-size: 0.85rem;
         }
 
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '▾'; }
-        details[open] summary::after { content: '▴'; }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '▾';
+        }
+
+        details[open] summary::after {
+            content: '▴';
+        }
 
         .section-title-static {
             color: var(--primary);
@@ -110,45 +131,111 @@
             color: var(--secondary); 
         }
 
-        /* Área de Conteúdo */
-        .content-area { flex: 3; min-width: 0; }
+        .content-area {
+            flex: 3;
+            min-width: 0;
+        }
 
         .filter-status {
-            background: #e9ecef; padding: 1rem;
-            border-radius: 8px; margin-bottom: 1.5rem;
-            display: flex; justify-content: space-between; align-items: center;
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Painel de Cadastro */
         .panel {
-            background: var(--white); padding: 2rem;
-            border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: none; margin-bottom: 2rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+            margin-bottom: 2rem;
         }
 
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
-        .form-group { display: flex; flex-direction: column; margin-bottom: 1rem; }
-        .form-group label { font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; }
-        input, select, textarea { padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
 
-        /* Card da Questão */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
         .question-card {
-            background: var(--white); padding: 1.5rem;
-            border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.5rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 1.5rem;
         }
 
-        .q-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
-        .q-img { text-align: center; margin: 1rem 0; }
-        .q-img img { max-width: 100%; border-radius: 4px; max-height: 400px;}
-        
-        .opt-list { list-style: none; padding: 0; }
-        .opt-list li { margin-bottom: 8px; }
-        .opt-list label { display: block; padding: 10px; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
-        
-        .correct { background: #d4edda !important; border-color: #28a745 !important; }
-        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
 
-        /* Tópicos de Cardiologia */
+        .q-img {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .q-img img {
+            max-width: 100%;
+            border-radius: 4px;
+            max-height: 400px;
+        }
+        
+        .opt-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .opt-list li {
+            margin-bottom: 8px;
+        }
+
+        .opt-list label {
+            display: block;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+
+        .wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
         .topicos-card {
             background: var(--white);
             padding: 2rem;
@@ -167,6 +254,34 @@
         .topicos-card p {
             color: #666;
             margin-bottom: 1.5rem;
+        }
+
+        .add-tema-box {
+            background: #f8f9fa;
+            border: 1px dashed var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add-tema-box input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-tema {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.65rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .topicos-grid {
@@ -192,6 +307,15 @@
             transform: translateY(-2px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.08);
         }
+
+        .empty-temas {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            color: #666;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
@@ -206,35 +330,34 @@
 
         <details>
             <summary>Clínica Médica</summary>
-            <div id="menu-clinica" style="padding-top: 5px;">
-            </div>
+            <div id="menu-clinica" style="padding-top: 5px;"></div>
         </details>
 
         <details>
             <summary>Cirurgia Geral</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="filtrar('disciplina', 'Cirurgia Geral')">Cirurgia Geral</div>
+                <div class="filter-item" onclick="mostrarTemasEspecialidade('Cirurgia Geral')">Cirurgia Geral</div>
             </div>
         </details>
 
         <details>
             <summary>Ginecologia e Obstetrícia</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="filtrar('disciplina', 'Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
+                <div class="filter-item" onclick="mostrarTemasEspecialidade('Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
             </div>
         </details>
 
         <details>
             <summary>Pediatria</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="filtrar('disciplina', 'Pediatria')">Pediatria</div>
+                <div class="filter-item" onclick="mostrarTemasEspecialidade('Pediatria')">Pediatria</div>
             </div>
         </details>
 
         <details>
             <summary>Medicina Preventiva</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="filtrar('disciplina', 'Medicina Preventiva')">Medicina Preventiva</div>
+                <div class="filter-item" onclick="mostrarTemasEspecialidade('Medicina Preventiva')">Medicina Preventiva</div>
             </div>
         </details>
         
@@ -250,38 +373,53 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Especialidade</label>
-                        <select id="in-disc" required></select>
+                        <select id="in-disc" required onchange="atualizarSelectTemas()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tema</label>
+                        <select id="in-tema">
+                            <option value="">Sem tema específico</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Banca</label>
                         <input type="text" id="in-banca" placeholder="Ex: USP-SP" required>
                     </div>
+                </div>
+
+                <div class="form-grid">
                     <div class="form-group">
                         <label>Ano</label>
                         <input type="number" id="in-ano" value="2026" required>
                     </div>
+                    <div class="form-group">
+                        <label>Imagem (Opcional)</label>
+                        <input type="file" id="in-img" accept="image/*">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Imagem (Opcional)</label>
-                    <input type="file" id="in-img" accept="image/*">
-                </div>
+
                 <div class="form-group">
                     <label>Enunciado</label>
                     <textarea id="in-enun" rows="3" required></textarea>
                 </div>
+
                 <div class="form-grid">
                     <input type="text" id="in-a" placeholder="Alternativa A" required>
                     <input type="text" id="in-b" placeholder="Alternativa B" required>
                     <input type="text" id="in-c" placeholder="Alternativa C" required>
                     <input type="text" id="in-d" placeholder="Alternativa D" required>
                 </div>
+
                 <div class="form-group">
                     <label>Gabarito</label>
                     <select id="in-correta">
-                        <option value="A">A</option><option value="B">B</option>
-                        <option value="C">C</option><option value="D">D</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
                     </select>
                 </div>
+
                 <button type="submit" class="btn-add">SALVAR QUESTÃO</button>
             </form>
         </div>
@@ -299,99 +437,219 @@
 
 <script>
     const especialidadesClinica = [
-        "Cardiologia", "Clínica Médica Geral", "Dermatologia", "Emergências Clínicas", 
-        "Endocrinologia", "Reumatologia", "Hematologia", "Oncologia", "Geriatria", 
-        "Gastroenterologia", "Imunologia", "Infectologia", "Nefrologia", "Neurologia", 
-        "Nutrologia", "Oftalmologia", "Pneumologia", "Otorrinolaringologia", "UTI"
+        "Cardiologia",
+        "Clínica Médica Geral",
+        "Dermatologia",
+        "Emergências Clínicas", 
+        "Endocrinologia",
+        "Reumatologia",
+        "Hematologia",
+        "Oncologia",
+        "Geriatria", 
+        "Gastroenterologia",
+        "Imunologia",
+        "Infectologia",
+        "Nefrologia",
+        "Neurologia", 
+        "Nutrologia",
+        "Oftalmologia",
+        "Pneumologia",
+        "Otorrinolaringologia",
+        "UTI"
     ];
 
-    const outrasAreas = ["Cirurgia Geral", "Ginecologia e Obstetrícia", "Medicina Preventiva", "Pediatria"];
-
-    const topicosCardiologia = [
-        "Anticoagulação na Cardiologia",
-        "Arritmias",
-        "Cardiopatias Congênitas",
-        "Síndrome Coronariana Crônica",
-        "Dor torácica não anginosa",
-        "Eletrocardiograma",
-        "Febre Reumática",
-        "Endocardite",
-        "Semiologia Cardíaca",
-        "Hipertensão Arterial Sistêmica",
-        "Insuficiência Cardíaca",
-        "Síncope",
-        "Síndrome Coronariana Aguda",
-        "Valvopatias"
+    const outrasAreas = [
+        "Cirurgia Geral",
+        "Ginecologia e Obstetrícia",
+        "Medicina Preventiva",
+        "Pediatria"
     ];
 
-    let filtroAtual = { tipo: 'todos', valor: null };
+    const temasPadrao = {
+        "Cardiologia": [
+            "Anticoagulação na Cardiologia",
+            "Arritmias",
+            "Cardiopatias Congênitas",
+            "Síndrome Coronariana Crônica",
+            "Dor torácica não anginosa",
+            "Eletrocardiograma",
+            "Febre Reumática",
+            "Endocardite",
+            "Semiologia Cardíaca",
+            "Hipertensão Arterial Sistêmica",
+            "Insuficiência Cardíaca",
+            "Síncope",
+            "Síndrome Coronariana Aguda",
+            "Valvopatias"
+        ]
+    };
+
+    let filtroAtual = { tipo: 'todos', valor: null, especialidade: null };
 
     window.onload = () => {
         const menuClinc = document.getElementById('menu-clinica');
         const selectDisc = document.getElementById('in-disc');
         
-        // Popular Menu Lateral da Clínica Médica
         especialidadesClinica.forEach(esp => {
-            if (esp === "Cardiologia") {
-                menuClinc.innerHTML += `<div class="filter-item" onclick="mostrarTopicosCardiologia()">Cardiologia</div>`;
-            } else {
-                menuClinc.innerHTML += `<div class="filter-item" onclick="filtrar('disciplina', '${esp}')">${esp}</div>`;
-            }
+            menuClinc.innerHTML += `
+                <div class="filter-item" onclick="mostrarTemasEspecialidade('${esp}')">
+                    ${esp}
+                </div>
+            `;
         });
 
-        // Popular o Select do formulário com TUDO
         [...especialidadesClinica, ...outrasAreas].forEach(esp => {
             selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
         });
 
+        atualizarSelectTemas();
         render();
     };
 
-    function toggleForm() {
-        const p = document.getElementById('panel-cadastro');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    function carregarTemasUsuario() {
+        return JSON.parse(localStorage.getItem('media_temas') || '{}');
     }
 
-    function mostrarTopicosCardiologia() {
-        filtroAtual = { tipo: 'disciplina', valor: 'Cardiologia' };
+    function salvarTemasUsuario(temas) {
+        localStorage.setItem('media_temas', JSON.stringify(temas));
+    }
 
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>Cardiologia</strong>`;
+    function getTemasEspecialidade(especialidade) {
+        const temasUsuario = carregarTemasUsuario();
+
+        const padrao = temasPadrao[especialidade] || [];
+        const personalizados = temasUsuario[especialidade] || [];
+
+        const todos = [...padrao, ...personalizados];
+
+        return [...new Set(todos)];
+    }
+
+    function mostrarTemasEspecialidade(especialidade) {
+        filtroAtual = {
+            tipo: 'disciplina',
+            valor: especialidade,
+            especialidade: especialidade
+        };
+
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
         document.getElementById('lista').innerHTML = "";
 
+        const temas = getTemasEspecialidade(especialidade);
         const area = document.getElementById('area-topicos');
 
         area.innerHTML = `
             <div class="topicos-card">
-                <h2>Cardiologia</h2>
-                <p>Escolha um tópico para visualizar as questões relacionadas.</p>
-                <div class="topicos-grid">
-                    ${topicosCardiologia.map(topico => `
-                        <div class="topico-item" onclick="filtrarTopicoCardiologia('${topico}')">
-                            ${topico}
-                        </div>
-                    `).join('')}
+                <h2>${especialidade}</h2>
+                <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
+
+                <div class="add-tema-box">
+                    <input type="text" id="novo-tema-${especialidade}" placeholder="Adicionar tema. Ex: Hanseníase">
+                    <button class="btn-tema" onclick="adicionarTema('${especialidade}')">Adicionar tema</button>
                 </div>
+
+                ${
+                    temas.length > 0
+                    ? `
+                        <div class="topicos-grid">
+                            ${temas.map(tema => `
+                                <div class="topico-item" onclick="filtrarTema('${especialidade}', '${tema}')">
+                                    ${tema}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `
+                    : `
+                        <div class="empty-temas">
+                            Nenhum tema cadastrado ainda para esta especialidade.
+                        </div>
+                    `
+                }
             </div>
         `;
+
+        render();
     }
 
-    function filtrarTopicoCardiologia(topico) {
+    function adicionarTema(especialidade) {
+        const input = document.getElementById(`novo-tema-${especialidade}`);
+        const novoTema = input.value.trim();
+
+        if (!novoTema) {
+            alert("Digite o nome do tema.");
+            return;
+        }
+
+        const temasUsuario = carregarTemasUsuario();
+
+        if (!temasUsuario[especialidade]) {
+            temasUsuario[especialidade] = [];
+        }
+
+        const temasAtuais = getTemasEspecialidade(especialidade);
+
+        if (temasAtuais.includes(novoTema)) {
+            alert("Este tema já existe nesta especialidade.");
+            return;
+        }
+
+        temasUsuario[especialidade].push(novoTema);
+        salvarTemasUsuario(temasUsuario);
+
+        mostrarTemasEspecialidade(especialidade);
+        atualizarSelectTemas();
+    }
+
+    function filtrarTema(especialidade, tema) {
         document.getElementById('area-topicos').innerHTML = "";
-        filtroAtual = { tipo: 'topico-cardiologia', valor: topico };
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>Cardiologia • ${topico}</strong>`;
+
+        filtroAtual = {
+            tipo: 'tema',
+            valor: tema,
+            especialidade: especialidade
+        };
+
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
         render();
+    }
+
+    function atualizarSelectTemas() {
+        const especialidade = document.getElementById('in-disc').value;
+        const selectTema = document.getElementById('in-tema');
+
+        selectTema.innerHTML = `<option value="">Sem tema específico</option>`;
+
+        const temas = getTemasEspecialidade(especialidade);
+
+        temas.forEach(tema => {
+            selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
+        });
+    }
+
+    function toggleForm() {
+        const p = document.getElementById('panel-cadastro');
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        atualizarSelectTemas();
     }
 
     function filtrar(tipo, valor) {
         document.getElementById('area-topicos').innerHTML = "";
-        filtroAtual = { tipo, valor };
+
+        filtroAtual = {
+            tipo: tipo,
+            valor: valor,
+            especialidade: null
+        };
+
         document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas as Questões'}</strong>`;
         render();
     }
 
     document.getElementById('form-q').addEventListener('submit', function(e) {
         e.preventDefault();
+
         const file = document.getElementById('in-img').files[0];
+
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => salvar(reader.result);
@@ -405,6 +663,7 @@
         const q = {
             id: Date.now(),
             disc: document.getElementById('in-disc').value,
+            tema: document.getElementById('in-tema').value,
             banca: document.getElementById('in-banca').value,
             ano: document.getElementById('in-ano').value,
             enun: document.getElementById('in-enun').value,
@@ -417,10 +676,16 @@
             },
             correta: document.getElementById('in-correta').value
         };
+
         const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
+
         banco.unshift(q);
+
         localStorage.setItem('media_db', JSON.stringify(banco));
+
         document.getElementById('form-q').reset();
+
+        atualizarSelectTemas();
         toggleForm();
         render();
     }
@@ -428,19 +693,29 @@
     function render() {
         const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
         const lista = document.getElementById('lista');
+
         lista.innerHTML = "";
 
         const filtrados = banco.filter(q => {
             if (filtroAtual.tipo === 'todos') return true;
-            if (filtroAtual.tipo === 'disciplina') return q.disc === filtroAtual.valor;
-            if (filtroAtual.tipo === 'topico-cardiologia') return q.disc === 'Cardiologia';
+
+            if (filtroAtual.tipo === 'disciplina') {
+                return q.disc === filtroAtual.valor;
+            }
+
+            if (filtroAtual.tipo === 'tema') {
+                return q.disc === filtroAtual.especialidade && q.tema === filtroAtual.valor;
+            }
+
             if (filtroAtual.tipo === 'banca-ano') {
                 const [b, a] = filtroAtual.valor.split('|');
                 return q.banca === b && q.ano === a;
             }
+
+            return true;
         });
 
-        if(filtrados.length === 0) {
+        if (filtrados.length === 0) {
             lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
             return;
         }
@@ -449,17 +724,25 @@
             lista.innerHTML += `
                 <div class="question-card">
                     <div class="q-header">
-                        <span>${q.banca} (${q.ano}) • <strong>${q.disc}</strong></span>
+                        <span>
+                            ${q.banca} (${q.ano}) • 
+                            <strong>${q.disc}</strong>
+                            ${q.tema ? ` • ${q.tema}` : ''}
+                        </span>
                         <button onclick="excluir(${q.id})" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
                     </div>
+
                     ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ''}
+
                     <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
+
                     <ul class="opt-list">
                         <li><label id="l-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}</label></li>
                         <li><label id="l-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}</label></li>
                         <li><label id="l-${q.id}-C"><input type="radio" name="r-${q.id}" value="C"> C) ${q.opts.C}</label></li>
                         <li><label id="l-${q.id}-D"><input type="radio" name="r-${q.id}" value="D"> D) ${q.opts.D}</label></li>
                     </ul>
+
                     <button class="btn-add" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
                 </div>
             `;
@@ -468,16 +751,22 @@
 
     function corrigir(id, correta) {
         const sel = document.querySelector(`input[name="r-${id}"]:checked`);
-        if(!sel) return alert("Selecione uma opção!");
+
+        if (!sel) return alert("Selecione uma opção!");
+
         document.getElementById(`l-${id}-${correta}`).classList.add('correct');
-        if(sel.value !== correta) document.getElementById(`l-${id}-${sel.value}`).classList.add('wrong');
+
+        if (sel.value !== correta) {
+            document.getElementById(`l-${id}-${sel.value}`).classList.add('wrong');
+        }
+
         document.getElementById(`btn-${id}`).disabled = true;
         document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
         document.getElementById(`btn-${id}`).style.background = "#666";
     }
 
     function excluir(id) {
-        if(confirm("Deseja realmente excluir esta questão?")) {
+        if (confirm("Deseja realmente excluir esta questão?")) {
             const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
             localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
             render();

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedIA - Banca de Questões Médicas</title>
+    <title>MedIA - Sistema de Questões Inteligente</title>
     <style>
-        /* Estilos Globais */
+        /* Estilos Globais e de Layout */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f4;
@@ -14,7 +14,6 @@
             padding: 0;
         }
 
-        /* Cabeçalho */
         header {
             background-color: #1b4332;
             color: #ffffff;
@@ -28,25 +27,8 @@
             z-index: 100;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        header h1 { cursor: pointer; margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
 
-        .search-bar {
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            border: 1px solid #2d6a4f;
-            width: 350px;
-            outline: none;
-            font-size: 0.9rem;
-        }
-
-        /* Layout Principal */
         main {
             padding: 2rem 5%;
             display: flex;
@@ -54,7 +36,7 @@
             align-items: flex-start;
         }
 
-        /* Barra Lateral Esquerda */
+        /* Barra Lateral */
         aside {
             flex: 1;
             min-width: 280px;
@@ -78,180 +60,152 @@
             font-size: 1rem;
             font-weight: bold;
             margin-bottom: 2rem;
-            transition: background 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: 0.3s;
         }
 
-        .btn-action-sidebar:hover {
-            background-color: #2d6a4f;
-            transform: translateY(-2px);
-        }
+        .btn-action-sidebar:hover { background-color: #2d6a4f; }
 
-        aside h3, .toggle-title {
-            margin-top: 0;
+        .toggle-title {
             color: #1b4332;
             border-bottom: 1px solid #e9ecef;
             padding-bottom: 0.5rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             margin-bottom: 1rem;
             font-weight: bold;
         }
 
-        /* Filtros e Lista de Provas */
-        .filter-group { margin-bottom: 1.2rem; }
-        .filter-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: #40916c; }
-        .filter-group select { width: 100%; padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; }
-
-        .institution-list { list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
-        .institution-details .institution-name { display: block; padding: 0.8rem 1rem; background-color: #f8f9fa; border-radius: 4px; border: 1px solid #e9ecef; font-weight: 600; cursor: pointer; list-style: none; }
-        
-        .year-list { list-style: none; padding: 0.8rem 0.5rem; margin-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; border-left: 2px dashed #d8e2dc; }
-        .year-item { display: flex; align-items: center; gap: 5px; }
-        .year-item a { text-decoration: none; background-color: #e9ecef; color: #2d3436; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; flex-grow: 1; text-align: center; }
-
-        .btn-add-year { background-color: #40916c; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* Área de Conteúdo */
-        .content-area { flex: 3; display: flex; flex-direction: column; gap: 2rem; min-width: 0; }
-
-        .add-question-panel {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            border-top: 4px solid #40916c;
-            display: none;
-            animation: fadeIn 0.3s ease;
+        /* Menu de Disciplinas */
+        .disciplina-item {
+            padding: 0.8rem;
+            margin-bottom: 0.3rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            border-left: 3px solid transparent;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .disciplina-item:hover { background: #e9ecef; border-left: 3px solid #40916c; }
+        .disciplina-item.active { background: #d8e2dc; border-left: 3px solid #1b4332; }
+
+        /* Provas na Íntegra */
+        .institution-list { list-style: none; padding: 0; margin: 1rem 0; }
+        .institution-name { padding: 0.8rem; background-color: #f8f9fa; border-radius: 4px; font-weight: 600; cursor: pointer; margin-bottom: 5px; }
+        
+        .year-list { list-style: none; padding: 0.5rem 0 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+        .year-btn { 
+            text-decoration: none; background-color: #e9ecef; color: #2d3436; 
+            padding: 0.4rem; border-radius: 4px; font-size: 0.85rem; 
+            text-align: center; cursor: pointer; border: none;
+        }
+        .year-btn:hover { background-color: #d8e2dc; }
+
+        /* Área de Conteúdo */
+        .content-area { flex: 3; display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .filter-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Formulário de Cadastro */
+        .add-question-panel {
+            background: #ffffff; padding: 2rem; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-top: 4px solid #40916c;
+            display: none; margin-bottom: 2rem;
+        }
 
         .form-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
         .form-group { flex: 1; display: flex; flex-direction: column; }
-        .form-group label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .form-group input, .form-group select, .form-group textarea { padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; font-family: inherit; }
+        .form-group label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; }
 
-        .option-row { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
-        .btn-submit { background-color: #40916c; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold; float: right; transition: 0.3s; }
-        .btn-submit:hover { background-color: #1b4332; }
-
-        /* Cartão de Questão */
+        /* Estilo do Cartão de Questão */
         .question-card {
             background: #ffffff; padding: 2rem; border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e0e0e0;
-            margin-bottom: 1.5rem; overflow: hidden;
         }
 
         .question-header {
             display: flex; justify-content: space-between; font-size: 0.85rem;
-            background: #f8f9fa; padding: 0.6rem 1rem; border-radius: 4px; border-left: 5px solid #1b4332;
-            margin-bottom: 1.5rem;
+            background: #f8f9fa; padding: 0.6rem 1rem; border-radius: 4px;
+            border-left: 5px solid #1b4332; margin-bottom: 1.5rem;
         }
 
-        /* Estilo da Imagem na Questão */
-        .question-image-container {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .question-image-container img {
-            max-width: 100%;
-            max-height: 400px;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-        }
-
-        .question-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-weight: 500; }
+        .question-image-container { text-align: center; margin-bottom: 1.5rem; }
+        .question-image-container img { max-width: 100%; max-height: 350px; border-radius: 4px; }
 
         .options-list { list-style: none; padding: 0; }
         .options-list li { margin-bottom: 0.8rem; }
-        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; }
         
-        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; font-weight: bold; color: #155724; }
-        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; }
+        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; }
 
-        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; margin-top: 1rem; }
-        
-        @media (max-width: 992px) {
-            main { flex-direction: column; }
-            header { flex-direction: column; }
-            .search-bar { width: 100%; margin-top: 10px; }
-            .form-row { flex-direction: column; }
-        }
+        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 1rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🩺 MedIA</h1>
-        <input type="text" class="search-bar" placeholder="Buscar questões...">
+        <h1 onclick="filtrarPor('todos')">🩺 MedIA</h1>
+        <div style="font-size: 0.9rem;">Plataforma de Estudos Médicos</div>
     </header>
 
     <main>
         <aside>
             <button class="btn-action-sidebar" onclick="toggleCadastro()">
-                ➕ Cadastrar Nova Questão
+                ➕ Cadastrar Questão
             </button>
 
             <div class="filtros-secao">
-                <h3>Filtros</h3>
-                <div class="filter-group">
-                    <label>Disciplina</label>
-                    <select id="filtro-disciplina">
-                        <option value="">Todas</option>
-                        <option value="Clínica Médica">Clínica Médica</option>
-                        <option value="Cirurgia Geral">Cirurgia Geral</option>
-                        <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
-                        <option value="Medicina Preventiva">Medicina Preventiva</option>
-                        <option value="Pediatria">Pediatria</option>
-                    </select>
-                </div>
+                <div class="toggle-title">Disciplinas</div>
+                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Clínica Médica')">Clínica Médica</div>
+                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Cirurgia Geral')">Cirurgia Geral</div>
+                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
+                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Medicina Preventiva')">Medicina Preventiva</div>
+                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Pediatria')">Pediatria</div>
             </div>
 
-            <div class="provas-integra">
-                <details class="main-details" open>
-                    <summary class="toggle-title">Provas na Íntegra</summary>
-                    <ul class="institution-list">
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">USP-SP</summary>
-                                <ul class="year-list">
-                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2026')">+</button></li>
-                                    <li class="year-item"><a href="#">2025</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2025')">+</button></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">ENARE</summary>
-                                <ul class="year-list">
-                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('ENARE', '2026')">+</button></li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
-                </details>
+            <div class="provas-integra" style="margin-top: 2rem;">
+                <div class="toggle-title">Provas por Ano</div>
+                <ul class="institution-list">
+                    <li>
+                        <details open>
+                            <summary class="institution-name">USP-SP</summary>
+                            <div class="year-list">
+                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'USP-SP|2026')">2026</button>
+                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'USP-SP|2025')">2025</button>
+                            </div>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary class="institution-name">ENARE</summary>
+                            <div class="year-list">
+                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'ENARE|2026')">2026</button>
+                            </div>
+                        </details>
+                    </li>
+                </ul>
             </div>
-
-            <button onclick="limparBanco()" style="margin-top:20px; color:#dc3545; background:none; border:none; cursor:pointer; text-decoration:underline; font-size: 0.8rem;">Apagar todo o histórico</button>
         </aside>
 
         <section class="content-area">
             <div class="add-question-panel" id="panel-cadastro">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
-                    <h2 id="titulo-form">➕ Cadastrar Nova Questão</h2>
-                    <button onclick="toggleCadastro()" style="border:none; background:none; cursor:pointer; font-size: 1.2rem;">❌</button>
-                </div>
+                <h2>➕ Nova Questão</h2>
                 <form id="form-questao">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Disciplina</label>
                             <select id="input-disciplina" required>
-                                <option value="" disabled selected>Selecione...</option>
                                 <option value="Clínica Médica">Clínica Médica</option>
                                 <option value="Cirurgia Geral">Cirurgia Geral</option>
                                 <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
@@ -260,17 +214,17 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Instituição</label>
-                            <input type="text" id="input-banca" placeholder="Ex: USP" required>
+                            <label>Banca (Ex: USP-SP)</label>
+                            <input type="text" id="input-banca" required>
                         </div>
                         <div class="form-group">
                             <label>Ano</label>
-                            <input type="text" id="input-ano" placeholder="Ex: 2024" required>
+                            <input type="number" id="input-ano" value="2026" required>
                         </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label>Imagem da Questão (Opcional)</label>
+                    <div class="form-group" style="margin-bottom:1rem">
+                        <label>Imagem (Opcional)</label>
                         <input type="file" id="input-imagem" accept="image/*">
                     </div>
 
@@ -278,15 +232,32 @@
                         <label>Enunciado</label>
                         <textarea id="input-enunciado" rows="4" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Alternativas (marque a correta)</label>
-                        <div class="option-row"><input type="radio" name="gabarito" value="A" required> <strong>A</strong> <input type="text" id="input-a" style="flex:1" required></div>
-                        <div class="option-row"><input type="radio" name="gabarito" value="B"> <strong>B</strong> <input type="text" id="input-b" style="flex:1" required></div>
-                        <div class="option-row"><input type="radio" name="gabarito" value="C"> <strong>C</strong> <input type="text" id="input-c" style="flex:1" required></div>
-                        <div class="option-row"><input type="radio" name="gabarito" value="D"> <strong>D</strong> <input type="text" id="input-d" style="flex:1" required></div>
+
+                    <div class="form-group" style="margin-top:1rem">
+                        <label>Alternativas</label>
+                        <input type="text" id="input-a" placeholder="Alternativa A" required style="margin-bottom:5px">
+                        <input type="text" id="input-b" placeholder="Alternativa B" required style="margin-bottom:5px">
+                        <input type="text" id="input-c" placeholder="Alternativa C" required style="margin-bottom:5px">
+                        <input type="text" id="input-d" placeholder="Alternativa D" required>
                     </div>
-                    <button type="submit" class="btn-submit">Salvar Questão Permanente</button>
+
+                    <div class="form-group" style="margin-top:1rem">
+                        <label>Letra Correta</label>
+                        <select id="input-correta">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-action-sidebar" style="margin-top:2rem">Salvar Questão</button>
                 </form>
+            </div>
+
+            <div id="status-filtro" class="filter-info">
+                <span id="texto-filtro">Mostrando: Todas as Questões</span>
+                <button onclick="filtrarPor('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">Limpar Filtro</button>
             </div>
 
             <div id="lista-questoes"></div>
@@ -294,131 +265,135 @@
     </main>
 
     <script>
-        window.onload = renderizarQuestoes;
+        // Estado Global da Aplicação
+        let filtroAtivo = { tipo: 'todos', valor: null };
+
+        window.onload = () => renderizarQuestoes();
 
         function toggleCadastro() {
             const painel = document.getElementById('panel-cadastro');
-            painel.style.display = (painel.style.display === 'none' || painel.style.display === '') ? 'block' : 'none';
-            if(painel.style.display === 'block') painel.scrollIntoView({ behavior: 'smooth' });
+            painel.style.display = (painel.style.display === 'block') ? 'none' : 'block';
         }
 
-        function adicionarPorContexto(banca, ano) {
-            document.getElementById('panel-cadastro').style.display = 'block';
-            document.getElementById('input-banca').value = banca;
-            document.getElementById('input-ano').value = ano;
-            document.getElementById('titulo-form').innerText = `➕ Nova Questão: ${banca} (${ano})`;
-            document.getElementById('input-disciplina').focus();
+        // FUNÇÃO DE FILTRAGEM
+        function filtrarPor(tipo, valor) {
+            filtroAtivo = { tipo, valor };
+            
+            // Atualiza o texto do status
+            const statusTxt = document.getElementById('texto-filtro');
+            if (tipo === 'todos') statusTxt.innerText = "Mostrando: Todas as Questões";
+            else if (tipo === 'disciplina') statusTxt.innerText = `Mostrando: ${valor}`;
+            else if (tipo === 'banca-ano') statusTxt.innerText = `Mostrando: ${valor.replace('|', ' ')}`;
+
+            renderizarQuestoes();
         }
 
+        // SALVAMENTO DE QUESTÃO
         const form = document.getElementById('form-questao');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const fileInput = document.getElementById('input-imagem');
-            const file = fileInput.files[0];
+            const file = document.getElementById('input-imagem').files[0];
 
             if (file) {
                 const reader = new FileReader();
-                reader.onloadend = function() {
-                    salvarQuestao(reader.result); // Salva com imagem Base64
-                };
+                reader.onloadend = () => salvarNoBanco(reader.result);
                 reader.readAsDataURL(file);
             } else {
-                salvarQuestao(null); // Salva sem imagem
+                salvarNoBanco(null);
             }
         });
 
-        function salvarQuestao(imagemBase64) {
-            const novaQuestao = {
+        function salvarNoBanco(imgBase64) {
+            const novaQ = {
                 id: Date.now(),
                 disciplina: document.getElementById('input-disciplina').value,
                 banca: document.getElementById('input-banca').value,
                 ano: document.getElementById('input-ano').value,
                 enunciado: document.getElementById('input-enunciado').value,
-                imagem: imagemBase64, // Armazena a imagem aqui
-                altA: document.getElementById('input-a').value,
-                altB: document.getElementById('input-b').value,
-                altC: document.getElementById('input-c').value,
-                altD: document.getElementById('input-d').value,
-                correta: document.querySelector('input[name="gabarito"]:checked').value
+                imagem: imgBase64,
+                alternativas: {
+                    A: document.getElementById('input-a').value,
+                    B: document.getElementById('input-b').value,
+                    C: document.getElementById('input-c').value,
+                    D: document.getElementById('input-d').value
+                },
+                correta: document.getElementById('input-correta').value
             };
 
-            let banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            banco.unshift(novaQuestao);
+            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
+            banco.unshift(novaQ);
+            localStorage.setItem('media_db', JSON.stringify(banco));
             
-            try {
-                localStorage.setItem('media_db', JSON.stringify(banco));
-                form.reset();
-                document.getElementById('titulo-form').innerText = "➕ Cadastrar Nova Questão";
-                renderizarQuestoes();
-                alert("Questão salva com sucesso!");
-            } catch (e) {
-                alert("Erro: A imagem pode ser muito grande para o armazenamento do navegador. Tente uma imagem menor.");
-            }
+            form.reset();
+            toggleCadastro();
+            renderizarQuestoes();
+            alert("Questão adicionada à categoria: " + novaQ.disciplina);
         }
 
+        // RENDERIZAÇÃO COM LÓGICA DE FILTRO
         function renderizarQuestoes() {
             const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            const listaDiv = document.getElementById('lista-questoes');
-            listaDiv.innerHTML = banco.length ? '' : '<p style="text-align:center; color:#666; margin-top:2rem">Nenhuma questão cadastrada ainda.</p>';
+            const container = document.getElementById('lista-questoes');
+            container.innerHTML = "";
 
-            banco.forEach(q => {
-                // Lógica para exibir imagem apenas se existir
-                const htmlImagem = q.imagem ? `<div class="question-image-container"><img src="${q.imagem}" alt="Imagem da questão"></div>` : '';
+            // Lógica de Filtragem Automática
+            const questoesFiltradas = banco.filter(q => {
+                if (filtroAtivo.tipo === 'todos') return true;
+                if (filtroAtivo.tipo === 'disciplina') return q.disciplina === filtroAtivo.valor;
+                if (filtroAtivo.tipo === 'banca-ano') {
+                    const [banca, ano] = filtroAtivo.valor.split('|');
+                    return q.banca === banca && q.ano === ano;
+                }
+                return true;
+            });
 
-                const html = `
-                    <div class="question-card">
+            if (questoesFiltradas.length === 0) {
+                container.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada para este filtro.</p>`;
+                return;
+            }
+
+            questoesFiltradas.forEach(q => {
+                const card = `
+                    <div class="question-card" style="margin-bottom: 2rem">
                         <div class="question-header">
-                            <span><strong>${q.banca}</strong> | ${q.disciplina} | ${q.ano}</span>
-                            <button onclick="deletarQuestao(${q.id})" style="color:#dc3545; background:none; border:none; cursor:pointer; font-weight:bold">Remover</button>
+                            <span><strong>${q.banca} (${q.ano})</strong> | ${q.disciplina}</span>
+                            <button onclick="deletar(${q.id})" style="color:red; background:none; border:none; cursor:pointer">Excluir</button>
                         </div>
                         
-                        ${htmlImagem}
-
-                        <div class="question-text">${q.enunciado}</div>
+                        ${q.imagem ? `<div class="question-image-container"><img src="${q.imagem}"></div>` : ''}
+                        
+                        <p>${q.enunciado}</p>
                         
                         <ul class="options-list">
-                            <li><label id="label-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.altA}</label></li>
-                            <li><label id="label-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.altB}</label></li>
-                            <li><label id="label-${q.id}-C"><input type="radio" name="r-${q.id}" value="C"> C) ${q.altC}</label></li>
-                            <li><label id="label-${q.id}-D"><input type="radio" name="r-${q.id}" value="D"> D) ${q.altD}</label></li>
+                            <li><label id="label-${q.id}-A"><input type="radio" name="q-${q.id}" value="A"> A) ${q.alternativas.A}</label></li>
+                            <li><label id="label-${q.id}-B"><input type="radio" name="q-${q.id}" value="B"> B) ${q.alternativas.B}</label></li>
+                            <li><label id="label-${q.id}-C"><input type="radio" name="q-${q.id}" value="C"> C) ${q.alternativas.C}</label></li>
+                            <li><label id="label-${q.id}-D"><input type="radio" name="q-${q.id}" value="D"> D) ${q.alternativas.D}</label></li>
                         </ul>
                         
-                        <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                        <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Responder</button>
                     </div>
                 `;
-                listaDiv.insertAdjacentHTML('beforeend', html);
+                container.insertAdjacentHTML('beforeend', card);
             });
         }
 
         function corrigir(id, correta) {
-            const selecionado = document.querySelector(`input[name="r-${id}"]:checked`);
-            if (!selecionado) return alert("Por favor, selecione uma alternativa!");
+            const marcado = document.querySelector(`input[name="q-${id}"]:checked`);
+            if (!marcado) return alert("Selecione uma opção!");
 
             document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
-            if (selecionado.value !== correta) {
-                document.getElementById(`label-${id}-${selecionado.value}`).classList.add('incorrect-answer');
+            if (marcado.value !== correta) {
+                document.getElementById(`label-${id}-${marcado.value}`).classList.add('incorrect-answer');
             }
-            
-            // Desabilita interações após responder
-            const inputs = document.getElementsByName(`r-${id}`);
-            inputs.forEach(i => i.disabled = true);
-            document.getElementById('btn-' + id).disabled = true;
-            document.getElementById('btn-' + id).innerText = "Questão Respondida";
-            document.getElementById('btn-' + id).style.backgroundColor = "#636e72";
+            document.getElementById(`btn-${id}`).disabled = true;
+            document.getElementById(`btn-${id}`).innerText = "Concluída";
         }
 
-        function deletarQuestao(id) {
-            if(confirm("Deseja realmente apagar esta questão?")) {
-                let banco = JSON.parse(localStorage.getItem('media_db')) || [];
+        function deletar(id) {
+            if(confirm("Apagar questão?")) {
+                const banco = JSON.parse(localStorage.getItem('media_db')) || [];
                 localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
-                renderizarQuestoes();
-            }
-        }
-
-        function limparBanco() {
-            if(confirm("Isso apagará TODAS as questões permanentemente. Continuar?")) {
-                localStorage.removeItem('media_db');
                 renderizarQuestoes();
             }
         }

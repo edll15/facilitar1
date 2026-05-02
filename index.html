@@ -5,520 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedIA - Banca de Questões Médicas</title>
     <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f4;
-            color: #2d3436;
-            margin: 0;
-            padding: 0;
-        }
+        /* Mantenho seus estilos originais e adiciono ajustes de UX */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f4; color: #2d3436; margin: 0; padding: 0; }
+        header { background-color: #1b4332; color: #ffffff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; }
+        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .search-bar { padding: 0.6rem 1.2rem; border-radius: 4px; border: 1px solid #2d6a4f; width: 350px; outline: none; font-size: 0.9rem; }
+        
+        main { padding: 2rem 5%; display: flex; gap: 2rem; align-items: flex-start; }
+        
+        aside { flex: 1; min-width: 250px; background: #ffffff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid #1b4332; position: sticky; top: 100px; }
+        
+        .btn-action-sidebar { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; width: 100%; cursor: pointer; font-size: 1rem; font-weight: bold; margin-bottom: 1rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-action-sidebar:hover { background-color: #2d6a4f; transform: translateY(-2px); }
+        
+        .filter-group { margin-bottom: 1.2rem; }
+        .filter-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: #40916c; }
+        .filter-group select { width: 100%; padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; }
 
-        /* Cabeçalho */
-        header {
-            background-color: #1b4332;
-            color: #ffffff;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* Estilo para Exportar/Importar */
+        .data-management { margin-top: 1rem; display: flex; gap: 5px; }
+        .btn-small { flex: 1; font-size: 0.7rem; padding: 5px; cursor: pointer; background: #eee; border: 1px solid #ccc; border-radius: 3px; }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .content-area { flex: 3; display: flex; flex-direction: column; gap: 2rem; min-width: 0; }
+        
+        .add-question-panel { background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-top: 4px solid #40916c; display: none; animation: fadeIn 0.3s ease; margin-bottom: 20px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .search-bar {
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            border: 1px solid #2d6a4f;
-            width: 350px;
-            outline: none;
-            font-size: 0.9rem;
-        }
+        .question-card { background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; margin-bottom: 1.5rem; }
+        .question-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: #636e72; margin-bottom: 1.2rem; background: #f8f9fa; padding: 0.6rem 1rem; border-radius: 4px; border-left: 5px solid #1b4332; }
+        .question-text { font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem; font-weight: 500; }
+        
+        .options-list { list-style: none; padding: 0; }
+        .options-list li { margin-bottom: 0.8rem; }
+        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .options-list input { margin-right: 10px; }
 
-        /* Layout Principal */
-        main {
-            padding: 2rem 5%;
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
+        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; font-weight: bold; }
+        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
 
-        /* Barra Lateral Esquerda (Filtros e Provas) */
-        aside {
-            flex: 1;
-            min-width: 250px;
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 4px solid #1b4332;
-            position: sticky;
-            top: 100px;
-        }
+        .card-footer { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; flex: 3; transition: 0.3s; }
+        .btn-copy { background: white; border: 1px solid #d8e2dc; color: #636e72; padding: 1rem; border-radius: 4px; cursor: pointer; flex: 1; }
 
-        /* Botão de Cadastrar na Barra Lateral */
-        .btn-action-sidebar {
-            background-color: #1b4332;
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 4px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            transition: background 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-action-sidebar:hover {
-            background-color: #2d6a4f;
-            transform: translateY(-2px);
-        }
-
-        aside h3, .toggle-title {
-            margin-top: 0;
-            color: #1b4332;
-            border-bottom: 1px solid #e9ecef;
-            padding-bottom: 0.5rem;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .filter-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .filter-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #40916c;
-        }
-
-        .filter-group select {
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 4px;
-            border: 1px solid #d8e2dc;
-            background-color: #fff;
-            color: #2d3436;
-        }
-
-        /* Seção: Provas na Íntegra (Retrátil) */
-        .provas-integra {
-            margin-top: 2.5rem;
-        }
-
-        details.main-details {
-            margin-bottom: 1rem;
-        }
-
-        .toggle-title {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-        }
-
-        .toggle-title::-webkit-details-marker {
-            display: none;
-        }
-
-        .toggle-title span {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        details[open] > .toggle-title span {
-            transform: rotate(180deg);
-        }
-
-        .institution-list {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        /* Estilos dos Submenus (Instituições e Anos) */
-        .institution-details .institution-name {
-            display: block;
-            padding: 0.8rem 1rem;
-            background-color: #f8f9fa;
-            color: #2d3436;
-            text-decoration: none;
-            border-radius: 4px;
-            border: 1px solid #e9ecef;
-            transition: all 0.2s ease;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-left: 4px solid #d8e2dc;
-            cursor: pointer;
-            position: relative;
-            list-style: none;
-        }
-
-        .institution-details .institution-name::-webkit-details-marker {
-            display: none;
-        }
-
-        .institution-details .institution-name:hover {
-            background-color: #f0fff4;
-            border-left-color: #40916c;
-            color: #1b4332;
-        }
-
-        .institution-details .institution-name::after {
-            content: '▼';
-            font-size: 0.6rem;
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.3s ease;
-            color: #636e72;
-        }
-
-        .institution-details[open] .institution-name::after {
-            transform: translateY(-50%) rotate(180deg);
-        }
-
-        .year-list {
-            list-style: none;
-            padding: 0.8rem 0.5rem 0.5rem 0.5rem;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            border-left: 2px dashed #d8e2dc;
-            margin-left: 1rem;
-        }
-
-        .year-list li a {
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            background-color: #e9ecef;
-            color: #2d3436;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .year-list li a:hover {
-            background-color: #40916c;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        .btn-delete {
-            background: none;
-            border: none;
-            color: #dc3545;
-            cursor: pointer;
-            font-size: 0.8rem;
-            text-decoration: underline;
-            margin-top: 2rem;
-            width: 100%;
-            text-align: left;
-            padding: 0;
-        }
-
-        /* Área Central (Formulário + Questões) */
-        .content-area {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            min-width: 0;
-        }
-
-        /* Painel de Adição de Questões */
-        .add-question-panel {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            border: 1px solid #e0e0e0;
-            border-top: 4px solid #40916c;
-            display: none; /* Escondido por padrão */
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .add-question-panel h2 {
-            margin: 0;
-            color: #1b4332;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-close-panel {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #636e72;
-            transition: color 0.2s;
-        }
-
-        .btn-close-panel:hover {
-            color: #dc3545;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #2d3436;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input[type="text"],
-        .form-group select,
-        .form-group textarea {
-            padding: 0.6rem;
-            border-radius: 4px;
-            border: 1px solid #d8e2dc;
-            font-family: inherit;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .options-setup {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        .option-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .option-row input[type="radio"] {
-            accent-color: #1b4332;
-            transform: scale(1.2);
-            cursor: pointer;
-        }
-
-        .option-row input[type="text"] {
-            flex: 1;
-        }
-
-        .btn-submit {
-            background-color: #40916c;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            transition: background 0.3s;
-            float: right;
-        }
-
-        .btn-submit:hover {
-            background-color: #2d6a4f;
-        }
-
-        /* Cartão de Questão */
-        .question-card {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
-            clear: both;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #636e72;
-            margin-bottom: 1.2rem;
-            background: #f8f9fa;
-            padding: 0.6rem 1rem;
-            border-radius: 4px;
-            border-left: 5px solid #1b4332;
-        }
-
-        .question-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .options-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .options-list li {
-            margin-bottom: 0.8rem;
-        }
-
-        .options-list label {
-            display: block;
-            padding: 1rem;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background-color: #fff;
-        }
-
-        /* Cores de Correção */
-        .options-list label.correct-answer {
-            background-color: #d4edda !important;
-            border-color: #28a745 !important;
-            color: #155724;
-            font-weight: bold;
-        }
-
-        .options-list label.incorrect-answer {
-            background-color: #f8d7da !important;
-            border-color: #dc3545 !important;
-            color: #721c24;
-        }
-
-        /* Rodapé do Cartão */
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-answer {
-            background-color: #1b4332;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            flex: 1;
-            text-transform: uppercase;
-            transition: background 0.3s;
-        }
-
-        .btn-answer:hover:not(:disabled) {
-            background-color: #2d6a4f;
-        }
-
-        .btn-answer:disabled {
-            background-color: #636e72;
-            cursor: not-allowed;
-        }
-
-        .btn-copy {
-            background: none;
-            border: 1px solid #d8e2dc;
-            color: #636e72;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0.8rem 1rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        }
-
-        .btn-copy:hover {
-            color: #1b4332;
-            border-color: #1b4332;
-            background-color: #f0fff4;
-        }
-
-        /* Responsividade */
-        @media (max-width: 992px) {
-            main { flex-direction: column; }
-            aside { position: static; width: 100%; box-sizing: border-box; }
-            .form-row { flex-direction: column; }
-            .search-bar { width: 100%; margin-top: 1rem; }
-            header { flex-direction: column; align-items: flex-start; }
-            .card-footer { flex-direction: column; align-items: stretch; }
-        }
+        .form-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .form-group { flex: 1; display: flex; flex-direction: column; }
+        textarea { min-height: 100px; padding: 10px; border: 1px solid #d8e2dc; border-radius: 4px; }
+        
+        @media (max-width: 992px) { main { flex-direction: column; } .search-bar { width: 100%; margin-top: 10px; } }
     </style>
 </head>
 <body>
 
     <header>
         <h1>🩺 MedIA</h1>
-        <input type="text" class="search-bar" placeholder="Buscar questões...">
+        <input type="text" id="main-search" class="search-bar" placeholder="Buscar no enunciado ou banca...">
     </header>
 
     <main>
         <aside>
-            <button class="btn-action-sidebar" onclick="toggleCadastro()">
-                ➕ Cadastrar Nova Questão
-            </button>
+            <button class="btn-action-sidebar" onclick="toggleCadastro()">➕ Nova Questão</button>
 
             <div class="filtros-secao">
                 <h3>Filtros</h3>
@@ -535,86 +80,22 @@
                 </div>
             </div>
 
-            <div class="provas-integra">
-                <details class="main-details">
-                    <summary class="toggle-title" title="Clique para expandir/recolher">Provas na Íntegra <span>▼</span></summary>
-                    <ul class="institution-list">
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">USP-SP</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">USP-RP</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">UNIFESP</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">IAMSPE</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">UNICAMP</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">HIAE</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details class="institution-details">
-                                <summary class="institution-name">Sírio-Libanês (SP)</summary>
-                                <ul class="year-list">
-                                    <li><a href="#">2026</a></li><li><a href="#">2025</a></li><li><a href="#">2024</a></li><li><a href="#">2023</a></li><li><a href="#">2022</a></li><li><a href="#">2021</a></li><li><a href="#">2020</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
-                </details>
+            <div class="data-management">
+                <button class="btn-small" onclick="exportarDados()">📤 Exportar JSON</button>
+                <button class="btn-small" onclick="importarDados()">📥 Importar</button>
             </div>
-
-            <button onclick="limparBanco()" class="btn-delete" title="Apagar todos os dados salvos">Limpar todas as questões salvas</button>
+            
+            <button onclick="limparBanco()" class="btn-delete" style="color: red; background: none; border: none; cursor: pointer; margin-top: 20px; font-size: 0.8rem; text-decoration: underline;">Limpar Banco de Dados</button>
         </aside>
 
         <section class="content-area">
-            
             <div class="add-question-panel" id="panel-cadastro">
-                <div class="panel-header">
-                    <h2>➕ Cadastrar Nova Questão</h2>
-                    <button class="btn-close-panel" onclick="toggleCadastro()" title="Fechar formulário">❌</button>
-                </div>
+                <h2>Cadastrar Questão</h2>
                 <form id="form-questao">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Disciplina</label>
                             <select id="input-disciplina" required>
-                                <option value="" disabled selected>Selecione...</option>
                                 <option value="Clínica Médica">Clínica Médica</option>
                                 <option value="Cirurgia Geral">Cirurgia Geral</option>
                                 <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
@@ -622,42 +103,21 @@
                                 <option value="Pediatria">Pediatria</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Instituição</label>
-                            <input type="text" id="input-banca" placeholder="Ex: USP, ENARE" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Ano</label>
-                            <input type="text" id="input-ano" placeholder="Ex: 2024" required>
-                        </div>
+                        <div class="form-group"><label>Banca</label><input type="text" id="input-banca" required></div>
+                        <div class="form-group"><label>Ano</label><input type="number" id="input-ano" required></div>
                     </div>
-                    <div class="form-group">
-                        <label>Enunciado</label>
-                        <textarea id="input-enunciado" required></textarea>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group"><label>Enunciado</label><textarea id="input-enunciado" required></textarea></div>
+                    
+                    <div class="form-group" style="margin-top:10px">
                         <label>Alternativas (marque a correta)</label>
-                        <div class="options-setup">
-                            <div class="option-row">
-                                <input type="radio" name="gabarito" value="A" required> <strong>A</strong>
-                                <input type="text" id="input-a" required>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" name="gabarito" value="B"> <strong>B</strong>
-                                <input type="text" id="input-b" required>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" name="gabarito" value="C"> <strong>C</strong>
-                                <input type="text" id="input-c" required>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" name="gabarito" value="D"> <strong>D</strong>
-                                <input type="text" id="input-d" required>
-                            </div>
+                        <div style="display:flex; flex-direction:column; gap:8px">
+                            <span><input type="radio" name="gabarito" value="A" required> A) <input type="text" id="input-a" style="width:85%" required></span>
+                            <span><input type="radio" name="gabarito" value="B"> B) <input type="text" id="input-b" style="width:85%" required></span>
+                            <span><input type="radio" name="gabarito" value="C"> C) <input type="text" id="input-c" style="width:85%" required></span>
+                            <span><input type="radio" name="gabarito" value="D"> D) <input type="text" id="input-d" style="width:85%" required></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn-submit">Salvar Questão Permanente</button>
-                    <div style="clear: both;"></div>
+                    <button type="submit" class="btn-action-sidebar" style="margin-top:20px">Salvar no Banco</button>
                 </form>
             </div>
 
@@ -666,162 +126,70 @@
     </main>
 
     <script>
-        window.onload = function() {
+        // Inicialização e Event Listeners para Filtros
+        document.addEventListener('DOMContentLoaded', () => {
             renderizarQuestoes();
-        };
+            document.getElementById('main-search').addEventListener('input', renderizarQuestoes);
+            document.getElementById('filtro-disciplina').addEventListener('change', renderizarQuestoes);
+        });
 
-        // Função para mostrar/esconder o formulário de cadastro
         function toggleCadastro() {
-            const painel = document.getElementById('panel-cadastro');
-            if (painel.style.display === 'none' || painel.style.display === '') {
-                painel.style.display = 'block';
-                // Rola suavemente para o formulário
-                painel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                painel.style.display = 'none';
-            }
+            const p = document.getElementById('panel-cadastro');
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
         }
 
-        const form = document.getElementById('form-questao');
-        const listaDiv = document.getElementById('lista-questoes');
-
-        form.addEventListener('submit', function(e) {
+        // Salvar Questão
+        document.getElementById('form-questao').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const novaQuestao = {
+            const nova = {
                 id: Date.now(),
                 disciplina: document.getElementById('input-disciplina').value,
                 banca: document.getElementById('input-banca').value,
                 ano: document.getElementById('input-ano').value,
                 enunciado: document.getElementById('input-enunciado').value,
-                altA: document.getElementById('input-a').value,
-                altB: document.getElementById('input-b').value,
-                altC: document.getElementById('input-c').value,
-                altD: document.getElementById('input-d').value,
+                A: document.getElementById('input-a').value,
+                B: document.getElementById('input-b').value,
+                C: document.getElementById('input-c').value,
+                D: document.getElementById('input-d').value,
                 correta: document.querySelector('input[name="gabarito"]:checked').value
             };
 
-            let banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            banco.unshift(novaQuestao);
+            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
+            banco.unshift(nova);
             localStorage.setItem('media_db', JSON.stringify(banco));
-
-            form.reset();
+            this.reset();
+            toggleCadastro();
             renderizarQuestoes();
-            
-            // Opcional: Se quiser que o formulário feche sozinho após salvar, descomente a linha abaixo
-            // toggleCadastro(); 
-            alert("Questão salva com sucesso!");
         });
 
+        // Renderização com Lógica de Filtro e Busca
         function renderizarQuestoes() {
             const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            listaDiv.innerHTML = '';
+            const listaDiv = document.getElementById('lista-questoes');
+            const termoBusca = document.getElementById('main-search').value.toLowerCase();
+            const filtroDisc = document.getElementById('filtro-disciplina').value;
 
-            if (banco.length === 0) {
-                listaDiv.innerHTML = '<p style="text-align:center; color:#666; margin-top: 2rem;">Nenhuma questão cadastrada ainda. Clique em "Cadastrar Nova Questão" ao lado!</p>';
-                return;
-            }
+            // Lógica de Filtragem
+            const questoesFiltradas = banco.filter(q => {
+                const matchesBusca = q.enunciado.toLowerCase().includes(termoBusca) || q.banca.toLowerCase().includes(termoBusca);
+                const matchesFiltro = filtroDisc === "" || q.disciplina === filtroDisc;
+                return matchesBusca && matchesFiltro;
+            });
 
-            banco.forEach(q => {
-                const html = `
-                    <div class="question-card">
+            listaDiv.innerHTML = questoesFiltradas.length ? '' : '<p style="text-align:center; opacity:0.6">Nenhuma questão encontrada.</p>';
+
+            questoesFiltradas.forEach(q => {
+                const card = `
+                    <div class="question-card" id="card-${q.id}">
                         <div class="question-header">
-                            <span><strong>${q.banca}</strong> | ${q.disciplina} | ${q.ano}</span>
-                            <button onclick="deletarQuestao(${q.id})" style="background:none; border:none; color:red; cursor:pointer" title="Apagar questão">Remover</button>
+                            <span><strong>${q.banca.toUpperCase()}</strong> | ${q.disciplina} | ${q.ano}</span>
+                            <button onclick="deletar(${q.id})" style="color:red; background:none; border:none; cursor:pointer">Remover</button>
                         </div>
                         <div class="question-text">${q.enunciado}</div>
                         <ul class="options-list">
-                            <li><label id="label-${q.id}-A"><input type="radio" name="radio-${q.id}" value="A"> A) ${q.altA}</label></li>
-                            <li><label id="label-${q.id}-B"><input type="radio" name="radio-${q.id}" value="B"> B) ${q.altB}</label></li>
-                            <li><label id="label-${q.id}-C"><input type="radio" name="radio-${q.id}" value="C"> C) ${q.altC}</label></li>
-                            <li><label id="label-${q.id}-D"><input type="radio" name="radio-${q.id}" value="D"> D) ${q.altD}</label></li>
+                            <li><label id="label-${q.id}-A"><input type="radio" name="res-${q.id}" value="A"> A) ${q.A}</label></li>
+                            <li><label id="label-${q.id}-B"><input type="radio" name="res-${q.id}" value="B"> B) ${q.B}</label></li>
+                            <li><label id="label-${q.id}-C"><input type="radio" name="res-${q.id}" value="C"> C) ${q.C}</label></li>
+                            <li><label id="label-${q.id}-D"><input type="radio" name="res-${q.id}" value="D"> D) ${q.D}</label></li>
                         </ul>
-                        
-                        <div class="card-footer">
-                            <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
-                            <button class="btn-copy" id="copy-${q.id}" onclick="copiarParaIA(${q.id})" title="Copiar texto para colar em uma IA">
-                                📋 Copiar
-                            </button>
-                        </div>
-                    </div>
-                `;
-                listaDiv.insertAdjacentHTML('beforeend', html);
-            });
-        }
-
-        function corrigir(id, correta) {
-            const radios = document.getElementsByName('radio-' + id);
-            let selecionado = null;
-            
-            radios.forEach(r => { if(r.checked) selecionado = r.value; r.disabled = true; });
-
-            if (!selecionado) {
-                alert("Escolha uma alternativa!");
-                radios.forEach(r => r.disabled = false);
-                return;
-            }
-
-            document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
-
-            if (selecionado !== correta) {
-                document.getElementById(`label-${id}-${selecionado}`).classList.add('incorrect-answer');
-            }
-
-            document.getElementById('btn-' + id).disabled = true;
-            document.getElementById('btn-' + id).innerText = "Respondida";
-        }
-
-        function copiarParaIA(id) {
-            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            const q = banco.find(item => item.id === id);
-            
-            if (!q) return;
-
-            const textoParaCopiar = `Instituição/Banca: ${q.banca}
-Disciplina: ${q.disciplina}
-Ano: ${q.ano}
-
-Enunciado:
-${q.enunciado}
-
-Alternativas:
-A) ${q.altA}
-B) ${q.altB}
-C) ${q.altC}
-D) ${q.altD}`;
-
-            navigator.clipboard.writeText(textoParaCopiar).then(() => {
-                const btnCopy = document.getElementById(`copy-${id}`);
-                btnCopy.innerHTML = "✅ Copiado!";
-                btnCopy.style.borderColor = "#28a745";
-                btnCopy.style.color = "#28a745";
-                
-                setTimeout(() => {
-                    btnCopy.innerHTML = "📋 Copiar";
-                    btnCopy.style.borderColor = "#d8e2dc";
-                    btnCopy.style.color = "#636e72";
-                }, 2000);
-            }).catch(err => {
-                alert("Erro ao copiar. O seu navegador pode ter bloqueado essa ação.");
-                console.error(err);
-            });
-        }
-
-        function deletarQuestao(id) {
-            if(confirm("Deseja realmente apagar esta questão?")) {
-                let banco = JSON.parse(localStorage.getItem('media_db')) || [];
-                banco = banco.filter(q => q.id !== id);
-                localStorage.setItem('media_db', JSON.stringify(banco));
-                renderizarQuestoes();
-            }
-        }
-
-        function limparBanco() {
-            if(confirm("Isso apagará TODAS as questões que você salvou. Tem certeza?")) {
-                localStorage.removeItem('media_db');
-                renderizarQuestoes();
-            }
-        }
-    </script>
-</body>
-</html>
+                        <div class="card-

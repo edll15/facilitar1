@@ -101,102 +101,22 @@
             font-weight: bold;
         }
 
-        .filter-group {
-            margin-bottom: 1.2rem;
-        }
+        /* Filtros e Lista de Provas */
+        .filter-group { margin-bottom: 1.2rem; }
+        .filter-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: #40916c; }
+        .filter-group select { width: 100%; padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; }
 
-        .filter-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #40916c;
-        }
+        .institution-list { list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .institution-details .institution-name { display: block; padding: 0.8rem 1rem; background-color: #f8f9fa; border-radius: 4px; border: 1px solid #e9ecef; font-weight: 600; cursor: pointer; list-style: none; }
+        
+        .year-list { list-style: none; padding: 0.8rem 0.5rem; margin-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; border-left: 2px dashed #d8e2dc; }
+        .year-item { display: flex; align-items: center; gap: 5px; }
+        .year-item a { text-decoration: none; background-color: #e9ecef; color: #2d3436; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; flex-grow: 1; text-align: center; }
 
-        .filter-group select {
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 4px;
-            border: 1px solid #d8e2dc;
-        }
-
-        /* Lista de Provas e Anos */
-        .institution-list {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .institution-details .institution-name {
-            display: block;
-            padding: 0.8rem 1rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            border: 1px solid #e9ecef;
-            font-weight: 600;
-            cursor: pointer;
-            list-style: none;
-            position: relative;
-        }
-
-        .year-list {
-            list-style: none;
-            padding: 0.8rem 0.5rem;
-            margin-left: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            border-left: 2px dashed #d8e2dc;
-        }
-
-        .year-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .year-item a {
-            text-decoration: none;
-            background-color: #e9ecef;
-            color: #2d3436;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        /* Botão "+" dentro dos anos */
-        .btn-add-year {
-            background-color: #40916c;
-            color: white;
-            border: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .btn-add-year:hover {
-            background-color: #1b4332;
-        }
+        .btn-add-year { background-color: #40916c; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
         /* Área de Conteúdo */
-        .content-area {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+        .content-area { flex: 3; display: flex; flex-direction: column; gap: 2rem; min-width: 0; }
 
         .add-question-panel {
             background: #ffffff;
@@ -208,56 +128,66 @@
             animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .form-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
         .form-group { flex: 1; display: flex; flex-direction: column; }
         .form-group label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .form-group input, .form-group select, .form-group textarea {
-            padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc;
-        }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; font-family: inherit; }
 
         .option-row { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
-        .btn-submit {
-            background-color: #40916c; color: white; border: none; padding: 0.8rem 1.5rem;
-            border-radius: 4px; cursor: pointer; font-weight: bold; float: right;
-        }
+        .btn-submit { background-color: #40916c; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold; float: right; transition: 0.3s; }
+        .btn-submit:hover { background-color: #1b4332; }
 
         /* Cartão de Questão */
         .question-card {
             background: #ffffff; padding: 2rem; border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e0e0e0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.5rem; overflow: hidden;
         }
 
         .question-header {
             display: flex; justify-content: space-between; font-size: 0.85rem;
             background: #f8f9fa; padding: 0.6rem 1rem; border-radius: 4px; border-left: 5px solid #1b4332;
+            margin-bottom: 1.5rem;
         }
+
+        /* Estilo da Imagem na Questão */
+        .question-image-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .question-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-weight: 500; }
 
         .options-list { list-style: none; padding: 0; }
         .options-list li { margin-bottom: 0.8rem; }
-        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; }
+        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; transition: 0.2s; }
         
-        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; font-weight: bold; }
-        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; }
+        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; font-weight: bold; color: #155724; }
+        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
 
-        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; flex: 1; font-weight: bold; }
+        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; text-transform: uppercase; margin-top: 1rem; }
         
         @media (max-width: 992px) {
             main { flex-direction: column; }
             header { flex-direction: column; }
             .search-bar { width: 100%; margin-top: 10px; }
+            .form-row { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Substantia Médica</h1>
+        <h1>🩺 MedIA</h1>
         <input type="text" class="search-bar" placeholder="Buscar questões...">
     </header>
 
@@ -285,14 +215,13 @@
             <div class="provas-integra">
                 <details class="main-details" open>
                     <summary class="toggle-title">Provas na Íntegra</summary>
-                    <ul class="institution-list" id="lista-instituicoes">
+                    <ul class="institution-list">
                         <li>
                             <details class="institution-details">
                                 <summary class="institution-name">USP-SP</summary>
                                 <ul class="year-list">
-                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2026')" title="Adicionar questão para este ano">+</button></li>
-                                    <li class="year-item"><a href="#">2025</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2025')" title="Adicionar questão para este ano">+</button></li>
-                                    <li class="year-item"><a href="#">2024</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2024')" title="Adicionar questão para este ano">+</button></li>
+                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2026')">+</button></li>
+                                    <li class="year-item"><a href="#">2025</a><button class="btn-add-year" onclick="adicionarPorContexto('USP-SP', '2025')">+</button></li>
                                 </ul>
                             </details>
                         </li>
@@ -300,8 +229,7 @@
                             <details class="institution-details">
                                 <summary class="institution-name">ENARE</summary>
                                 <ul class="year-list">
-                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('ENARE', '2026')" title="Adicionar questão para este ano">+</button></li>
-                                    <li class="year-item"><a href="#">2025</a><button class="btn-add-year" onclick="adicionarPorContexto('ENARE', '2025')" title="Adicionar questão para este ano">+</button></li>
+                                    <li class="year-item"><a href="#">2026</a><button class="btn-add-year" onclick="adicionarPorContexto('ENARE', '2026')">+</button></li>
                                 </ul>
                             </details>
                         </li>
@@ -309,14 +237,14 @@
                 </details>
             </div>
 
-            <button onclick="limparBanco()" class="btn-delete" style="margin-top:20px; color:red; background:none; border:none; cursor:pointer; text-decoration:underline">Limpar Banco de Dados</button>
+            <button onclick="limparBanco()" style="margin-top:20px; color:#dc3545; background:none; border:none; cursor:pointer; text-decoration:underline; font-size: 0.8rem;">Apagar todo o histórico</button>
         </aside>
 
         <section class="content-area">
             <div class="add-question-panel" id="panel-cadastro">
-                <div style="display:flex; justify-content:space-between; align-items:center">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
                     <h2 id="titulo-form">➕ Cadastrar Nova Questão</h2>
-                    <button onclick="toggleCadastro()" style="border:none; background:none; cursor:pointer">❌</button>
+                    <button onclick="toggleCadastro()" style="border:none; background:none; cursor:pointer; font-size: 1.2rem;">❌</button>
                 </div>
                 <form id="form-questao">
                     <div class="form-row">
@@ -340,18 +268,24 @@
                             <input type="text" id="input-ano" placeholder="Ex: 2024" required>
                         </div>
                     </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>Imagem da Questão (Opcional)</label>
+                        <input type="file" id="input-imagem" accept="image/*">
+                    </div>
+
                     <div class="form-group">
                         <label>Enunciado</label>
                         <textarea id="input-enunciado" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Alternativas</label>
+                        <label>Alternativas (marque a correta)</label>
                         <div class="option-row"><input type="radio" name="gabarito" value="A" required> <strong>A</strong> <input type="text" id="input-a" style="flex:1" required></div>
                         <div class="option-row"><input type="radio" name="gabarito" value="B"> <strong>B</strong> <input type="text" id="input-b" style="flex:1" required></div>
                         <div class="option-row"><input type="radio" name="gabarito" value="C"> <strong>C</strong> <input type="text" id="input-c" style="flex:1" required></div>
                         <div class="option-row"><input type="radio" name="gabarito" value="D"> <strong>D</strong> <input type="text" id="input-d" style="flex:1" required></div>
                     </div>
-                    <button type="submit" class="btn-submit">Salvar Questão</button>
+                    <button type="submit" class="btn-submit">Salvar Questão Permanente</button>
                 </form>
             </div>
 
@@ -368,34 +302,40 @@
             if(painel.style.display === 'block') painel.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // FUNÇÃO NOVA: Preenche o formulário automaticamente baseado no ano clicado
         function adicionarPorContexto(banca, ano) {
-            const painel = document.getElementById('panel-cadastro');
-            
-            // Abre o painel se estiver fechado
-            painel.style.display = 'block';
-            
-            // Preenche os campos
+            document.getElementById('panel-cadastro').style.display = 'block';
             document.getElementById('input-banca').value = banca;
             document.getElementById('input-ano').value = ano;
-            
-            // Dá foco na disciplina para agilizar o preenchimento
-            document.getElementById('input-disciplina').focus();
-            
-            // Feedback visual suave
             document.getElementById('titulo-form').innerText = `➕ Nova Questão: ${banca} (${ano})`;
-            painel.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('input-disciplina').focus();
         }
 
         const form = document.getElementById('form-questao');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            const fileInput = document.getElementById('input-imagem');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    salvarQuestao(reader.result); // Salva com imagem Base64
+                };
+                reader.readAsDataURL(file);
+            } else {
+                salvarQuestao(null); // Salva sem imagem
+            }
+        });
+
+        function salvarQuestao(imagemBase64) {
             const novaQuestao = {
                 id: Date.now(),
                 disciplina: document.getElementById('input-disciplina').value,
                 banca: document.getElementById('input-banca').value,
                 ano: document.getElementById('input-ano').value,
                 enunciado: document.getElementById('input-enunciado').value,
+                imagem: imagemBase64, // Armazena a imagem aqui
                 altA: document.getElementById('input-a').value,
                 altB: document.getElementById('input-b').value,
                 altC: document.getElementById('input-c').value,
@@ -405,33 +345,45 @@
 
             let banco = JSON.parse(localStorage.getItem('media_db')) || [];
             banco.unshift(novaQuestao);
-            localStorage.setItem('media_db', JSON.stringify(banco));
-
-            form.reset();
-            document.getElementById('titulo-form').innerText = "➕ Cadastrar Nova Questão";
-            renderizarQuestoes();
-            alert("Questão salva!");
-        });
+            
+            try {
+                localStorage.setItem('media_db', JSON.stringify(banco));
+                form.reset();
+                document.getElementById('titulo-form').innerText = "➕ Cadastrar Nova Questão";
+                renderizarQuestoes();
+                alert("Questão salva com sucesso!");
+            } catch (e) {
+                alert("Erro: A imagem pode ser muito grande para o armazenamento do navegador. Tente uma imagem menor.");
+            }
+        }
 
         function renderizarQuestoes() {
             const banco = JSON.parse(localStorage.getItem('media_db')) || [];
             const listaDiv = document.getElementById('lista-questoes');
-            listaDiv.innerHTML = banco.length ? '' : '<p style="text-align:center">Nenhuma questão cadastrada.</p>';
+            listaDiv.innerHTML = banco.length ? '' : '<p style="text-align:center; color:#666; margin-top:2rem">Nenhuma questão cadastrada ainda.</p>';
 
             banco.forEach(q => {
+                // Lógica para exibir imagem apenas se existir
+                const htmlImagem = q.imagem ? `<div class="question-image-container"><img src="${q.imagem}" alt="Imagem da questão"></div>` : '';
+
                 const html = `
                     <div class="question-card">
                         <div class="question-header">
                             <span><strong>${q.banca}</strong> | ${q.disciplina} | ${q.ano}</span>
-                            <button onclick="deletarQuestao(${q.id})" style="color:red; background:none; border:none; cursor:pointer">Remover</button>
+                            <button onclick="deletarQuestao(${q.id})" style="color:#dc3545; background:none; border:none; cursor:pointer; font-weight:bold">Remover</button>
                         </div>
-                        <p>${q.enunciado}</p>
+                        
+                        ${htmlImagem}
+
+                        <div class="question-text">${q.enunciado}</div>
+                        
                         <ul class="options-list">
                             <li><label id="label-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.altA}</label></li>
                             <li><label id="label-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.altB}</label></li>
                             <li><label id="label-${q.id}-C"><input type="radio" name="r-${q.id}" value="C"> C) ${q.altC}</label></li>
                             <li><label id="label-${q.id}-D"><input type="radio" name="r-${q.id}" value="D"> D) ${q.altD}</label></li>
                         </ul>
+                        
                         <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
                     </div>
                 `;
@@ -441,18 +393,23 @@
 
         function corrigir(id, correta) {
             const selecionado = document.querySelector(`input[name="r-${id}"]:checked`);
-            if (!selecionado) return alert("Selecione uma opção!");
+            if (!selecionado) return alert("Por favor, selecione uma alternativa!");
 
             document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
             if (selecionado.value !== correta) {
                 document.getElementById(`label-${id}-${selecionado.value}`).classList.add('incorrect-answer');
             }
+            
+            // Desabilita interações após responder
+            const inputs = document.getElementsByName(`r-${id}`);
+            inputs.forEach(i => i.disabled = true);
             document.getElementById('btn-' + id).disabled = true;
-            document.getElementById('btn-' + id).innerText = "Respondida";
+            document.getElementById('btn-' + id).innerText = "Questão Respondida";
+            document.getElementById('btn-' + id).style.backgroundColor = "#636e72";
         }
 
         function deletarQuestao(id) {
-            if(confirm("Apagar questão?")) {
+            if(confirm("Deseja realmente apagar esta questão?")) {
                 let banco = JSON.parse(localStorage.getItem('media_db')) || [];
                 localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
                 renderizarQuestoes();
@@ -460,7 +417,7 @@
         }
 
         function limparBanco() {
-            if(confirm("Limpar tudo?")) {
+            if(confirm("Isso apagará TODAS as questões permanentemente. Continuar?")) {
                 localStorage.removeItem('media_db');
                 renderizarQuestoes();
             }

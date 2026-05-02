@@ -147,6 +147,51 @@
         
         .correct { background: #d4edda !important; border-color: #28a745 !important; }
         .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+
+        /* Tópicos de Cardiologia */
+        .topicos-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .topicos-card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .topicos-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .topico-item {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .topico-item:hover {
+            background: #e9f5ef;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
     </style>
 </head>
 <body>
@@ -246,6 +291,8 @@
             <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">Ver Todas</button>
         </div>
 
+        <div id="area-topicos"></div>
+
         <div id="lista"></div>
     </section>
 </main>
@@ -260,6 +307,23 @@
 
     const outrasAreas = ["Cirurgia Geral", "Ginecologia e Obstetrícia", "Medicina Preventiva", "Pediatria"];
 
+    const topicosCardiologia = [
+        "Anticoagulação na Cardiologia",
+        "Arritmias",
+        "Cardiopatias Congênitas",
+        "Síndrome Coronariana Crônica",
+        "Dor torácica não anginosa",
+        "Eletrocardiograma",
+        "Febre Reumática",
+        "Endocardite",
+        "Semiologia Cardíaca",
+        "Hipertensão Arterial Sistêmica",
+        "Insuficiência Cardíaca",
+        "Síncope",
+        "Síndrome Coronariana Aguda",
+        "Valvopatias"
+    ];
+
     let filtroAtual = { tipo: 'todos', valor: null };
 
     window.onload = () => {
@@ -268,7 +332,11 @@
         
         // Popular Menu Lateral da Clínica Médica
         especialidadesClinica.forEach(esp => {
-            menuClinc.innerHTML += `<div class="filter-item" onclick="filtrar('disciplina', '${esp}')">${esp}</div>`;
+            if (esp === "Cardiologia") {
+                menuClinc.innerHTML += `<div class="filter-item" onclick="mostrarTopicosCardiologia()">Cardiologia</div>`;
+            } else {
+                menuClinc.innerHTML += `<div class="filter-item" onclick="filtrar('disciplina', '${esp}')">${esp}</div>`;
+            }
         });
 
         // Popular o Select do formulário com TUDO
@@ -284,7 +352,38 @@
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 
+    function mostrarTopicosCardiologia() {
+        filtroAtual = { tipo: 'disciplina', valor: 'Cardiologia' };
+
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>Cardiologia</strong>`;
+        document.getElementById('lista').innerHTML = "";
+
+        const area = document.getElementById('area-topicos');
+
+        area.innerHTML = `
+            <div class="topicos-card">
+                <h2>Cardiologia</h2>
+                <p>Escolha um tópico para visualizar as questões relacionadas.</p>
+                <div class="topicos-grid">
+                    ${topicosCardiologia.map(topico => `
+                        <div class="topico-item" onclick="filtrarTopicoCardiologia('${topico}')">
+                            ${topico}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function filtrarTopicoCardiologia(topico) {
+        document.getElementById('area-topicos').innerHTML = "";
+        filtroAtual = { tipo: 'topico-cardiologia', valor: topico };
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>Cardiologia • ${topico}</strong>`;
+        render();
+    }
+
     function filtrar(tipo, valor) {
+        document.getElementById('area-topicos').innerHTML = "";
         filtroAtual = { tipo, valor };
         document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas as Questões'}</strong>`;
         render();
@@ -334,6 +433,7 @@
         const filtrados = banco.filter(q => {
             if (filtroAtual.tipo === 'todos') return true;
             if (filtroAtual.tipo === 'disciplina') return q.disc === filtroAtual.valor;
+            if (filtroAtual.tipo === 'topico-cardiologia') return q.disc === 'Cardiologia';
             if (filtroAtual.tipo === 'banca-ano') {
                 const [b, a] = filtroAtual.valor.split('|');
                 return q.banca === b && q.ano === a;

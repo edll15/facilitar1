@@ -3,400 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedIA - Sistema de Questões Inteligente</title>
+    <title>MedIA - Banco de Questões Especializado</title>
     <style>
-        /* Estilos Globais e de Layout */
+        :root {
+            --primary: #1b4332;
+            --secondary: #40916c;
+            --bg: #f4f7f4;
+            --white: #ffffff;
+            --text: #2d3436;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f4;
-            color: #2d3436;
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0; padding: 0;
         }
 
         header {
-            background-color: #1b4332;
-            color: #ffffff;
+            background-color: var(--primary);
+            color: var(--white);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
         }
 
-        header h1 { cursor: pointer; margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        header h1 { cursor: pointer; margin: 0; font-size: 1.8rem; }
 
         main {
             padding: 2rem 5%;
-            display: flex;
-            gap: 2rem;
+            display: flex; gap: 2rem;
             align-items: flex-start;
         }
 
-        /* Barra Lateral */
+        /* Barra Lateral com Scroll */
         aside {
             flex: 1;
-            min-width: 280px;
-            background: #ffffff;
+            min-width: 300px;
+            max-height: 85vh;
+            background: var(--white);
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 4px solid #1b4332;
-            position: sticky;
-            top: 100px;
+            border-top: 4px solid var(--primary);
+            position: sticky; top: 90px;
+            overflow-y: auto;
         }
 
-        .btn-action-sidebar {
-            background-color: #1b4332;
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 4px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            transition: 0.3s;
+        .btn-add {
+            background-color: var(--primary);
+            color: white; border: none;
+            padding: 0.8rem; border-radius: 4px;
+            width: 100%; cursor: pointer;
+            font-weight: bold; margin-bottom: 1.5rem;
         }
 
-        .btn-action-sidebar:hover { background-color: #2d6a4f; }
-
-        .toggle-title {
-            color: #1b4332;
-            border-bottom: 1px solid #e9ecef;
+        .section-title {
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
             padding-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            margin-bottom: 1rem;
+            margin: 1.5rem 0 0.8rem 0;
             font-weight: bold;
+            display: flex; justify-content: space-between;
         }
 
-        /* Menu de Disciplinas */
-        .disciplina-item {
-            padding: 0.8rem;
-            margin-bottom: 0.3rem;
+        .filter-item {
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 2px;
             background: #f8f9fa;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 0.85rem;
             transition: 0.2s;
-            font-weight: 500;
-            border-left: 3px solid transparent;
         }
 
-        .disciplina-item:hover { background: #e9ecef; border-left: 3px solid #40916c; }
-        .disciplina-item.active { background: #d8e2dc; border-left: 3px solid #1b4332; }
+        .filter-item:hover { background: #e9ecef; color: var(--secondary); }
+        .filter-item.active { background: var(--secondary); color: white; }
 
-        /* Provas na Íntegra */
-        .institution-list { list-style: none; padding: 0; margin: 1rem 0; }
-        .institution-name { padding: 0.8rem; background-color: #f8f9fa; border-radius: 4px; font-weight: 600; cursor: pointer; margin-bottom: 5px; }
-        
-        .year-list { list-style: none; padding: 0.5rem 0 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-        .year-btn { 
-            text-decoration: none; background-color: #e9ecef; color: #2d3436; 
-            padding: 0.4rem; border-radius: 4px; font-size: 0.85rem; 
-            text-align: center; cursor: pointer; border: none;
-        }
-        .year-btn:hover { background-color: #d8e2dc; }
+        /* Estilo da Área de Conteúdo */
+        .content-area { flex: 3; min-width: 0; }
 
-        /* Área de Conteúdo */
-        .content-area { flex: 3; display: flex; flex-direction: column; gap: 1.5rem; }
-
-        .filter-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #e9ecef;
-            padding: 1rem;
-            border-radius: 8px;
-            font-weight: bold;
+        .filter-status {
+            background: #e9ecef; padding: 1rem;
+            border-radius: 8px; margin-bottom: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* Formulário de Cadastro */
-        .add-question-panel {
-            background: #ffffff; padding: 2rem; border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-top: 4px solid #40916c;
+        /* Painel de Cadastro */
+        .panel {
+            background: var(--white); padding: 2rem;
+            border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: none; margin-bottom: 2rem;
         }
 
-        .form-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
-        .form-group { flex: 1; display: flex; flex-direction: column; }
-        .form-group label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; }
-        .form-group input, .form-group select, .form-group textarea { padding: 0.6rem; border-radius: 4px; border: 1px solid #d8e2dc; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; }
+        input, select, textarea { padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px; }
 
-        /* Estilo do Cartão de Questão */
+        /* Card da Questão */
         .question-card {
-            background: #ffffff; padding: 2rem; border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e0e0e0;
+            background: var(--white); padding: 1.5rem;
+            border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.5rem;
         }
 
-        .question-header {
-            display: flex; justify-content: space-between; font-size: 0.85rem;
-            background: #f8f9fa; padding: 0.6rem 1rem; border-radius: 4px;
-            border-left: 5px solid #1b4332; margin-bottom: 1.5rem;
-        }
-
-        .question-image-container { text-align: center; margin-bottom: 1.5rem; }
-        .question-image-container img { max-width: 100%; max-height: 350px; border-radius: 4px; }
-
-        .options-list { list-style: none; padding: 0; }
-        .options-list li { margin-bottom: 0.8rem; }
-        .options-list label { display: block; padding: 1rem; border: 1px solid #e9ecef; border-radius: 6px; cursor: pointer; }
+        .q-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
+        .q-img { text-align: center; margin: 1rem 0; }
+        .q-img img { max-width: 100%; border-radius: 4px; }
         
-        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; }
-        .incorrect-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; }
-
-        .btn-answer { background-color: #1b4332; color: white; border: none; padding: 1rem; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 1rem; }
+        .opt-list { list-style: none; padding: 0; }
+        .opt-list li { margin-bottom: 8px; }
+        .opt-list label { display: block; padding: 10px; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
+        
+        .correct { background: #d4edda !important; border-color: #28a745 !important; }
+        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1 onclick="filtrarPor('todos')">🩺 MedIA</h1>
-        <div style="font-size: 0.9rem;">Plataforma de Estudos Médicos</div>
-    </header>
+<header>
+    <h1 onclick="filtrar('todos')">🩺 MedIA</h1>
+</header>
 
-    <main>
-        <aside>
-            <button class="btn-action-sidebar" onclick="toggleCadastro()">
-                ➕ Cadastrar Questão
-            </button>
+<main>
+    <aside>
+        <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
-            <div class="filtros-secao">
-                <div class="toggle-title">Disciplinas</div>
-                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Clínica Médica')">Clínica Médica</div>
-                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Cirurgia Geral')">Cirurgia Geral</div>
-                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
-                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Medicina Preventiva')">Medicina Preventiva</div>
-                <div class="disciplina-item" onclick="filtrarPor('disciplina', 'Pediatria')">Pediatria</div>
+        <div class="section-title">Clínica Médica</div>
+        <div id="menu-clinica">
             </div>
 
-            <div class="provas-integra" style="margin-top: 2rem;">
-                <div class="toggle-title">Provas por Ano</div>
-                <ul class="institution-list">
-                    <li>
-                        <details open>
-                            <summary class="institution-name">USP-SP</summary>
-                            <div class="year-list">
-                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'USP-SP|2026')">2026</button>
-                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'USP-SP|2025')">2025</button>
-                            </div>
-                        </details>
-                    </li>
-                    <li>
-                        <details>
-                            <summary class="institution-name">ENARE</summary>
-                            <div class="year-list">
-                                <button class="year-btn" onclick="filtrarPor('banca-ano', 'ENARE|2026')">2026</button>
-                            </div>
-                        </details>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+        <div class="section-title">Outras Áreas</div>
+        <div class="filter-item" onclick="filtrar('disciplina', 'Cirurgia Geral')">Cirurgia Geral</div>
+        <div class="filter-item" onclick="filtrar('disciplina', 'Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
+        <div class="filter-item" onclick="filtrar('disciplina', 'Medicina Preventiva')">Medicina Preventiva</div>
+        <div class="filter-item" onclick="filtrar('disciplina', 'Pediatria')">Pediatria</div>
+        
+        <div class="section-title">Provas (USP-SP)</div>
+        <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2026')">USP-SP 2026</div>
+        <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2025')">USP-SP 2025</div>
+    </aside>
 
-        <section class="content-area">
-            <div class="add-question-panel" id="panel-cadastro">
-                <h2>➕ Nova Questão</h2>
-                <form id="form-questao">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Disciplina</label>
-                            <select id="input-disciplina" required>
-                                <option value="Clínica Médica">Clínica Médica</option>
-                                <option value="Cirurgia Geral">Cirurgia Geral</option>
-                                <option value="Ginecologia e Obstetrícia">Ginecologia e Obstetrícia</option>
-                                <option value="Medicina Preventiva">Medicina Preventiva</option>
-                                <option value="Pediatria">Pediatria</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Banca (Ex: USP-SP)</label>
-                            <input type="text" id="input-banca" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Ano</label>
-                            <input type="number" id="input-ano" value="2026" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:1rem">
-                        <label>Imagem (Opcional)</label>
-                        <input type="file" id="input-imagem" accept="image/*">
-                    </div>
-
+    <section class="content-area">
+        <div id="panel-cadastro" class="panel">
+            <h3>Nova Questão</h3>
+            <form id="form-q">
+                <div class="form-grid">
                     <div class="form-group">
-                        <label>Enunciado</label>
-                        <textarea id="input-enunciado" rows="4" required></textarea>
+                        <label>Disciplina / Especialidade</label>
+                        <select id="in-disc" required></select>
                     </div>
-
-                    <div class="form-group" style="margin-top:1rem">
-                        <label>Alternativas</label>
-                        <input type="text" id="input-a" placeholder="Alternativa A" required style="margin-bottom:5px">
-                        <input type="text" id="input-b" placeholder="Alternativa B" required style="margin-bottom:5px">
-                        <input type="text" id="input-c" placeholder="Alternativa C" required style="margin-bottom:5px">
-                        <input type="text" id="input-d" placeholder="Alternativa D" required>
+                    <div class="form-group">
+                        <label>Banca</label>
+                        <input type="text" id="in-banca" placeholder="Ex: USP-SP" required>
                     </div>
-
-                    <div class="form-group" style="margin-top:1rem">
-                        <label>Letra Correta</label>
-                        <select id="input-correta">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
+                    <div class="form-group">
+                        <label>Ano</label>
+                        <input type="number" id="in-ano" value="2026" required>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagem (opcional)</label>
+                    <input type="file" id="in-img" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Enunciado</label>
+                    <textarea id="in-enun" rows="3" required></textarea>
+                </div>
+                <div class="form-grid">
+                    <input type="text" id="in-a" placeholder="Alternativa A" required>
+                    <input type="text" id="in-b" placeholder="Alternativa B" required>
+                    <input type="text" id="in-c" placeholder="Alternativa C" required>
+                    <input type="text" id="in-d" placeholder="Alternativa D" required>
+                </div>
+                <div class="form-group">
+                    <label>Gabarito</label>
+                    <select id="in-correta">
+                        <option value="A">A</option><option value="B">B</option>
+                        <option value="C">C</option><option value="D">D</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-add">SALVAR QUESTÃO</button>
+            </form>
+        </div>
 
-                    <button type="submit" class="btn-action-sidebar" style="margin-top:2rem">Salvar Questão</button>
-                </form>
-            </div>
+        <div class="filter-status">
+            <span id="txt-filtro">Mostrando: <strong>Todas</strong></span>
+            <button onclick="filtrar('todos')">Limpar</button>
+        </div>
 
-            <div id="status-filtro" class="filter-info">
-                <span id="texto-filtro">Mostrando: Todas as Questões</span>
-                <button onclick="filtrarPor('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">Limpar Filtro</button>
-            </div>
+        <div id="lista"></div>
+    </section>
+</main>
 
-            <div id="lista-questoes"></div>
-        </section>
-    </main>
+<script>
+    const especialidades = [
+        "Cardiologia", "Clínica Médica Geral", "Dermatologia", "Emergências Clínicas", 
+        "Endocrinologia", "Reumatologia", "Hematologia", "Oncologia", "Geriatria", 
+        "Gastroenterologia", "Imunologia", "Infectologia", "Nefrologia", "Neurologia", 
+        "Nutrologia", "Oftalmologia", "Pneumologia", "Otorrinolaringologia", "UTI",
+        "Cirurgia Geral", "Ginecologia e Obstetrícia", "Medicina Preventiva", "Pediatria"
+    ];
 
-    <script>
-        // Estado Global da Aplicação
-        let filtroAtivo = { tipo: 'todos', valor: null };
+    let filtroAtual = { tipo: 'todos', valor: null };
 
-        window.onload = () => renderizarQuestoes();
+    // Inicializar Menus
+    window.onload = () => {
+        const menuClinc = document.getElementById('menu-clinica');
+        const selectDisc = document.getElementById('in-disc');
+        
+        // Popular apenas as de Clínica Médica no Menu Lateral (as 19 primeiras da sua lista)
+        especialidades.slice(0, 19).forEach(esp => {
+            menuClinc.innerHTML += `<div class="filter-item" onclick="filtrar('disciplina', '${esp}')">${esp}</div>`;
+        });
 
-        function toggleCadastro() {
-            const painel = document.getElementById('panel-cadastro');
-            painel.style.display = (painel.style.display === 'block') ? 'none' : 'block';
+        // Popular todas no Select do formulário
+        especialidades.forEach(esp => {
+            selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
+        });
+
+        render();
+    };
+
+    function toggleForm() {
+        const p = document.getElementById('panel-cadastro');
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function filtrar(tipo, valor) {
+        filtroAtual = { tipo, valor };
+        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas'}</strong>`;
+        render();
+    }
+
+    document.getElementById('form-q').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const file = document.getElementById('in-img').files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => salvar(reader.result);
+            reader.readAsDataURL(file);
+        } else {
+            salvar(null);
         }
+    });
 
-        // FUNÇÃO DE FILTRAGEM
-        function filtrarPor(tipo, valor) {
-            filtroAtivo = { tipo, valor };
-            
-            // Atualiza o texto do status
-            const statusTxt = document.getElementById('texto-filtro');
-            if (tipo === 'todos') statusTxt.innerText = "Mostrando: Todas as Questões";
-            else if (tipo === 'disciplina') statusTxt.innerText = `Mostrando: ${valor}`;
-            else if (tipo === 'banca-ano') statusTxt.innerText = `Mostrando: ${valor.replace('|', ' ')}`;
+    function salvar(img) {
+        const q = {
+            id: Date.now(),
+            disc: document.getElementById('in-disc').value,
+            banca: document.getElementById('in-banca').value,
+            ano: document.getElementById('in-ano').value,
+            enun: document.getElementById('in-enun').value,
+            img: img,
+            opts: {
+                A: document.getElementById('in-a').value,
+                B: document.getElementById('in-b').value,
+                C: document.getElementById('in-c').value,
+                D: document.getElementById('in-d').value
+            },
+            correta: document.getElementById('in-correta').value
+        };
+        const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
+        banco.unshift(q);
+        localStorage.setItem('media_db', JSON.stringify(banco));
+        document.getElementById('form-q').reset();
+        toggleForm();
+        render();
+    }
 
-            renderizarQuestoes();
-        }
+    function render() {
+        const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
+        const lista = document.getElementById('lista');
+        lista.innerHTML = "";
 
-        // SALVAMENTO DE QUESTÃO
-        const form = document.getElementById('form-questao');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const file = document.getElementById('input-imagem').files[0];
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => salvarNoBanco(reader.result);
-                reader.readAsDataURL(file);
-            } else {
-                salvarNoBanco(null);
+        const filtrados = banco.filter(q => {
+            if (filtroAtual.tipo === 'todos') return true;
+            if (filtroAtual.tipo === 'disciplina') return q.disc === filtroAtual.valor;
+            if (filtroAtual.tipo === 'banca-ano') {
+                const [b, a] = filtroAtual.valor.split('|');
+                return q.banca === b && q.ano === a;
             }
         });
 
-        function salvarNoBanco(imgBase64) {
-            const novaQ = {
-                id: Date.now(),
-                disciplina: document.getElementById('input-disciplina').value,
-                banca: document.getElementById('input-banca').value,
-                ano: document.getElementById('input-ano').value,
-                enunciado: document.getElementById('input-enunciado').value,
-                imagem: imgBase64,
-                alternativas: {
-                    A: document.getElementById('input-a').value,
-                    B: document.getElementById('input-b').value,
-                    C: document.getElementById('input-c').value,
-                    D: document.getElementById('input-d').value
-                },
-                correta: document.getElementById('input-correta').value
-            };
-
-            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            banco.unshift(novaQ);
-            localStorage.setItem('media_db', JSON.stringify(banco));
-            
-            form.reset();
-            toggleCadastro();
-            renderizarQuestoes();
-            alert("Questão adicionada à categoria: " + novaQ.disciplina);
-        }
-
-        // RENDERIZAÇÃO COM LÓGICA DE FILTRO
-        function renderizarQuestoes() {
-            const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-            const container = document.getElementById('lista-questoes');
-            container.innerHTML = "";
-
-            // Lógica de Filtragem Automática
-            const questoesFiltradas = banco.filter(q => {
-                if (filtroAtivo.tipo === 'todos') return true;
-                if (filtroAtivo.tipo === 'disciplina') return q.disciplina === filtroAtivo.valor;
-                if (filtroAtivo.tipo === 'banca-ano') {
-                    const [banca, ano] = filtroAtivo.valor.split('|');
-                    return q.banca === banca && q.ano === ano;
-                }
-                return true;
-            });
-
-            if (questoesFiltradas.length === 0) {
-                container.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada para este filtro.</p>`;
-                return;
-            }
-
-            questoesFiltradas.forEach(q => {
-                const card = `
-                    <div class="question-card" style="margin-bottom: 2rem">
-                        <div class="question-header">
-                            <span><strong>${q.banca} (${q.ano})</strong> | ${q.disciplina}</span>
-                            <button onclick="deletar(${q.id})" style="color:red; background:none; border:none; cursor:pointer">Excluir</button>
-                        </div>
-                        
-                        ${q.imagem ? `<div class="question-image-container"><img src="${q.imagem}"></div>` : ''}
-                        
-                        <p>${q.enunciado}</p>
-                        
-                        <ul class="options-list">
-                            <li><label id="label-${q.id}-A"><input type="radio" name="q-${q.id}" value="A"> A) ${q.alternativas.A}</label></li>
-                            <li><label id="label-${q.id}-B"><input type="radio" name="q-${q.id}" value="B"> B) ${q.alternativas.B}</label></li>
-                            <li><label id="label-${q.id}-C"><input type="radio" name="q-${q.id}" value="C"> C) ${q.alternativas.C}</label></li>
-                            <li><label id="label-${q.id}-D"><input type="radio" name="q-${q.id}" value="D"> D) ${q.alternativas.D}</label></li>
-                        </ul>
-                        
-                        <button class="btn-answer" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Responder</button>
+        filtrados.forEach(q => {
+            lista.innerHTML += `
+                <div class="question-card">
+                    <div class="q-header">
+                        <span>${q.banca} (${q.ano}) • <strong>${q.disc}</strong></span>
+                        <button onclick="excluir(${q.id})" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
                     </div>
-                `;
-                container.insertAdjacentHTML('beforeend', card);
-            });
-        }
+                    ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ''}
+                    <p>${q.enun}</p>
+                    <ul class="opt-list">
+                        <li><label id="l-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}</label></li>
+                        <li><label id="l-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}</label></li>
+                        <li><label id="l-${q.id}-C"><input type="radio" name="r-${q.id}" value="C"> C) ${q.opts.C}</label></li>
+                        <li><label id="l-${q.id}-D"><input type="radio" name="r-${q.id}" value="D"> D) ${q.opts.D}</label></li>
+                    </ul>
+                    <button class="btn-add" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                </div>
+            `;
+        });
+    }
 
-        function corrigir(id, correta) {
-            const marcado = document.querySelector(`input[name="q-${id}"]:checked`);
-            if (!marcado) return alert("Selecione uma opção!");
+    function corrigir(id, correta) {
+        const sel = document.querySelector(`input[name="r-${id}"]:checked`);
+        if(!sel) return alert("Selecione uma opção!");
+        document.getElementById(`l-${id}-${correta}`).classList.add('correct');
+        if(sel.value !== correta) document.getElementById(`l-${id}-${sel.value}`).classList.add('wrong');
+        document.getElementById(`btn-${id}`).disabled = true;
+    }
 
-            document.getElementById(`label-${id}-${correta}`).classList.add('correct-answer');
-            if (marcado.value !== correta) {
-                document.getElementById(`label-${id}-${marcado.value}`).classList.add('incorrect-answer');
-            }
-            document.getElementById(`btn-${id}`).disabled = true;
-            document.getElementById(`btn-${id}`).innerText = "Concluída";
+    function excluir(id) {
+        if(confirm("Excluir questão?")) {
+            const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
+            localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
+            render();
         }
+    }
+</script>
 
-        function deletar(id) {
-            if(confirm("Apagar questão?")) {
-                const banco = JSON.parse(localStorage.getItem('media_db')) || [];
-                localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
-                renderizarQuestoes();
-            }
-        }
-    </script>
 </body>
 </html>

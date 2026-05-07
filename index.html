@@ -144,6 +144,37 @@
             color: var(--secondary); 
         }
 
+        .add-especialidade-box {
+            background: #f8f9fa;
+            border: 1px dashed var(--secondary);
+            padding: 0.6rem;
+            border-radius: 6px;
+            margin: 8px 0;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .add-especialidade-box input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.5rem;
+            font-size: 0.78rem;
+        }
+
+        .btn-especialidade {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
         .content-area {
             flex: 3;
             min-width: 0;
@@ -410,6 +441,10 @@
             .add-tema-box {
                 grid-template-columns: 1fr;
             }
+
+            .add-especialidade-box {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -435,34 +470,81 @@
 
         <details>
             <summary>Clínica Médica</summary>
-            <div id="menu-clinica" style="padding-top: 5px;"></div>
+            <div style="padding-top: 5px;">
+                <div class="add-especialidade-box">
+                    <input 
+                        type="text" 
+                        id="nova-especialidade-clinica-medica" 
+                        placeholder="Adicionar especialidade"
+                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Clínica Médica"); }'
+                    >
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Clínica Médica")'>Adicionar</button>
+                </div>
+                <div id="menu-clinica"></div>
+            </div>
         </details>
 
         <details>
             <summary>Cirurgia Geral</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="mostrarTemasEspecialidade('Cirurgia Geral')">Cirurgia Geral</div>
+                <div class="add-especialidade-box">
+                    <input 
+                        type="text" 
+                        id="nova-especialidade-cirurgia-geral" 
+                        placeholder="Adicionar especialidade"
+                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Cirurgia Geral"); }'
+                    >
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Cirurgia Geral")'>Adicionar</button>
+                </div>
+                <div id="menu-cirurgia-geral"></div>
             </div>
         </details>
 
         <details>
             <summary>Ginecologia e Obstetrícia</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="mostrarTemasEspecialidade('Ginecologia e Obstetrícia')">Ginecologia e Obstetrícia</div>
+                <div class="add-especialidade-box">
+                    <input 
+                        type="text" 
+                        id="nova-especialidade-ginecologia-e-obstetricia" 
+                        placeholder="Adicionar especialidade"
+                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Ginecologia e Obstetrícia"); }'
+                    >
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Ginecologia e Obstetrícia")'>Adicionar</button>
+                </div>
+                <div id="menu-ginecologia-e-obstetricia"></div>
             </div>
         </details>
 
         <details>
             <summary>Pediatria</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="mostrarTemasEspecialidade('Pediatria')">Pediatria</div>
+                <div class="add-especialidade-box">
+                    <input 
+                        type="text" 
+                        id="nova-especialidade-pediatria" 
+                        placeholder="Adicionar especialidade"
+                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Pediatria"); }'
+                    >
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Pediatria")'>Adicionar</button>
+                </div>
+                <div id="menu-pediatria"></div>
             </div>
         </details>
 
         <details>
             <summary>Medicina Preventiva</summary>
             <div style="padding-top: 5px;">
-                <div class="filter-item" onclick="mostrarTemasEspecialidade('Medicina Preventiva')">Medicina Preventiva</div>
+                <div class="add-especialidade-box">
+                    <input 
+                        type="text" 
+                        id="nova-especialidade-medicina-preventiva" 
+                        placeholder="Adicionar especialidade"
+                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Medicina Preventiva"); }'
+                    >
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Medicina Preventiva")'>Adicionar</button>
+                </div>
+                <div id="menu-medicina-preventiva"></div>
             </div>
         </details>
         
@@ -577,7 +659,8 @@
     const estado = {
         banco: [],
         temasUsuario: {},
-        temasOcultos: {}
+        temasOcultos: {},
+        especialidadesUsuario: {}
     };
 
     const especialidadesClinica = [
@@ -602,12 +685,29 @@
         "UTI"
     ];
 
-    const outrasAreas = [
-        "Cirurgia Geral",
-        "Ginecologia e Obstetrícia",
-        "Medicina Preventiva",
-        "Pediatria"
-    ];
+    const especialidadesBasePorBloco = {
+        "Clínica Médica": especialidadesClinica,
+        "Cirurgia Geral": ["Cirurgia Geral"],
+        "Ginecologia e Obstetrícia": ["Ginecologia e Obstetrícia"],
+        "Pediatria": ["Pediatria"],
+        "Medicina Preventiva": ["Medicina Preventiva"]
+    };
+
+    const idsMenusPorBloco = {
+        "Clínica Médica": "menu-clinica",
+        "Cirurgia Geral": "menu-cirurgia-geral",
+        "Ginecologia e Obstetrícia": "menu-ginecologia-e-obstetricia",
+        "Pediatria": "menu-pediatria",
+        "Medicina Preventiva": "menu-medicina-preventiva"
+    };
+
+    const idsInputsPorBloco = {
+        "Clínica Médica": "nova-especialidade-clinica-medica",
+        "Cirurgia Geral": "nova-especialidade-cirurgia-geral",
+        "Ginecologia e Obstetrícia": "nova-especialidade-ginecologia-e-obstetricia",
+        "Pediatria": "nova-especialidade-pediatria",
+        "Medicina Preventiva": "nova-especialidade-medicina-preventiva"
+    };
 
     const temasPadrao = {
         "Cardiologia": [
@@ -640,26 +740,68 @@
     };
 
     function inicializarSite() {
-        const menuClinc = document.getElementById("menu-clinica");
-        const selectDisc = document.getElementById("in-disc");
-
-        menuClinc.innerHTML = "";
-        selectDisc.innerHTML = "";
-
-        especialidadesClinica.forEach(esp => {
-            menuClinc.innerHTML += `
-                <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
-                    ${esp}
-                </div>
-            `;
-        });
-
-        [...especialidadesClinica, ...outrasAreas].forEach(esp => {
-            selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
-        });
-
+        renderizarMenusEspecialidades();
+        renderizarSelectEspecialidades();
         atualizarSelectTemas();
         render();
+    }
+
+    function getEspecialidadesBloco(bloco) {
+        const base = especialidadesBasePorBloco[bloco] || [];
+        const personalizadas = estado.especialidadesUsuario[bloco] || [];
+
+        const todas = [...base, ...personalizadas];
+        const unicas = [];
+
+        todas.forEach(esp => {
+            if (!temaExiste(unicas, esp)) {
+                unicas.push(esp);
+            }
+        });
+
+        return unicas;
+    }
+
+    function getTodasEspecialidades() {
+        const todas = [];
+
+        Object.keys(especialidadesBasePorBloco).forEach(bloco => {
+            getEspecialidadesBloco(bloco).forEach(esp => {
+                if (!temaExiste(todas, esp)) {
+                    todas.push(esp);
+                }
+            });
+        });
+
+        return todas;
+    }
+
+    function renderizarMenusEspecialidades() {
+        Object.keys(idsMenusPorBloco).forEach(bloco => {
+            const menu = document.getElementById(idsMenusPorBloco[bloco]);
+
+            if (!menu) return;
+
+            menu.innerHTML = "";
+
+            getEspecialidadesBloco(bloco).forEach(esp => {
+                menu.innerHTML += `
+                    <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
+                        ${esp}
+                    </div>
+                `;
+            });
+        });
+    }
+
+    function renderizarSelectEspecialidades() {
+        const selectDisc = document.getElementById("in-disc");
+
+        selectDisc.innerHTML = "";
+
+        getTodasEspecialidades().forEach(esp => {
+            selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
+        });
     }
 
     function configurarStatus(texto) {
@@ -698,12 +840,15 @@
                     estado.banco = Array.isArray(dados.banco) ? dados.banco : [];
                     estado.temasUsuario = dados.temasUsuario || {};
                     estado.temasOcultos = dados.temasOcultos || {};
+                    estado.especialidadesUsuario = dados.especialidadesUsuario || {};
                 } else {
                     await salvarOnline();
                 }
 
                 carregouPrimeiraVez = true;
                 configurarStatus("Salvo online");
+                renderizarMenusEspecialidades();
+                renderizarSelectEspecialidades();
                 atualizarSelectTemas();
 
                 if (filtroAtual.tipo === "disciplina" && filtroAtual.especialidade) {
@@ -754,6 +899,7 @@
                 banco: estado.banco,
                 temasUsuario: estado.temasUsuario,
                 temasOcultos: estado.temasOcultos,
+                especialidadesUsuario: estado.especialidadesUsuario,
                 atualizadoEm: serverTimestamp()
             }, { merge: true });
 
@@ -806,6 +952,39 @@
 
         return unicos.filter(tema => !ocultos.includes(tema));
     }
+
+    window.adicionarEspecialidade = async function(bloco) {
+        const input = document.getElementById(idsInputsPorBloco[bloco]);
+        const novaEspecialidade = normalizarTexto(input.value);
+
+        if (!novaEspecialidade) {
+            alert("Digite o nome da especialidade.");
+            return;
+        }
+
+        const todasEspecialidades = getTodasEspecialidades();
+
+        if (temaExiste(todasEspecialidades, novaEspecialidade)) {
+            alert("Esta especialidade já existe.");
+            return;
+        }
+
+        if (!estado.especialidadesUsuario[bloco]) {
+            estado.especialidadesUsuario[bloco] = [];
+        }
+
+        estado.especialidadesUsuario[bloco].push(novaEspecialidade);
+
+        const salvou = await salvarOnline();
+
+        if (!salvou) return;
+
+        input.value = "";
+
+        renderizarMenusEspecialidades();
+        renderizarSelectEspecialidades();
+        atualizarSelectTemas();
+    };
 
     window.mostrarTemasEspecialidade = function(especialidade) {
         filtroAtual = {

@@ -887,6 +887,7 @@
                     return {
                         docId: documento.id,
                         id: dados.id || documento.id,
+                        numero: dados.numero || null,
                         disc: dados.disc || "",
                         tema: dados.tema || "",
                         banca: dados.banca || "",
@@ -899,6 +900,18 @@
                 });
 
                 estado.banco.sort((a, b) => {
+                    const aEhProva = a.disc === "Prova na íntegra";
+                    const bEhProva = b.disc === "Prova na íntegra";
+
+                    if (aEhProva && bEhProva) {
+                        const numeroA = Number(a.numero) || 0;
+                        const numeroB = Number(b.numero) || 0;
+
+                        if (numeroA !== numeroB) {
+                            return numeroA - numeroB;
+                        }
+                    }
+
                     const idA = Number(a.id) || 0;
                     const idB = Number(b.id) || 0;
                     return idB - idA;
@@ -1269,6 +1282,7 @@
 
         const q = {
             id: Date.now(),
+            numero: null,
             disc: document.getElementById("in-disc").value,
             tema: document.getElementById("in-tema").value,
             banca: document.getElementById("in-banca").value,
@@ -1318,6 +1332,24 @@
             return true;
         });
 
+        filtrados.sort((a, b) => {
+            const aEhProva = a.disc === "Prova na íntegra";
+            const bEhProva = b.disc === "Prova na íntegra";
+
+            if (aEhProva && bEhProva) {
+                const numeroA = Number(a.numero) || 0;
+                const numeroB = Number(b.numero) || 0;
+
+                if (numeroA !== numeroB) {
+                    return numeroA - numeroB;
+                }
+            }
+
+            const idA = Number(a.id) || 0;
+            const idB = Number(b.id) || 0;
+            return idB - idA;
+        });
+
         if (!carregouQuestoes && firebaseAtivo) {
             lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões online...</p>`;
             return;
@@ -1336,6 +1368,7 @@
                 <div class="question-card">
                     <div class="q-header">
                         <span>
+                            ${q.numero ? `Questão ${q.numero} • ` : ""}
                             ${q.banca} (${q.ano}) • 
                             <strong>${q.disc}</strong>
                             ${q.tema ? ` • ${q.tema}` : ""}

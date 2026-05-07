@@ -86,6 +86,22 @@
             opacity: 0.92;
         }
 
+        .btn-copy {
+            background: #edf6f0;
+            color: #1b4332;
+            border: 1px solid #40916c;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: #d8f3dc;
+        }
+
         details {
             margin-bottom: 5px;
         }
@@ -241,6 +257,12 @@
             color: #666;
             margin-bottom: 1rem;
             gap: 1rem;
+        }
+
+        .q-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
 
         .q-img {
@@ -444,6 +466,14 @@
 
             .add-especialidade-box {
                 grid-template-columns: 1fr;
+            }
+
+            .q-header {
+                flex-direction: column;
+            }
+
+            .q-actions {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -1374,9 +1404,15 @@
                             ${q.tema ? ` • ${q.tema}` : ""}
                         </span>
 
-                        <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
-                            Remover
-                        </button>
+                        <div class="q-actions">
+                            <button class="btn-copy" onclick="copiarQuestao('${q.docId}')">
+                                📋 Copiar
+                            </button>
+
+                            <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
+                                Remover
+                            </button>
+                        </div>
                     </div>
 
                     ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
@@ -1400,6 +1436,45 @@
             `;
         });
     }
+
+    window.copiarQuestao = async function(docId) {
+        const q = estado.banco.find(item => item.docId === docId);
+
+        if (!q) {
+            alert("Não foi possível encontrar esta questão.");
+            return;
+        }
+
+        const alternativas = q.opts || {};
+        const letras = Object.keys(alternativas).sort();
+
+        const texto = [
+            q.numero ? `Questão ${q.numero}` : "Questão",
+            q.banca && q.ano ? `${q.banca} (${q.ano})` : "",
+            q.disc ? `Área: ${q.disc}` : "",
+            q.tema ? `Tema: ${q.tema}` : "",
+            "",
+            q.enun,
+            "",
+            ...letras.map(letra => `${letra}) ${alternativas[letra]}`)
+        ].filter(linha => linha !== "").join("\n");
+
+        try {
+            await navigator.clipboard.writeText(texto);
+            alert("Questão copiada com sucesso!");
+        } catch (erro) {
+            console.error(erro);
+
+            const area = document.createElement("textarea");
+            area.value = texto;
+            document.body.appendChild(area);
+            area.select();
+            document.execCommand("copy");
+            document.body.removeChild(area);
+
+            alert("Questão copiada com sucesso!");
+        }
+    };
 
     window.corrigir = function(id, correta) {
         const sel = document.querySelector(`input[name="r-${id}"]:checked`);

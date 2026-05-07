@@ -461,9 +461,9 @@
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
         <div class="aviso-online">
-            ✅ Temas e questões serão salvos online no Firebase.
+            ✅ Temas, especialidades e questões serão salvos online no Firebase.
             <br>
-            Ao abrir em outro computador, os dados serão carregados automaticamente.
+            As questões são lidas da coleção <strong>questoes</strong>.
         </div>
 
         <div class="erro-firebase" id="erro-firebase"></div>
@@ -472,12 +472,7 @@
             <summary>Clínica Médica</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input 
-                        type="text" 
-                        id="nova-especialidade-clinica-medica" 
-                        placeholder="Adicionar especialidade"
-                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Clínica Médica"); }'
-                    >
+                    <input type="text" id="nova-especialidade-clinica-medica" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Clínica Médica"); }'>
                     <button class="btn-especialidade" onclick='adicionarEspecialidade("Clínica Médica")'>Adicionar</button>
                 </div>
                 <div id="menu-clinica"></div>
@@ -488,12 +483,7 @@
             <summary>Cirurgia Geral</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input 
-                        type="text" 
-                        id="nova-especialidade-cirurgia-geral" 
-                        placeholder="Adicionar especialidade"
-                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Cirurgia Geral"); }'
-                    >
+                    <input type="text" id="nova-especialidade-cirurgia-geral" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Cirurgia Geral"); }'>
                     <button class="btn-especialidade" onclick='adicionarEspecialidade("Cirurgia Geral")'>Adicionar</button>
                 </div>
                 <div id="menu-cirurgia-geral"></div>
@@ -504,12 +494,7 @@
             <summary>Ginecologia e Obstetrícia</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input 
-                        type="text" 
-                        id="nova-especialidade-ginecologia-e-obstetricia" 
-                        placeholder="Adicionar especialidade"
-                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Ginecologia e Obstetrícia"); }'
-                    >
+                    <input type="text" id="nova-especialidade-ginecologia-e-obstetricia" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Ginecologia e Obstetrícia"); }'>
                     <button class="btn-especialidade" onclick='adicionarEspecialidade("Ginecologia e Obstetrícia")'>Adicionar</button>
                 </div>
                 <div id="menu-ginecologia-e-obstetricia"></div>
@@ -520,12 +505,7 @@
             <summary>Pediatria</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input 
-                        type="text" 
-                        id="nova-especialidade-pediatria" 
-                        placeholder="Adicionar especialidade"
-                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Pediatria"); }'
-                    >
+                    <input type="text" id="nova-especialidade-pediatria" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Pediatria"); }'>
                     <button class="btn-especialidade" onclick='adicionarEspecialidade("Pediatria")'>Adicionar</button>
                 </div>
                 <div id="menu-pediatria"></div>
@@ -536,12 +516,7 @@
             <summary>Medicina Preventiva</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input 
-                        type="text" 
-                        id="nova-especialidade-medicina-preventiva" 
-                        placeholder="Adicionar especialidade"
-                        onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Medicina Preventiva"); }'
-                    >
+                    <input type="text" id="nova-especialidade-medicina-preventiva" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Medicina Preventiva"); }'>
                     <button class="btn-especialidade" onclick='adicionarEspecialidade("Medicina Preventiva")'>Adicionar</button>
                 </div>
                 <div id="menu-medicina-preventiva"></div>
@@ -572,7 +547,7 @@
 
                     <div class="form-group">
                         <label>Banca</label>
-                        <input type="text" id="in-banca" placeholder="Ex: USP-SP" required>
+                        <input type="text" id="in-banca" placeholder="Ex: SUS-SP" required>
                     </div>
                 </div>
 
@@ -598,6 +573,7 @@
                     <input type="text" id="in-b" placeholder="Alternativa B" required>
                     <input type="text" id="in-c" placeholder="Alternativa C" required>
                     <input type="text" id="in-d" placeholder="Alternativa D" required>
+                    <input type="text" id="in-e" placeholder="Alternativa E">
                 </div>
 
                 <div class="form-group">
@@ -607,6 +583,7 @@
                         <option value="B">B</option>
                         <option value="C">C</option>
                         <option value="D">D</option>
+                        <option value="E">E</option>
                     </select>
                 </div>
 
@@ -616,14 +593,12 @@
 
         <div class="filter-status">
             <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-
             <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
                 Ver Todas
             </button>
         </div>
 
         <div id="area-topicos"></div>
-
         <div id="lista"></div>
     </section>
 </main>
@@ -633,8 +608,10 @@
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
     import { 
         getFirestore,
+        collection,
         doc,
         setDoc,
+        deleteDoc,
         onSnapshot,
         serverTimestamp
     } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
@@ -650,9 +627,11 @@
     };
 
     let db = null;
-    let docRef = null;
+    let configRef = null;
+    let questoesRef = null;
     let firebaseAtivo = false;
-    let carregouPrimeiraVez = false;
+    let carregouQuestoes = false;
+    let carregouConfig = false;
     let salvandoAgora = false;
 
     const estado = {
@@ -689,7 +668,8 @@
         "Cirurgia Geral": ["Cirurgia Geral"],
         "Ginecologia e Obstetrícia": ["Ginecologia e Obstetrícia"],
         "Pediatria": ["Pediatria"],
-        "Medicina Preventiva": ["Medicina Preventiva"]
+        "Medicina Preventiva": ["Medicina Preventiva"],
+        "Prova na íntegra": ["Prova na íntegra"]
     };
 
     const idsMenusPorBloco = {
@@ -770,7 +750,6 @@
 
     function renderizarProvasIntegra() {
         const menu = document.getElementById("menu-provas-integra");
-
         menu.innerHTML = "";
 
         instituicoesProvasIntegra.forEach(instituicao => {
@@ -792,7 +771,6 @@
     function getEspecialidadesBloco(bloco) {
         const base = especialidadesBasePorBloco[bloco] || [];
         const personalizadas = estado.especialidadesUsuario[bloco] || [];
-
         const todas = [...base, ...personalizadas];
         const unicas = [];
 
@@ -822,7 +800,6 @@
     function renderizarMenusEspecialidades() {
         Object.keys(idsMenusPorBloco).forEach(bloco => {
             const menu = document.getElementById(idsMenusPorBloco[bloco]);
-
             if (!menu) return;
 
             menu.innerHTML = "";
@@ -839,7 +816,6 @@
 
     function renderizarSelectEspecialidades() {
         const selectDisc = document.getElementById("in-disc");
-
         selectDisc.innerHTML = "";
 
         getTodasEspecialidades().forEach(esp => {
@@ -868,52 +844,77 @@
             }
 
             db = getFirestore(app);
-            docRef = doc(db, "mediaApp", "bancoPrincipal");
+            configRef = doc(db, "mediaApp", "bancoPrincipal");
+            questoesRef = collection(db, "questoes");
 
             firebaseAtivo = true;
-
             configurarStatus("Sincronizando...");
 
-            onSnapshot(docRef, async (snap) => {
+            onSnapshot(configRef, async (snap) => {
                 if (salvandoAgora) return;
 
                 if (snap.exists()) {
                     const dados = snap.data();
-
-                    estado.banco = Array.isArray(dados.banco) ? dados.banco : [];
                     estado.temasUsuario = dados.temasUsuario || {};
                     estado.temasOcultos = dados.temasOcultos || {};
                     estado.especialidadesUsuario = dados.especialidadesUsuario || {};
                 } else {
-                    await salvarOnline();
+                    await salvarConfiguracoesOnline();
                 }
 
-                carregouPrimeiraVez = true;
-                configurarStatus("Salvo online");
+                carregouConfig = true;
+
                 renderizarMenusEspecialidades();
                 renderizarSelectEspecialidades();
                 renderizarProvasIntegra();
                 atualizarSelectTemas();
-
-                if (filtroAtual.tipo === "disciplina" && filtroAtual.especialidade) {
-                    mostrarTemasEspecialidade(filtroAtual.especialidade);
-                } else {
-                    render();
-                }
+                render();
             }, (erro) => {
                 console.error(erro);
-                configurarStatus("Erro ao sincronizar");
+                configurarStatus("Erro ao sincronizar configurações");
 
                 mostrarErroFirebase(`
-                    ⚠️ Erro ao conectar ao Firestore.
+                    ⚠️ Erro ao conectar às configurações do Firestore.
                     <br><br>
-                    Verifique se:
-                    <br>
-                    1. O Cloud Firestore foi ativado no Firebase.
-                    <br>
-                    2. As regras permitem leitura e escrita.
-                    <br>
-                    3. Você publicou as regras.
+                    Verifique se as regras permitem leitura e escrita.
+                `);
+            });
+
+            onSnapshot(questoesRef, (snap) => {
+                estado.banco = snap.docs.map(documento => {
+                    const dados = documento.data();
+
+                    return {
+                        docId: documento.id,
+                        id: dados.id || documento.id,
+                        disc: dados.disc || "",
+                        tema: dados.tema || "",
+                        banca: dados.banca || "",
+                        ano: String(dados.ano || ""),
+                        enun: dados.enun || "",
+                        img: dados.img || null,
+                        opts: dados.opts || {},
+                        correta: dados.correta || ""
+                    };
+                });
+
+                estado.banco.sort((a, b) => {
+                    const idA = Number(a.id) || 0;
+                    const idB = Number(b.id) || 0;
+                    return idB - idA;
+                });
+
+                carregouQuestoes = true;
+                configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
+                render();
+            }, (erro) => {
+                console.error(erro);
+                configurarStatus("Erro ao carregar questões");
+
+                mostrarErroFirebase(`
+                    ⚠️ Erro ao carregar as questões do Firestore.
+                    <br><br>
+                    Verifique se a coleção <strong>questoes</strong> existe e se as regras permitem leitura.
                 `);
             });
 
@@ -929,9 +930,9 @@
         }
     }
 
-    async function salvarOnline() {
-        if (!firebaseAtivo || !docRef) {
-            alert("Firebase ainda não está conectado. Os dados não serão salvos online.");
+    async function salvarConfiguracoesOnline() {
+        if (!firebaseAtivo || !configRef) {
+            alert("Firebase ainda não está conectado. As configurações não serão salvas online.");
             return false;
         }
 
@@ -939,8 +940,7 @@
             salvandoAgora = true;
             configurarStatus("Salvando...");
 
-            await setDoc(docRef, {
-                banco: estado.banco,
+            await setDoc(configRef, {
                 temasUsuario: estado.temasUsuario,
                 temasOcultos: estado.temasOcultos,
                 especialidadesUsuario: estado.especialidadesUsuario,
@@ -956,14 +956,37 @@
             return true;
         } catch (erro) {
             salvandoAgora = false;
-
             console.error(erro);
             configurarStatus("Erro ao salvar");
 
-            alert(
-                "Não foi possível salvar online. Verifique se o Firestore está ativado, se as regras permitem escrita e se há internet."
-            );
+            alert("Não foi possível salvar online. Verifique as regras do Firestore.");
+            return false;
+        }
+    }
 
+    async function salvarQuestaoOnline(q) {
+        if (!firebaseAtivo || !db) {
+            alert("Firebase ainda não está conectado. A questão não será salva online.");
+            return false;
+        }
+
+        try {
+            configurarStatus("Salvando questão...");
+
+            const idDoc = `questao_${q.id}`;
+
+            await setDoc(doc(db, "questoes", idDoc), {
+                ...q,
+                atualizadoEm: serverTimestamp()
+            }, { merge: true });
+
+            configurarStatus("Salvo online");
+            return true;
+        } catch (erro) {
+            console.error(erro);
+            configurarStatus("Erro ao salvar questão");
+
+            alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
             return false;
         }
     }
@@ -976,7 +999,6 @@
 
     function temaExiste(lista, novoTema) {
         const novo = normalizarTexto(novoTema).toLowerCase();
-
         return lista.some(t => normalizarTexto(t).toLowerCase() === novo);
     }
 
@@ -984,7 +1006,6 @@
         const padrao = temasPadrao[especialidade] || [];
         const personalizados = estado.temasUsuario[especialidade] || [];
         const ocultos = estado.temasOcultos[especialidade] || [];
-
         const todos = [...padrao, ...personalizados];
         const unicos = [];
 
@@ -1019,8 +1040,7 @@
 
         estado.especialidadesUsuario[bloco].push(novaEspecialidade);
 
-        const salvou = await salvarOnline();
-
+        const salvou = await salvarConfiguracoesOnline();
         if (!salvou) return;
 
         input.value = "";
@@ -1113,8 +1133,7 @@
 
         estado.temasUsuario[especialidade].push(novoTema);
 
-        const salvou = await salvarOnline();
-
+        const salvou = await salvarConfiguracoesOnline();
         if (!salvou) return;
 
         input.value = "";
@@ -1161,8 +1180,7 @@
             };
         }
 
-        const salvou = await salvarOnline();
-
+        const salvou = await salvarConfiguracoesOnline();
         if (!salvou) return;
 
         mostrarTemasEspecialidade(especialidade);
@@ -1198,9 +1216,7 @@
 
     window.toggleForm = function() {
         const p = document.getElementById("panel-cadastro");
-
         p.style.display = p.style.display === "block" ? "none" : "block";
-
         atualizarSelectTemas();
     };
 
@@ -1230,9 +1246,7 @@
 
         if (file) {
             const reader = new FileReader();
-
             reader.onloadend = () => salvarQuestao(reader.result);
-
             reader.readAsDataURL(file);
         } else {
             salvarQuestao(null);
@@ -1240,34 +1254,44 @@
     });
 
     async function salvarQuestao(img) {
+        const opts = {
+            A: document.getElementById("in-a").value,
+            B: document.getElementById("in-b").value,
+            C: document.getElementById("in-c").value,
+            D: document.getElementById("in-d").value
+        };
+
+        const alternativaE = document.getElementById("in-e").value.trim();
+
+        if (alternativaE) {
+            opts.E = alternativaE;
+        }
+
         const q = {
             id: Date.now(),
             disc: document.getElementById("in-disc").value,
             tema: document.getElementById("in-tema").value,
             banca: document.getElementById("in-banca").value,
-            ano: document.getElementById("in-ano").value,
+            ano: String(document.getElementById("in-ano").value),
             enun: document.getElementById("in-enun").value,
             img: img,
-            opts: {
-                A: document.getElementById("in-a").value,
-                B: document.getElementById("in-b").value,
-                C: document.getElementById("in-c").value,
-                D: document.getElementById("in-d").value
-            },
-            correta: document.getElementById("in-correta").value
+            opts: opts,
+            correta: document.getElementById("in-correta").value,
+            criadoEm: serverTimestamp()
         };
 
-        estado.banco.unshift(q);
+        if (q.correta === "E" && !opts.E) {
+            alert("Você marcou gabarito E, mas não preencheu a alternativa E.");
+            return;
+        }
 
-        const salvou = await salvarOnline();
+        const salvou = await salvarQuestaoOnline(q);
 
         if (!salvou) return;
 
         document.getElementById("form-q").reset();
-
         atualizarSelectTemas();
         toggleForm();
-        render();
     }
 
     function render() {
@@ -1288,14 +1312,14 @@
 
             if (filtroAtual.tipo === "banca-ano") {
                 const [b, a] = filtroAtual.valor.split("|");
-                return q.banca === b && q.ano === a;
+                return q.banca === b && String(q.ano) === String(a);
             }
 
             return true;
         });
 
-        if (!carregouPrimeiraVez && firebaseAtivo) {
-            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando dados online...</p>`;
+        if (!carregouQuestoes && firebaseAtivo) {
+            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões online...</p>`;
             return;
         }
 
@@ -1305,6 +1329,9 @@
         }
 
         filtrados.forEach(q => {
+            const alternativas = q.opts || {};
+            const letras = Object.keys(alternativas).sort();
+
             lista.innerHTML += `
                 <div class="question-card">
                     <div class="q-header">
@@ -1314,7 +1341,7 @@
                             ${q.tema ? ` • ${q.tema}` : ""}
                         </span>
 
-                        <button onclick="excluirQuestao(${q.id})" style="color:red; border:none; background:none; cursor:pointer">
+                        <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
                             Remover
                         </button>
                     </div>
@@ -1324,32 +1351,16 @@
                     <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
 
                     <ul class="opt-list">
-                        <li>
-                            <label id="l-${q.id}-A">
-                                <input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}
-                            </label>
-                        </li>
-
-                        <li>
-                            <label id="l-${q.id}-B">
-                                <input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}
-                            </label>
-                        </li>
-
-                        <li>
-                            <label id="l-${q.id}-C">
-                                <input type="radio" name="r-${q.id}" value="C"> C) ${q.opts.C}
-                            </label>
-                        </li>
-
-                        <li>
-                            <label id="l-${q.id}-D">
-                                <input type="radio" name="r-${q.id}" value="D"> D) ${q.opts.D}
-                            </label>
-                        </li>
+                        ${letras.map(letra => `
+                            <li>
+                                <label id="l-${q.docId}-${letra}">
+                                    <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
+                                </label>
+                            </li>
+                        `).join("")}
                     </ul>
 
-                    <button class="btn-add" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">
+                    <button class="btn-add" id="btn-${q.docId}" onclick="corrigir('${q.docId}', '${q.correta}')">
                         Confirmar Resposta
                     </button>
                 </div>
@@ -1365,10 +1376,18 @@
             return;
         }
 
-        document.getElementById(`l-${id}-${correta}`).classList.add("correct");
+        const corretaEl = document.getElementById(`l-${id}-${correta}`);
+
+        if (corretaEl) {
+            corretaEl.classList.add("correct");
+        }
 
         if (sel.value !== correta) {
-            document.getElementById(`l-${id}-${sel.value}`).classList.add("wrong");
+            const erradaEl = document.getElementById(`l-${id}-${sel.value}`);
+
+            if (erradaEl) {
+                erradaEl.classList.add("wrong");
+            }
         }
 
         document.getElementById(`btn-${id}`).disabled = true;
@@ -1376,15 +1395,20 @@
         document.getElementById(`btn-${id}`).style.background = "#666";
     };
 
-    window.excluirQuestao = async function(id) {
+    window.excluirQuestao = async function(docId) {
+        if (!docId) {
+            alert("Não foi possível identificar esta questão no Firebase.");
+            return;
+        }
+
         if (confirm("Deseja realmente excluir esta questão?")) {
-            estado.banco = estado.banco.filter(q => q.id !== id);
-
-            const salvou = await salvarOnline();
-
-            if (!salvou) return;
-
-            render();
+            try {
+                await deleteDoc(doc(db, "questoes", docId));
+                configurarStatus("Questão removida");
+            } catch (erro) {
+                console.error(erro);
+                alert("Erro ao excluir a questão no Firebase.");
+            }
         }
     };
 </script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedIA - Banco de Questões Inteligente</title>
+
     <style>
         :root {
             --primary: #1b4332;
@@ -11,6 +12,7 @@
             --bg: #f4f7f4;
             --white: #ffffff;
             --text: #2d3436;
+            --danger: #c1121f;
         }
 
         body {
@@ -38,6 +40,13 @@
             cursor: pointer;
             margin: 0;
             font-size: 1.8rem;
+        }
+
+        .sync-status {
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.14);
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
         }
 
         main {
@@ -70,7 +79,11 @@
             width: 100%;
             cursor: pointer;
             font-weight: bold;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-add:hover {
+            opacity: 0.92;
         }
 
         details {
@@ -196,6 +209,7 @@
             font-size: 0.8rem;
             color: #666;
             margin-bottom: 1rem;
+            gap: 1rem;
         }
 
         .q-img {
@@ -324,7 +338,7 @@
             border-radius: 50%;
             border: none;
             background: #fff0f0;
-            color: #c1121f;
+            color: var(--danger);
             cursor: pointer;
             font-size: 1rem;
             display: flex;
@@ -334,7 +348,7 @@
         }
 
         .btn-lixeira-tema:hover {
-            background: #c1121f;
+            background: var(--danger);
             color: white;
             transform: scale(1.08);
         }
@@ -347,17 +361,77 @@
             border-radius: 8px;
             border: 1px solid #eee;
         }
+
+        .aviso-online {
+            font-size: 0.75rem;
+            color: #1b4332;
+            background: #edf6f0;
+            border-left: 4px solid var(--secondary);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .erro-firebase {
+            font-size: 0.8rem;
+            color: #7f1d1d;
+            background: #fff0f0;
+            border-left: 4px solid var(--danger);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                flex-direction: column;
+            }
+
+            aside {
+                position: static;
+                max-height: none;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-status {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .add-tema-box {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
 
 <header>
     <h1 onclick="filtrar('todos')">🩺 MedIA</h1>
+    <div class="sync-status" id="sync-status">Conectando...</div>
 </header>
 
 <main>
     <aside>
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
+
+        <div class="aviso-online">
+            ✅ Temas e questões serão salvos online no Firebase.
+            <br>
+            Ao abrir em outro computador, os dados serão carregados automaticamente.
+        </div>
+
+        <div class="erro-firebase" id="erro-firebase"></div>
 
         <details>
             <summary>Clínica Médica</summary>
@@ -400,18 +474,21 @@
     <section class="content-area">
         <div id="panel-cadastro" class="panel">
             <h3>Nova Questão</h3>
+
             <form id="form-q">
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Especialidade</label>
                         <select id="in-disc" required onchange="atualizarSelectTemas()"></select>
                     </div>
+
                     <div class="form-group">
                         <label>Tema</label>
                         <select id="in-tema">
                             <option value="">Sem tema específico</option>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label>Banca</label>
                         <input type="text" id="in-banca" placeholder="Ex: USP-SP" required>
@@ -423,8 +500,9 @@
                         <label>Ano</label>
                         <input type="number" id="in-ano" value="2026" required>
                     </div>
+
                     <div class="form-group">
-                        <label>Imagem (Opcional)</label>
+                        <label>Imagem Opcional</label>
                         <input type="file" id="in-img" accept="image/*">
                     </div>
                 </div>
@@ -457,7 +535,10 @@
 
         <div class="filter-status">
             <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">Ver Todas</button>
+
+            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
+                Ver Todas
+            </button>
         </div>
 
         <div id="area-topicos"></div>
@@ -466,7 +547,39 @@
     </section>
 </main>
 
-<script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+    import { 
+        getFirestore,
+        doc,
+        setDoc,
+        onSnapshot,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBRynrI-LkGCndpgPCkhexWOBuhyQUVWQE",
+        authDomain: "media-a7c06.firebaseapp.com",
+        projectId: "media-a7c06",
+        storageBucket: "media-a7c06.firebasestorage.app",
+        messagingSenderId: "732762970952",
+        appId: "1:732762970952:web:9beb402a99ed363be0b17d",
+        measurementId: "G-R9QB551FBM"
+    };
+
+    let db = null;
+    let docRef = null;
+    let firebaseAtivo = false;
+    let carregouPrimeiraVez = false;
+    let salvandoAgora = false;
+
+    const estado = {
+        banco: [],
+        temasUsuario: {},
+        temasOcultos: {}
+    };
+
     const especialidadesClinica = [
         "Cardiologia",
         "Clínica Médica Geral",
@@ -515,12 +628,24 @@
         ]
     };
 
-    let filtroAtual = { tipo: 'todos', valor: null, especialidade: null };
+    let filtroAtual = {
+        tipo: "todos",
+        valor: null,
+        especialidade: null
+    };
 
     window.onload = () => {
-        const menuClinc = document.getElementById('menu-clinica');
-        const selectDisc = document.getElementById('in-disc');
-        
+        inicializarSite();
+        conectarFirebase();
+    };
+
+    function inicializarSite() {
+        const menuClinc = document.getElementById("menu-clinica");
+        const selectDisc = document.getElementById("in-disc");
+
+        menuClinc.innerHTML = "";
+        selectDisc.innerHTML = "";
+
         especialidadesClinica.forEach(esp => {
             menuClinc.innerHTML += `
                 <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
@@ -535,49 +660,165 @@
 
         atualizarSelectTemas();
         render();
-    };
-
-    function carregarTemasUsuario() {
-        return JSON.parse(localStorage.getItem('media_temas') || '{}');
     }
 
-    function salvarTemasUsuario(temas) {
-        localStorage.setItem('media_temas', JSON.stringify(temas));
+    function configurarStatus(texto) {
+        document.getElementById("sync-status").innerText = texto;
     }
 
-    function carregarTemasOcultos() {
-        return JSON.parse(localStorage.getItem('media_temas_ocultos') || '{}');
+    function mostrarErroFirebase(texto) {
+        const box = document.getElementById("erro-firebase");
+        box.style.display = "block";
+        box.innerHTML = texto;
     }
 
-    function salvarTemasOcultos(temasOcultos) {
-        localStorage.setItem('media_temas_ocultos', JSON.stringify(temasOcultos));
+    async function conectarFirebase() {
+        try {
+            const app = initializeApp(firebaseConfig);
+
+            try {
+                getAnalytics(app);
+            } catch (e) {
+                console.warn("Analytics não iniciado neste ambiente:", e);
+            }
+
+            db = getFirestore(app);
+            docRef = doc(db, "mediaApp", "bancoPrincipal");
+
+            firebaseAtivo = true;
+
+            configurarStatus("Sincronizando...");
+
+            onSnapshot(docRef, async (snap) => {
+                if (salvandoAgora) return;
+
+                if (snap.exists()) {
+                    const dados = snap.data();
+
+                    estado.banco = Array.isArray(dados.banco) ? dados.banco : [];
+                    estado.temasUsuario = dados.temasUsuario || {};
+                    estado.temasOcultos = dados.temasOcultos || {};
+                } else {
+                    await salvarOnline();
+                }
+
+                carregouPrimeiraVez = true;
+                configurarStatus("Salvo online");
+                atualizarSelectTemas();
+
+                if (filtroAtual.tipo === "disciplina" && filtroAtual.especialidade) {
+                    mostrarTemasEspecialidade(filtroAtual.especialidade);
+                } else {
+                    render();
+                }
+            }, (erro) => {
+                console.error(erro);
+                configurarStatus("Erro ao sincronizar");
+
+                mostrarErroFirebase(`
+                    ⚠️ Erro ao conectar ao Firestore.
+                    <br><br>
+                    Verifique se:
+                    <br>
+                    1. O Cloud Firestore foi ativado no Firebase.
+                    <br>
+                    2. As regras permitem leitura e escrita.
+                    <br>
+                    3. Você publicou as regras.
+                `);
+            });
+
+        } catch (erro) {
+            console.error(erro);
+            configurarStatus("Erro no Firebase");
+
+            mostrarErroFirebase(`
+                ⚠️ Não foi possível iniciar o Firebase.
+                <br><br>
+                Verifique se o código do Firebase foi copiado corretamente.
+            `);
+        }
+    }
+
+    async function salvarOnline() {
+        if (!firebaseAtivo || !docRef) {
+            alert("Firebase ainda não está conectado. Os dados não serão salvos online.");
+            return false;
+        }
+
+        try {
+            salvandoAgora = true;
+            configurarStatus("Salvando...");
+
+            await setDoc(docRef, {
+                banco: estado.banco,
+                temasUsuario: estado.temasUsuario,
+                temasOcultos: estado.temasOcultos,
+                atualizadoEm: serverTimestamp()
+            }, { merge: true });
+
+            configurarStatus("Salvo online");
+
+            setTimeout(() => {
+                salvandoAgora = false;
+            }, 500);
+
+            return true;
+        } catch (erro) {
+            salvandoAgora = false;
+
+            console.error(erro);
+            configurarStatus("Erro ao salvar");
+
+            alert(
+                "Não foi possível salvar online. Verifique se o Firestore está ativado, se as regras permitem escrita e se há internet."
+            );
+
+            return false;
+        }
+    }
+
+    function normalizarTexto(txt) {
+        return String(txt || "")
+            .trim()
+            .replace(/\s+/g, " ");
+    }
+
+    function temaExiste(lista, novoTema) {
+        const novo = normalizarTexto(novoTema).toLowerCase();
+
+        return lista.some(t => normalizarTexto(t).toLowerCase() === novo);
     }
 
     function getTemasEspecialidade(especialidade) {
-        const temasUsuario = carregarTemasUsuario();
-        const temasOcultos = carregarTemasOcultos();
-
         const padrao = temasPadrao[especialidade] || [];
-        const personalizados = temasUsuario[especialidade] || [];
-        const ocultos = temasOcultos[especialidade] || [];
+        const personalizados = estado.temasUsuario[especialidade] || [];
+        const ocultos = estado.temasOcultos[especialidade] || [];
 
         const todos = [...padrao, ...personalizados];
+        const unicos = [];
 
-        return [...new Set(todos)].filter(tema => !ocultos.includes(tema));
+        todos.forEach(tema => {
+            if (!temaExiste(unicos, tema)) {
+                unicos.push(tema);
+            }
+        });
+
+        return unicos.filter(tema => !ocultos.includes(tema));
     }
 
-    function mostrarTemasEspecialidade(especialidade) {
+    window.mostrarTemasEspecialidade = function(especialidade) {
         filtroAtual = {
-            tipo: 'disciplina',
+            tipo: "disciplina",
             valor: especialidade,
             especialidade: especialidade
         };
 
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
-        document.getElementById('lista').innerHTML = "";
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
+        document.getElementById("lista").innerHTML = "";
 
         const temas = getTemasEspecialidade(especialidade);
-        const area = document.getElementById('area-topicos');
+        const area = document.getElementById("area-topicos");
 
         area.innerHTML = `
             <div class="topicos-card">
@@ -585,8 +826,16 @@
                 <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
 
                 <div class="add-tema-box">
-                    <input type="text" id="novo-tema-${especialidade}" placeholder="Adicionar tema. Ex: Hanseníase">
-                    <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>Adicionar tema</button>
+                    <input 
+                        type="text" 
+                        id="novo-tema-${especialidade}" 
+                        placeholder="Adicionar tema. Ex: Hanseníase"
+                        onkeydown='if(event.key === "Enter"){ adicionarTema(${JSON.stringify(especialidade)}); }'
+                    >
+
+                    <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>
+                        Adicionar tema
+                    </button>
                 </div>
 
                 ${
@@ -596,6 +845,7 @@
                             ${temas.map(tema => `
                                 <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
                                     <span class="topico-nome">${tema}</span>
+
                                     <button 
                                         class="btn-lixeira-tema" 
                                         title="Excluir tema"
@@ -603,7 +853,7 @@
                                         🗑️
                                     </button>
                                 </div>
-                            `).join('')}
+                            `).join("")}
                         </div>
                     `
                     : `
@@ -616,98 +866,103 @@
         `;
 
         render();
-    }
+    };
 
-    function adicionarTema(especialidade) {
+    window.adicionarTema = async function(especialidade) {
         const input = document.getElementById(`novo-tema-${especialidade}`);
-        const novoTema = input.value.trim();
+        const novoTema = normalizarTexto(input.value);
 
         if (!novoTema) {
             alert("Digite o nome do tema.");
             return;
         }
 
-        const temasUsuario = carregarTemasUsuario();
-
-        if (!temasUsuario[especialidade]) {
-            temasUsuario[especialidade] = [];
+        if (!estado.temasUsuario[especialidade]) {
+            estado.temasUsuario[especialidade] = [];
         }
 
         const temasAtuais = getTemasEspecialidade(especialidade);
 
-        if (temasAtuais.includes(novoTema)) {
+        if (temaExiste(temasAtuais, novoTema)) {
             alert("Este tema já existe nesta especialidade.");
             return;
         }
 
-        temasUsuario[especialidade].push(novoTema);
-        salvarTemasUsuario(temasUsuario);
+        estado.temasUsuario[especialidade].push(novoTema);
+
+        const salvou = await salvarOnline();
+
+        if (!salvou) return;
+
+        input.value = "";
 
         mostrarTemasEspecialidade(especialidade);
         atualizarSelectTemas();
-    }
+    };
 
-    function excluirTema(especialidade, tema) {
+    window.excluirTema = async function(especialidade, tema) {
         if (!confirm(`Deseja realmente excluir o tema "${tema}" de ${especialidade}?`)) {
             return;
         }
 
-        const temasUsuario = carregarTemasUsuario();
-        const temasOcultos = carregarTemasOcultos();
-
-        const personalizados = temasUsuario[especialidade] || [];
+        const personalizados = estado.temasUsuario[especialidade] || [];
         const padrao = temasPadrao[especialidade] || [];
 
         if (personalizados.includes(tema)) {
-            temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
+            estado.temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
 
-            if (temasUsuario[especialidade].length === 0) {
-                delete temasUsuario[especialidade];
+            if (estado.temasUsuario[especialidade].length === 0) {
+                delete estado.temasUsuario[especialidade];
             }
-
-            salvarTemasUsuario(temasUsuario);
         }
 
         if (padrao.includes(tema)) {
-            if (!temasOcultos[especialidade]) {
-                temasOcultos[especialidade] = [];
+            if (!estado.temasOcultos[especialidade]) {
+                estado.temasOcultos[especialidade] = [];
             }
 
-            if (!temasOcultos[especialidade].includes(tema)) {
-                temasOcultos[especialidade].push(tema);
+            if (!estado.temasOcultos[especialidade].includes(tema)) {
+                estado.temasOcultos[especialidade].push(tema);
             }
-
-            salvarTemasOcultos(temasOcultos);
         }
 
-        if (filtroAtual.tipo === 'tema' && filtroAtual.especialidade === especialidade && filtroAtual.valor === tema) {
+        if (
+            filtroAtual.tipo === "tema" &&
+            filtroAtual.especialidade === especialidade &&
+            filtroAtual.valor === tema
+        ) {
             filtroAtual = {
-                tipo: 'disciplina',
+                tipo: "disciplina",
                 valor: especialidade,
                 especialidade: especialidade
             };
         }
 
+        const salvou = await salvarOnline();
+
+        if (!salvou) return;
+
         mostrarTemasEspecialidade(especialidade);
         atualizarSelectTemas();
-    }
+    };
 
-    function filtrarTema(especialidade, tema) {
-        document.getElementById('area-topicos').innerHTML = "";
+    window.filtrarTema = function(especialidade, tema) {
+        document.getElementById("area-topicos").innerHTML = "";
 
         filtroAtual = {
-            tipo: 'tema',
+            tipo: "tema",
             valor: tema,
             especialidade: especialidade
         };
 
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
-        render();
-    }
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
 
-    function atualizarSelectTemas() {
-        const especialidade = document.getElementById('in-disc').value;
-        const selectTema = document.getElementById('in-tema');
+        render();
+    };
+
+    window.atualizarSelectTemas = function() {
+        const especialidade = document.getElementById("in-disc").value;
+        const selectTema = document.getElementById("in-tema");
 
         selectTema.innerHTML = `<option value="">Sem tema específico</option>`;
 
@@ -716,16 +971,18 @@
         temas.forEach(tema => {
             selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
         });
-    }
+    };
 
-    function toggleForm() {
-        const p = document.getElementById('panel-cadastro');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    window.toggleForm = function() {
+        const p = document.getElementById("panel-cadastro");
+
+        p.style.display = p.style.display === "block" ? "none" : "block";
+
         atualizarSelectTemas();
-    }
+    };
 
-    function filtrar(tipo, valor) {
-        document.getElementById('area-topicos').innerHTML = "";
+    window.filtrar = function(tipo, valor) {
+        document.getElementById("area-topicos").innerHTML = "";
 
         filtroAtual = {
             tipo: tipo,
@@ -733,49 +990,52 @@
             especialidade: null
         };
 
-        document.getElementById('txt-filtro').innerHTML = `Mostrando: <strong>${valor || 'Todas as Questões'}</strong>`;
-        render();
-    }
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
 
-    document.getElementById('form-q').addEventListener('submit', function(e) {
+        render();
+    };
+
+    document.getElementById("form-q").addEventListener("submit", function(e) {
         e.preventDefault();
 
-        const file = document.getElementById('in-img').files[0];
+        const file = document.getElementById("in-img").files[0];
 
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => salvar(reader.result);
+
+            reader.onloadend = () => salvarQuestao(reader.result);
+
             reader.readAsDataURL(file);
         } else {
-            salvar(null);
+            salvarQuestao(null);
         }
     });
 
-    function salvar(img) {
+    async function salvarQuestao(img) {
         const q = {
             id: Date.now(),
-            disc: document.getElementById('in-disc').value,
-            tema: document.getElementById('in-tema').value,
-            banca: document.getElementById('in-banca').value,
-            ano: document.getElementById('in-ano').value,
-            enun: document.getElementById('in-enun').value,
+            disc: document.getElementById("in-disc").value,
+            tema: document.getElementById("in-tema").value,
+            banca: document.getElementById("in-banca").value,
+            ano: document.getElementById("in-ano").value,
+            enun: document.getElementById("in-enun").value,
             img: img,
             opts: {
-                A: document.getElementById('in-a').value,
-                B: document.getElementById('in-b').value,
-                C: document.getElementById('in-c').value,
-                D: document.getElementById('in-d').value
+                A: document.getElementById("in-a").value,
+                B: document.getElementById("in-b").value,
+                C: document.getElementById("in-c").value,
+                D: document.getElementById("in-d").value
             },
-            correta: document.getElementById('in-correta').value
+            correta: document.getElementById("in-correta").value
         };
 
-        const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
+        estado.banco.unshift(q);
 
-        banco.unshift(q);
+        const salvou = await salvarOnline();
 
-        localStorage.setItem('media_db', JSON.stringify(banco));
+        if (!salvou) return;
 
-        document.getElementById('form-q').reset();
+        document.getElementById("form-q").reset();
 
         atualizarSelectTemas();
         toggleForm();
@@ -783,29 +1043,33 @@
     }
 
     function render() {
-        const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
-        const lista = document.getElementById('lista');
+        const lista = document.getElementById("lista");
 
         lista.innerHTML = "";
 
-        const filtrados = banco.filter(q => {
-            if (filtroAtual.tipo === 'todos') return true;
+        const filtrados = estado.banco.filter(q => {
+            if (filtroAtual.tipo === "todos") return true;
 
-            if (filtroAtual.tipo === 'disciplina') {
+            if (filtroAtual.tipo === "disciplina") {
                 return q.disc === filtroAtual.valor;
             }
 
-            if (filtroAtual.tipo === 'tema') {
+            if (filtroAtual.tipo === "tema") {
                 return q.disc === filtroAtual.especialidade && q.tema === filtroAtual.valor;
             }
 
-            if (filtroAtual.tipo === 'banca-ano') {
-                const [b, a] = filtroAtual.valor.split('|');
+            if (filtroAtual.tipo === "banca-ano") {
+                const [b, a] = filtroAtual.valor.split("|");
                 return q.banca === b && q.ano === a;
             }
 
             return true;
         });
+
+        if (!carregouPrimeiraVez && firebaseAtivo) {
+            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando dados online...</p>`;
+            return;
+        }
 
         if (filtrados.length === 0) {
             lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
@@ -819,51 +1083,82 @@
                         <span>
                             ${q.banca} (${q.ano}) • 
                             <strong>${q.disc}</strong>
-                            ${q.tema ? ` • ${q.tema}` : ''}
+                            ${q.tema ? ` • ${q.tema}` : ""}
                         </span>
-                        <button onclick="excluir(${q.id})" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
+
+                        <button onclick="excluirQuestao(${q.id})" style="color:red; border:none; background:none; cursor:pointer">
+                            Remover
+                        </button>
                     </div>
 
-                    ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ''}
+                    ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
 
                     <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
 
                     <ul class="opt-list">
-                        <li><label id="l-${q.id}-A"><input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}</label></li>
-                        <li><label id="l-${q.id}-B"><input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}</label></li>
-                        <li><label id="l-${q.id}-C"><input type="radio" name="r-${q.id}" value="C"> C) ${q.opts.C}</label></li>
-                        <li><label id="l-${q.id}-D"><input type="radio" name="r-${q.id}" value="D"> D) ${q.opts.D}</label></li>
+                        <li>
+                            <label id="l-${q.id}-A">
+                                <input type="radio" name="r-${q.id}" value="A"> A) ${q.opts.A}
+                            </label>
+                        </li>
+
+                        <li>
+                            <label id="l-${q.id}-B">
+                                <input type="radio" name="r-${q.id}" value="B"> B) ${q.opts.B}
+                            </label>
+                        </li>
+
+                        <li>
+                            <label id="l-${q.id}-C">
+                                <input type="radio" name="r-${q.id}" value="C"> C) ${q.opts.C}
+                            </label>
+                        </li>
+
+                        <li>
+                            <label id="l-${q.id}-D">
+                                <input type="radio" name="r-${q.id}" value="D"> D) ${q.opts.D}
+                            </label>
+                        </li>
                     </ul>
 
-                    <button class="btn-add" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">Confirmar Resposta</button>
+                    <button class="btn-add" id="btn-${q.id}" onclick="corrigir(${q.id}, '${q.correta}')">
+                        Confirmar Resposta
+                    </button>
                 </div>
             `;
         });
     }
 
-    function corrigir(id, correta) {
+    window.corrigir = function(id, correta) {
         const sel = document.querySelector(`input[name="r-${id}"]:checked`);
 
-        if (!sel) return alert("Selecione uma opção!");
+        if (!sel) {
+            alert("Selecione uma opção!");
+            return;
+        }
 
-        document.getElementById(`l-${id}-${correta}`).classList.add('correct');
+        document.getElementById(`l-${id}-${correta}`).classList.add("correct");
 
         if (sel.value !== correta) {
-            document.getElementById(`l-${id}-${sel.value}`).classList.add('wrong');
+            document.getElementById(`l-${id}-${sel.value}`).classList.add("wrong");
         }
 
         document.getElementById(`btn-${id}`).disabled = true;
         document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
         document.getElementById(`btn-${id}`).style.background = "#666";
-    }
+    };
 
-    function excluir(id) {
+    window.excluirQuestao = async function(id) {
         if (confirm("Deseja realmente excluir esta questão?")) {
-            const banco = JSON.parse(localStorage.getItem('media_db') || '[]');
-            localStorage.setItem('media_db', JSON.stringify(banco.filter(q => q.id !== id)));
+            estado.banco = estado.banco.filter(q => q.id !== id);
+
+            const salvou = await salvarOnline();
+
+            if (!salvou) return;
+
             render();
         }
-    }
+    };
 </script>
 
 </body>

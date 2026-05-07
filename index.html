@@ -551,6 +551,9 @@
         <div class="section-title-static">Provas</div>
         <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2026')">USP-SP 2026</div>
         <div class="filter-item" onclick="filtrar('banca-ano', 'USP-SP|2025')">USP-SP 2025</div>
+
+        <div class="section-title-static">Provas na íntegra</div>
+        <div id="menu-provas-integra"></div>
     </aside>
 
     <section class="content-area">
@@ -709,6 +712,28 @@
         "Medicina Preventiva": "nova-especialidade-medicina-preventiva"
     };
 
+    const instituicoesProvasIntegra = [
+        "USP-SP",
+        "USP-RP",
+        "Unicamp",
+        "Unifesp",
+        "HIAE",
+        "IAMSPE",
+        "Santa Casa (SP)",
+        "Sírio Libanês (SP)",
+        "SUS-SP",
+        "ENAMED"
+    ];
+
+    const anosProvasIntegra = [
+        2026,
+        2025,
+        2024,
+        2023,
+        2022,
+        2021
+    ];
+
     const temasPadrao = {
         "Cardiologia": [
             "Anticoagulação na Cardiologia",
@@ -742,8 +767,30 @@
     function inicializarSite() {
         renderizarMenusEspecialidades();
         renderizarSelectEspecialidades();
+        renderizarProvasIntegra();
         atualizarSelectTemas();
         render();
+    }
+
+    function renderizarProvasIntegra() {
+        const menu = document.getElementById("menu-provas-integra");
+
+        menu.innerHTML = "";
+
+        instituicoesProvasIntegra.forEach(instituicao => {
+            menu.innerHTML += `
+                <details>
+                    <summary>${instituicao}</summary>
+                    <div style="padding-top: 5px;">
+                        ${anosProvasIntegra.map(ano => `
+                            <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
+                                ${instituicao} ${ano}
+                            </div>
+                        `).join("")}
+                    </div>
+                </details>
+            `;
+        });
     }
 
     function getEspecialidadesBloco(bloco) {
@@ -849,6 +896,7 @@
                 configurarStatus("Salvo online");
                 renderizarMenusEspecialidades();
                 renderizarSelectEspecialidades();
+                renderizarProvasIntegra();
                 atualizarSelectTemas();
 
                 if (filtroAtual.tipo === "disciplina" && filtroAtual.especialidade) {
@@ -1169,7 +1217,12 @@
             especialidade: null
         };
 
-        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
+        if (tipo === "banca-ano" && valor) {
+            const [banca, ano] = valor.split("|");
+            document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${banca} ${ano}</strong>`;
+        } else {
+            document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
+        }
 
         render();
     };

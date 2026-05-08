@@ -835,12 +835,13 @@ const firebaseConfig = {
     measurementId: "G-R9QB551FBM"
 };
 
-const PROJECT_ID = firebaseConfig.projectId;
-const API_KEY = firebaseConfig.apiKey;
-const BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
-
+let db = null;
+let configRef = null;
+let questoesRef = null;
+let firebaseAtivo = false;
+let firebaseCarregado = false;
 let carregouQuestoes = true;
-let firebaseAtivo = true;
+let salvandoAgora = false;
 
 const estado = {
     banco: [],
@@ -972,7 +973,10 @@ function abrirBancoR1() {
     window.scrollTo(0, 0);
 
     filtrar("todos");
-    carregarTudoOnline();
+
+    if (!firebaseCarregado) {
+        carregarFirebaseSDK();
+    }
 }
 
 function abrirBancoRmais() {
@@ -989,214 +993,173 @@ function voltarInicio() {
     window.scrollTo(0, 0);
 }
 
-function configurarStatus(texto) {
-    document.getElementById("sync-status").innerText = texto;
-}
-
-function mostrarErroFirebase(texto) {
-    const box = document.getElementById("erro-firebase");
-    box.style.display = "block";
-    box.innerHTML = texto;
-}
-
-function limparErroFirebase() {
-    const box = document.getElementById("erro-firebase");
-    box.style.display = "none";
-    box.innerHTML = "";
-}
-
-function valorFirestoreParaJS(valor) {
-    if (!valor) return null;
-
-    if ("stringValue" in valor) return valor.stringValue;
-    if ("integerValue" in valor) return Number(valor.integerValue);
-    if ("doubleValue" in valor) return Number(valor.doubleValue);
-    if ("booleanValue" in valor) return valor.booleanValue;
-    if ("nullValue" in valor) return null;
-    if ("timestampValue" in valor) return valor.timestampValue;
-
-    if ("arrayValue" in valor) {
-        const values = valor.arrayValue.values || [];
-        return values.map(valorFirestoreParaJS);
-    }
-
-    if ("mapValue" in valor) {
-        const fields = valor.mapValue.fields || {};
-        const obj = {};
-        Object.keys(fields).forEach(function(chave) {
-            obj[chave] = valorFirestoreParaJS(fields[chave]);
-        });
-        return obj;
-    }
-
-    return null;
-}
-
-function objetoFirestoreParaJS(fields) {
-    const obj = {};
-    fields = fields || {};
-
-    Object.keys(fields).forEach(function(chave) {
-        obj[chave] = valorFirestoreParaJS(fields[chave]);
-    });
-
-    return obj;
-}
-
-function jsParaValorFirestore(valor) {
-    if (valor === null || valor === undefined) {
-        return { nullValue: null };
-    }
-
-    if (typeof valor === "string") {
-        return { stringValue: valor };
-    }
-
-    if (typeof valor === "number") {
-        if (Number.isInteger(valor)) {
-            return { integerValue: String(valor) };
-        }
-        return { doubleValue: valor };
-    }
-
-    if (typeof valor === "boolean") {
-        return { booleanValue: valor };
-    }
-
-    if (Array.isArray(valor)) {
-        return {
-            arrayValue: {
-                values: valor.map(jsParaValorFirestore)
-            }
-        };
-    }
-
-    if (valor instanceof Date) {
-        return { timestampValue: valor.toISOString() };
-    }
-
-    if (typeof valor === "object") {
-        const fields = {};
-        Object.keys(valor).forEach(function(chave) {
-            fields[chave] = jsParaValorFirestore(valor[chave]);
-        });
-
-        return {
-            mapValue: {
-                fields: fields
-            }
-        };
-    }
-
-    return { stringValue: String(valor) };
-}
-
-function jsParaFieldsFirestore(obj) {
-    const fields = {};
-
-    Object.keys(obj).forEach(function(chave) {
-        fields[chave] = jsParaValorFirestore(obj[chave]);
-    });
-
-    return fields;
-}
-
-async function carregarTudoOnline() {
-    limparErroFirebase();
-    carregouQuestoes = false;
-    configurarStatus("Carregando questões...");
-    render();
-
-    await carregarConfiguracoesOnline();
-    await carregarQuestoesOnline();
-}
-
-async function carregarConfiguracoesOnline() {
-    try {
-        const url = `${BASE_URL}/mediaApp/bancoPrincipal?key=${API_KEY}`;
-        const resp = await fetch(url);
-
-        if (!resp.ok) {
+function carregarScript(src) {
+    return new Promise(function(resolve, reject) {
+        if (document.querySelector(`script[src="${src}"]`)) {
+            resolve();
             return;
         }
 
-        const doc = await resp.json();
-        const dados = objetoFirestoreParaJS(doc.fields || {});
+        const s = document.createElement("script");
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+    });
+}
 
-        estado.temasUsuario = dados.temasUsuario || {};
-        estado.temasOcultos = dados.temasOcultos || {};
-        estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+async function carregarFirebaseSDK() {
+    firebaseCarregado = true;
+    carregouQuestoes = false;
+    configurarStatus("Conectando Firebase...");
+    render();
+
+    try {
+        await carregarScript("https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js");
+        await carregarScript("https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-compat.js");
+        await carregarScript("https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics-compat.js");
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        try {
+            firebase.analytics();
+        } catch (e) {
+            console.warn("Analytics não iniciado:", e);
+        }
+
+        db = firebase.firestore();
+
+        try {
+            db.settings({
+                experimentalForceLongPolling: true,
+                merge: true
+            });
+        } catch (e) {
+            console.warn("Settings Firestore já aplicadas:", e);
+        }
+
+        configRef = db.collection("mediaApp").doc("bancoPrincipal");
+        questoesRef = db.collection("questoes");
+        firebaseAtivo = true;
+
+        configurarStatus("Firebase conectado. Carregando dados...");
+
+        await carregarConfiguracoesSDK();
+        await carregarQuestoesSDK();
+
+        questoesRef.onSnapshot(function(snapshot) {
+            atualizarBancoComSnapshotSDK(snapshot);
+            carregouQuestoes = true;
+            configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
+            render();
+        }, function(erro) {
+            console.error(erro);
+            configurarStatus("Erro ao sincronizar questões");
+        });
+
+        configRef.onSnapshot(function(snap) {
+            if (salvandoAgora) return;
+
+            if (snap.exists) {
+                const dados = snap.data();
+                estado.temasUsuario = dados.temasUsuario || {};
+                estado.temasOcultos = dados.temasOcultos || {};
+                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+            }
+
+            renderizarMenusEspecialidades();
+            renderizarSelectEspecialidades();
+            renderizarProvasIntegra();
+            atualizarSelectTemas();
+            render();
+        }, function(erro) {
+            console.error(erro);
+            configurarStatus("Erro ao sincronizar configurações");
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        carregouQuestoes = true;
+        configurarStatus("Firebase não conectado");
+        mostrarErroFirebase(`
+            ⚠️ Não consegui conectar ao Firebase.
+            <br><br>
+            O R1 abriu, mas não foi possível carregar as questões já salvas.
+        `);
+        render();
+    }
+}
+
+async function carregarConfiguracoesSDK() {
+    try {
+        const snap = await configRef.get();
+
+        if (snap.exists) {
+            const dados = snap.data();
+            estado.temasUsuario = dados.temasUsuario || {};
+            estado.temasOcultos = dados.temasOcultos || {};
+            estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+        }
 
         renderizarMenusEspecialidades();
         renderizarSelectEspecialidades();
         renderizarProvasIntegra();
         atualizarSelectTemas();
+
     } catch (erro) {
         console.error(erro);
     }
 }
 
-async function carregarQuestoesOnline() {
+async function carregarQuestoesSDK() {
     try {
-        let todas = [];
-        let pageToken = "";
+        configurarStatus("Carregando questões salvas...");
 
-        do {
-            let url = `${BASE_URL}/questoes?pageSize=1000&key=${API_KEY}`;
+        const snapshot = await questoesRef.get();
 
-            if (pageToken) {
-                url += `&pageToken=${encodeURIComponent(pageToken)}`;
-            }
-
-            const resp = await fetch(url);
-
-            if (!resp.ok) {
-                throw new Error("Erro ao buscar coleção questoes");
-            }
-
-            const json = await resp.json();
-            todas = todas.concat(json.documents || []);
-            pageToken = json.nextPageToken || "";
-        } while (pageToken);
-
-        estado.banco = todas.map(function(documento) {
-            const dados = objetoFirestoreParaJS(documento.fields || {});
-            const docId = documento.name.split("/").pop();
-
-            return {
-                docId: docId,
-                id: dados.id || docId,
-                numero: dados.numero || null,
-                disc: dados.disc || dados.especialidade || dados.disciplina || "",
-                tema: dados.tema || "",
-                banca: dados.banca || dados.instituicao || "",
-                ano: String(dados.ano || ""),
-                enun: dados.enun || dados.enunciado || dados.pergunta || "",
-                img: dados.img || dados.imagem || null,
-                opts: dados.opts || dados.alternativas || {},
-                correta: dados.correta || dados.gabarito || ""
-            };
-        });
-
-        ordenarBanco();
+        atualizarBancoComSnapshotSDK(snapshot);
 
         carregouQuestoes = true;
-        configurarStatus(`Carregado • ${estado.banco.length} questão(ões)`);
+        configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
         render();
 
     } catch (erro) {
         console.error(erro);
         carregouQuestoes = true;
-        configurarStatus("Erro ao carregar");
-
+        configurarStatus("Erro ao carregar questões");
         mostrarErroFirebase(`
-            ⚠️ Não consegui carregar as questões da coleção <strong>questoes</strong>.
+            ⚠️ Não consegui carregar a coleção <strong>questoes</strong>.
             <br><br>
             Verifique se as regras do Firestore permitem leitura.
         `);
-
         render();
     }
+}
+
+function atualizarBancoComSnapshotSDK(snapshot) {
+    estado.banco = [];
+
+    snapshot.forEach(function(documento) {
+        const dados = documento.data();
+
+        estado.banco.push({
+            docId: documento.id,
+            id: dados.id || documento.id,
+            numero: dados.numero || null,
+            disc: dados.disc || dados.especialidade || dados.disciplina || "",
+            tema: dados.tema || "",
+            banca: dados.banca || dados.instituicao || "",
+            ano: String(dados.ano || ""),
+            enun: dados.enun || dados.enunciado || dados.pergunta || "",
+            img: dados.img || dados.imagem || null,
+            opts: dados.opts || dados.alternativas || {},
+            correta: dados.correta || dados.gabarito || ""
+        });
+    });
+
+    ordenarBanco();
 }
 
 function ordenarBanco() {
@@ -1217,6 +1180,16 @@ function ordenarBanco() {
         const idB = Number(b.id) || 0;
         return idB - idA;
     });
+}
+
+function configurarStatus(texto) {
+    document.getElementById("sync-status").innerText = texto;
+}
+
+function mostrarErroFirebase(texto) {
+    const box = document.getElementById("erro-firebase");
+    box.style.display = "block";
+    box.innerHTML = texto;
 }
 
 function renderizarProvasIntegra() {
@@ -1296,81 +1269,6 @@ function renderizarSelectEspecialidades() {
     });
 }
 
-async function salvarConfiguracoesOnline() {
-    try {
-        const url = `${BASE_URL}/mediaApp/bancoPrincipal?key=${API_KEY}`;
-
-        const corpo = {
-            fields: jsParaFieldsFirestore({
-                temasUsuario: estado.temasUsuario,
-                temasOcultos: estado.temasOcultos,
-                especialidadesUsuario: estado.especialidadesUsuario,
-                atualizadoEm: new Date()
-            })
-        };
-
-        const resp = await fetch(url, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        });
-
-        if (!resp.ok) {
-            throw new Error("Erro ao salvar configurações");
-        }
-
-        configurarStatus("Configurações salvas");
-        return true;
-
-    } catch (erro) {
-        console.error(erro);
-        configurarStatus("Erro ao salvar");
-        alert("Não foi possível salvar online. Verifique as regras do Firestore.");
-        return false;
-    }
-}
-
-async function salvarQuestaoOnline(q) {
-    try {
-        configurarStatus("Salvando questão...");
-
-        const idDoc = `questao_${q.id}`;
-        const url = `${BASE_URL}/questoes/${idDoc}?key=${API_KEY}`;
-
-        const corpo = {
-            fields: jsParaFieldsFirestore({
-                ...q,
-                atualizadoEm: new Date()
-            })
-        };
-
-        const resp = await fetch(url, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        });
-
-        if (!resp.ok) {
-            throw new Error("Erro ao salvar questão");
-        }
-
-        configurarStatus("Questão salva");
-        await carregarQuestoesOnline();
-
-        return true;
-
-    } catch (erro) {
-        console.error(erro);
-        configurarStatus("Erro ao salvar questão");
-        alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
-        return false;
-    }
-}
-
 function normalizarTexto(txt) {
     return String(txt || "").trim().replace(/\s+/g, " ");
 }
@@ -1399,6 +1297,62 @@ function getTemasEspecialidade(especialidade) {
     return unicos.filter(function(tema) {
         return !ocultos.includes(tema);
     });
+}
+
+async function salvarConfiguracoesOnline() {
+    if (!firebaseAtivo || !configRef) {
+        alert("Firebase ainda não está conectado.");
+        return false;
+    }
+
+    try {
+        salvandoAgora = true;
+
+        await configRef.set({
+            temasUsuario: estado.temasUsuario,
+            temasOcultos: estado.temasOcultos,
+            especialidadesUsuario: estado.especialidadesUsuario,
+            atualizadoEm: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        setTimeout(function() {
+            salvandoAgora = false;
+        }, 500);
+
+        return true;
+
+    } catch (erro) {
+        salvandoAgora = false;
+        console.error(erro);
+        alert("Não foi possível salvar online. Verifique as regras do Firestore.");
+        return false;
+    }
+}
+
+async function salvarQuestaoOnline(q) {
+    if (!firebaseAtivo || !db) {
+        alert("Firebase ainda não está conectado.");
+        return false;
+    }
+
+    try {
+        configurarStatus("Salvando questão...");
+
+        const idDoc = `questao_${q.id}`;
+
+        await db.collection("questoes").doc(idDoc).set({
+            ...q,
+            atualizadoEm: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        configurarStatus("Questão salva");
+        return true;
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
+        return false;
+    }
 }
 
 async function adicionarEspecialidade(bloco) {
@@ -1639,7 +1593,7 @@ async function salvarQuestao(img) {
         img: img,
         opts: opts,
         correta: document.getElementById("in-correta").value,
-        criadoEm: new Date()
+        criadoEm: firebaseAtivo ? firebase.firestore.FieldValue.serverTimestamp() : new Date()
     };
 
     if (q.correta === "E" && !opts.E) {
@@ -1828,25 +1782,19 @@ function corrigir(id, correta) {
 
 async function excluirQuestao(docId) {
     if (!docId) {
-        alert("Não foi possível identificar esta questão.");
+        alert("Não foi possível identificar esta questão no Firebase.");
+        return;
+    }
+
+    if (!firebaseAtivo || !db) {
+        alert("Firebase ainda não está conectado.");
         return;
     }
 
     if (confirm("Deseja realmente excluir esta questão?")) {
         try {
-            const url = `${BASE_URL}/questoes/${docId}?key=${API_KEY}`;
-
-            const resp = await fetch(url, {
-                method: "DELETE"
-            });
-
-            if (!resp.ok) {
-                throw new Error("Erro ao excluir questão");
-            }
-
+            await db.collection("questoes").doc(docId).delete();
             configurarStatus("Questão removida");
-            await carregarQuestoesOnline();
-
         } catch (erro) {
             console.error(erro);
             alert("Erro ao excluir a questão.");

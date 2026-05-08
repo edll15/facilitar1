@@ -674,9 +674,9 @@ textarea {
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
         <div class="aviso-online">
-            ✅ Temas, especialidades e questões serão salvos online no Firebase.
+            ✅ Para economizar leituras do Firebase, as questões só serão carregadas quando você clicar em uma especialidade, tema ou prova.
             <br>
-            As questões são lidas da coleção <strong>questoes</strong>.
+            Limite: <strong>20 questões por vez</strong>.
         </div>
 
         <div class="erro-firebase" id="erro-firebase"></div>
@@ -805,14 +805,20 @@ textarea {
         </div>
 
         <div class="filter-status">
-            <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
-                Ver Todas
+            <span id="txt-filtro">Mostrando: <strong>Selecione uma especialidade, tema ou prova</strong></span>
+            <button onclick="limparQuestoes()" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
+                Limpar
             </button>
         </div>
 
         <div id="area-topicos"></div>
         <div id="lista"></div>
+
+        <div id="area-carregar-mais" style="text-align:center; margin: 1rem 0 2rem 0; display:none;">
+            <button class="btn-add" style="max-width:260px;" onclick="carregarMaisQuestoes()">
+                Carregar mais questões
+            </button>
+        </div>
     </section>
 </main>
 
@@ -831,8 +837,8 @@ function abrirBancoR1() {
     document.getElementById("tela-r1").classList.remove("hidden");
     window.scrollTo(0, 0);
 
-    if (typeof window.filtrar === "function") {
-        window.filtrar("todos");
+    if (typeof window.limparQuestoes === "function") {
+        window.limparQuestoes();
     }
 }
 
@@ -861,7 +867,13 @@ import {
     setDoc,
     deleteDoc,
     onSnapshot,
-    serverTimestamp
+    serverTimestamp,
+    getDocs,
+    query,
+    where,
+    orderBy,
+    limit,
+    startAfter
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -874,12 +886,18 @@ const firebaseConfig = {
     measurementId: "G-R9QB551FBM"
 };
 
+const LIMITE_POR_PAGINA = 20;
+
 let db = null;
 let configRef = null;
 let questoesRef = null;
 let firebaseAtivo = false;
-let carregouQuestoes = false;
+let carregouQuestoes = true;
 let salvandoAgora = false;
+let ultimoDocumento = null;
+let consultaAtual = null;
+let carregandoQuestoes = false;
+let haMaisQuestoes = false;
 
 const estado = {
     banco: [],
@@ -970,7 +988,7 @@ const temasPadrao = {
 };
 
 let filtroAtual = {
-    tipo: "todos",
+    tipo: "vazio",
     valor: null,
     especialidade: null
 };
@@ -986,6 +1004,7 @@ function inicializarSite() {
     renderizarProvasIntegra();
     atualizarSelectTemas();
     render();
+    mostrarOuEsconderBotaoCarregarMais(false);
 
     document.getElementById("form-q").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -1002,6 +1021,303 @@ function inicializarSite() {
     });
 }
 
+async function conectarFirebase() {
+    try {
+        const app = initializeApp(firebaseConfig);
+
+        try {
+            getAnalytics(app);
+        } catch (e) {
+            console.warn("Analytics não iniciado neste ambiente:", e);
+        }
+
+        db = getFirestore(app);
+        configRef = doc(db, "mediaApp", "bancoPrincipal");
+        questoesRef = collection(db, "questoes");
+
+        firebaseAtivo = true;
+        configurarStatus("Pronto • leitura sob demanda");
+
+        onSnapshot(configRef, async (snap) => {
+            if (salvandoAgora) return;
+
+            if (snap.exists()) {
+                const dados = snap.data();
+                estado.temasUsuario = dados.temasUsuario || {};
+                estado.temasOcultos = dados.temasOcultos || {};
+                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+            } else {
+                await salvarConfiguracoesOnline();
+            }
+
+            renderizarMenusEspecialidades();
+            renderizarSelectEspecialidades();
+            renderizarProvasIntegra();
+            atualizarSelectTemas();
+            render();
+        }, (erro) => {
+            console.error(erro);
+            configurarStatus("Erro nas configurações");
+
+            mostrarErroFirebase(`
+                ⚠️ Erro ao conectar às configurações do Firestore.
+                <br><br>
+                Verifique se as regras permitem leitura e escrita.
+            `);
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        firebaseAtivo = false;
+        carregouQuestoes = true;
+        configurarStatus("Erro no Firebase");
+
+        mostrarErroFirebase(`
+            ⚠️ Não foi possível iniciar o Firebase.
+            <br><br>
+            Verifique se o código do Firebase foi copiado corretamente.
+        `);
+
+        render();
+    }
+}
+
+function montarQuestao(documento) {
+    const dados = documento.data();
+
+    return {
+        docId: documento.id,
+        id: dados.id || documento.id,
+        numero: dados.numero || null,
+        disc: dados.disc || dados.especialidade || dados.disciplina || "",
+        tema: dados.tema || "",
+        banca: dados.banca || dados.instituicao || "",
+        ano: String(dados.ano || ""),
+        enun: dados.enun || dados.enunciado || dados.pergunta || "",
+        img: dados.img || dados.imagem || null,
+        opts: dados.opts || dados.alternativas || {},
+        correta: dados.correta || dados.gabarito || ""
+    };
+}
+
+async function executarConsultaPaginada(q, resetar) {
+    try {
+        if (!firebaseAtivo || !questoesRef) {
+            alert("Firebase ainda não está conectado.");
+            return;
+        }
+
+        carregandoQuestoes = true;
+        carregouQuestoes = false;
+        configurarStatus("Carregando questões...");
+        render();
+
+        const snap = await getDocs(q);
+
+        const novasQuestoes = snap.docs.map(documento => montarQuestao(documento));
+
+        if (resetar) {
+            estado.banco = novasQuestoes;
+        } else {
+            estado.banco = [...estado.banco, ...novasQuestoes];
+        }
+
+        if (!snap.empty) {
+            ultimoDocumento = snap.docs[snap.docs.length - 1];
+        }
+
+        haMaisQuestoes = snap.size === LIMITE_POR_PAGINA;
+
+        carregandoQuestoes = false;
+        carregouQuestoes = true;
+
+        configurarStatus(`Carregado • ${estado.banco.length} questão(ões)`);
+        mostrarOuEsconderBotaoCarregarMais(haMaisQuestoes);
+        render();
+
+    } catch (erro) {
+        console.error(erro);
+
+        carregandoQuestoes = false;
+        carregouQuestoes = true;
+        configurarStatus("Erro ao carregar");
+        mostrarOuEsconderBotaoCarregarMais(false);
+
+        mostrarErroFirebase(`
+            ⚠️ Erro ao carregar questões.
+            <br><br>
+            Se o console do navegador mostrar um link para criar índice no Firestore, clique nele e crie o índice.
+            <br><br>
+            Isso pode acontecer com filtros combinando <strong>where</strong> e <strong>orderBy</strong>.
+        `);
+
+        render();
+    }
+}
+
+window.carregarQuestoesPorEspecialidade = async function(especialidade, resetar = true) {
+    if (carregandoQuestoes) return;
+
+    if (resetar) {
+        estado.banco = [];
+        ultimoDocumento = null;
+        consultaAtual = {
+            tipo: "disciplina",
+            valor: especialidade
+        };
+
+        filtroAtual = {
+            tipo: "disciplina",
+            valor: especialidade,
+            especialidade: especialidade
+        };
+
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
+    }
+
+    let q;
+
+    if (ultimoDocumento) {
+        q = query(
+            questoesRef,
+            where("disc", "==", especialidade),
+            orderBy("id", "desc"),
+            startAfter(ultimoDocumento),
+            limit(LIMITE_POR_PAGINA)
+        );
+    } else {
+        q = query(
+            questoesRef,
+            where("disc", "==", especialidade),
+            orderBy("id", "desc"),
+            limit(LIMITE_POR_PAGINA)
+        );
+    }
+
+    await executarConsultaPaginada(q, resetar);
+};
+
+window.carregarQuestoesPorTema = async function(especialidade, tema, resetar = true) {
+    if (carregandoQuestoes) return;
+
+    if (resetar) {
+        estado.banco = [];
+        ultimoDocumento = null;
+        consultaAtual = {
+            tipo: "tema",
+            especialidade: especialidade,
+            valor: tema
+        };
+
+        filtroAtual = {
+            tipo: "tema",
+            valor: tema,
+            especialidade: especialidade
+        };
+
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
+    }
+
+    let q;
+
+    if (ultimoDocumento) {
+        q = query(
+            questoesRef,
+            where("disc", "==", especialidade),
+            where("tema", "==", tema),
+            orderBy("id", "desc"),
+            startAfter(ultimoDocumento),
+            limit(LIMITE_POR_PAGINA)
+        );
+    } else {
+        q = query(
+            questoesRef,
+            where("disc", "==", especialidade),
+            where("tema", "==", tema),
+            orderBy("id", "desc"),
+            limit(LIMITE_POR_PAGINA)
+        );
+    }
+
+    await executarConsultaPaginada(q, resetar);
+};
+
+window.carregarQuestoesPorProva = async function(banca, ano, resetar = true) {
+    if (carregandoQuestoes) return;
+
+    if (resetar) {
+        estado.banco = [];
+        ultimoDocumento = null;
+        consultaAtual = {
+            tipo: "banca-ano",
+            banca: banca,
+            ano: ano
+        };
+
+        filtroAtual = {
+            tipo: "banca-ano",
+            valor: `${banca}|${ano}`,
+            especialidade: null
+        };
+
+        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${banca} ${ano}</strong>`;
+    }
+
+    let q;
+
+    if (ultimoDocumento) {
+        q = query(
+            questoesRef,
+            where("banca", "==", banca),
+            where("ano", "==", String(ano)),
+            orderBy("numero", "asc"),
+            startAfter(ultimoDocumento),
+            limit(LIMITE_POR_PAGINA)
+        );
+    } else {
+        q = query(
+            questoesRef,
+            where("banca", "==", banca),
+            where("ano", "==", String(ano)),
+            orderBy("numero", "asc"),
+            limit(LIMITE_POR_PAGINA)
+        );
+    }
+
+    await executarConsultaPaginada(q, resetar);
+};
+
+window.carregarMaisQuestoes = async function() {
+    if (!consultaAtual || carregandoQuestoes || !haMaisQuestoes) return;
+
+    if (consultaAtual.tipo === "disciplina") {
+        await carregarQuestoesPorEspecialidade(consultaAtual.valor, false);
+    }
+
+    if (consultaAtual.tipo === "tema") {
+        await carregarQuestoesPorTema(
+            consultaAtual.especialidade,
+            consultaAtual.valor,
+            false
+        );
+    }
+
+    if (consultaAtual.tipo === "banca-ano") {
+        await carregarQuestoesPorProva(
+            consultaAtual.banca,
+            consultaAtual.ano,
+            false
+        );
+    }
+};
+
+function mostrarOuEsconderBotaoCarregarMais(mostrar) {
+    const area = document.getElementById("area-carregar-mais");
+    if (!area) return;
+
+    area.style.display = mostrar ? "block" : "none";
+}
+
 function renderizarProvasIntegra() {
     const menu = document.getElementById("menu-provas-integra");
     menu.innerHTML = "";
@@ -1012,7 +1328,7 @@ function renderizarProvasIntegra() {
                 <summary>${instituicao}</summary>
                 <div style="padding-top: 5px;">
                     ${anosProvasIntegra.map(ano => `
-                        <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
+                        <div class="filter-item" onclick="carregarQuestoesPorProva('${instituicao}', '${ano}')">
                             ${instituicao} ${ano}
                         </div>
                     `).join("")}
@@ -1093,121 +1409,6 @@ function esconderErroFirebase() {
     box.innerHTML = "";
 }
 
-async function conectarFirebase() {
-    try {
-        const app = initializeApp(firebaseConfig);
-
-        try {
-            getAnalytics(app);
-        } catch (e) {
-            console.warn("Analytics não iniciado neste ambiente:", e);
-        }
-
-        db = getFirestore(app);
-        configRef = doc(db, "mediaApp", "bancoPrincipal");
-        questoesRef = collection(db, "questoes");
-
-        firebaseAtivo = true;
-        configurarStatus("Sincronizando...");
-
-        onSnapshot(configRef, async (snap) => {
-            if (salvandoAgora) return;
-
-            if (snap.exists()) {
-                const dados = snap.data();
-                estado.temasUsuario = dados.temasUsuario || {};
-                estado.temasOcultos = dados.temasOcultos || {};
-                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
-            } else {
-                await salvarConfiguracoesOnline();
-            }
-
-            renderizarMenusEspecialidades();
-            renderizarSelectEspecialidades();
-            renderizarProvasIntegra();
-            atualizarSelectTemas();
-            render();
-        }, (erro) => {
-            console.error(erro);
-            configurarStatus("Erro nas configurações");
-
-            mostrarErroFirebase(`
-                ⚠️ Erro ao conectar às configurações do Firestore.
-                <br><br>
-                Verifique se as regras permitem leitura e escrita.
-            `);
-        });
-
-        onSnapshot(questoesRef, (snap) => {
-            estado.banco = snap.docs.map(documento => {
-                const dados = documento.data();
-
-                return {
-                    docId: documento.id,
-                    id: dados.id || documento.id,
-                    numero: dados.numero || null,
-                    disc: dados.disc || dados.especialidade || dados.disciplina || "",
-                    tema: dados.tema || "",
-                    banca: dados.banca || dados.instituicao || "",
-                    ano: String(dados.ano || ""),
-                    enun: dados.enun || dados.enunciado || dados.pergunta || "",
-                    img: dados.img || dados.imagem || null,
-                    opts: dados.opts || dados.alternativas || {},
-                    correta: dados.correta || dados.gabarito || ""
-                };
-            });
-
-            estado.banco.sort((a, b) => {
-                const aEhProva = a.disc === "Prova na íntegra";
-                const bEhProva = b.disc === "Prova na íntegra";
-
-                if (aEhProva && bEhProva) {
-                    const numeroA = Number(a.numero) || 0;
-                    const numeroB = Number(b.numero) || 0;
-
-                    if (numeroA !== numeroB) {
-                        return numeroA - numeroB;
-                    }
-                }
-
-                const idA = Number(a.id) || 0;
-                const idB = Number(b.id) || 0;
-                return idB - idA;
-            });
-
-            carregouQuestoes = true;
-            esconderErroFirebase();
-            configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
-            render();
-        }, (erro) => {
-            console.error(erro);
-            carregouQuestoes = true;
-            configurarStatus("Erro ao carregar questões");
-
-            mostrarErroFirebase(`
-                ⚠️ Erro ao carregar as questões do Firestore.
-                <br><br>
-                Verifique se a coleção se chama exatamente <strong>questoes</strong> e se as regras permitem leitura.
-            `);
-
-            render();
-        });
-
-    } catch (erro) {
-        console.error(erro);
-        carregouQuestoes = true;
-        configurarStatus("Erro no Firebase");
-
-        mostrarErroFirebase(`
-            ⚠️ Não foi possível iniciar o Firebase.
-            <br><br>
-            Verifique se o código do Firebase foi copiado corretamente.
-        `);
-
-        render();
-    }
-}
-
 async function salvarConfiguracoesOnline() {
     if (!firebaseAtivo || !configRef) {
         alert("Firebase ainda não está conectado. As configurações não serão salvas online.");
@@ -1259,6 +1460,21 @@ async function salvarQuestaoOnline(q) {
         }, { merge: true });
 
         configurarStatus("Salvo online");
+
+        if (consultaAtual) {
+            if (consultaAtual.tipo === "disciplina" && q.disc === consultaAtual.valor) {
+                limparERecarregarConsultaAtual();
+            }
+
+            if (consultaAtual.tipo === "tema" && q.disc === consultaAtual.especialidade && q.tema === consultaAtual.valor) {
+                limparERecarregarConsultaAtual();
+            }
+
+            if (consultaAtual.tipo === "banca-ano" && q.banca === consultaAtual.banca && String(q.ano) === String(consultaAtual.ano)) {
+                limparERecarregarConsultaAtual();
+            }
+        }
+
         return true;
     } catch (erro) {
         console.error(erro);
@@ -1266,6 +1482,27 @@ async function salvarQuestaoOnline(q) {
 
         alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
         return false;
+    }
+}
+
+async function limparERecarregarConsultaAtual() {
+    if (!consultaAtual) return;
+
+    const atual = {...consultaAtual};
+
+    estado.banco = [];
+    ultimoDocumento = null;
+
+    if (atual.tipo === "disciplina") {
+        await carregarQuestoesPorEspecialidade(atual.valor, true);
+    }
+
+    if (atual.tipo === "tema") {
+        await carregarQuestoesPorTema(atual.especialidade, atual.valor, true);
+    }
+
+    if (atual.tipo === "banca-ano") {
+        await carregarQuestoesPorProva(atual.banca, atual.ano, true);
     }
 }
 
@@ -1344,7 +1581,7 @@ window.mostrarTemasEspecialidade = function(especialidade) {
     area.innerHTML = `
         <div class="topicos-card">
             <h2>${especialidade}</h2>
-            <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
+            <p>Questões desta especialidade serão carregadas em lotes de ${LIMITE_POR_PAGINA}. Escolha um tema abaixo para filtrar melhor.</p>
 
             <div class="add-tema-box">
                 <input 
@@ -1386,7 +1623,7 @@ window.mostrarTemasEspecialidade = function(especialidade) {
         </div>
     `;
 
-    render();
+    carregarQuestoesPorEspecialidade(especialidade);
 };
 
 window.adicionarTema = async function(especialidade) {
@@ -1468,15 +1705,7 @@ window.excluirTema = async function(especialidade, tema) {
 window.filtrarTema = function(especialidade, tema) {
     document.getElementById("area-topicos").innerHTML = "";
 
-    filtroAtual = {
-        tipo: "tema",
-        valor: tema,
-        especialidade: especialidade
-    };
-
-    document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
-
-    render();
+    carregarQuestoesPorTema(especialidade, tema);
 };
 
 window.atualizarSelectTemas = function() {
@@ -1498,22 +1727,23 @@ window.toggleForm = function() {
     atualizarSelectTemas();
 };
 
-window.filtrar = function(tipo, valor) {
-    document.getElementById("area-topicos").innerHTML = "";
+window.limparQuestoes = function() {
+    estado.banco = [];
+    ultimoDocumento = null;
+    consultaAtual = null;
+    haMaisQuestoes = false;
+    carregouQuestoes = true;
 
     filtroAtual = {
-        tipo: tipo,
-        valor: valor,
+        tipo: "vazio",
+        valor: null,
         especialidade: null
     };
 
-    if (tipo === "banca-ano" && valor) {
-        const [banca, ano] = valor.split("|");
-        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${banca} ${ano}</strong>`;
-    } else {
-        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
-    }
+    document.getElementById("area-topicos").innerHTML = "";
+    document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>Selecione uma especialidade, tema ou prova</strong>`;
 
+    mostrarOuEsconderBotaoCarregarMais(false);
     render();
 };
 
@@ -1564,54 +1794,26 @@ function render() {
 
     lista.innerHTML = "";
 
-    const filtrados = estado.banco.filter(q => {
-        if (filtroAtual.tipo === "todos") return true;
-
-        if (filtroAtual.tipo === "disciplina") {
-            return q.disc === filtroAtual.valor;
-        }
-
-        if (filtroAtual.tipo === "tema") {
-            return q.disc === filtroAtual.especialidade && q.tema === filtroAtual.valor;
-        }
-
-        if (filtroAtual.tipo === "banca-ano") {
-            const [b, a] = filtroAtual.valor.split("|");
-            return q.banca === b && String(q.ano) === String(a);
-        }
-
-        return true;
-    });
-
-    filtrados.sort((a, b) => {
-        const aEhProva = a.disc === "Prova na íntegra";
-        const bEhProva = b.disc === "Prova na íntegra";
-
-        if (aEhProva && bEhProva) {
-            const numeroA = Number(a.numero) || 0;
-            const numeroB = Number(b.numero) || 0;
-
-            if (numeroA !== numeroB) {
-                return numeroA - numeroB;
-            }
-        }
-
-        const idA = Number(a.id) || 0;
-        const idB = Number(b.id) || 0;
-        return idB - idA;
-    });
-
-    if (!carregouQuestoes && firebaseAtivo) {
-        lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões online...</p>`;
+    if (filtroAtual.tipo === "vazio") {
+        lista.innerHTML = `
+            <p style="text-align:center; padding:2rem; color:#666">
+                Selecione uma especialidade, tema ou prova para carregar as questões.
+            </p>
+        `;
         return;
     }
 
-    if (filtrados.length === 0) {
+    if (!carregouQuestoes) {
+        lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões...</p>`;
+        return;
+    }
+
+    if (estado.banco.length === 0) {
         lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
         return;
     }
 
-    filtrados.forEach(q => {
+    estado.banco.forEach(q => {
         const alternativas = q.opts || {};
         const letras = Object.keys(alternativas).sort();
 
@@ -1734,6 +1936,10 @@ window.excluirQuestao = async function(docId) {
         try {
             await deleteDoc(doc(db, "questoes", docId));
             configurarStatus("Questão removida");
+
+            estado.banco = estado.banco.filter(q => q.docId !== docId);
+            render();
+
         } catch (erro) {
             console.error(erro);
             alert("Erro ao excluir a questão no Firebase.");

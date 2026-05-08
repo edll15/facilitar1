@@ -638,7 +638,7 @@ textarea {
 
 <header>
     <h1 onclick="voltarInicio()">🩺 MedIA</h1>
-    <div class="sync-status" id="sync-status">Conectando...</div>
+    <div class="sync-status" id="sync-status">Iniciando...</div>
 </header>
 
 <section id="tela-inicial" class="home-screen">
@@ -882,6 +882,7 @@ let firebaseAtivo = false;
 let carregouQuestoes = false;
 let carregouConfig = false;
 let salvandoAgora = false;
+let timeoutFirebase = null;
 
 const estado = {
     banco: [],
@@ -984,10 +985,10 @@ let filtroAtual = {
     especialidade: null
 };
 
-window.onload = () => {
+window.addEventListener("DOMContentLoaded", () => {
     inicializarSite();
     conectarFirebase();
-};
+});
 
 function inicializarSite() {
     renderizarMenusEspecialidades();
@@ -995,6 +996,21 @@ function inicializarSite() {
     renderizarProvasIntegra();
     atualizarSelectTemas();
     render();
+
+    const form = document.getElementById("form-q");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const file = document.getElementById("in-img").files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => salvarQuestao(reader.result);
+            reader.readAsDataURL(file);
+        } else {
+            salvarQuestao(null);
+        }
+    });
 }
 
 function renderizarProvasIntegra() {
@@ -1084,12 +1100,13 @@ function mostrarErroFirebase(texto) {
 
 async function conectarFirebase() {
     try {
+        configurarStatus("Conectando...");
         const app = initializeApp(firebaseConfig);
 
         try {
             getAnalytics(app);
         } catch (e) {
-            console.warn("Analytics não iniciado neste ambiente:", e);
+            console.warn("Analytics não iniciado:", e);
         }
 
         db = getFirestore(app);
@@ -1097,7 +1114,15 @@ async function conectarFirebase() {
         questoesRef = collection(db, "questoes");
 
         firebaseAtivo = true;
-        configurarStatus("Sincronizando...");
+        configurarStatus("Conectado • carregando dados...");
+
+        timeoutFirebase = setTimeout(() => {
+            if (!carregouQuestoes) {
+                carregouQuestoes = true;
+                configurarStatus("Conectado • aguardando questões");
+                render();
+            }
+        }, 5000);
 
         onSnapshot(configRef, async (snap) => {
             if (salvandoAgora) return;
@@ -1108,7 +1133,10 @@ async function conectarFirebase() {
                 estado.temasOcultos = dados.temasOcultos || {};
                 estado.especialidadesUsuario = dados.especialidadesUsuario || {};
             } else {
-                await salvarConfiguracoesOnline();
+                estado.temasUsuario = {};
+                estado.temasOcultos = {};
+                estado.especialidadesUsuario = {};
+                salvarConfiguracoesOnline();
             }
 
             carregouConfig = true;
@@ -1118,9 +1146,14 @@ async function conectarFirebase() {
             renderizarProvasIntegra();
             atualizarSelectTemas();
             render();
+
+            if (!carregouQuestoes) {
+                configurarStatus("Configurações carregadas • buscando questões...");
+            }
         }, (erro) => {
             console.error(erro);
-            configurarStatus("Erro ao sincronizar configurações");
+            carregouConfig = true;
+            configurarStatus("Erro nas configurações");
 
             mostrarErroFirebase(`
                 ⚠️ Erro ao conectar às configurações do Firestore.
@@ -1130,6 +1163,11 @@ async function conectarFirebase() {
         });
 
         onSnapshot(questoesRef, (snap) => {
+            if (timeoutFirebase) {
+                clearTimeout(timeoutFirebase);
+                timeoutFirebase = null;
+            }
+
             estado.banco = snap.docs.map(documento => {
                 const dados = documento.data();
 
@@ -1171,7 +1209,15 @@ async function conectarFirebase() {
             render();
         }, (erro) => {
             console.error(erro);
+
+            if (timeoutFirebase) {
+                clearTimeout(timeoutFirebase);
+                timeoutFirebase = null;
+            }
+
+            carregouQuestoes = true;
             configurarStatus("Erro ao carregar questões");
+            render();
 
             mostrarErroFirebase(`
                 ⚠️ Erro ao carregar as questões do Firestore.
@@ -1182,7 +1228,16 @@ async function conectarFirebase() {
 
     } catch (erro) {
         console.error(erro);
-        configurarStatus("Erro no Firebase");
+
+        if (timeoutFirebase) {
+            clearTimeout(timeoutFirebase);
+            timeoutFirebase = null;
+        }
+
+        firebaseAtivo = false;
+        carregouQuestoes = true;
+        configurarStatus("Firebase não conectado");
+        render();
 
         mostrarErroFirebase(`
             ⚠️ Não foi possível iniciar o Firebase.
@@ -1200,7 +1255,6 @@ async function salvarConfiguracoesOnline() {
 
     try {
         salvandoAgora = true;
-        configurarStatus("Salvando...");
 
         await setDoc(configRef, {
             temasUsuario: estado.temasUsuario,
@@ -1208,8 +1262,6 @@ async function salvarConfiguracoesOnline() {
             especialidadesUsuario: estado.especialidadesUsuario,
             atualizadoEm: serverTimestamp()
         }, { merge: true });
-
-        configurarStatus("Salvo online");
 
         setTimeout(() => {
             salvandoAgora = false;
@@ -1219,7 +1271,7 @@ async function salvarConfiguracoesOnline() {
     } catch (erro) {
         salvandoAgora = false;
         console.error(erro);
-        configurarStatus("Erro ao salvar");
+        configurarStatus("Erro ao salvar configurações");
 
         alert("Não foi possível salvar online. Verifique as regras do Firestore.");
         return false;
@@ -1500,20 +1552,6 @@ window.filtrar = function(tipo, valor) {
 
     render();
 };
-
-document.getElementById("form-q").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const file = document.getElementById("in-img").files[0];
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => salvarQuestao(reader.result);
-        reader.readAsDataURL(file);
-    } else {
-        salvarQuestao(null);
-    }
-});
 
 async function salvarQuestao(img) {
     const opts = {

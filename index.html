@@ -869,7 +869,8 @@ import {
     setDoc,
     deleteDoc,
     onSnapshot,
-    serverTimestamp
+    serverTimestamp,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -887,7 +888,6 @@ let configRef = null;
 let questoesRef = null;
 let firebaseAtivo = false;
 let carregouQuestoes = false;
-let carregouConfig = false;
 let salvandoAgora = false;
 
 const estado = {
@@ -984,10 +984,10 @@ let filtroAtual = {
     especialidade: null
 };
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
     inicializarSite();
     conectarFirebase();
-};
+});
 
 function inicializarSite() {
     renderizarMenusEspecialidades();
@@ -1009,6 +1009,145 @@ function inicializarSite() {
             salvarQuestao(null);
         }
     });
+}
+
+function normalizarQuestao(documento) {
+    const dados = documento.data();
+
+    return {
+        docId: documento.id,
+        id: dados.id || documento.id,
+        numero: dados.numero || null,
+        disc: dados.disc || dados.especialidade || dados.disciplina || "",
+        tema: dados.tema || "",
+        banca: dados.banca || dados.instituicao || "",
+        ano: String(dados.ano || ""),
+        enun: dados.enun || dados.enunciado || dados.pergunta || "",
+        img: dados.img || dados.imagem || null,
+        opts: dados.opts || dados.alternativas || {},
+        correta: dados.correta || dados.gabarito || ""
+    };
+}
+
+function ordenarBanco() {
+    estado.banco.sort((a, b) => {
+        const aEhProva = a.disc === "Prova na íntegra";
+        const bEhProva = b.disc === "Prova na íntegra";
+
+        if (aEhProva && bEhProva) {
+            const numeroA = Number(a.numero) || 0;
+            const numeroB = Number(b.numero) || 0;
+
+            if (numeroA !== numeroB) {
+                return numeroA - numeroB;
+            }
+        }
+
+        const idA = Number(a.id) || 0;
+        const idB = Number(b.id) || 0;
+        return idB - idA;
+    });
+}
+
+async function carregarQuestoesUmaVez() {
+    try {
+        configurarStatus("Carregando questões...");
+
+        const snap = await getDocs(questoesRef);
+
+        estado.banco = snap.docs.map(documento => normalizarQuestao(documento));
+        ordenarBanco();
+
+        carregouQuestoes = true;
+        configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
+        render();
+    } catch (erro) {
+        console.error(erro);
+        carregouQuestoes = true;
+        configurarStatus("Erro ao carregar questões");
+
+        mostrarErroFirebase(`
+            ⚠️ Erro na leitura inicial das questões.
+            <br><br>
+            Verifique se a coleção <strong>questoes</strong> existe e se as regras permitem leitura.
+        `);
+
+        render();
+    }
+}
+
+async function conectarFirebase() {
+    try {
+        const app = initializeApp(firebaseConfig);
+
+        try {
+            getAnalytics(app);
+        } catch (e) {
+            console.warn("Analytics não iniciado neste ambiente:", e);
+        }
+
+        db = getFirestore(app);
+        configRef = doc(db, "mediaApp", "bancoPrincipal");
+        questoesRef = collection(db, "questoes");
+
+        firebaseAtivo = true;
+        configurarStatus("Conectado ao Firebase");
+
+        onSnapshot(configRef, async (snap) => {
+            if (salvandoAgora) return;
+
+            if (snap.exists()) {
+                const dados = snap.data();
+                estado.temasUsuario = dados.temasUsuario || {};
+                estado.temasOcultos = dados.temasOcultos || {};
+                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+            } else {
+                await salvarConfiguracoesOnline();
+            }
+
+            renderizarMenusEspecialidades();
+            renderizarSelectEspecialidades();
+            renderizarProvasIntegra();
+            atualizarSelectTemas();
+            render();
+        }, (erro) => {
+            console.error(erro);
+            configurarStatus("Erro ao sincronizar configurações");
+
+            mostrarErroFirebase(`
+                ⚠️ Erro ao conectar às configurações do Firestore.
+                <br><br>
+                Verifique se as regras permitem leitura e escrita.
+            `);
+        });
+
+        await carregarQuestoesUmaVez();
+
+        onSnapshot(questoesRef, (snap) => {
+            estado.banco = snap.docs.map(documento => normalizarQuestao(documento));
+            ordenarBanco();
+
+            carregouQuestoes = true;
+            configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
+            render();
+        }, (erro) => {
+            console.error(erro);
+            configurarStatus("Erro ao sincronizar questões");
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        carregouQuestoes = true;
+        configurarStatus("Erro no Firebase");
+
+        mostrarErroFirebase(`
+            ⚠️ Não foi possível iniciar o Firebase.
+            <br><br>
+            Verifique se o código do Firebase foi copiado corretamente.
+        `);
+
+        render();
+    }
 }
 
 function renderizarProvasIntegra() {
@@ -1094,116 +1233,6 @@ function mostrarErroFirebase(texto) {
     const box = document.getElementById("erro-firebase");
     box.style.display = "block";
     box.innerHTML = texto;
-}
-
-async function conectarFirebase() {
-    try {
-        const app = initializeApp(firebaseConfig);
-
-        try {
-            getAnalytics(app);
-        } catch (e) {
-            console.warn("Analytics não iniciado neste ambiente:", e);
-        }
-
-        db = getFirestore(app);
-        configRef = doc(db, "mediaApp", "bancoPrincipal");
-        questoesRef = collection(db, "questoes");
-
-        firebaseAtivo = true;
-        configurarStatus("Sincronizando...");
-
-        onSnapshot(configRef, async (snap) => {
-            if (salvandoAgora) return;
-
-            if (snap.exists()) {
-                const dados = snap.data();
-                estado.temasUsuario = dados.temasUsuario || {};
-                estado.temasOcultos = dados.temasOcultos || {};
-                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
-            } else {
-                await salvarConfiguracoesOnline();
-            }
-
-            carregouConfig = true;
-
-            renderizarMenusEspecialidades();
-            renderizarSelectEspecialidades();
-            renderizarProvasIntegra();
-            atualizarSelectTemas();
-            render();
-        }, (erro) => {
-            console.error(erro);
-            configurarStatus("Erro ao sincronizar configurações");
-
-            mostrarErroFirebase(`
-                ⚠️ Erro ao conectar às configurações do Firestore.
-                <br><br>
-                Verifique se as regras permitem leitura e escrita.
-            `);
-        });
-
-        onSnapshot(questoesRef, (snap) => {
-            estado.banco = snap.docs.map(documento => {
-                const dados = documento.data();
-
-                return {
-                    docId: documento.id,
-                    id: dados.id || documento.id,
-                    numero: dados.numero || null,
-                    disc: dados.disc || "",
-                    tema: dados.tema || "",
-                    banca: dados.banca || "",
-                    ano: String(dados.ano || ""),
-                    enun: dados.enun || "",
-                    img: dados.img || null,
-                    opts: dados.opts || {},
-                    correta: dados.correta || ""
-                };
-            });
-
-            estado.banco.sort((a, b) => {
-                const aEhProva = a.disc === "Prova na íntegra";
-                const bEhProva = b.disc === "Prova na íntegra";
-
-                if (aEhProva && bEhProva) {
-                    const numeroA = Number(a.numero) || 0;
-                    const numeroB = Number(b.numero) || 0;
-
-                    if (numeroA !== numeroB) {
-                        return numeroA - numeroB;
-                    }
-                }
-
-                const idA = Number(a.id) || 0;
-                const idB = Number(b.id) || 0;
-                return idB - idA;
-            });
-
-            carregouQuestoes = true;
-            configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
-            render();
-        }, (erro) => {
-            console.error(erro);
-            configurarStatus("Erro ao carregar questões");
-
-            mostrarErroFirebase(`
-                ⚠️ Erro ao carregar as questões do Firestore.
-                <br><br>
-                Verifique se a coleção <strong>questoes</strong> existe e se as regras permitem leitura.
-            `);
-        });
-
-    } catch (erro) {
-        console.error(erro);
-        configurarStatus("Erro no Firebase");
-
-        mostrarErroFirebase(`
-            ⚠️ Não foi possível iniciar o Firebase.
-            <br><br>
-            Verifique se o código do Firebase foi copiado corretamente.
-        `);
-    }
 }
 
 async function salvarConfiguracoesOnline() {

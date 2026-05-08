@@ -118,7 +118,6 @@ header h1 {
     transition: 0.25s;
     position: relative;
     overflow: hidden;
-    width: 100%;
     min-height: 230px;
 }
 
@@ -645,7 +644,7 @@ textarea {
 <body>
 
 <header>
-    <h1 id="btn-home">🩺 MedIA</h1>
+    <h1 onclick="voltarInicio()">🩺 MedIA</h1>
     <div class="sync-status" id="sync-status">Pronto</div>
 </header>
 
@@ -661,14 +660,14 @@ textarea {
         </p>
 
         <div class="home-cards">
-            <div class="home-card" id="card-r1">
+            <div class="home-card" onclick="abrirBancoR1()">
                 <div class="home-icon">🎯</div>
                 <h3>Questões Acesso Direto (R1)</h3>
                 <p>Especialidades, temas, provas na íntegra, cadastro e resolução das questões atuais.</p>
                 <div class="home-action">Entrar no R1 →</div>
             </div>
 
-            <div class="home-card" id="card-rmais">
+            <div class="home-card" onclick="abrirBancoRmais()">
                 <div class="home-icon">🚀</div>
                 <h3>Questões R+</h3>
                 <p>Área separada para futuramente organizar questões de residência avançada.</p>
@@ -680,7 +679,7 @@ textarea {
 
 <main id="tela-r1" class="app-main hidden">
     <aside>
-        <button class="btn-add" id="btn-toggle-form">➕ CADASTRAR QUESTÃO</button>
+        <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
         <div class="aviso-online">
             ✅ Temas, especialidades e questões serão salvos online no Firebase.
@@ -694,8 +693,8 @@ textarea {
             <summary>Clínica Médica</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-clinica-medica" placeholder="Adicionar especialidade">
-                    <button class="btn-especialidade" data-bloco="Clínica Médica">Adicionar</button>
+                    <input type="text" id="nova-especialidade-clinica-medica" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Clínica Médica"); }'>
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Clínica Médica")'>Adicionar</button>
                 </div>
                 <div id="menu-clinica"></div>
             </div>
@@ -705,8 +704,8 @@ textarea {
             <summary>Cirurgia Geral</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-cirurgia-geral" placeholder="Adicionar especialidade">
-                    <button class="btn-especialidade" data-bloco="Cirurgia Geral">Adicionar</button>
+                    <input type="text" id="nova-especialidade-cirurgia-geral" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Cirurgia Geral"); }'>
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Cirurgia Geral")'>Adicionar</button>
                 </div>
                 <div id="menu-cirurgia-geral"></div>
             </div>
@@ -716,8 +715,8 @@ textarea {
             <summary>Ginecologia e Obstetrícia</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-ginecologia-e-obstetricia" placeholder="Adicionar especialidade">
-                    <button class="btn-especialidade" data-bloco="Ginecologia e Obstetrícia">Adicionar</button>
+                    <input type="text" id="nova-especialidade-ginecologia-e-obstetricia" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Ginecologia e Obstetrícia"); }'>
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Ginecologia e Obstetrícia")'>Adicionar</button>
                 </div>
                 <div id="menu-ginecologia-e-obstetricia"></div>
             </div>
@@ -727,8 +726,8 @@ textarea {
             <summary>Pediatria</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-pediatria" placeholder="Adicionar especialidade">
-                    <button class="btn-especialidade" data-bloco="Pediatria">Adicionar</button>
+                    <input type="text" id="nova-especialidade-pediatria" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Pediatria"); }'>
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Pediatria")'>Adicionar</button>
                 </div>
                 <div id="menu-pediatria"></div>
             </div>
@@ -738,8 +737,8 @@ textarea {
             <summary>Medicina Preventiva</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-medicina-preventiva" placeholder="Adicionar especialidade">
-                    <button class="btn-especialidade" data-bloco="Medicina Preventiva">Adicionar</button>
+                    <input type="text" id="nova-especialidade-medicina-preventiva" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Medicina Preventiva"); }'>
+                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Medicina Preventiva")'>Adicionar</button>
                 </div>
                 <div id="menu-medicina-preventiva"></div>
             </div>
@@ -757,7 +756,7 @@ textarea {
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Especialidade</label>
-                        <select id="in-disc" required></select>
+                        <select id="in-disc" required onchange="atualizarSelectTemas()"></select>
                     </div>
 
                     <div class="form-group">
@@ -815,7 +814,7 @@ textarea {
 
         <div class="filter-status">
             <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-            <button id="btn-ver-todas" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
+            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
                 Ver Todas
             </button>
         </div>
@@ -829,22 +828,25 @@ textarea {
     <div class="rmais-card">
         <h2>Questões R+</h2>
         <p>Esta área já está criada, mas ainda está vazia. Depois podemos montar aqui um banco separado para R+.</p>
-        <button class="btn-voltar" id="btn-voltar-rmais">Voltar para a tela inicial</button>
+        <button class="btn-voltar" onclick="voltarInicio()">Voltar para a tela inicial</button>
     </div>
 </section>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
-import { 
-    getFirestore,
-    collection,
-    doc,
-    setDoc,
-    deleteDoc,
-    onSnapshot,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+<script>
+let db = null;
+let configRef = null;
+let questoesRef = null;
+
+let firebaseAtivo = false;
+let firebaseIniciado = false;
+let carregouQuestoes = true;
+let salvandoAgora = false;
+
+let firebaseDoc = null;
+let firebaseSetDoc = null;
+let firebaseDeleteDoc = null;
+let firebaseOnSnapshot = null;
+let firebaseServerTimestamp = null;
 
 const firebaseConfig = {
     apiKey: "AIzaSyBRynrI-LkGCndpgPCkhexWOBuhyQUVWQE",
@@ -855,15 +857,6 @@ const firebaseConfig = {
     appId: "1:732762970952:web:9beb402a99ed363be0b17d",
     measurementId: "G-R9QB551FBM"
 };
-
-let db = null;
-let configRef = null;
-let questoesRef = null;
-let firebaseAtivo = false;
-let firebaseIniciado = false;
-let carregouQuestoes = false;
-let salvandoAgora = false;
-let timeoutFirebase = null;
 
 const estado = {
     banco: [],
@@ -932,14 +925,7 @@ const instituicoesProvasIntegra = [
     "ENAMED"
 ];
 
-const anosProvasIntegra = [
-    2026,
-    2025,
-    2024,
-    2023,
-    2022,
-    2021
-];
+const anosProvasIntegra = [2026, 2025, 2024, 2023, 2022, 2021];
 
 const temasPadrao = {
     "Cardiologia": [
@@ -966,32 +952,17 @@ let filtroAtual = {
     especialidade: null
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    inicializarSiteSemFirebase();
-    configurarEventosFixos();
+document.addEventListener("DOMContentLoaded", function() {
+    inicializarSite();
 });
 
-function configurarEventosFixos() {
-    document.getElementById("card-r1").addEventListener("click", abrirBancoR1);
-    document.getElementById("card-rmais").addEventListener("click", abrirBancoRmais);
-    document.getElementById("btn-home").addEventListener("click", voltarInicio);
-    document.getElementById("btn-voltar-rmais").addEventListener("click", voltarInicio);
-    document.getElementById("btn-toggle-form").addEventListener("click", toggleForm);
-    document.getElementById("btn-ver-todas").addEventListener("click", () => filtrar("todos"));
-    document.getElementById("in-disc").addEventListener("change", atualizarSelectTemas);
-
-    document.querySelectorAll(".btn-especialidade").forEach(botao => {
-        botao.addEventListener("click", () => adicionarEspecialidade(botao.dataset.bloco));
-    });
-
-    Object.keys(idsInputsPorBloco).forEach(bloco => {
-        const input = document.getElementById(idsInputsPorBloco[bloco]);
-        input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                adicionarEspecialidade(bloco);
-            }
-        });
-    });
+function inicializarSite() {
+    configurarStatus("Pronto");
+    renderizarMenusEspecialidades();
+    renderizarSelectEspecialidades();
+    renderizarProvasIntegra();
+    atualizarSelectTemas();
+    render();
 
     document.getElementById("form-q").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -1006,16 +977,6 @@ function configurarEventosFixos() {
             salvarQuestao(null);
         }
     });
-}
-
-function inicializarSiteSemFirebase() {
-    renderizarMenusEspecialidades();
-    renderizarSelectEspecialidades();
-    renderizarProvasIntegra();
-    atualizarSelectTemas();
-    carregouQuestoes = true;
-    render();
-    configurarStatus("Pronto");
 }
 
 function abrirBancoR1() {
@@ -1035,100 +996,16 @@ function abrirBancoRmais() {
     document.getElementById("tela-inicial").classList.add("hidden");
     document.getElementById("tela-r1").classList.add("hidden");
     document.getElementById("tela-rmais").classList.remove("hidden");
-    window.scrollTo(0, 0);
     configurarStatus("Pronto");
+    window.scrollTo(0, 0);
 }
 
 function voltarInicio() {
     document.getElementById("tela-r1").classList.add("hidden");
     document.getElementById("tela-rmais").classList.add("hidden");
     document.getElementById("tela-inicial").classList.remove("hidden");
+    configurarStatus(firebaseAtivo ? "Firebase conectado" : "Pronto");
     window.scrollTo(0, 0);
-}
-
-function renderizarProvasIntegra() {
-    const menu = document.getElementById("menu-provas-integra");
-    menu.innerHTML = "";
-
-    instituicoesProvasIntegra.forEach(instituicao => {
-        const details = document.createElement("details");
-
-        const summary = document.createElement("summary");
-        summary.textContent = instituicao;
-
-        const div = document.createElement("div");
-        div.style.paddingTop = "5px";
-
-        anosProvasIntegra.forEach(ano => {
-            const item = document.createElement("div");
-            item.className = "filter-item";
-            item.textContent = `${instituicao} ${ano}`;
-            item.addEventListener("click", () => filtrar("banca-ano", `${instituicao}|${ano}`));
-            div.appendChild(item);
-        });
-
-        details.appendChild(summary);
-        details.appendChild(div);
-        menu.appendChild(details);
-    });
-}
-
-function getEspecialidadesBloco(bloco) {
-    const base = especialidadesBasePorBloco[bloco] || [];
-    const personalizadas = estado.especialidadesUsuario[bloco] || [];
-    const todas = [...base, ...personalizadas];
-    const unicas = [];
-
-    todas.forEach(esp => {
-        if (!temaExiste(unicas, esp)) {
-            unicas.push(esp);
-        }
-    });
-
-    return unicas;
-}
-
-function getTodasEspecialidades() {
-    const todas = [];
-
-    Object.keys(especialidadesBasePorBloco).forEach(bloco => {
-        getEspecialidadesBloco(bloco).forEach(esp => {
-            if (!temaExiste(todas, esp)) {
-                todas.push(esp);
-            }
-        });
-    });
-
-    return todas;
-}
-
-function renderizarMenusEspecialidades() {
-    Object.keys(idsMenusPorBloco).forEach(bloco => {
-        const menu = document.getElementById(idsMenusPorBloco[bloco]);
-        if (!menu) return;
-
-        menu.innerHTML = "";
-
-        getEspecialidadesBloco(bloco).forEach(esp => {
-            const item = document.createElement("div");
-            item.className = "filter-item";
-            item.textContent = esp;
-            item.addEventListener("click", () => mostrarTemasEspecialidade(esp));
-            menu.appendChild(item);
-        });
-    });
-}
-
-function renderizarSelectEspecialidades() {
-    const selectDisc = document.getElementById("in-disc");
-    selectDisc.innerHTML = "";
-
-    getTodasEspecialidades().forEach(esp => {
-        const opt = document.createElement("option");
-        opt.value = esp;
-        opt.textContent = esp;
-        selectDisc.appendChild(opt);
-    });
 }
 
 function configurarStatus(texto) {
@@ -1142,29 +1019,38 @@ function mostrarErroFirebase(texto) {
 }
 
 async function conectarFirebase() {
-    if (firebaseIniciado) return;
-
     firebaseIniciado = true;
     carregouQuestoes = false;
     configurarStatus("Conectando Firebase...");
 
     try {
-        const app = initializeApp(firebaseConfig);
+        const appModule = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js");
+        const analyticsModule = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js");
+        const firestoreModule = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js");
+
+        const app = appModule.initializeApp(firebaseConfig);
 
         try {
-            getAnalytics(app);
+            analyticsModule.getAnalytics(app);
         } catch (e) {
             console.warn("Analytics não iniciado:", e);
         }
 
-        db = getFirestore(app);
-        configRef = doc(db, "mediaApp", "bancoPrincipal");
-        questoesRef = collection(db, "questoes");
+        db = firestoreModule.getFirestore(app);
+
+        firebaseDoc = firestoreModule.doc;
+        firebaseSetDoc = firestoreModule.setDoc;
+        firebaseDeleteDoc = firestoreModule.deleteDoc;
+        firebaseOnSnapshot = firestoreModule.onSnapshot;
+        firebaseServerTimestamp = firestoreModule.serverTimestamp;
+
+        configRef = firestoreModule.doc(db, "mediaApp", "bancoPrincipal");
+        questoesRef = firestoreModule.collection(db, "questoes");
 
         firebaseAtivo = true;
         configurarStatus("Firebase conectado • carregando...");
 
-        timeoutFirebase = setTimeout(() => {
+        setTimeout(() => {
             if (!carregouQuestoes) {
                 carregouQuestoes = true;
                 configurarStatus("Firebase conectado • aguardando dados");
@@ -1172,7 +1058,7 @@ async function conectarFirebase() {
             }
         }, 7000);
 
-        onSnapshot(configRef, async (snap) => {
+        firebaseOnSnapshot(configRef, async function(snap) {
             if (salvandoAgora) return;
 
             if (snap.exists()) {
@@ -1192,9 +1078,10 @@ async function conectarFirebase() {
             renderizarProvasIntegra();
             atualizarSelectTemas();
             render();
-        }, (erro) => {
+        }, function(erro) {
             console.error(erro);
             configurarStatus("Erro nas configurações");
+
             mostrarErroFirebase(`
                 ⚠️ Erro ao conectar às configurações do Firestore.
                 <br><br>
@@ -1202,13 +1089,8 @@ async function conectarFirebase() {
             `);
         });
 
-        onSnapshot(questoesRef, (snap) => {
-            if (timeoutFirebase) {
-                clearTimeout(timeoutFirebase);
-                timeoutFirebase = null;
-            }
-
-            estado.banco = snap.docs.map(documento => {
+        firebaseOnSnapshot(questoesRef, function(snap) {
+            estado.banco = snap.docs.map(function(documento) {
                 const dados = documento.data();
 
                 return {
@@ -1226,7 +1108,7 @@ async function conectarFirebase() {
                 };
             });
 
-            estado.banco.sort((a, b) => {
+            estado.banco.sort(function(a, b) {
                 const aEhProva = a.disc === "Prova na íntegra";
                 const bEhProva = b.disc === "Prova na íntegra";
 
@@ -1247,14 +1129,8 @@ async function conectarFirebase() {
             carregouQuestoes = true;
             configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
             render();
-        }, (erro) => {
+        }, function(erro) {
             console.error(erro);
-
-            if (timeoutFirebase) {
-                clearTimeout(timeoutFirebase);
-                timeoutFirebase = null;
-            }
-
             carregouQuestoes = true;
             configurarStatus("Erro ao carregar questões");
             render();
@@ -1269,11 +1145,6 @@ async function conectarFirebase() {
     } catch (erro) {
         console.error(erro);
 
-        if (timeoutFirebase) {
-            clearTimeout(timeoutFirebase);
-            timeoutFirebase = null;
-        }
-
         firebaseAtivo = false;
         carregouQuestoes = true;
         configurarStatus("Firebase não conectado");
@@ -1282,13 +1153,90 @@ async function conectarFirebase() {
         mostrarErroFirebase(`
             ⚠️ Não foi possível iniciar o Firebase.
             <br><br>
-            Verifique se o código do Firebase foi copiado corretamente.
+            O R1 abriu normalmente, mas sem sincronização online.
         `);
     }
 }
 
+function renderizarProvasIntegra() {
+    const menu = document.getElementById("menu-provas-integra");
+    menu.innerHTML = "";
+
+    instituicoesProvasIntegra.forEach(function(instituicao) {
+        menu.innerHTML += `
+            <details>
+                <summary>${instituicao}</summary>
+                <div style="padding-top: 5px;">
+                    ${anosProvasIntegra.map(function(ano) {
+                        return `
+                            <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
+                                ${instituicao} ${ano}
+                            </div>
+                        `;
+                    }).join("")}
+                </div>
+            </details>
+        `;
+    });
+}
+
+function getEspecialidadesBloco(bloco) {
+    const base = especialidadesBasePorBloco[bloco] || [];
+    const personalizadas = estado.especialidadesUsuario[bloco] || [];
+    const todas = [...base, ...personalizadas];
+    const unicas = [];
+
+    todas.forEach(function(esp) {
+        if (!temaExiste(unicas, esp)) {
+            unicas.push(esp);
+        }
+    });
+
+    return unicas;
+}
+
+function getTodasEspecialidades() {
+    const todas = [];
+
+    Object.keys(especialidadesBasePorBloco).forEach(function(bloco) {
+        getEspecialidadesBloco(bloco).forEach(function(esp) {
+            if (!temaExiste(todas, esp)) {
+                todas.push(esp);
+            }
+        });
+    });
+
+    return todas;
+}
+
+function renderizarMenusEspecialidades() {
+    Object.keys(idsMenusPorBloco).forEach(function(bloco) {
+        const menu = document.getElementById(idsMenusPorBloco[bloco]);
+        if (!menu) return;
+
+        menu.innerHTML = "";
+
+        getEspecialidadesBloco(bloco).forEach(function(esp) {
+            menu.innerHTML += `
+                <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
+                    ${esp}
+                </div>
+            `;
+        });
+    });
+}
+
+function renderizarSelectEspecialidades() {
+    const selectDisc = document.getElementById("in-disc");
+    selectDisc.innerHTML = "";
+
+    getTodasEspecialidades().forEach(function(esp) {
+        selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
+    });
+}
+
 async function salvarConfiguracoesOnline() {
-    if (!firebaseAtivo || !configRef) {
+    if (!firebaseAtivo || !configRef || !firebaseSetDoc) {
         alert("Firebase ainda não está conectado. As configurações não serão salvas online.");
         return false;
     }
@@ -1296,14 +1244,14 @@ async function salvarConfiguracoesOnline() {
     try {
         salvandoAgora = true;
 
-        await setDoc(configRef, {
+        await firebaseSetDoc(configRef, {
             temasUsuario: estado.temasUsuario,
             temasOcultos: estado.temasOcultos,
             especialidadesUsuario: estado.especialidadesUsuario,
-            atualizadoEm: serverTimestamp()
+            atualizadoEm: firebaseServerTimestamp()
         }, { merge: true });
 
-        setTimeout(() => {
+        setTimeout(function() {
             salvandoAgora = false;
         }, 500);
 
@@ -1312,14 +1260,13 @@ async function salvarConfiguracoesOnline() {
         salvandoAgora = false;
         console.error(erro);
         configurarStatus("Erro ao salvar configurações");
-
         alert("Não foi possível salvar online. Verifique as regras do Firestore.");
         return false;
     }
 }
 
 async function salvarQuestaoOnline(q) {
-    if (!firebaseAtivo || !db) {
+    if (!firebaseAtivo || !db || !firebaseSetDoc || !firebaseDoc) {
         alert("Firebase ainda não está conectado. A questão não será salva online.");
         return false;
     }
@@ -1329,9 +1276,9 @@ async function salvarQuestaoOnline(q) {
 
         const idDoc = `questao_${q.id}`;
 
-        await setDoc(doc(db, "questoes", idDoc), {
+        await firebaseSetDoc(firebaseDoc(db, "questoes", idDoc), {
             ...q,
-            atualizadoEm: serverTimestamp()
+            atualizadoEm: firebaseServerTimestamp()
         }, { merge: true });
 
         configurarStatus("Salvo online");
@@ -1339,7 +1286,6 @@ async function salvarQuestaoOnline(q) {
     } catch (erro) {
         console.error(erro);
         configurarStatus("Erro ao salvar questão");
-
         alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
         return false;
     }
@@ -1353,7 +1299,9 @@ function normalizarTexto(txt) {
 
 function temaExiste(lista, novoTema) {
     const novo = normalizarTexto(novoTema).toLowerCase();
-    return lista.some(t => normalizarTexto(t).toLowerCase() === novo);
+    return lista.some(function(t) {
+        return normalizarTexto(t).toLowerCase() === novo;
+    });
 }
 
 function getTemasEspecialidade(especialidade) {
@@ -1363,13 +1311,15 @@ function getTemasEspecialidade(especialidade) {
     const todos = [...padrao, ...personalizados];
     const unicos = [];
 
-    todos.forEach(tema => {
+    todos.forEach(function(tema) {
         if (!temaExiste(unicos, tema)) {
             unicos.push(tema);
         }
     });
 
-    return unicos.filter(tema => !ocultos.includes(tema));
+    return unicos.filter(function(tema) {
+        return !ocultos.includes(tema);
+    });
 }
 
 async function adicionarEspecialidade(bloco) {
@@ -1417,78 +1367,53 @@ function mostrarTemasEspecialidade(especialidade) {
     const temas = getTemasEspecialidade(especialidade);
     const area = document.getElementById("area-topicos");
 
-    area.innerHTML = "";
+    area.innerHTML = `
+        <div class="topicos-card">
+            <h2>${especialidade}</h2>
+            <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
 
-    const card = document.createElement("div");
-    card.className = "topicos-card";
+            <div class="add-tema-box">
+                <input 
+                    type="text" 
+                    id="novo-tema-${especialidade}" 
+                    placeholder="Adicionar tema. Ex: Hanseníase"
+                    onkeydown='if(event.key === "Enter"){ adicionarTema(${JSON.stringify(especialidade)}); }'
+                >
 
-    const h2 = document.createElement("h2");
-    h2.textContent = especialidade;
+                <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>
+                    Adicionar tema
+                </button>
+            </div>
 
-    const p = document.createElement("p");
-    p.textContent = "Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.";
+            ${
+                temas.length > 0
+                ? `
+                    <div class="topicos-grid">
+                        ${temas.map(function(tema) {
+                            return `
+                                <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                    <span class="topico-nome">${tema}</span>
 
-    const addBox = document.createElement("div");
-    addBox.className = "add-tema-box";
+                                    <button 
+                                        class="btn-lixeira-tema" 
+                                        title="Excluir tema"
+                                        onclick='event.stopPropagation(); excluirTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                        🗑️
+                                    </button>
+                                </div>
+                            `;
+                        }).join("")}
+                    </div>
+                `
+                : `
+                    <div class="empty-temas">
+                        Nenhum tema cadastrado ainda para esta especialidade.
+                    </div>
+                `
+            }
+        </div>
+    `;
 
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = `novo-tema-${especialidade}`;
-    input.placeholder = "Adicionar tema. Ex: Hanseníase";
-    input.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            adicionarTema(especialidade);
-        }
-    });
-
-    const btn = document.createElement("button");
-    btn.className = "btn-tema";
-    btn.textContent = "Adicionar tema";
-    btn.addEventListener("click", () => adicionarTema(especialidade));
-
-    addBox.appendChild(input);
-    addBox.appendChild(btn);
-
-    card.appendChild(h2);
-    card.appendChild(p);
-    card.appendChild(addBox);
-
-    if (temas.length > 0) {
-        const grid = document.createElement("div");
-        grid.className = "topicos-grid";
-
-        temas.forEach(tema => {
-            const item = document.createElement("div");
-            item.className = "topico-item";
-            item.addEventListener("click", () => filtrarTema(especialidade, tema));
-
-            const nome = document.createElement("span");
-            nome.className = "topico-nome";
-            nome.textContent = tema;
-
-            const lixeira = document.createElement("button");
-            lixeira.className = "btn-lixeira-tema";
-            lixeira.title = "Excluir tema";
-            lixeira.textContent = "🗑️";
-            lixeira.addEventListener("click", (event) => {
-                event.stopPropagation();
-                excluirTema(especialidade, tema);
-            });
-
-            item.appendChild(nome);
-            item.appendChild(lixeira);
-            grid.appendChild(item);
-        });
-
-        card.appendChild(grid);
-    } else {
-        const vazio = document.createElement("div");
-        vazio.className = "empty-temas";
-        vazio.textContent = "Nenhum tema cadastrado ainda para esta especialidade.";
-        card.appendChild(vazio);
-    }
-
-    area.appendChild(card);
     render();
 }
 
@@ -1532,7 +1457,9 @@ async function excluirTema(especialidade, tema) {
     const padrao = temasPadrao[especialidade] || [];
 
     if (personalizados.includes(tema)) {
-        estado.temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
+        estado.temasUsuario[especialidade] = personalizados.filter(function(t) {
+            return t !== tema;
+        });
 
         if (estado.temasUsuario[especialidade].length === 0) {
             delete estado.temasUsuario[especialidade];
@@ -1590,11 +1517,8 @@ function atualizarSelectTemas() {
 
     const temas = getTemasEspecialidade(especialidade);
 
-    temas.forEach(tema => {
-        const opt = document.createElement("option");
-        opt.value = tema;
-        opt.textContent = tema;
-        selectTema.appendChild(opt);
+    temas.forEach(function(tema) {
+        selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
     });
 }
 
@@ -1648,7 +1572,7 @@ async function salvarQuestao(img) {
         img: img,
         opts: opts,
         correta: document.getElementById("in-correta").value,
-        criadoEm: serverTimestamp()
+        criadoEm: firebaseServerTimestamp ? firebaseServerTimestamp() : new Date()
     };
 
     if (q.correta === "E" && !opts.E) {
@@ -1670,7 +1594,7 @@ function render() {
 
     lista.innerHTML = "";
 
-    const filtrados = estado.banco.filter(q => {
+    const filtrados = estado.banco.filter(function(q) {
         if (filtroAtual.tipo === "todos") return true;
 
         if (filtroAtual.tipo === "disciplina") {
@@ -1689,7 +1613,7 @@ function render() {
         return true;
     });
 
-    filtrados.sort((a, b) => {
+    filtrados.sort(function(a, b) {
         const aEhProva = a.disc === "Prova na íntegra";
         const bEhProva = b.disc === "Prova na íntegra";
 
@@ -1717,57 +1641,59 @@ function render() {
         return;
     }
 
-    filtrados.forEach(q => {
+    filtrados.forEach(function(q) {
         const alternativas = q.opts || {};
         const letras = Object.keys(alternativas).sort();
 
-        const card = document.createElement("div");
-        card.className = "question-card";
+        lista.innerHTML += `
+            <div class="question-card">
+                <div class="q-header">
+                    <span>
+                        ${q.numero ? `Questão ${q.numero} • ` : ""}
+                        ${q.banca} (${q.ano}) • 
+                        <strong>${q.disc}</strong>
+                        ${q.tema ? ` • ${q.tema}` : ""}
+                    </span>
 
-        card.innerHTML = `
-            <div class="q-header">
-                <span>
-                    ${q.numero ? `Questão ${q.numero} • ` : ""}
-                    ${q.banca} (${q.ano}) • 
-                    <strong>${q.disc}</strong>
-                    ${q.tema ? ` • ${q.tema}` : ""}
-                </span>
+                    <div class="q-actions">
+                        <button class="btn-copy" onclick="copiarQuestao('${q.docId}')">
+                            📋 Copiar
+                        </button>
 
-                <div class="q-actions">
-                    <button class="btn-copy">📋 Copiar</button>
-                    <button class="btn-remover" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
+                        <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
+                            Remover
+                        </button>
+                    </div>
                 </div>
+
+                ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
+
+                <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
+
+                <ul class="opt-list">
+                    ${letras.map(function(letra) {
+                        return `
+                            <li>
+                                <label id="l-${q.docId}-${letra}">
+                                    <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
+                                </label>
+                            </li>
+                        `;
+                    }).join("")}
+                </ul>
+
+                <button class="btn-add" id="btn-${q.docId}" onclick="corrigir('${q.docId}', '${q.correta}')">
+                    Confirmar Resposta
+                </button>
             </div>
-
-            ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
-
-            <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
-
-            <ul class="opt-list">
-                ${letras.map(letra => `
-                    <li>
-                        <label id="l-${q.docId}-${letra}">
-                            <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
-                        </label>
-                    </li>
-                `).join("")}
-            </ul>
-
-            <button class="btn-add btn-corrigir" id="btn-${q.docId}">
-                Confirmar Resposta
-            </button>
         `;
-
-        card.querySelector(".btn-copy").addEventListener("click", () => copiarQuestao(q.docId));
-        card.querySelector(".btn-remover").addEventListener("click", () => excluirQuestao(q.docId));
-        card.querySelector(".btn-corrigir").addEventListener("click", () => corrigir(q.docId, q.correta));
-
-        lista.appendChild(card);
     });
 }
 
 async function copiarQuestao(docId) {
-    const q = estado.banco.find(item => item.docId === docId);
+    const q = estado.banco.find(function(item) {
+        return item.docId === docId;
+    });
 
     if (!q) {
         alert("Não foi possível encontrar esta questão.");
@@ -1785,8 +1711,12 @@ async function copiarQuestao(docId) {
         "",
         q.enun,
         "",
-        ...letras.map(letra => `${letra}) ${alternativas[letra]}`)
-    ].filter(linha => linha !== "").join("\n");
+        ...letras.map(function(letra) {
+            return `${letra}) ${alternativas[letra]}`;
+        })
+    ].filter(function(linha) {
+        return linha !== "";
+    }).join("\n");
 
     try {
         await navigator.clipboard.writeText(texto);
@@ -1838,9 +1768,14 @@ async function excluirQuestao(docId) {
         return;
     }
 
+    if (!firebaseAtivo || !db || !firebaseDeleteDoc || !firebaseDoc) {
+        alert("Firebase ainda não está conectado.");
+        return;
+    }
+
     if (confirm("Deseja realmente excluir esta questão?")) {
         try {
-            await deleteDoc(doc(db, "questoes", docId));
+            await firebaseDeleteDoc(firebaseDoc(db, "questoes", docId));
             configurarStatus("Questão removida");
         } catch (erro) {
             console.error(erro);

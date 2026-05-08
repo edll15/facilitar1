@@ -1,665 +1,639 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedIA - Banco de Questões Inteligente</title>
-
-    <style>
-        :root {
-            --primary: #1b4332;
-            --primary-dark: #0f2f23;
-            --secondary: #40916c;
-            --accent: #74c69d;
-            --bg: #f4f7f4;
-            --white: #ffffff;
-            --text: #2d3436;
-            --muted: #6c757d;
-            --danger: #c1121f;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(116, 198, 157, 0.18), transparent 34%),
-                radial-gradient(circle at bottom right, rgba(27, 67, 50, 0.12), transparent 38%),
-                var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            color: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 14px rgba(0,0,0,0.22);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header h1 {
-            cursor: pointer;
-            margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: -0.5px;
-        }
-
-        .sync-status {
-            font-size: 0.85rem;
-            background: rgba(255,255,255,0.14);
-            padding: 0.45rem 0.8rem;
-            border-radius: 999px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .home-screen {
-            min-height: calc(100vh - 76px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 5%;
-        }
-
-        .home-wrapper {
-            width: 100%;
-            max-width: 1050px;
-            text-align: center;
-        }
-
-        .home-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(64,145,108,0.12);
-            color: var(--primary);
-            border: 1px solid rgba(64,145,108,0.2);
-            padding: 0.5rem 0.9rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .home-title {
-            font-size: clamp(2rem, 5vw, 4rem);
-            color: var(--primary);
-            margin: 0;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-        }
-
-        .home-subtitle {
-            color: var(--muted);
-            max-width: 670px;
-            margin: 1rem auto 2.5rem auto;
-            line-height: 1.6;
-            font-size: 1.05rem;
-        }
-
-        .home-cards {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(260px, 1fr));
-            gap: 1.5rem;
-            align-items: stretch;
-        }
-
-        .home-card {
-            position: relative;
-            overflow: hidden;
-            background: rgba(255,255,255,0.88);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(27,67,50,0.09);
-            border-radius: 24px;
-            padding: 2rem;
-            min-height: 245px;
-            box-shadow: 0 20px 45px rgba(27,67,50,0.10);
-            cursor: pointer;
-            transition: 0.25s ease;
-            text-align: left;
-        }
-
-        .home-card::before {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: rgba(64,145,108,0.13);
-            top: -70px;
-            right: -60px;
-        }
-
-        .home-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 24px 55px rgba(27,67,50,0.17);
-            border-color: rgba(64,145,108,0.35);
-        }
-
-        .home-icon {
-            width: 58px;
-            height: 58px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 10px 20px rgba(27,67,50,0.22);
-        }
-
-        .home-card h2 {
-            color: var(--primary);
-            margin: 0 0 0.6rem 0;
-            font-size: 1.45rem;
-            position: relative;
-        }
-
-        .home-card p {
-            color: var(--muted);
-            margin: 0 0 1.4rem 0;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .home-card .card-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            font-weight: 800;
-            position: relative;
-        }
-
-        .app-main {
-            padding: 2rem 5%;
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
-
-        .rmais-screen {
-            padding: 2rem 5%;
-        }
-
-        .rmais-placeholder {
-            max-width: 850px;
-            margin: 3rem auto;
-            background: var(--white);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 18px 45px rgba(27,67,50,0.10);
-            border-top: 5px solid var(--secondary);
-            text-align: center;
-        }
-
-        .rmais-placeholder h2 {
-            color: var(--primary);
-            margin-top: 0;
-            font-size: 2rem;
-        }
-
-        .rmais-placeholder p {
-            color: var(--muted);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .btn-voltar {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        aside {
-            flex: 1;
-            min-width: 300px;
-            max-height: 85vh;
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
-            border-top: 4px solid var(--primary);
-            position: sticky;
-            top: 90px;
-            overflow-y: auto;
-        }
-
-        .btn-add {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            width: 100%;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .btn-add:hover {
-            opacity: 0.92;
-        }
-
-        .btn-copy {
-            background: #edf6f0;
-            color: #1b4332;
-            border: 1px solid #40916c;
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .btn-copy:hover {
-            background: #d8f3dc;
-        }
-
-        details {
-            margin-bottom: 5px;
-        }
-        
-        summary {
-            list-style: none;
-            background: #f1f3f1;
-            padding: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary::after {
-            content: '▾';
-        }
-
-        details[open] summary::after {
-            content: '▴';
-        }
-
-        .section-title-static {
-            color: var(--primary);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            margin: 1.5rem 0 0.8rem 0;
-            font-weight: bold;
-        }
-
-        .filter-item {
-            padding: 0.6rem 1rem;
-            margin: 2px 0;
-            background: #f8f9fa;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: 0.2s;
-            border-left: 2px solid transparent;
-        }
-
-        .filter-item:hover { 
-            background: #e9ecef; 
-            border-left: 2px solid var(--secondary);
-            color: var(--secondary); 
-        }
-
-        .add-especialidade-box {
-            background: #f8f9fa;
-            border: 1px dashed var(--secondary);
-            padding: 0.6rem;
-            border-radius: 8px;
-            margin: 8px 0;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 6px;
-            align-items: center;
-        }
-
-        .add-especialidade-box input {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0.5rem;
-            font-size: 0.78rem;
-        }
-
-        .btn-especialidade {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 0.5rem 0.7rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.75rem;
-            white-space: nowrap;
-        }
-
-        .content-area {
-            flex: 3;
-            min-width: 0;
-        }
-
-        .filter-status {
-            background: #e9ecef;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .panel {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-            display: none;
-            margin-bottom: 2rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        input,
-        select,
-        textarea {
-            padding: 0.6rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        }
-
-        .question-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 14px;
-            border: 1px solid #ddd;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 16px rgba(0,0,0,0.04);
-        }
-
-        .q-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 1rem;
-            gap: 1rem;
-        }
-
-        .q-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .q-img {
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .q-img img {
-            max-width: 100%;
-            border-radius: 8px;
-            max-height: 400px;
-        }
-        
-        .opt-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .opt-list li {
-            margin-bottom: 8px;
-        }
-
-        .opt-list label {
-            display: block;
-            padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        
-        .correct {
-            background: #d4edda !important;
-            border-color: #28a745 !important;
-        }
-
-        .wrong {
-            background: #f8d7da !important;
-            border-color: #dc3545 !important;
-        }
-
-        .topicos-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-            border-top: 4px solid var(--primary);
-            margin-bottom: 2rem;
-        }
-
-        .topicos-card h2 {
-            color: var(--primary);
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-        }
-
-        .topicos-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .add-tema-box {
-            background: #f8f9fa;
-            border: 1px dashed var(--secondary);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .add-tema-box input {
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .btn-tema {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 0.65rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .topicos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .topico-item {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-left: 4px solid var(--secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-            color: var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .topico-item:hover {
-            background: #e9f5ef;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-        }
-
-        .topico-nome {
-            flex: 1;
-            line-height: 1.3;
-        }
-
-        .btn-lixeira-tema {
-            width: 34px;
-            height: 34px;
-            min-width: 34px;
-            border-radius: 50%;
-            border: none;
-            background: #fff0f0;
-            color: var(--danger);
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-
-        .btn-lixeira-tema:hover {
-            background: var(--danger);
-            color: white;
-            transform: scale(1.08);
-        }
-
-        .empty-temas {
-            text-align: center;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            color: #666;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-
-        .aviso-online {
-            font-size: 0.75rem;
-            color: #1b4332;
-            background: #edf6f0;
-            border-left: 4px solid var(--secondary);
-            padding: 0.8rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-
-        .erro-firebase {
-            font-size: 0.8rem;
-            color: #7f1d1d;
-            background: #fff0f0;
-            border-left: 4px solid var(--danger);
-            padding: 0.8rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-            display: none;
-        }
-
-        @media (max-width: 900px) {
-            .home-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .home-card {
-                min-height: 210px;
-            }
-
-            .app-main {
-                flex-direction: column;
-            }
-
-            aside {
-                position: static;
-                max-height: none;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .filter-status {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .add-tema-box {
-                grid-template-columns: 1fr;
-            }
-
-            .add-especialidade-box {
-                grid-template-columns: 1fr;
-            }
-
-            .q-header {
-                flex-direction: column;
-            }
-
-            .q-actions {
-                justify-content: flex-start;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedIA - Banco de Questões Inteligente</title>
+
+<style>
+:root {
+    --primary: #1b4332;
+    --secondary: #40916c;
+    --bg: #f4f7f4;
+    --white: #ffffff;
+    --text: #2d3436;
+    --danger: #c1121f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(64,145,108,0.18), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(27,67,50,0.16), transparent 35%),
+        var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    cursor: pointer;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.sync-status {
+    font-size: 0.85rem;
+    background: rgba(255,255,255,0.14);
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.home {
+    min-height: calc(100vh - 74px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+.home-box {
+    width: 100%;
+    max-width: 1050px;
+    text-align: center;
+}
+
+.home-badge {
+    display: inline-block;
+    background: #edf6f0;
+    color: var(--primary);
+    border: 1px solid #d8f3dc;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.home h2 {
+    margin: 0;
+    color: var(--primary);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    letter-spacing: -1px;
+}
+
+.home p {
+    max-width: 680px;
+    margin: 1rem auto 2.5rem auto;
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.home-card {
+    background: rgba(255,255,255,0.92);
+    border-radius: 22px;
+    padding: 2rem;
+    text-align: left;
+    border: 1px solid rgba(27,67,50,0.08);
+    box-shadow: 0 18px 40px rgba(27,67,50,0.12);
+    cursor: pointer;
+    transition: 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-card::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: rgba(64,145,108,0.12);
+    border-radius: 50%;
+    top: -70px;
+    right: -70px;
+}
+
+.home-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 24px 55px rgba(27,67,50,0.18);
+}
+
+.home-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.home-card h3 {
+    margin: 0 0 0.7rem 0;
+    color: var(--primary);
+    font-size: 1.45rem;
+    position: relative;
+    z-index: 1;
+}
+
+.home-card p {
+    margin: 0 0 1.2rem 0;
+    color: #666;
+    font-size: 0.98rem;
+    position: relative;
+    z-index: 1;
+}
+
+.home-action {
+    color: var(--primary);
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+main.app {
+    padding: 2rem 5%;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.rmais {
+    padding: 2rem 5%;
+}
+
+.rmais-card {
+    max-width: 850px;
+    margin: 3rem auto;
+    background: white;
+    border-radius: 18px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 18px 40px rgba(27,67,50,0.12);
+    border-top: 5px solid var(--secondary);
+}
+
+.rmais-card h2 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+.btn-voltar {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+aside {
+    flex: 1;
+    min-width: 300px;
+    max-height: 85vh;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--primary);
+    position: sticky;
+    top: 90px;
+    overflow-y: auto;
+}
+
+.btn-add {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.btn-add:hover {
+    opacity: 0.92;
+}
+
+.btn-copy {
+    background: #edf6f0;
+    color: #1b4332;
+    border: 1px solid #40916c;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.btn-copy:hover {
+    background: #d8f3dc;
+}
+
+details {
+    margin-bottom: 5px;
+}
+
+summary {
+    list-style: none;
+    background: #f1f3f1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: '▾';
+}
+
+details[open] summary::after {
+    content: '▴';
+}
+
+.section-title-static {
+    color: var(--primary);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin: 1.5rem 0 0.8rem 0;
+    font-weight: bold;
+}
+
+.filter-item {
+    padding: 0.6rem 1rem;
+    margin: 2px 0;
+    background: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.filter-item:hover {
+    background: #e9ecef;
+    border-left: 2px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.add-especialidade-box {
+    background: #f8f9fa;
+    border: 1px dashed var(--secondary);
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin: 8px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    align-items: center;
+}
+
+.add-especialidade-box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 0.78rem;
+}
+
+.btn-especialidade {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.5rem 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.content-area {
+    flex: 3;
+    min-width: 0;
+}
+
+.filter-status {
+    background: #e9ecef;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: none;
+    margin-bottom: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+input,
+select,
+textarea {
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.question-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.q-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.q-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.q-img {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.q-img img {
+    max-width: 100%;
+    border-radius: 4px;
+    max-height: 400px;
+}
+
+.opt-list {
+    list-style: none;
+    padding: 0;
+}
+
+.opt-list li {
+    margin-bottom: 8px;
+}
+
+.opt-list label {
+    display: block;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.correct {
+    background: #d4edda !important;
+    border-color: #28a745 !important;
+}
+
+.wrong {
+    background: #f8d7da !important;
+    border-color: #dc3545 !important;
+}
+
+.topicos-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--primary);
+    margin-bottom: 2rem;
+}
+
+.topicos-card h2 {
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.topicos-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.add-tema-box {
+    background: #f8f9fa;
+    border: 1px dashed var(--secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.add-tema-box input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-tema {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.65rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.topicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.topico-item {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid var(--secondary);
+    padding: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.topico-item:hover {
+    background: #e9f5ef;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.topico-nome {
+    flex: 1;
+    line-height: 1.3;
+}
+
+.btn-lixeira-tema {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 50%;
+    border: none;
+    background: #fff0f0;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.btn-lixeira-tema:hover {
+    background: var(--danger);
+    color: white;
+    transform: scale(1.08);
+}
+
+.empty-temas {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    color: #666;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.aviso-online {
+    font-size: 0.75rem;
+    color: #1b4332;
+    background: #edf6f0;
+    border-left: 4px solid var(--secondary);
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.erro-firebase {
+    font-size: 0.8rem;
+    color: #7f1d1d;
+    background: #fff0f0;
+    border-left: 4px solid var(--danger);
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .home-cards {
+        grid-template-columns: 1fr;
+    }
+
+    main.app {
+        flex-direction: column;
+    }
+
+    aside {
+        position: static;
+        max-height: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-status {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .add-tema-box {
+        grid-template-columns: 1fr;
+    }
+
+    .add-especialidade-box {
+        grid-template-columns: 1fr;
+    }
+
+    .q-header {
+        flex-direction: column;
+    }
+
+    .q-actions {
+        justify-content: flex-start;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -669,42 +643,34 @@
     <div class="sync-status" id="sync-status">Conectando...</div>
 </header>
 
-<main id="tela-inicial" class="home-screen">
-    <div class="home-wrapper">
-        <div class="home-kicker">Banco de Questões Inteligente</div>
-
-        <h2 class="home-title">Escolha seu banco de questões</h2>
-
-        <p class="home-subtitle">
-            Organize seus estudos por tipo de prova, especialidade, tema, banca e ano.
-            Selecione uma das opções abaixo para começar.
+<section id="tela-inicial" class="home">
+    <div class="home-box">
+        <div class="home-badge">Banco de Questões Inteligente</div>
+        <h2>Escolha seu banco de questões</h2>
+        <p>
+            Selecione abaixo o módulo que deseja acessar. Todo o conteúdo atual do site está dentro de
+            <strong>Questões Acesso Direto (R1)</strong>.
         </p>
 
         <div class="home-cards">
-            <div class="home-card" onclick="abrirBanco('r1')">
+            <div class="home-card" onclick="abrirBancoR1()">
                 <div class="home-icon">🎯</div>
-                <h2>Questões Acesso Direto (R1)</h2>
-                <p>
-                    Aqui fica todo o conteúdo atual do seu site: questões, temas,
-                    especialidades, provas na íntegra e cadastro de novas questões.
-                </p>
-                <span class="card-action">Entrar no banco R1 →</span>
+                <h3>Questões Acesso Direto (R1)</h3>
+                <p>Especialidades, temas, provas na íntegra, cadastro e resolução das questões atuais.</p>
+                <div class="home-action">Entrar no R1 →</div>
             </div>
 
-            <div class="home-card" onclick="abrirBanco('rmais')">
+            <div class="home-card" onclick="abrirBancoRmais()">
                 <div class="home-icon">🚀</div>
-                <h2>Questões R+</h2>
-                <p>
-                    Espaço reservado para questões de R+. Você poderá organizar
-                    depois por área, prova, tema e subespecialidade.
-                </p>
-                <span class="card-action">Entrar no banco R+ →</span>
+                <h3>Questões R+</h3>
+                <p>Área separada para futuramente organizar questões de residência avançada.</p>
+                <div class="home-action">Entrar no R+ →</div>
             </div>
         </div>
     </div>
-</main>
+</section>
 
-<main id="tela-r1" class="app-main hidden">
+<main id="tela-r1" class="app hidden">
     <aside>
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
@@ -841,7 +807,7 @@
 
         <div class="filter-status">
             <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:7px 12px; border-radius:7px">
+            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
                 Ver Todas
             </button>
         </div>
@@ -851,929 +817,947 @@
     </section>
 </main>
 
-<main id="tela-rmais" class="rmais-screen hidden">
-    <div class="rmais-placeholder">
+<section id="tela-rmais" class="rmais hidden">
+    <div class="rmais-card">
         <h2>Questões R+</h2>
         <p>
-            Esta área já está criada como uma segunda entrada do site.
-            Por enquanto ela está vazia, para que depois possamos montar um banco próprio de R+,
-            separado das questões de Acesso Direto.
+            Esta área já está criada, mas ainda está vazia. Depois podemos montar aqui um banco separado para R+.
         </p>
-
-        <button class="btn-voltar" onclick="voltarInicio()">Voltar para a página inicial</button>
+        <button class="btn-voltar" onclick="voltarInicio()">Voltar para a tela inicial</button>
     </div>
-</main>
+</section>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
-    import { 
-        getFirestore,
-        collection,
-        doc,
-        setDoc,
-        deleteDoc,
-        onSnapshot,
-        serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+import { 
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    deleteDoc,
+    onSnapshot,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBRynrI-LkGCndpgPCkhexWOBuhyQUVWQE",
-        authDomain: "media-a7c06.firebaseapp.com",
-        projectId: "media-a7c06",
-        storageBucket: "media-a7c06.firebasestorage.app",
-        messagingSenderId: "732762970952",
-        appId: "1:732762970952:web:9beb402a99ed363be0b17d",
-        measurementId: "G-R9QB551FBM"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyBRynrI-LkGCndpgPCkhexWOBuhyQUVWQE",
+    authDomain: "media-a7c06.firebaseapp.com",
+    projectId: "media-a7c06",
+    storageBucket: "media-a7c06.firebasestorage.app",
+    messagingSenderId: "732762970952",
+    appId: "1:732762970952:web:9beb402a99ed363be0b17d",
+    measurementId: "G-R9QB551FBM"
+};
 
-    let db = null;
-    let configRef = null;
-    let questoesRef = null;
-    let firebaseAtivo = false;
-    let carregouQuestoes = false;
-    let carregouConfig = false;
-    let salvandoAgora = false;
+let db = null;
+let configRef = null;
+let questoesRef = null;
+let firebaseAtivo = false;
+let carregouQuestoes = false;
+let salvandoAgora = false;
 
-    const estado = {
-        banco: [],
-        temasUsuario: {},
-        temasOcultos: {},
-        especialidadesUsuario: {}
-    };
+const estado = {
+    banco: [],
+    temasUsuario: {},
+    temasOcultos: {},
+    especialidadesUsuario: {}
+};
 
-    const especialidadesClinica = [
-        "Cardiologia",
-        "Clínica Médica Geral",
-        "Dermatologia",
-        "Emergências Clínicas", 
-        "Endocrinologia",
-        "Reumatologia",
-        "Hematologia",
-        "Oncologia",
-        "Geriatria", 
-        "Gastroenterologia",
-        "Imunologia",
-        "Infectologia",
-        "Nefrologia",
-        "Neurologia", 
-        "Nutrologia",
-        "Oftalmologia",
-        "Pneumologia",
-        "Otorrinolaringologia",
-        "UTI"
-    ];
+const especialidadesClinica = [
+    "Cardiologia",
+    "Clínica Médica Geral",
+    "Dermatologia",
+    "Emergências Clínicas", 
+    "Endocrinologia",
+    "Reumatologia",
+    "Hematologia",
+    "Oncologia",
+    "Geriatria", 
+    "Gastroenterologia",
+    "Imunologia",
+    "Infectologia",
+    "Nefrologia",
+    "Neurologia", 
+    "Nutrologia",
+    "Oftalmologia",
+    "Pneumologia",
+    "Otorrinolaringologia",
+    "UTI"
+];
 
-    const especialidadesBasePorBloco = {
-        "Clínica Médica": especialidadesClinica,
-        "Cirurgia Geral": ["Cirurgia Geral"],
-        "Ginecologia e Obstetrícia": ["Ginecologia e Obstetrícia"],
-        "Pediatria": ["Pediatria"],
-        "Medicina Preventiva": ["Medicina Preventiva"],
-        "Prova na íntegra": ["Prova na íntegra"]
-    };
+const especialidadesBasePorBloco = {
+    "Clínica Médica": especialidadesClinica,
+    "Cirurgia Geral": ["Cirurgia Geral"],
+    "Ginecologia e Obstetrícia": ["Ginecologia e Obstetrícia"],
+    "Pediatria": ["Pediatria"],
+    "Medicina Preventiva": ["Medicina Preventiva"],
+    "Prova na íntegra": ["Prova na íntegra"]
+};
 
-    const idsMenusPorBloco = {
-        "Clínica Médica": "menu-clinica",
-        "Cirurgia Geral": "menu-cirurgia-geral",
-        "Ginecologia e Obstetrícia": "menu-ginecologia-e-obstetricia",
-        "Pediatria": "menu-pediatria",
-        "Medicina Preventiva": "menu-medicina-preventiva"
-    };
+const idsMenusPorBloco = {
+    "Clínica Médica": "menu-clinica",
+    "Cirurgia Geral": "menu-cirurgia-geral",
+    "Ginecologia e Obstetrícia": "menu-ginecologia-e-obstetricia",
+    "Pediatria": "menu-pediatria",
+    "Medicina Preventiva": "menu-medicina-preventiva"
+};
 
-    const idsInputsPorBloco = {
-        "Clínica Médica": "nova-especialidade-clinica-medica",
-        "Cirurgia Geral": "nova-especialidade-cirurgia-geral",
-        "Ginecologia e Obstetrícia": "nova-especialidade-ginecologia-e-obstetricia",
-        "Pediatria": "nova-especialidade-pediatria",
-        "Medicina Preventiva": "nova-especialidade-medicina-preventiva"
-    };
+const idsInputsPorBloco = {
+    "Clínica Médica": "nova-especialidade-clinica-medica",
+    "Cirurgia Geral": "nova-especialidade-cirurgia-geral",
+    "Ginecologia e Obstetrícia": "nova-especialidade-ginecologia-e-obstetricia",
+    "Pediatria": "nova-especialidade-pediatria",
+    "Medicina Preventiva": "nova-especialidade-medicina-preventiva"
+};
 
-    const instituicoesProvasIntegra = [
-        "USP-SP",
-        "USP-RP",
-        "Unicamp",
-        "Unifesp",
-        "HIAE",
-        "IAMSPE",
-        "Santa Casa (SP)",
-        "Sírio Libanês (SP)",
-        "SUS-SP",
-        "ENAMED"
-    ];
+const instituicoesProvasIntegra = [
+    "USP-SP",
+    "USP-RP",
+    "Unicamp",
+    "Unifesp",
+    "HIAE",
+    "IAMSPE",
+    "Santa Casa (SP)",
+    "Sírio Libanês (SP)",
+    "SUS-SP",
+    "ENAMED"
+];
 
-    const anosProvasIntegra = [
-        2026,
-        2025,
-        2024,
-        2023,
-        2022,
-        2021
-    ];
+const anosProvasIntegra = [
+    2026,
+    2025,
+    2024,
+    2023,
+    2022,
+    2021
+];
 
-    const temasPadrao = {
-        "Cardiologia": [
-            "Anticoagulação na Cardiologia",
-            "Arritmias",
-            "Cardiopatias Congênitas",
-            "Síndrome Coronariana Crônica",
-            "Dor torácica não anginosa",
-            "Eletrocardiograma",
-            "Febre Reumática",
-            "Endocardite",
-            "Semiologia Cardíaca",
-            "Hipertensão Arterial Sistêmica",
-            "Insuficiência Cardíaca",
-            "Síncope",
-            "Síndrome Coronariana Aguda",
-            "Valvopatias"
-        ]
-    };
+const temasPadrao = {
+    "Cardiologia": [
+        "Anticoagulação na Cardiologia",
+        "Arritmias",
+        "Cardiopatias Congênitas",
+        "Síndrome Coronariana Crônica",
+        "Dor torácica não anginosa",
+        "Eletrocardiograma",
+        "Febre Reumática",
+        "Endocardite",
+        "Semiologia Cardíaca",
+        "Hipertensão Arterial Sistêmica",
+        "Insuficiência Cardíaca",
+        "Síncope",
+        "Síndrome Coronariana Aguda",
+        "Valvopatias"
+    ]
+};
 
-    let filtroAtual = {
-        tipo: "todos",
-        valor: null,
-        especialidade: null
-    };
+let filtroAtual = {
+    tipo: "todos",
+    valor: null,
+    especialidade: null
+};
 
-    window.onload = () => {
-        inicializarSite();
-        conectarFirebase();
-    };
+window.abrirBancoR1 = function() {
+    document.getElementById("tela-inicial").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.add("hidden");
+    document.getElementById("tela-r1").classList.remove("hidden");
+    filtrar("todos");
+    window.scrollTo(0, 0);
+};
 
-    window.abrirBanco = function(tipo) {
-        document.getElementById("tela-inicial").classList.add("hidden");
-        document.getElementById("tela-r1").classList.add("hidden");
-        document.getElementById("tela-rmais").classList.add("hidden");
+window.abrirBancoRmais = function() {
+    document.getElementById("tela-inicial").classList.add("hidden");
+    document.getElementById("tela-r1").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.remove("hidden");
+    window.scrollTo(0, 0);
+};
 
-        if (tipo === "r1") {
-            document.getElementById("tela-r1").classList.remove("hidden");
-            filtrar("todos");
-        }
+window.voltarInicio = function() {
+    document.getElementById("tela-r1").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.add("hidden");
+    document.getElementById("tela-inicial").classList.remove("hidden");
+    window.scrollTo(0, 0);
+};
 
-        if (tipo === "rmais") {
-            document.getElementById("tela-rmais").classList.remove("hidden");
-        }
+window.addEventListener("DOMContentLoaded", () => {
+    inicializarSite();
+    conectarFirebase();
 
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    const form = document.getElementById("form-q");
+    if (form) {
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
 
-    window.voltarInicio = function() {
-        document.getElementById("tela-r1").classList.add("hidden");
-        document.getElementById("tela-rmais").classList.add("hidden");
-        document.getElementById("tela-inicial").classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+            const file = document.getElementById("in-img").files[0];
 
-    function inicializarSite() {
-        renderizarMenusEspecialidades();
-        renderizarSelectEspecialidades();
-        renderizarProvasIntegra();
-        atualizarSelectTemas();
-        render();
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => salvarQuestao(reader.result);
+                reader.readAsDataURL(file);
+            } else {
+                salvarQuestao(null);
+            }
+        });
     }
+});
 
-    function renderizarProvasIntegra() {
-        const menu = document.getElementById("menu-provas-integra");
+function inicializarSite() {
+    renderizarMenusEspecialidades();
+    renderizarSelectEspecialidades();
+    renderizarProvasIntegra();
+    atualizarSelectTemas();
+    render();
+}
+
+function renderizarProvasIntegra() {
+    const menu = document.getElementById("menu-provas-integra");
+    if (!menu) return;
+
+    menu.innerHTML = "";
+
+    instituicoesProvasIntegra.forEach(instituicao => {
+        menu.innerHTML += `
+            <details>
+                <summary>${instituicao}</summary>
+                <div style="padding-top: 5px;">
+                    ${anosProvasIntegra.map(ano => `
+                        <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
+                            ${instituicao} ${ano}
+                        </div>
+                    `).join("")}
+                </div>
+            </details>
+        `;
+    });
+}
+
+function getEspecialidadesBloco(bloco) {
+    const base = especialidadesBasePorBloco[bloco] || [];
+    const personalizadas = estado.especialidadesUsuario[bloco] || [];
+    const todas = [...base, ...personalizadas];
+    const unicas = [];
+
+    todas.forEach(esp => {
+        if (!temaExiste(unicas, esp)) {
+            unicas.push(esp);
+        }
+    });
+
+    return unicas;
+}
+
+function getTodasEspecialidades() {
+    const todas = [];
+
+    Object.keys(especialidadesBasePorBloco).forEach(bloco => {
+        getEspecialidadesBloco(bloco).forEach(esp => {
+            if (!temaExiste(todas, esp)) {
+                todas.push(esp);
+            }
+        });
+    });
+
+    return todas;
+}
+
+function renderizarMenusEspecialidades() {
+    Object.keys(idsMenusPorBloco).forEach(bloco => {
+        const menu = document.getElementById(idsMenusPorBloco[bloco]);
+        if (!menu) return;
+
         menu.innerHTML = "";
 
-        instituicoesProvasIntegra.forEach(instituicao => {
+        getEspecialidadesBloco(bloco).forEach(esp => {
             menu.innerHTML += `
-                <details>
-                    <summary>${instituicao}</summary>
-                    <div style="padding-top: 5px;">
-                        ${anosProvasIntegra.map(ano => `
-                            <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
-                                ${instituicao} ${ano}
+                <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
+                    ${esp}
+                </div>
+            `;
+        });
+    });
+}
+
+function renderizarSelectEspecialidades() {
+    const selectDisc = document.getElementById("in-disc");
+    if (!selectDisc) return;
+
+    selectDisc.innerHTML = "";
+
+    getTodasEspecialidades().forEach(esp => {
+        selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
+    });
+}
+
+function configurarStatus(texto) {
+    const el = document.getElementById("sync-status");
+    if (el) el.innerText = texto;
+}
+
+function mostrarErroFirebase(texto) {
+    const box = document.getElementById("erro-firebase");
+    if (!box) return;
+
+    box.style.display = "block";
+    box.innerHTML = texto;
+}
+
+async function conectarFirebase() {
+    try {
+        const app = initializeApp(firebaseConfig);
+
+        try {
+            getAnalytics(app);
+        } catch (e) {
+            console.warn("Analytics não iniciado neste ambiente:", e);
+        }
+
+        db = getFirestore(app);
+        configRef = doc(db, "mediaApp", "bancoPrincipal");
+        questoesRef = collection(db, "questoes");
+
+        firebaseAtivo = true;
+        configurarStatus("Sincronizando...");
+
+        onSnapshot(configRef, async (snap) => {
+            if (salvandoAgora) return;
+
+            if (snap.exists()) {
+                const dados = snap.data();
+                estado.temasUsuario = dados.temasUsuario || {};
+                estado.temasOcultos = dados.temasOcultos || {};
+                estado.especialidadesUsuario = dados.especialidadesUsuario || {};
+            } else {
+                await salvarConfiguracoesOnline();
+            }
+
+            renderizarMenusEspecialidades();
+            renderizarSelectEspecialidades();
+            renderizarProvasIntegra();
+            atualizarSelectTemas();
+            render();
+        }, (erro) => {
+            console.error(erro);
+            configurarStatus("Erro ao sincronizar configurações");
+
+            mostrarErroFirebase(`
+                ⚠️ Erro ao conectar às configurações do Firestore.
+                <br><br>
+                Verifique se as regras permitem leitura e escrita.
+            `);
+        });
+
+        onSnapshot(questoesRef, (snap) => {
+            estado.banco = snap.docs.map(documento => {
+                const dados = documento.data();
+
+                return {
+                    docId: documento.id,
+                    id: dados.id || documento.id,
+                    numero: dados.numero || null,
+                    disc: dados.disc || "",
+                    tema: dados.tema || "",
+                    banca: dados.banca || "",
+                    ano: String(dados.ano || ""),
+                    enun: dados.enun || "",
+                    img: dados.img || null,
+                    opts: dados.opts || {},
+                    correta: dados.correta || ""
+                };
+            });
+
+            estado.banco.sort((a, b) => {
+                const aEhProva = a.disc === "Prova na íntegra";
+                const bEhProva = b.disc === "Prova na íntegra";
+
+                if (aEhProva && bEhProva) {
+                    const numeroA = Number(a.numero) || 0;
+                    const numeroB = Number(b.numero) || 0;
+
+                    if (numeroA !== numeroB) {
+                        return numeroA - numeroB;
+                    }
+                }
+
+                const idA = Number(a.id) || 0;
+                const idB = Number(b.id) || 0;
+                return idB - idA;
+            });
+
+            carregouQuestoes = true;
+            configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
+            render();
+        }, (erro) => {
+            console.error(erro);
+            configurarStatus("Erro ao carregar questões");
+
+            mostrarErroFirebase(`
+                ⚠️ Erro ao carregar as questões do Firestore.
+                <br><br>
+                Verifique se a coleção <strong>questoes</strong> existe e se as regras permitem leitura.
+            `);
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        configurarStatus("Erro no Firebase");
+
+        mostrarErroFirebase(`
+            ⚠️ Não foi possível iniciar o Firebase.
+            <br><br>
+            Verifique se o código do Firebase foi copiado corretamente.
+        `);
+    }
+}
+
+async function salvarConfiguracoesOnline() {
+    if (!firebaseAtivo || !configRef) {
+        alert("Firebase ainda não está conectado. As configurações não serão salvas online.");
+        return false;
+    }
+
+    try {
+        salvandoAgora = true;
+        configurarStatus("Salvando...");
+
+        await setDoc(configRef, {
+            temasUsuario: estado.temasUsuario,
+            temasOcultos: estado.temasOcultos,
+            especialidadesUsuario: estado.especialidadesUsuario,
+            atualizadoEm: serverTimestamp()
+        }, { merge: true });
+
+        configurarStatus("Salvo online");
+
+        setTimeout(() => {
+            salvandoAgora = false;
+        }, 500);
+
+        return true;
+    } catch (erro) {
+        salvandoAgora = false;
+        console.error(erro);
+        configurarStatus("Erro ao salvar");
+
+        alert("Não foi possível salvar online. Verifique as regras do Firestore.");
+        return false;
+    }
+}
+
+async function salvarQuestaoOnline(q) {
+    if (!firebaseAtivo || !db) {
+        alert("Firebase ainda não está conectado. A questão não será salva online.");
+        return false;
+    }
+
+    try {
+        configurarStatus("Salvando questão...");
+
+        const idDoc = `questao_${q.id}`;
+
+        await setDoc(doc(db, "questoes", idDoc), {
+            ...q,
+            atualizadoEm: serverTimestamp()
+        }, { merge: true });
+
+        configurarStatus("Salvo online");
+        return true;
+    } catch (erro) {
+        console.error(erro);
+        configurarStatus("Erro ao salvar questão");
+
+        alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
+        return false;
+    }
+}
+
+function normalizarTexto(txt) {
+    return String(txt || "")
+        .trim()
+        .replace(/\s+/g, " ");
+}
+
+function temaExiste(lista, novoTema) {
+    const novo = normalizarTexto(novoTema).toLowerCase();
+    return lista.some(t => normalizarTexto(t).toLowerCase() === novo);
+}
+
+function getTemasEspecialidade(especialidade) {
+    const padrao = temasPadrao[especialidade] || [];
+    const personalizados = estado.temasUsuario[especialidade] || [];
+    const ocultos = estado.temasOcultos[especialidade] || [];
+    const todos = [...padrao, ...personalizados];
+    const unicos = [];
+
+    todos.forEach(tema => {
+        if (!temaExiste(unicos, tema)) {
+            unicos.push(tema);
+        }
+    });
+
+    return unicos.filter(tema => !ocultos.includes(tema));
+}
+
+window.adicionarEspecialidade = async function(bloco) {
+    const input = document.getElementById(idsInputsPorBloco[bloco]);
+    if (!input) return;
+
+    const novaEspecialidade = normalizarTexto(input.value);
+
+    if (!novaEspecialidade) {
+        alert("Digite o nome da especialidade.");
+        return;
+    }
+
+    const todasEspecialidades = getTodasEspecialidades();
+
+    if (temaExiste(todasEspecialidades, novaEspecialidade)) {
+        alert("Esta especialidade já existe.");
+        return;
+    }
+
+    if (!estado.especialidadesUsuario[bloco]) {
+        estado.especialidadesUsuario[bloco] = [];
+    }
+
+    estado.especialidadesUsuario[bloco].push(novaEspecialidade);
+
+    const salvou = await salvarConfiguracoesOnline();
+    if (!salvou) return;
+
+    input.value = "";
+
+    renderizarMenusEspecialidades();
+    renderizarSelectEspecialidades();
+    atualizarSelectTemas();
+};
+
+window.mostrarTemasEspecialidade = function(especialidade) {
+    filtroAtual = {
+        tipo: "disciplina",
+        valor: especialidade,
+        especialidade: especialidade
+    };
+
+    document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
+    document.getElementById("lista").innerHTML = "";
+
+    const temas = getTemasEspecialidade(especialidade);
+    const area = document.getElementById("area-topicos");
+
+    area.innerHTML = `
+        <div class="topicos-card">
+            <h2>${especialidade}</h2>
+            <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
+
+            <div class="add-tema-box">
+                <input 
+                    type="text" 
+                    id="novo-tema-${especialidade}" 
+                    placeholder="Adicionar tema. Ex: Hanseníase"
+                    onkeydown='if(event.key === "Enter"){ adicionarTema(${JSON.stringify(especialidade)}); }'
+                >
+
+                <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>
+                    Adicionar tema
+                </button>
+            </div>
+
+            ${
+                temas.length > 0
+                ? `
+                    <div class="topicos-grid">
+                        ${temas.map(tema => `
+                            <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                <span class="topico-nome">${tema}</span>
+
+                                <button 
+                                    class="btn-lixeira-tema" 
+                                    title="Excluir tema"
+                                    onclick='event.stopPropagation(); excluirTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
+                                    🗑️
+                                </button>
                             </div>
                         `).join("")}
                     </div>
-                </details>
-            `;
-        });
-    }
-
-    function getEspecialidadesBloco(bloco) {
-        const base = especialidadesBasePorBloco[bloco] || [];
-        const personalizadas = estado.especialidadesUsuario[bloco] || [];
-        const todas = [...base, ...personalizadas];
-        const unicas = [];
-
-        todas.forEach(esp => {
-            if (!temaExiste(unicas, esp)) {
-                unicas.push(esp);
-            }
-        });
-
-        return unicas;
-    }
-
-    function getTodasEspecialidades() {
-        const todas = [];
-
-        Object.keys(especialidadesBasePorBloco).forEach(bloco => {
-            getEspecialidadesBloco(bloco).forEach(esp => {
-                if (!temaExiste(todas, esp)) {
-                    todas.push(esp);
-                }
-            });
-        });
-
-        return todas;
-    }
-
-    function renderizarMenusEspecialidades() {
-        Object.keys(idsMenusPorBloco).forEach(bloco => {
-            const menu = document.getElementById(idsMenusPorBloco[bloco]);
-            if (!menu) return;
-
-            menu.innerHTML = "";
-
-            getEspecialidadesBloco(bloco).forEach(esp => {
-                menu.innerHTML += `
-                    <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
-                        ${esp}
+                `
+                : `
+                    <div class="empty-temas">
+                        Nenhum tema cadastrado ainda para esta especialidade.
                     </div>
-                `;
-            });
-        });
-    }
-
-    function renderizarSelectEspecialidades() {
-        const selectDisc = document.getElementById("in-disc");
-        selectDisc.innerHTML = "";
-
-        getTodasEspecialidades().forEach(esp => {
-            selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
-        });
-    }
-
-    function configurarStatus(texto) {
-        document.getElementById("sync-status").innerText = texto;
-    }
-
-    function mostrarErroFirebase(texto) {
-        const box = document.getElementById("erro-firebase");
-        box.style.display = "block";
-        box.innerHTML = texto;
-    }
-
-    async function conectarFirebase() {
-        try {
-            const app = initializeApp(firebaseConfig);
-
-            try {
-                getAnalytics(app);
-            } catch (e) {
-                console.warn("Analytics não iniciado neste ambiente:", e);
+                `
             }
+        </div>
+    `;
 
-            db = getFirestore(app);
-            configRef = doc(db, "mediaApp", "bancoPrincipal");
-            questoesRef = collection(db, "questoes");
+    render();
+};
 
-            firebaseAtivo = true;
-            configurarStatus("Sincronizando...");
+window.adicionarTema = async function(especialidade) {
+    const input = document.getElementById(`novo-tema-${especialidade}`);
+    if (!input) return;
 
-            onSnapshot(configRef, async (snap) => {
-                if (salvandoAgora) return;
+    const novoTema = normalizarTexto(input.value);
 
-                if (snap.exists()) {
-                    const dados = snap.data();
-                    estado.temasUsuario = dados.temasUsuario || {};
-                    estado.temasOcultos = dados.temasOcultos || {};
-                    estado.especialidadesUsuario = dados.especialidadesUsuario || {};
-                } else {
-                    await salvarConfiguracoesOnline();
-                }
+    if (!novoTema) {
+        alert("Digite o nome do tema.");
+        return;
+    }
 
-                carregouConfig = true;
+    if (!estado.temasUsuario[especialidade]) {
+        estado.temasUsuario[especialidade] = [];
+    }
 
-                renderizarMenusEspecialidades();
-                renderizarSelectEspecialidades();
-                renderizarProvasIntegra();
-                atualizarSelectTemas();
-                render();
-            }, (erro) => {
-                console.error(erro);
-                configurarStatus("Erro ao sincronizar configurações");
+    const temasAtuais = getTemasEspecialidade(especialidade);
 
-                mostrarErroFirebase(`
-                    ⚠️ Erro ao conectar às configurações do Firestore.
-                    <br><br>
-                    Verifique se as regras permitem leitura e escrita.
-                `);
-            });
+    if (temaExiste(temasAtuais, novoTema)) {
+        alert("Este tema já existe nesta especialidade.");
+        return;
+    }
 
-            onSnapshot(questoesRef, (snap) => {
-                estado.banco = snap.docs.map(documento => {
-                    const dados = documento.data();
+    estado.temasUsuario[especialidade].push(novoTema);
 
-                    return {
-                        docId: documento.id,
-                        id: dados.id || documento.id,
-                        numero: dados.numero || null,
-                        disc: dados.disc || "",
-                        tema: dados.tema || "",
-                        banca: dados.banca || "",
-                        ano: String(dados.ano || ""),
-                        enun: dados.enun || "",
-                        img: dados.img || null,
-                        opts: dados.opts || {},
-                        correta: dados.correta || ""
-                    };
-                });
+    const salvou = await salvarConfiguracoesOnline();
+    if (!salvou) return;
 
-                estado.banco.sort((a, b) => {
-                    const aEhProva = a.disc === "Prova na íntegra";
-                    const bEhProva = b.disc === "Prova na íntegra";
+    input.value = "";
 
-                    if (aEhProva && bEhProva) {
-                        const numeroA = Number(a.numero) || 0;
-                        const numeroB = Number(b.numero) || 0;
+    mostrarTemasEspecialidade(especialidade);
+    atualizarSelectTemas();
+};
 
-                        if (numeroA !== numeroB) {
-                            return numeroA - numeroB;
-                        }
-                    }
+window.excluirTema = async function(especialidade, tema) {
+    if (!confirm(`Deseja realmente excluir o tema "${tema}" de ${especialidade}?`)) {
+        return;
+    }
 
-                    const idA = Number(a.id) || 0;
-                    const idB = Number(b.id) || 0;
-                    return idB - idA;
-                });
+    const personalizados = estado.temasUsuario[especialidade] || [];
+    const padrao = temasPadrao[especialidade] || [];
 
-                carregouQuestoes = true;
-                configurarStatus(`Salvo online • ${estado.banco.length} questão(ões)`);
-                render();
-            }, (erro) => {
-                console.error(erro);
-                configurarStatus("Erro ao carregar questões");
+    if (personalizados.includes(tema)) {
+        estado.temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
 
-                mostrarErroFirebase(`
-                    ⚠️ Erro ao carregar as questões do Firestore.
-                    <br><br>
-                    Verifique se a coleção <strong>questoes</strong> existe e se as regras permitem leitura.
-                `);
-            });
-
-        } catch (erro) {
-            console.error(erro);
-            configurarStatus("Erro no Firebase");
-
-            mostrarErroFirebase(`
-                ⚠️ Não foi possível iniciar o Firebase.
-                <br><br>
-                Verifique se o código do Firebase foi copiado corretamente.
-            `);
+        if (estado.temasUsuario[especialidade].length === 0) {
+            delete estado.temasUsuario[especialidade];
         }
     }
 
-    async function salvarConfiguracoesOnline() {
-        if (!firebaseAtivo || !configRef) {
-            alert("Firebase ainda não está conectado. As configurações não serão salvas online.");
-            return false;
+    if (padrao.includes(tema)) {
+        if (!estado.temasOcultos[especialidade]) {
+            estado.temasOcultos[especialidade] = [];
         }
 
-        try {
-            salvandoAgora = true;
-            configurarStatus("Salvando...");
-
-            await setDoc(configRef, {
-                temasUsuario: estado.temasUsuario,
-                temasOcultos: estado.temasOcultos,
-                especialidadesUsuario: estado.especialidadesUsuario,
-                atualizadoEm: serverTimestamp()
-            }, { merge: true });
-
-            configurarStatus("Salvo online");
-
-            setTimeout(() => {
-                salvandoAgora = false;
-            }, 500);
-
-            return true;
-        } catch (erro) {
-            salvandoAgora = false;
-            console.error(erro);
-            configurarStatus("Erro ao salvar");
-
-            alert("Não foi possível salvar online. Verifique as regras do Firestore.");
-            return false;
+        if (!estado.temasOcultos[especialidade].includes(tema)) {
+            estado.temasOcultos[especialidade].push(tema);
         }
     }
 
-    async function salvarQuestaoOnline(q) {
-        if (!firebaseAtivo || !db) {
-            alert("Firebase ainda não está conectado. A questão não será salva online.");
-            return false;
-        }
-
-        try {
-            configurarStatus("Salvando questão...");
-
-            const idDoc = `questao_${q.id}`;
-
-            await setDoc(doc(db, "questoes", idDoc), {
-                ...q,
-                atualizadoEm: serverTimestamp()
-            }, { merge: true });
-
-            configurarStatus("Salvo online");
-            return true;
-        } catch (erro) {
-            console.error(erro);
-            configurarStatus("Erro ao salvar questão");
-
-            alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
-            return false;
-        }
-    }
-
-    function normalizarTexto(txt) {
-        return String(txt || "")
-            .trim()
-            .replace(/\s+/g, " ");
-    }
-
-    function temaExiste(lista, novoTema) {
-        const novo = normalizarTexto(novoTema).toLowerCase();
-        return lista.some(t => normalizarTexto(t).toLowerCase() === novo);
-    }
-
-    function getTemasEspecialidade(especialidade) {
-        const padrao = temasPadrao[especialidade] || [];
-        const personalizados = estado.temasUsuario[especialidade] || [];
-        const ocultos = estado.temasOcultos[especialidade] || [];
-        const todos = [...padrao, ...personalizados];
-        const unicos = [];
-
-        todos.forEach(tema => {
-            if (!temaExiste(unicos, tema)) {
-                unicos.push(tema);
-            }
-        });
-
-        return unicos.filter(tema => !ocultos.includes(tema));
-    }
-
-    window.adicionarEspecialidade = async function(bloco) {
-        const input = document.getElementById(idsInputsPorBloco[bloco]);
-        const novaEspecialidade = normalizarTexto(input.value);
-
-        if (!novaEspecialidade) {
-            alert("Digite o nome da especialidade.");
-            return;
-        }
-
-        const todasEspecialidades = getTodasEspecialidades();
-
-        if (temaExiste(todasEspecialidades, novaEspecialidade)) {
-            alert("Esta especialidade já existe.");
-            return;
-        }
-
-        if (!estado.especialidadesUsuario[bloco]) {
-            estado.especialidadesUsuario[bloco] = [];
-        }
-
-        estado.especialidadesUsuario[bloco].push(novaEspecialidade);
-
-        const salvou = await salvarConfiguracoesOnline();
-        if (!salvou) return;
-
-        input.value = "";
-
-        renderizarMenusEspecialidades();
-        renderizarSelectEspecialidades();
-        atualizarSelectTemas();
-    };
-
-    window.mostrarTemasEspecialidade = function(especialidade) {
+    if (
+        filtroAtual.tipo === "tema" &&
+        filtroAtual.especialidade === especialidade &&
+        filtroAtual.valor === tema
+    ) {
         filtroAtual = {
             tipo: "disciplina",
             valor: especialidade,
             especialidade: especialidade
         };
+    }
 
-        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade}</strong>`;
-        document.getElementById("lista").innerHTML = "";
+    const salvou = await salvarConfiguracoesOnline();
+    if (!salvou) return;
 
-        const temas = getTemasEspecialidade(especialidade);
-        const area = document.getElementById("area-topicos");
+    mostrarTemasEspecialidade(especialidade);
+    atualizarSelectTemas();
+};
 
-        area.innerHTML = `
-            <div class="topicos-card">
-                <h2>${especialidade}</h2>
-                <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
+window.filtrarTema = function(especialidade, tema) {
+    document.getElementById("area-topicos").innerHTML = "";
 
-                <div class="add-tema-box">
-                    <input 
-                        type="text" 
-                        id="novo-tema-${especialidade}" 
-                        placeholder="Adicionar tema. Ex: Hanseníase"
-                        onkeydown='if(event.key === "Enter"){ adicionarTema(${JSON.stringify(especialidade)}); }'
-                    >
-
-                    <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>
-                        Adicionar tema
-                    </button>
-                </div>
-
-                ${
-                    temas.length > 0
-                    ? `
-                        <div class="topicos-grid">
-                            ${temas.map(tema => `
-                                <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
-                                    <span class="topico-nome">${tema}</span>
-
-                                    <button 
-                                        class="btn-lixeira-tema" 
-                                        title="Excluir tema"
-                                        onclick='event.stopPropagation(); excluirTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
-                                        🗑️
-                                    </button>
-                                </div>
-                            `).join("")}
-                        </div>
-                    `
-                    : `
-                        <div class="empty-temas">
-                            Nenhum tema cadastrado ainda para esta especialidade.
-                        </div>
-                    `
-                }
-            </div>
-        `;
-
-        render();
+    filtroAtual = {
+        tipo: "tema",
+        valor: tema,
+        especialidade: especialidade
     };
 
-    window.adicionarTema = async function(especialidade) {
-        const input = document.getElementById(`novo-tema-${especialidade}`);
-        const novoTema = normalizarTexto(input.value);
+    document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
 
-        if (!novoTema) {
-            alert("Digite o nome do tema.");
-            return;
-        }
+    render();
+};
 
-        if (!estado.temasUsuario[especialidade]) {
-            estado.temasUsuario[especialidade] = [];
-        }
+window.atualizarSelectTemas = function() {
+    const selectDisc = document.getElementById("in-disc");
+    const selectTema = document.getElementById("in-tema");
 
-        const temasAtuais = getTemasEspecialidade(especialidade);
+    if (!selectDisc || !selectTema) return;
 
-        if (temaExiste(temasAtuais, novoTema)) {
-            alert("Este tema já existe nesta especialidade.");
-            return;
-        }
+    const especialidade = selectDisc.value;
 
-        estado.temasUsuario[especialidade].push(novoTema);
+    selectTema.innerHTML = `<option value="">Sem tema específico</option>`;
 
-        const salvou = await salvarConfiguracoesOnline();
-        if (!salvou) return;
+    const temas = getTemasEspecialidade(especialidade);
 
-        input.value = "";
+    temas.forEach(tema => {
+        selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
+    });
+};
 
-        mostrarTemasEspecialidade(especialidade);
-        atualizarSelectTemas();
+window.toggleForm = function() {
+    const p = document.getElementById("panel-cadastro");
+    if (!p) return;
+
+    p.style.display = p.style.display === "block" ? "none" : "block";
+    atualizarSelectTemas();
+};
+
+window.filtrar = function(tipo, valor) {
+    const areaTopicos = document.getElementById("area-topicos");
+    if (areaTopicos) areaTopicos.innerHTML = "";
+
+    filtroAtual = {
+        tipo: tipo,
+        valor: valor,
+        especialidade: null
     };
 
-    window.excluirTema = async function(especialidade, tema) {
-        if (!confirm(`Deseja realmente excluir o tema "${tema}" de ${especialidade}?`)) {
-            return;
-        }
+    const txtFiltro = document.getElementById("txt-filtro");
 
-        const personalizados = estado.temasUsuario[especialidade] || [];
-        const padrao = temasPadrao[especialidade] || [];
-
-        if (personalizados.includes(tema)) {
-            estado.temasUsuario[especialidade] = personalizados.filter(t => t !== tema);
-
-            if (estado.temasUsuario[especialidade].length === 0) {
-                delete estado.temasUsuario[especialidade];
-            }
-        }
-
-        if (padrao.includes(tema)) {
-            if (!estado.temasOcultos[especialidade]) {
-                estado.temasOcultos[especialidade] = [];
-            }
-
-            if (!estado.temasOcultos[especialidade].includes(tema)) {
-                estado.temasOcultos[especialidade].push(tema);
-            }
-        }
-
-        if (
-            filtroAtual.tipo === "tema" &&
-            filtroAtual.especialidade === especialidade &&
-            filtroAtual.valor === tema
-        ) {
-            filtroAtual = {
-                tipo: "disciplina",
-                valor: especialidade,
-                especialidade: especialidade
-            };
-        }
-
-        const salvou = await salvarConfiguracoesOnline();
-        if (!salvou) return;
-
-        mostrarTemasEspecialidade(especialidade);
-        atualizarSelectTemas();
-    };
-
-    window.filtrarTema = function(especialidade, tema) {
-        document.getElementById("area-topicos").innerHTML = "";
-
-        filtroAtual = {
-            tipo: "tema",
-            valor: tema,
-            especialidade: especialidade
-        };
-
-        document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
-
-        render();
-    };
-
-    window.atualizarSelectTemas = function() {
-        const especialidade = document.getElementById("in-disc").value;
-        const selectTema = document.getElementById("in-tema");
-
-        selectTema.innerHTML = `<option value="">Sem tema específico</option>`;
-
-        const temas = getTemasEspecialidade(especialidade);
-
-        temas.forEach(tema => {
-            selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
-        });
-    };
-
-    window.toggleForm = function() {
-        const p = document.getElementById("panel-cadastro");
-        p.style.display = p.style.display === "block" ? "none" : "block";
-        atualizarSelectTemas();
-    };
-
-    window.filtrar = function(tipo, valor) {
-        document.getElementById("area-topicos").innerHTML = "";
-
-        filtroAtual = {
-            tipo: tipo,
-            valor: valor,
-            especialidade: null
-        };
-
+    if (txtFiltro) {
         if (tipo === "banca-ano" && valor) {
             const [banca, ano] = valor.split("|");
-            document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${banca} ${ano}</strong>`;
+            txtFiltro.innerHTML = `Mostrando: <strong>${banca} ${ano}</strong>`;
         } else {
-            document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
+            txtFiltro.innerHTML = `Mostrando: <strong>${valor || "Todas as Questões"}</strong>`;
         }
+    }
 
-        render();
+    render();
+};
+
+async function salvarQuestao(img) {
+    const opts = {
+        A: document.getElementById("in-a").value,
+        B: document.getElementById("in-b").value,
+        C: document.getElementById("in-c").value,
+        D: document.getElementById("in-d").value
     };
 
-    document.getElementById("form-q").addEventListener("submit", function(e) {
-        e.preventDefault();
+    const alternativaE = document.getElementById("in-e").value.trim();
 
-        const file = document.getElementById("in-img").files[0];
+    if (alternativaE) {
+        opts.E = alternativaE;
+    }
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => salvarQuestao(reader.result);
-            reader.readAsDataURL(file);
-        } else {
-            salvarQuestao(null);
+    const q = {
+        id: Date.now(),
+        numero: null,
+        disc: document.getElementById("in-disc").value,
+        tema: document.getElementById("in-tema").value,
+        banca: document.getElementById("in-banca").value,
+        ano: String(document.getElementById("in-ano").value),
+        enun: document.getElementById("in-enun").value,
+        img: img,
+        opts: opts,
+        correta: document.getElementById("in-correta").value,
+        criadoEm: serverTimestamp()
+    };
+
+    if (q.correta === "E" && !opts.E) {
+        alert("Você marcou gabarito E, mas não preencheu a alternativa E.");
+        return;
+    }
+
+    const salvou = await salvarQuestaoOnline(q);
+
+    if (!salvou) return;
+
+    document.getElementById("form-q").reset();
+    atualizarSelectTemas();
+    toggleForm();
+}
+
+function render() {
+    const lista = document.getElementById("lista");
+    if (!lista) return;
+
+    lista.innerHTML = "";
+
+    const filtrados = estado.banco.filter(q => {
+        if (filtroAtual.tipo === "todos") return true;
+
+        if (filtroAtual.tipo === "disciplina") {
+            return q.disc === filtroAtual.valor;
         }
+
+        if (filtroAtual.tipo === "tema") {
+            return q.disc === filtroAtual.especialidade && q.tema === filtroAtual.valor;
+        }
+
+        if (filtroAtual.tipo === "banca-ano") {
+            const [b, a] = filtroAtual.valor.split("|");
+            return q.banca === b && String(q.ano) === String(a);
+        }
+
+        return true;
     });
 
-    async function salvarQuestao(img) {
-        const opts = {
-            A: document.getElementById("in-a").value,
-            B: document.getElementById("in-b").value,
-            C: document.getElementById("in-c").value,
-            D: document.getElementById("in-d").value
-        };
+    filtrados.sort((a, b) => {
+        const aEhProva = a.disc === "Prova na íntegra";
+        const bEhProva = b.disc === "Prova na íntegra";
 
-        const alternativaE = document.getElementById("in-e").value.trim();
+        if (aEhProva && bEhProva) {
+            const numeroA = Number(a.numero) || 0;
+            const numeroB = Number(b.numero) || 0;
 
-        if (alternativaE) {
-            opts.E = alternativaE;
+            if (numeroA !== numeroB) {
+                return numeroA - numeroB;
+            }
         }
 
-        const q = {
-            id: Date.now(),
-            numero: null,
-            disc: document.getElementById("in-disc").value,
-            tema: document.getElementById("in-tema").value,
-            banca: document.getElementById("in-banca").value,
-            ano: String(document.getElementById("in-ano").value),
-            enun: document.getElementById("in-enun").value,
-            img: img,
-            opts: opts,
-            correta: document.getElementById("in-correta").value,
-            criadoEm: serverTimestamp()
-        };
+        const idA = Number(a.id) || 0;
+        const idB = Number(b.id) || 0;
+        return idB - idA;
+    });
 
-        if (q.correta === "E" && !opts.E) {
-            alert("Você marcou gabarito E, mas não preencheu a alternativa E.");
-            return;
-        }
-
-        const salvou = await salvarQuestaoOnline(q);
-
-        if (!salvou) return;
-
-        document.getElementById("form-q").reset();
-        atualizarSelectTemas();
-        toggleForm();
+    if (!carregouQuestoes && firebaseAtivo) {
+        lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões online...</p>`;
+        return;
     }
 
-    function render() {
-        const lista = document.getElementById("lista");
-
-        lista.innerHTML = "";
-
-        const filtrados = estado.banco.filter(q => {
-            if (filtroAtual.tipo === "todos") return true;
-
-            if (filtroAtual.tipo === "disciplina") {
-                return q.disc === filtroAtual.valor;
-            }
-
-            if (filtroAtual.tipo === "tema") {
-                return q.disc === filtroAtual.especialidade && q.tema === filtroAtual.valor;
-            }
-
-            if (filtroAtual.tipo === "banca-ano") {
-                const [b, a] = filtroAtual.valor.split("|");
-                return q.banca === b && String(q.ano) === String(a);
-            }
-
-            return true;
-        });
-
-        filtrados.sort((a, b) => {
-            const aEhProva = a.disc === "Prova na íntegra";
-            const bEhProva = b.disc === "Prova na íntegra";
-
-            if (aEhProva && bEhProva) {
-                const numeroA = Number(a.numero) || 0;
-                const numeroB = Number(b.numero) || 0;
-
-                if (numeroA !== numeroB) {
-                    return numeroA - numeroB;
-                }
-            }
-
-            const idA = Number(a.id) || 0;
-            const idB = Number(b.id) || 0;
-            return idB - idA;
-        });
-
-        if (!carregouQuestoes && firebaseAtivo) {
-            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Carregando questões online...</p>`;
-            return;
-        }
-
-        if (filtrados.length === 0) {
-            lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
-            return;
-        }
-
-        filtrados.forEach(q => {
-            const alternativas = q.opts || {};
-            const letras = Object.keys(alternativas).sort();
-
-            lista.innerHTML += `
-                <div class="question-card">
-                    <div class="q-header">
-                        <span>
-                            ${q.numero ? `Questão ${q.numero} • ` : ""}
-                            ${q.banca} (${q.ano}) • 
-                            <strong>${q.disc}</strong>
-                            ${q.tema ? ` • ${q.tema}` : ""}
-                        </span>
-
-                        <div class="q-actions">
-                            <button class="btn-copy" onclick="copiarQuestao('${q.docId}')">
-                                📋 Copiar
-                            </button>
-
-                            <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
-                                Remover
-                            </button>
-                        </div>
-                    </div>
-
-                    ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
-
-                    <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
-
-                    <ul class="opt-list">
-                        ${letras.map(letra => `
-                            <li>
-                                <label id="l-${q.docId}-${letra}">
-                                    <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
-                                </label>
-                            </li>
-                        `).join("")}
-                    </ul>
-
-                    <button class="btn-add" id="btn-${q.docId}" onclick="corrigir('${q.docId}', '${q.correta}')">
-                        Confirmar Resposta
-                    </button>
-                </div>
-            `;
-        });
+    if (filtrados.length === 0) {
+        lista.innerHTML = `<p style="text-align:center; padding:2rem; color:#666">Nenhuma questão encontrada aqui ainda.</p>`;
+        return;
     }
 
-    window.copiarQuestao = async function(docId) {
-        const q = estado.banco.find(item => item.docId === docId);
-
-        if (!q) {
-            alert("Não foi possível encontrar esta questão.");
-            return;
-        }
-
+    filtrados.forEach(q => {
         const alternativas = q.opts || {};
         const letras = Object.keys(alternativas).sort();
 
-        const texto = [
-            q.numero ? `Questão ${q.numero}` : "Questão",
-            q.banca && q.ano ? `${q.banca} (${q.ano})` : "",
-            q.disc ? `Área: ${q.disc}` : "",
-            q.tema ? `Tema: ${q.tema}` : "",
-            "",
-            q.enun,
-            "",
-            ...letras.map(letra => `${letra}) ${alternativas[letra]}`)
-        ].filter(linha => linha !== "").join("\n");
+        lista.innerHTML += `
+            <div class="question-card">
+                <div class="q-header">
+                    <span>
+                        ${q.numero ? `Questão ${q.numero} • ` : ""}
+                        ${q.banca} (${q.ano}) • 
+                        <strong>${q.disc}</strong>
+                        ${q.tema ? ` • ${q.tema}` : ""}
+                    </span>
 
+                    <div class="q-actions">
+                        <button class="btn-copy" onclick="copiarQuestao('${q.docId}')">
+                            📋 Copiar
+                        </button>
+
+                        <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
+                            Remover
+                        </button>
+                    </div>
+                </div>
+
+                ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
+
+                <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
+
+                <ul class="opt-list">
+                    ${letras.map(letra => `
+                        <li>
+                            <label id="l-${q.docId}-${letra}">
+                                <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
+                            </label>
+                        </li>
+                    `).join("")}
+                </ul>
+
+                <button class="btn-add" id="btn-${q.docId}" onclick="corrigir('${q.docId}', '${q.correta}')">
+                    Confirmar Resposta
+                </button>
+            </div>
+        `;
+    });
+}
+
+window.copiarQuestao = async function(docId) {
+    const q = estado.banco.find(item => item.docId === docId);
+
+    if (!q) {
+        alert("Não foi possível encontrar esta questão.");
+        return;
+    }
+
+    const alternativas = q.opts || {};
+    const letras = Object.keys(alternativas).sort();
+
+    const texto = [
+        q.numero ? `Questão ${q.numero}` : "Questão",
+        q.banca && q.ano ? `${q.banca} (${q.ano})` : "",
+        q.disc ? `Área: ${q.disc}` : "",
+        q.tema ? `Tema: ${q.tema}` : "",
+        "",
+        q.enun,
+        "",
+        ...letras.map(letra => `${letra}) ${alternativas[letra]}`)
+    ].filter(linha => linha !== "").join("\n");
+
+    try {
+        await navigator.clipboard.writeText(texto);
+        alert("Questão copiada com sucesso!");
+    } catch (erro) {
+        console.error(erro);
+
+        const area = document.createElement("textarea");
+        area.value = texto;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        document.body.removeChild(area);
+
+        alert("Questão copiada com sucesso!");
+    }
+};
+
+window.corrigir = function(id, correta) {
+    const sel = document.querySelector(`input[name="r-${id}"]:checked`);
+
+    if (!sel) {
+        alert("Selecione uma opção!");
+        return;
+    }
+
+    const corretaEl = document.getElementById(`l-${id}-${correta}`);
+
+    if (corretaEl) {
+        corretaEl.classList.add("correct");
+    }
+
+    if (sel.value !== correta) {
+        const erradaEl = document.getElementById(`l-${id}-${sel.value}`);
+
+        if (erradaEl) {
+            erradaEl.classList.add("wrong");
+        }
+    }
+
+    document.getElementById(`btn-${id}`).disabled = true;
+    document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
+    document.getElementById(`btn-${id}`).style.background = "#666";
+};
+
+window.excluirQuestao = async function(docId) {
+    if (!docId) {
+        alert("Não foi possível identificar esta questão no Firebase.");
+        return;
+    }
+
+    if (confirm("Deseja realmente excluir esta questão?")) {
         try {
-            await navigator.clipboard.writeText(texto);
-            alert("Questão copiada com sucesso!");
+            await deleteDoc(doc(db, "questoes", docId));
+            configurarStatus("Questão removida");
         } catch (erro) {
             console.error(erro);
-
-            const area = document.createElement("textarea");
-            area.value = texto;
-            document.body.appendChild(area);
-            area.select();
-            document.execCommand("copy");
-            document.body.removeChild(area);
-
-            alert("Questão copiada com sucesso!");
+            alert("Erro ao excluir a questão no Firebase.");
         }
-    };
-
-    window.corrigir = function(id, correta) {
-        const sel = document.querySelector(`input[name="r-${id}"]:checked`);
-
-        if (!sel) {
-            alert("Selecione uma opção!");
-            return;
-        }
-
-        const corretaEl = document.getElementById(`l-${id}-${correta}`);
-
-        if (corretaEl) {
-            corretaEl.classList.add("correct");
-        }
-
-        if (sel.value !== correta) {
-            const erradaEl = document.getElementById(`l-${id}-${sel.value}`);
-
-            if (erradaEl) {
-                erradaEl.classList.add("wrong");
-            }
-        }
-
-        document.getElementById(`btn-${id}`).disabled = true;
-        document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
-        document.getElementById(`btn-${id}`).style.background = "#666";
-    };
-
-    window.excluirQuestao = async function(docId) {
-        if (!docId) {
-            alert("Não foi possível identificar esta questão no Firebase.");
-            return;
-        }
-
-        if (confirm("Deseja realmente excluir esta questão?")) {
-            try {
-                await deleteDoc(doc(db, "questoes", docId));
-                configurarStatus("Questão removida");
-            } catch (erro) {
-                console.error(erro);
-                alert("Erro ao excluir a questão no Firebase.");
-            }
-        }
-    };
+    }
+};
 </script>
 
 </body>

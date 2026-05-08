@@ -15,6 +15,10 @@
     --danger: #c1121f;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg);
@@ -114,6 +118,8 @@ header h1 {
     transition: 0.25s;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    min-height: 230px;
 }
 
 .home-card:hover {
@@ -130,6 +136,7 @@ header h1 {
     border-radius: 50%;
     top: -70px;
     right: -70px;
+    pointer-events: none;
 }
 
 .home-icon {
@@ -147,27 +154,28 @@ header h1 {
     z-index: 1;
 }
 
+.home-card h3,
+.home-card p,
+.home-action {
+    position: relative;
+    z-index: 1;
+}
+
 .home-card h3 {
     margin: 0 0 0.7rem 0;
     color: var(--primary);
     font-size: 1.45rem;
-    position: relative;
-    z-index: 1;
 }
 
 .home-card p {
     margin: 0 0 1.2rem 0;
     color: #666;
     font-size: 0.98rem;
-    position: relative;
-    z-index: 1;
 }
 
 .home-action {
     color: var(--primary);
     font-weight: bold;
-    position: relative;
-    z-index: 1;
 }
 
 .rmais-screen {
@@ -637,8 +645,8 @@ textarea {
 <body>
 
 <header>
-    <h1 onclick="voltarInicio()">🩺 MedIA</h1>
-    <div class="sync-status" id="sync-status">Iniciando...</div>
+    <h1 id="btn-home">🩺 MedIA</h1>
+    <div class="sync-status" id="sync-status">Pronto</div>
 </header>
 
 <section id="tela-inicial" class="home-screen">
@@ -653,14 +661,14 @@ textarea {
         </p>
 
         <div class="home-cards">
-            <div class="home-card" onclick="abrirBancoR1()">
+            <div class="home-card" id="card-r1">
                 <div class="home-icon">🎯</div>
                 <h3>Questões Acesso Direto (R1)</h3>
                 <p>Especialidades, temas, provas na íntegra, cadastro e resolução das questões atuais.</p>
                 <div class="home-action">Entrar no R1 →</div>
             </div>
 
-            <div class="home-card" onclick="abrirBancoRmais()">
+            <div class="home-card" id="card-rmais">
                 <div class="home-icon">🚀</div>
                 <h3>Questões R+</h3>
                 <p>Área separada para futuramente organizar questões de residência avançada.</p>
@@ -672,7 +680,7 @@ textarea {
 
 <main id="tela-r1" class="app-main hidden">
     <aside>
-        <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
+        <button class="btn-add" id="btn-toggle-form">➕ CADASTRAR QUESTÃO</button>
 
         <div class="aviso-online">
             ✅ Temas, especialidades e questões serão salvos online no Firebase.
@@ -686,8 +694,8 @@ textarea {
             <summary>Clínica Médica</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-clinica-medica" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Clínica Médica"); }'>
-                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Clínica Médica")'>Adicionar</button>
+                    <input type="text" id="nova-especialidade-clinica-medica" placeholder="Adicionar especialidade">
+                    <button class="btn-especialidade" data-bloco="Clínica Médica">Adicionar</button>
                 </div>
                 <div id="menu-clinica"></div>
             </div>
@@ -697,8 +705,8 @@ textarea {
             <summary>Cirurgia Geral</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-cirurgia-geral" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Cirurgia Geral"); }'>
-                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Cirurgia Geral")'>Adicionar</button>
+                    <input type="text" id="nova-especialidade-cirurgia-geral" placeholder="Adicionar especialidade">
+                    <button class="btn-especialidade" data-bloco="Cirurgia Geral">Adicionar</button>
                 </div>
                 <div id="menu-cirurgia-geral"></div>
             </div>
@@ -708,8 +716,8 @@ textarea {
             <summary>Ginecologia e Obstetrícia</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-ginecologia-e-obstetricia" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Ginecologia e Obstetrícia"); }'>
-                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Ginecologia e Obstetrícia")'>Adicionar</button>
+                    <input type="text" id="nova-especialidade-ginecologia-e-obstetricia" placeholder="Adicionar especialidade">
+                    <button class="btn-especialidade" data-bloco="Ginecologia e Obstetrícia">Adicionar</button>
                 </div>
                 <div id="menu-ginecologia-e-obstetricia"></div>
             </div>
@@ -719,8 +727,8 @@ textarea {
             <summary>Pediatria</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-pediatria" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Pediatria"); }'>
-                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Pediatria")'>Adicionar</button>
+                    <input type="text" id="nova-especialidade-pediatria" placeholder="Adicionar especialidade">
+                    <button class="btn-especialidade" data-bloco="Pediatria">Adicionar</button>
                 </div>
                 <div id="menu-pediatria"></div>
             </div>
@@ -730,8 +738,8 @@ textarea {
             <summary>Medicina Preventiva</summary>
             <div style="padding-top: 5px;">
                 <div class="add-especialidade-box">
-                    <input type="text" id="nova-especialidade-medicina-preventiva" placeholder="Adicionar especialidade" onkeydown='if(event.key === "Enter"){ adicionarEspecialidade("Medicina Preventiva"); }'>
-                    <button class="btn-especialidade" onclick='adicionarEspecialidade("Medicina Preventiva")'>Adicionar</button>
+                    <input type="text" id="nova-especialidade-medicina-preventiva" placeholder="Adicionar especialidade">
+                    <button class="btn-especialidade" data-bloco="Medicina Preventiva">Adicionar</button>
                 </div>
                 <div id="menu-medicina-preventiva"></div>
             </div>
@@ -749,7 +757,7 @@ textarea {
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Especialidade</label>
-                        <select id="in-disc" required onchange="atualizarSelectTemas()"></select>
+                        <select id="in-disc" required></select>
                     </div>
 
                     <div class="form-group">
@@ -807,7 +815,7 @@ textarea {
 
         <div class="filter-status">
             <span id="txt-filtro">Mostrando: <strong>Todas as Questões</strong></span>
-            <button onclick="filtrar('todos')" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
+            <button id="btn-ver-todas" style="cursor:pointer; border:none; background:#1b4332; color:white; padding:5px 10px; border-radius:4px">
                 Ver Todas
             </button>
         </div>
@@ -821,36 +829,9 @@ textarea {
     <div class="rmais-card">
         <h2>Questões R+</h2>
         <p>Esta área já está criada, mas ainda está vazia. Depois podemos montar aqui um banco separado para R+.</p>
-        <button class="btn-voltar" onclick="voltarInicio()">Voltar para a tela inicial</button>
+        <button class="btn-voltar" id="btn-voltar-rmais">Voltar para a tela inicial</button>
     </div>
 </section>
-
-<script>
-function abrirBancoR1() {
-    document.getElementById("tela-inicial").classList.add("hidden");
-    document.getElementById("tela-rmais").classList.add("hidden");
-    document.getElementById("tela-r1").classList.remove("hidden");
-    window.scrollTo(0, 0);
-
-    if (typeof window.filtrar === "function") {
-        window.filtrar("todos");
-    }
-}
-
-function abrirBancoRmais() {
-    document.getElementById("tela-inicial").classList.add("hidden");
-    document.getElementById("tela-r1").classList.add("hidden");
-    document.getElementById("tela-rmais").classList.remove("hidden");
-    window.scrollTo(0, 0);
-}
-
-function voltarInicio() {
-    document.getElementById("tela-r1").classList.add("hidden");
-    document.getElementById("tela-rmais").classList.add("hidden");
-    document.getElementById("tela-inicial").classList.remove("hidden");
-    window.scrollTo(0, 0);
-}
-</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
@@ -879,8 +860,8 @@ let db = null;
 let configRef = null;
 let questoesRef = null;
 let firebaseAtivo = false;
+let firebaseIniciado = false;
 let carregouQuestoes = false;
-let carregouConfig = false;
 let salvandoAgora = false;
 let timeoutFirebase = null;
 
@@ -985,20 +966,34 @@ let filtroAtual = {
     especialidade: null
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-    inicializarSite();
-    conectarFirebase();
+document.addEventListener("DOMContentLoaded", () => {
+    inicializarSiteSemFirebase();
+    configurarEventosFixos();
 });
 
-function inicializarSite() {
-    renderizarMenusEspecialidades();
-    renderizarSelectEspecialidades();
-    renderizarProvasIntegra();
-    atualizarSelectTemas();
-    render();
+function configurarEventosFixos() {
+    document.getElementById("card-r1").addEventListener("click", abrirBancoR1);
+    document.getElementById("card-rmais").addEventListener("click", abrirBancoRmais);
+    document.getElementById("btn-home").addEventListener("click", voltarInicio);
+    document.getElementById("btn-voltar-rmais").addEventListener("click", voltarInicio);
+    document.getElementById("btn-toggle-form").addEventListener("click", toggleForm);
+    document.getElementById("btn-ver-todas").addEventListener("click", () => filtrar("todos"));
+    document.getElementById("in-disc").addEventListener("change", atualizarSelectTemas);
 
-    const form = document.getElementById("form-q");
-    form.addEventListener("submit", function(e) {
+    document.querySelectorAll(".btn-especialidade").forEach(botao => {
+        botao.addEventListener("click", () => adicionarEspecialidade(botao.dataset.bloco));
+    });
+
+    Object.keys(idsInputsPorBloco).forEach(bloco => {
+        const input = document.getElementById(idsInputsPorBloco[bloco]);
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                adicionarEspecialidade(bloco);
+            }
+        });
+    });
+
+    document.getElementById("form-q").addEventListener("submit", function(e) {
         e.preventDefault();
 
         const file = document.getElementById("in-img").files[0];
@@ -1013,23 +1008,68 @@ function inicializarSite() {
     });
 }
 
+function inicializarSiteSemFirebase() {
+    renderizarMenusEspecialidades();
+    renderizarSelectEspecialidades();
+    renderizarProvasIntegra();
+    atualizarSelectTemas();
+    carregouQuestoes = true;
+    render();
+    configurarStatus("Pronto");
+}
+
+function abrirBancoR1() {
+    document.getElementById("tela-inicial").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.add("hidden");
+    document.getElementById("tela-r1").classList.remove("hidden");
+    window.scrollTo(0, 0);
+
+    filtrar("todos");
+
+    if (!firebaseIniciado) {
+        conectarFirebase();
+    }
+}
+
+function abrirBancoRmais() {
+    document.getElementById("tela-inicial").classList.add("hidden");
+    document.getElementById("tela-r1").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.remove("hidden");
+    window.scrollTo(0, 0);
+    configurarStatus("Pronto");
+}
+
+function voltarInicio() {
+    document.getElementById("tela-r1").classList.add("hidden");
+    document.getElementById("tela-rmais").classList.add("hidden");
+    document.getElementById("tela-inicial").classList.remove("hidden");
+    window.scrollTo(0, 0);
+}
+
 function renderizarProvasIntegra() {
     const menu = document.getElementById("menu-provas-integra");
     menu.innerHTML = "";
 
     instituicoesProvasIntegra.forEach(instituicao => {
-        menu.innerHTML += `
-            <details>
-                <summary>${instituicao}</summary>
-                <div style="padding-top: 5px;">
-                    ${anosProvasIntegra.map(ano => `
-                        <div class="filter-item" onclick="filtrar('banca-ano', '${instituicao}|${ano}')">
-                            ${instituicao} ${ano}
-                        </div>
-                    `).join("")}
-                </div>
-            </details>
-        `;
+        const details = document.createElement("details");
+
+        const summary = document.createElement("summary");
+        summary.textContent = instituicao;
+
+        const div = document.createElement("div");
+        div.style.paddingTop = "5px";
+
+        anosProvasIntegra.forEach(ano => {
+            const item = document.createElement("div");
+            item.className = "filter-item";
+            item.textContent = `${instituicao} ${ano}`;
+            item.addEventListener("click", () => filtrar("banca-ano", `${instituicao}|${ano}`));
+            div.appendChild(item);
+        });
+
+        details.appendChild(summary);
+        details.appendChild(div);
+        menu.appendChild(details);
     });
 }
 
@@ -1070,11 +1110,11 @@ function renderizarMenusEspecialidades() {
         menu.innerHTML = "";
 
         getEspecialidadesBloco(bloco).forEach(esp => {
-            menu.innerHTML += `
-                <div class="filter-item" onclick='mostrarTemasEspecialidade(${JSON.stringify(esp)})'>
-                    ${esp}
-                </div>
-            `;
+            const item = document.createElement("div");
+            item.className = "filter-item";
+            item.textContent = esp;
+            item.addEventListener("click", () => mostrarTemasEspecialidade(esp));
+            menu.appendChild(item);
         });
     });
 }
@@ -1084,7 +1124,10 @@ function renderizarSelectEspecialidades() {
     selectDisc.innerHTML = "";
 
     getTodasEspecialidades().forEach(esp => {
-        selectDisc.innerHTML += `<option value="${esp}">${esp}</option>`;
+        const opt = document.createElement("option");
+        opt.value = esp;
+        opt.textContent = esp;
+        selectDisc.appendChild(opt);
     });
 }
 
@@ -1099,8 +1142,13 @@ function mostrarErroFirebase(texto) {
 }
 
 async function conectarFirebase() {
+    if (firebaseIniciado) return;
+
+    firebaseIniciado = true;
+    carregouQuestoes = false;
+    configurarStatus("Conectando Firebase...");
+
     try {
-        configurarStatus("Conectando...");
         const app = initializeApp(firebaseConfig);
 
         try {
@@ -1114,15 +1162,15 @@ async function conectarFirebase() {
         questoesRef = collection(db, "questoes");
 
         firebaseAtivo = true;
-        configurarStatus("Conectado • carregando dados...");
+        configurarStatus("Firebase conectado • carregando...");
 
         timeoutFirebase = setTimeout(() => {
             if (!carregouQuestoes) {
                 carregouQuestoes = true;
-                configurarStatus("Conectado • aguardando questões");
+                configurarStatus("Firebase conectado • aguardando dados");
                 render();
             }
-        }, 5000);
+        }, 7000);
 
         onSnapshot(configRef, async (snap) => {
             if (salvandoAgora) return;
@@ -1139,22 +1187,14 @@ async function conectarFirebase() {
                 salvarConfiguracoesOnline();
             }
 
-            carregouConfig = true;
-
             renderizarMenusEspecialidades();
             renderizarSelectEspecialidades();
             renderizarProvasIntegra();
             atualizarSelectTemas();
             render();
-
-            if (!carregouQuestoes) {
-                configurarStatus("Configurações carregadas • buscando questões...");
-            }
         }, (erro) => {
             console.error(erro);
-            carregouConfig = true;
             configurarStatus("Erro nas configurações");
-
             mostrarErroFirebase(`
                 ⚠️ Erro ao conectar às configurações do Firestore.
                 <br><br>
@@ -1332,7 +1372,7 @@ function getTemasEspecialidade(especialidade) {
     return unicos.filter(tema => !ocultos.includes(tema));
 }
 
-window.adicionarEspecialidade = async function(bloco) {
+async function adicionarEspecialidade(bloco) {
     const input = document.getElementById(idsInputsPorBloco[bloco]);
     const novaEspecialidade = normalizarTexto(input.value);
 
@@ -1362,9 +1402,9 @@ window.adicionarEspecialidade = async function(bloco) {
     renderizarMenusEspecialidades();
     renderizarSelectEspecialidades();
     atualizarSelectTemas();
-};
+}
 
-window.mostrarTemasEspecialidade = function(especialidade) {
+function mostrarTemasEspecialidade(especialidade) {
     filtroAtual = {
         tipo: "disciplina",
         valor: especialidade,
@@ -1377,55 +1417,82 @@ window.mostrarTemasEspecialidade = function(especialidade) {
     const temas = getTemasEspecialidade(especialidade);
     const area = document.getElementById("area-topicos");
 
-    area.innerHTML = `
-        <div class="topicos-card">
-            <h2>${especialidade}</h2>
-            <p>Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.</p>
+    area.innerHTML = "";
 
-            <div class="add-tema-box">
-                <input 
-                    type="text" 
-                    id="novo-tema-${especialidade}" 
-                    placeholder="Adicionar tema. Ex: Hanseníase"
-                    onkeydown='if(event.key === "Enter"){ adicionarTema(${JSON.stringify(especialidade)}); }'
-                >
+    const card = document.createElement("div");
+    card.className = "topicos-card";
 
-                <button class="btn-tema" onclick='adicionarTema(${JSON.stringify(especialidade)})'>
-                    Adicionar tema
-                </button>
-            </div>
+    const h2 = document.createElement("h2");
+    h2.textContent = especialidade;
 
-            ${
-                temas.length > 0
-                ? `
-                    <div class="topicos-grid">
-                        ${temas.map(tema => `
-                            <div class="topico-item" onclick='filtrarTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
-                                <span class="topico-nome">${tema}</span>
+    const p = document.createElement("p");
+    p.textContent = "Escolha um tema para visualizar questões ou adicione um novo tema nesta especialidade.";
 
-                                <button 
-                                    class="btn-lixeira-tema" 
-                                    title="Excluir tema"
-                                    onclick='event.stopPropagation(); excluirTema(${JSON.stringify(especialidade)}, ${JSON.stringify(tema)})'>
-                                    🗑️
-                                </button>
-                            </div>
-                        `).join("")}
-                    </div>
-                `
-                : `
-                    <div class="empty-temas">
-                        Nenhum tema cadastrado ainda para esta especialidade.
-                    </div>
-                `
-            }
-        </div>
-    `;
+    const addBox = document.createElement("div");
+    addBox.className = "add-tema-box";
 
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = `novo-tema-${especialidade}`;
+    input.placeholder = "Adicionar tema. Ex: Hanseníase";
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            adicionarTema(especialidade);
+        }
+    });
+
+    const btn = document.createElement("button");
+    btn.className = "btn-tema";
+    btn.textContent = "Adicionar tema";
+    btn.addEventListener("click", () => adicionarTema(especialidade));
+
+    addBox.appendChild(input);
+    addBox.appendChild(btn);
+
+    card.appendChild(h2);
+    card.appendChild(p);
+    card.appendChild(addBox);
+
+    if (temas.length > 0) {
+        const grid = document.createElement("div");
+        grid.className = "topicos-grid";
+
+        temas.forEach(tema => {
+            const item = document.createElement("div");
+            item.className = "topico-item";
+            item.addEventListener("click", () => filtrarTema(especialidade, tema));
+
+            const nome = document.createElement("span");
+            nome.className = "topico-nome";
+            nome.textContent = tema;
+
+            const lixeira = document.createElement("button");
+            lixeira.className = "btn-lixeira-tema";
+            lixeira.title = "Excluir tema";
+            lixeira.textContent = "🗑️";
+            lixeira.addEventListener("click", (event) => {
+                event.stopPropagation();
+                excluirTema(especialidade, tema);
+            });
+
+            item.appendChild(nome);
+            item.appendChild(lixeira);
+            grid.appendChild(item);
+        });
+
+        card.appendChild(grid);
+    } else {
+        const vazio = document.createElement("div");
+        vazio.className = "empty-temas";
+        vazio.textContent = "Nenhum tema cadastrado ainda para esta especialidade.";
+        card.appendChild(vazio);
+    }
+
+    area.appendChild(card);
     render();
-};
+}
 
-window.adicionarTema = async function(especialidade) {
+async function adicionarTema(especialidade) {
     const input = document.getElementById(`novo-tema-${especialidade}`);
     const novoTema = normalizarTexto(input.value);
 
@@ -1454,9 +1521,9 @@ window.adicionarTema = async function(especialidade) {
 
     mostrarTemasEspecialidade(especialidade);
     atualizarSelectTemas();
-};
+}
 
-window.excluirTema = async function(especialidade, tema) {
+async function excluirTema(especialidade, tema) {
     if (!confirm(`Deseja realmente excluir o tema "${tema}" de ${especialidade}?`)) {
         return;
     }
@@ -1499,9 +1566,9 @@ window.excluirTema = async function(especialidade, tema) {
 
     mostrarTemasEspecialidade(especialidade);
     atualizarSelectTemas();
-};
+}
 
-window.filtrarTema = function(especialidade, tema) {
+function filtrarTema(especialidade, tema) {
     document.getElementById("area-topicos").innerHTML = "";
 
     filtroAtual = {
@@ -1513,9 +1580,9 @@ window.filtrarTema = function(especialidade, tema) {
     document.getElementById("txt-filtro").innerHTML = `Mostrando: <strong>${especialidade} • ${tema}</strong>`;
 
     render();
-};
+}
 
-window.atualizarSelectTemas = function() {
+function atualizarSelectTemas() {
     const especialidade = document.getElementById("in-disc").value;
     const selectTema = document.getElementById("in-tema");
 
@@ -1524,17 +1591,20 @@ window.atualizarSelectTemas = function() {
     const temas = getTemasEspecialidade(especialidade);
 
     temas.forEach(tema => {
-        selectTema.innerHTML += `<option value="${tema}">${tema}</option>`;
+        const opt = document.createElement("option");
+        opt.value = tema;
+        opt.textContent = tema;
+        selectTema.appendChild(opt);
     });
-};
+}
 
-window.toggleForm = function() {
+function toggleForm() {
     const p = document.getElementById("panel-cadastro");
     p.style.display = p.style.display === "block" ? "none" : "block";
     atualizarSelectTemas();
-};
+}
 
-window.filtrar = function(tipo, valor) {
+function filtrar(tipo, valor) {
     document.getElementById("area-topicos").innerHTML = "";
 
     filtroAtual = {
@@ -1551,7 +1621,7 @@ window.filtrar = function(tipo, valor) {
     }
 
     render();
-};
+}
 
 async function salvarQuestao(img) {
     const opts = {
@@ -1651,50 +1721,52 @@ function render() {
         const alternativas = q.opts || {};
         const letras = Object.keys(alternativas).sort();
 
-        lista.innerHTML += `
-            <div class="question-card">
-                <div class="q-header">
-                    <span>
-                        ${q.numero ? `Questão ${q.numero} • ` : ""}
-                        ${q.banca} (${q.ano}) • 
-                        <strong>${q.disc}</strong>
-                        ${q.tema ? ` • ${q.tema}` : ""}
-                    </span>
+        const card = document.createElement("div");
+        card.className = "question-card";
 
-                    <div class="q-actions">
-                        <button class="btn-copy" onclick="copiarQuestao('${q.docId}')">
-                            📋 Copiar
-                        </button>
+        card.innerHTML = `
+            <div class="q-header">
+                <span>
+                    ${q.numero ? `Questão ${q.numero} • ` : ""}
+                    ${q.banca} (${q.ano}) • 
+                    <strong>${q.disc}</strong>
+                    ${q.tema ? ` • ${q.tema}` : ""}
+                </span>
 
-                        <button onclick="excluirQuestao('${q.docId}')" style="color:red; border:none; background:none; cursor:pointer">
-                            Remover
-                        </button>
-                    </div>
+                <div class="q-actions">
+                    <button class="btn-copy">📋 Copiar</button>
+                    <button class="btn-remover" style="color:red; border:none; background:none; cursor:pointer">Remover</button>
                 </div>
-
-                ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
-
-                <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
-
-                <ul class="opt-list">
-                    ${letras.map(letra => `
-                        <li>
-                            <label id="l-${q.docId}-${letra}">
-                                <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
-                            </label>
-                        </li>
-                    `).join("")}
-                </ul>
-
-                <button class="btn-add" id="btn-${q.docId}" onclick="corrigir('${q.docId}', '${q.correta}')">
-                    Confirmar Resposta
-                </button>
             </div>
+
+            ${q.img ? `<div class="q-img"><img src="${q.img}"></div>` : ""}
+
+            <p style="font-weight:500; font-size:1.05rem; line-height:1.5">${q.enun}</p>
+
+            <ul class="opt-list">
+                ${letras.map(letra => `
+                    <li>
+                        <label id="l-${q.docId}-${letra}">
+                            <input type="radio" name="r-${q.docId}" value="${letra}"> ${letra}) ${alternativas[letra]}
+                        </label>
+                    </li>
+                `).join("")}
+            </ul>
+
+            <button class="btn-add btn-corrigir" id="btn-${q.docId}">
+                Confirmar Resposta
+            </button>
         `;
+
+        card.querySelector(".btn-copy").addEventListener("click", () => copiarQuestao(q.docId));
+        card.querySelector(".btn-remover").addEventListener("click", () => excluirQuestao(q.docId));
+        card.querySelector(".btn-corrigir").addEventListener("click", () => corrigir(q.docId, q.correta));
+
+        lista.appendChild(card);
     });
 }
 
-window.copiarQuestao = async function(docId) {
+async function copiarQuestao(docId) {
     const q = estado.banco.find(item => item.docId === docId);
 
     if (!q) {
@@ -1731,9 +1803,9 @@ window.copiarQuestao = async function(docId) {
 
         alert("Questão copiada com sucesso!");
     }
-};
+}
 
-window.corrigir = function(id, correta) {
+function corrigir(id, correta) {
     const sel = document.querySelector(`input[name="r-${id}"]:checked`);
 
     if (!sel) {
@@ -1758,9 +1830,9 @@ window.corrigir = function(id, correta) {
     document.getElementById(`btn-${id}`).disabled = true;
     document.getElementById(`btn-${id}`).innerText = "Questão Concluída";
     document.getElementById(`btn-${id}`).style.background = "#666";
-};
+}
 
-window.excluirQuestao = async function(docId) {
+async function excluirQuestao(docId) {
     if (!docId) {
         alert("Não foi possível identificar esta questão no Firebase.");
         return;
@@ -1775,7 +1847,7 @@ window.excluirQuestao = async function(docId) {
             alert("Erro ao excluir a questão no Firebase.");
         }
     }
-};
+}
 </script>
 
 </body>

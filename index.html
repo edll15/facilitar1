@@ -642,7 +642,7 @@ textarea {
 
 <header>
     <h1 onclick="voltarInicio()">🩺 MedIA</h1>
-    <div class="sync-status" id="sync-status">Conectando...</div>
+    <div class="sync-status" id="sync-status">Pronto</div>
 </header>
 
 <section id="tela-inicial" class="home-screen">
@@ -674,7 +674,9 @@ textarea {
         <button class="btn-add" onclick="toggleForm()">➕ CADASTRAR QUESTÃO</button>
 
         <div class="aviso-online">
-            ✅ Para economizar leituras do Firebase, as questões só serão carregadas quando você clicar em uma especialidade, tema ou prova.
+            ✅ Para economizar leituras, o Firebase só conecta ao entrar no R1.
+            <br>
+            As questões só carregam ao clicar em especialidade, tema ou prova.
             <br>
             Limite: <strong>20 questões por vez</strong>.
         </div>
@@ -840,6 +842,10 @@ function abrirBancoR1() {
     if (typeof window.limparQuestoes === "function") {
         window.limparQuestoes();
     }
+
+    if (typeof window.iniciarFirebaseSeNecessario === "function") {
+        window.iniciarFirebaseSeNecessario();
+    }
 }
 
 function abrirBancoRmais() {
@@ -892,6 +898,7 @@ let db = null;
 let configRef = null;
 let questoesRef = null;
 let firebaseAtivo = false;
+let firebaseJaConectado = false;
 let carregouQuestoes = true;
 let salvandoAgora = false;
 let ultimoDocumento = null;
@@ -995,10 +1002,10 @@ let filtroAtual = {
 
 document.addEventListener("DOMContentLoaded", () => {
     inicializarSite();
-    conectarFirebase();
 });
 
 function inicializarSite() {
+    configurarStatus("Pronto");
     renderizarMenusEspecialidades();
     renderizarSelectEspecialidades();
     renderizarProvasIntegra();
@@ -1021,8 +1028,19 @@ function inicializarSite() {
     });
 }
 
+window.iniciarFirebaseSeNecessario = async function() {
+    if (firebaseJaConectado) {
+        return;
+    }
+
+    firebaseJaConectado = true;
+    await conectarFirebase();
+};
+
 async function conectarFirebase() {
     try {
+        configurarStatus("Conectando Firebase...");
+
         const app = initializeApp(firebaseConfig);
 
         try {
@@ -1069,6 +1087,7 @@ async function conectarFirebase() {
     } catch (erro) {
         console.error(erro);
         firebaseAtivo = false;
+        firebaseJaConectado = false;
         carregouQuestoes = true;
         configurarStatus("Erro no Firebase");
 
@@ -1133,6 +1152,7 @@ async function executarConsultaPaginada(q, resetar) {
 
         configurarStatus(`Carregado • ${estado.banco.length} questão(ões)`);
         mostrarOuEsconderBotaoCarregarMais(haMaisQuestoes);
+        esconderErroFirebase();
         render();
 
     } catch (erro) {
@@ -1157,6 +1177,10 @@ async function executarConsultaPaginada(q, resetar) {
 
 window.carregarQuestoesPorEspecialidade = async function(especialidade, resetar = true) {
     if (carregandoQuestoes) return;
+
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
 
     if (resetar) {
         estado.banco = [];
@@ -1199,6 +1223,10 @@ window.carregarQuestoesPorEspecialidade = async function(especialidade, resetar 
 
 window.carregarQuestoesPorTema = async function(especialidade, tema, resetar = true) {
     if (carregandoQuestoes) return;
+
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
 
     if (resetar) {
         estado.banco = [];
@@ -1244,6 +1272,10 @@ window.carregarQuestoesPorTema = async function(especialidade, tema, resetar = t
 
 window.carregarQuestoesPorProva = async function(banca, ano, resetar = true) {
     if (carregandoQuestoes) return;
+
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
 
     if (resetar) {
         estado.banco = [];
@@ -1461,20 +1493,6 @@ async function salvarQuestaoOnline(q) {
 
         configurarStatus("Salvo online");
 
-        if (consultaAtual) {
-            if (consultaAtual.tipo === "disciplina" && q.disc === consultaAtual.valor) {
-                limparERecarregarConsultaAtual();
-            }
-
-            if (consultaAtual.tipo === "tema" && q.disc === consultaAtual.especialidade && q.tema === consultaAtual.valor) {
-                limparERecarregarConsultaAtual();
-            }
-
-            if (consultaAtual.tipo === "banca-ano" && q.banca === consultaAtual.banca && String(q.ano) === String(consultaAtual.ano)) {
-                limparERecarregarConsultaAtual();
-            }
-        }
-
         return true;
     } catch (erro) {
         console.error(erro);
@@ -1482,27 +1500,6 @@ async function salvarQuestaoOnline(q) {
 
         alert("Não foi possível salvar a questão online. Verifique as regras do Firestore.");
         return false;
-    }
-}
-
-async function limparERecarregarConsultaAtual() {
-    if (!consultaAtual) return;
-
-    const atual = {...consultaAtual};
-
-    estado.banco = [];
-    ultimoDocumento = null;
-
-    if (atual.tipo === "disciplina") {
-        await carregarQuestoesPorEspecialidade(atual.valor, true);
-    }
-
-    if (atual.tipo === "tema") {
-        await carregarQuestoesPorTema(atual.especialidade, atual.valor, true);
-    }
-
-    if (atual.tipo === "banca-ano") {
-        await carregarQuestoesPorProva(atual.banca, atual.ano, true);
     }
 }
 
@@ -1540,6 +1537,10 @@ window.adicionarEspecialidade = async function(bloco) {
     if (!novaEspecialidade) {
         alert("Digite o nome da especialidade.");
         return;
+    }
+
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
     }
 
     const todasEspecialidades = getTodasEspecialidades();
@@ -1635,6 +1636,10 @@ window.adicionarTema = async function(especialidade) {
         return;
     }
 
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
+
     if (!estado.temasUsuario[especialidade]) {
         estado.temasUsuario[especialidade] = [];
     }
@@ -1662,6 +1667,10 @@ window.excluirTema = async function(especialidade, tema) {
         return;
     }
 
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
+
     const personalizados = estado.temasUsuario[especialidade] || [];
     const padrao = temasPadrao[especialidade] || [];
 
@@ -1683,18 +1692,6 @@ window.excluirTema = async function(especialidade, tema) {
         }
     }
 
-    if (
-        filtroAtual.tipo === "tema" &&
-        filtroAtual.especialidade === especialidade &&
-        filtroAtual.valor === tema
-    ) {
-        filtroAtual = {
-            tipo: "disciplina",
-            valor: especialidade,
-            especialidade: especialidade
-        };
-    }
-
     const salvou = await salvarConfiguracoesOnline();
     if (!salvou) return;
 
@@ -1704,7 +1701,6 @@ window.excluirTema = async function(especialidade, tema) {
 
 window.filtrarTema = function(especialidade, tema) {
     document.getElementById("area-topicos").innerHTML = "";
-
     carregarQuestoesPorTema(especialidade, tema);
 };
 
@@ -1748,6 +1744,10 @@ window.limparQuestoes = function() {
 };
 
 async function salvarQuestao(img) {
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
+    }
+
     const opts = {
         A: document.getElementById("in-a").value,
         B: document.getElementById("in-b").value,
@@ -1930,6 +1930,10 @@ window.excluirQuestao = async function(docId) {
     if (!docId) {
         alert("Não foi possível identificar esta questão no Firebase.");
         return;
+    }
+
+    if (!firebaseAtivo) {
+        await window.iniciarFirebaseSeNecessario();
     }
 
     if (confirm("Deseja realmente excluir esta questão?")) {

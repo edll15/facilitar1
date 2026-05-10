@@ -1,0 +1,223 @@
+{
+  "Cardiologia": [
+    "Anticoagulação na Cardiologia",
+    "Arritmias",
+    "Cardiopatias Congênitas",
+    "Dor torácica não anginosa",
+    "Eletrocardiograma",
+    "Endocardite",
+    "Febre Reumática",
+    "Hipertensão Arterial Sistêmica",
+    "Insuficiência Cardíaca",
+    "Semiologia Cardíaca",
+    "Síncope",
+    "Síndrome Coronariana Aguda",
+    "Síndrome Coronariana Crônica",
+    "Valvopatias"
+  ],
+  "Prova na íntegra": [
+    "IAMSPE 2025",
+    "IAMSPE 2026",
+    "SUS-SP 2022",
+    "SUS-SP 2023",
+    "SUS-SP 2024",
+    "SUS-SP 2025",
+    "SUS-SP 2026",
+    "USP-RP 2026"
+  ],
+  "Dermatologia": [
+    "Câncer de pele",
+    "Dermatoses bolhosas",
+    "Hanseníase",
+    "Infecções de pele",
+    "Miscelânea - Dermatologia",
+    "Psoríase",
+    "Stevens-Johnson e Necrólise Epidérmica Tóxica"
+  ],
+  "Endocrinologia": [
+    "Diabetes Mellitus",
+    "Dislipidemia e Síndrome Metabólica",
+    "Doenças da Adrenal",
+    "Doenças da Hipófise",
+    "Doenças da Paratireóide",
+    "Doenças da Tireóide",
+    "Hipogonadismo",
+    "Neoplasia Endócrina Múltipla",
+    "Outros tipos de Diabetes"
+  ],
+  "Gastroenterologia": [
+    "Cirrose e suas complicações",
+    "Doença inflamatória intestinal",
+    "Doenças do Esôfago",
+    "Doenças do Estômago",
+    "Doenças do Fígado",
+    "Doenças Pancreáticas",
+    "Outras Doenças do Intestino"
+  ],
+  "Geriatria": [
+    "Avaliação Global do Idoso",
+    "Deficiência Cognitiva no Idoso",
+    "Incontinências no Idoso",
+    "Síndrome de Fragilidade do Idoso",
+    "Vacinação do Idoso"
+  ],
+  "Hematologia": [
+    "Anemias Hiperproliferativas",
+    "Anemias Hipoproliferativas",
+    "Anticoagulação",
+    "Avaliação do Hemograma",
+    "Distúrbios da Hemostasia",
+    "Hemocomponentes",
+    "Miscelânea - Hematologia",
+    "Onco-hematologia",
+    "Porfirias",
+    "Púrpura Trombocitopênica Idiopática (PTI)",
+    "Púrpura Trombocitopênica Trombótica (PTT)"
+  ],
+  "Reumatologia": [
+    "Artrite Idiopática Juvenil (AIJ)",
+    "Artrite Reumatóide",
+    "Artrites infecciosas",
+    "Colagenoses",
+    "Doença de Still",
+    "Espondiloartrites",
+    "Fibromialgia",
+    "Miopatias Autoimunes Sistêmicas",
+    "Sarcoidose",
+    "Vasculites"
+  ],
+  "Pneumologia": [
+    "Análise da Espirometria",
+    "Apneia do Sono",
+    "Cessação do Tabagismo",
+    "Derrame pleural",
+    "Distúrbios Respiratórios Mistos",
+    "Doenças Respiratórias Obstrutivas",
+    "Doenças Respiratórias Restritivas",
+    "Hipertensão Pulmonar",
+    "Miscelânea - Pneumologia",
+    "Nódulo Pulmonar",
+    "Pneumonia da Comunidade e Hospitalar",
+    "Tromboembolismo pulmonar"
+  ],
+  "Infectologia": [
+    "Acidentes com animais peçonhentos",
+    "Acidentes com materiais biológicos",
+    "Antibioticoterapia",
+    "Arboviroses",
+    "Esporotricose",
+    "Esquistossomose",
+    "Hepatite viral",
+    "HIV e AIDS",
+    "Infecções virais",
+    "ISTs",
+    "Leishmaniose",
+    "Micoses",
+    "Miscelânea - Infectologia",
+    "Outras doenças negligenciadas",
+    "Paracoccidioidomicose",
+    "Parasitose",
+    "Síndromes ictéricas",
+    "Tuberculose",
+    "Vacinação"
+  ],
+  "Oncologia": [
+    "Abordagem geral das neoplasias",
+    "Cuidados paliativos",
+    "Hipercalcemia da malignidade",
+    "Miscelânea - Oncologia",
+    "Neutropenia febril",
+    "Obstrução intestinal maligna",
+    "Quimioterápicos",
+    "Síndrome da compressão medular",
+    "Síndrome da veia cava superior",
+    "Síndrome de lise tumoral"
+  ],
+  "Imunologia": [
+    "Anafilaxia",
+    "Imunodeficiências",
+    "Miscelânea - Alergias",
+    "Miscelânea - Imunologia",
+    "Rinite"
+  ],
+  "UTI": [
+    "Lesões por pressão",
+    "Miscelânea - UTI",
+    "Neurointensivismo",
+    "Nutrição do Doente Crítico",
+    "Procedimentos na UTI",
+    "Sedação e Analgesia"
+  ],
+  "Nefrologia": [
+    "Distúrbio ácido-básico",
+    "Distúrbios do cálcio",
+    "Distúrbios do potássio",
+    "Distúrbios do sódio",
+    "Doença Renal Crônica",
+    "Glomerulopatias",
+    "Infecção do trato urinário",
+    "Lesão Renal Aguda",
+    "Miscelânea - Nefrologia",
+    "Nefrolitíase",
+    "Outros DHE"
+  ],
+  "Psiquiatria": [
+    "Ansiedade e Distúrbios do Humor",
+    "Dependência de Substâncias Químicas",
+    "Distúrbios Alimentares",
+    "Distúrbios de Personalidade",
+    "Distúrbios do sono",
+    "Miscelânea - Psiquiatria",
+    "Transtorno do Espectro Autista"
+  ],
+  "Nutrologia": [
+    "Miscelânea - Nutrologia",
+    "Síndrome de realimentação"
+  ],
+  "Otorrinolaringologia": [
+    "Doenças da orofaringe e seios da face",
+    "Doenças do Ouvido",
+    "Epistaxe",
+    "Miscelânea - Otorrinolaringologia"
+  ],
+  "Oftalmologia": [
+    "Catarata",
+    "Doenças da Úvea",
+    "Glaucoma",
+    "Manejo de Corpo Estranho no Globo Ocular",
+    "Miscelânea - Oftalmologia",
+    "Olho Vermelho",
+    "Outras Doenças Infecciosas Oculares"
+  ],
+  "Neurologia": [
+    "Acidente Vascular Encefálico",
+    "Anatomia do SNC",
+    "Cefaleias",
+    "Doença de Parkinson e Parkinsonismo",
+    "Doenças da junção neuromuscular",
+    "Doenças desmielinizantes",
+    "Epilepsia",
+    "Meningite e encefalites",
+    "Miscelânea - Neurologia",
+    "Neoplasias de SNC",
+    "Síndrome medulares",
+    "Vertigem"
+  ],
+  "Clínica Médica Geral": [
+    "Cuidados Paliativos",
+    "Pré-operatório",
+    "Profilaxia de Tromboembolismo Venoso (TEV)",
+    "Rastreamentos populacionais",
+    "Vacinação do adulto"
+  ],
+  "Emergências Clínicas": [
+    "ACLS",
+    "BLS",
+    "Choque",
+    "Intoxicações",
+    "Manejo de Via Aérea",
+    "Morte Encefálica",
+    "Sepse",
+    "Ventilação Mecânica"
+  ]
+}

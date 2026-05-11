@@ -1,419 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MedIA - Banco de Questões Inteligente</title>
-<style>
-:root{--primary:#1b4332;--secondary:#40916c;--bg:#f4f7f4;--white:#fff;--text:#2d3436;--danger:#c1121f;--muted:#666}
-*{box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,GeneVA,Verdana,sans-serif;background:radial-gradient(circle at top left,rgba(64,145,108,.12),transparent 32%),radial-gradient(circle at bottom right,rgba(27,67,50,.10),transparent 35%),var(--bg);color:var(--text);margin:0;padding:0}.hidden{display:none!important}
-header{background:var(--primary);color:var(--white);padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2);position:sticky;top:0;z-index:100}header h1{cursor:pointer;margin:0;font-size:1.8rem}.sync-status{font-size:.85rem;background:rgba(255,255,255,.14);padding:.45rem .8rem;border-radius:999px}
-.page{padding:2.2rem 5%;max-width:1500px;margin:0 auto}.home-screen{min-height:calc(100vh - 74px);padding:2rem 5%;display:flex;align-items:center;justify-content:center}.home-container{width:100%;max-width:1050px;text-align:center}.home-badge{display:inline-block;background:#edf6f0;color:var(--primary);border:1px solid #d8f3dc;padding:.5rem 1rem;border-radius:999px;font-size:.85rem;font-weight:800;margin-bottom:1rem}.home-container h2{margin:0;color:var(--primary);font-size:clamp(2rem,5vw,3.8rem)}.home-container p{max-width:680px;margin:1rem auto 2.5rem;color:#666;font-size:1.05rem;line-height:1.6}.home-cards{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:1.5rem}.home-card,.category-card{background:white;border-radius:22px;padding:2rem;text-align:center;border:1px solid rgba(27,67,50,.08);box-shadow:0 18px 40px rgba(27,67,50,.12);cursor:pointer;transition:.25s;position:relative;overflow:hidden;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center}.home-card:hover,.category-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(27,67,50,.18)}.home-card::after,.category-card::after{content:"";position:absolute;width:170px;height:170px;background:rgba(64,145,108,.12);border-radius:50%;top:-70px;right:-70px;pointer-events:none}.home-icon,.cat-icon{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;display:flex;justify-content:center;align-items:center;font-size:1.8rem;margin-bottom:1rem;position:relative;z-index:1}.home-card h3,.category-card h3{position:relative;z-index:1;margin:0;color:var(--primary);font-size:1.45rem;line-height:1.15}.home-card p{position:relative;z-index:1;margin:.8rem 0 1.2rem;color:#666;font-size:.98rem}.home-action{position:relative;z-index:1;color:var(--primary);font-weight:800}.category-grid{display:grid;grid-template-columns:repeat(3,minmax(260px,1fr));gap:1.5rem;align-items:start}.category-card{min-height:250px}.section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:2rem}.section-head h1{color:var(--primary);font-size:clamp(2.4rem,5vw,4.4rem);margin:0 0 .7rem;line-height:1}.section-head p{margin:0;color:#666;font-size:1.1rem}.btn-back{background:linear-gradient(135deg,#1b4332,#40916c);color:white;border:none;border-radius:999px;padding:1rem 1.6rem;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 16px 35px rgba(27,67,50,.22);white-space:nowrap}.btn-back:hover{filter:brightness(.97);transform:translateY(-1px)}
-.panel-card{background:white;border-radius:16px;border-top:5px solid var(--primary);box-shadow:0 12px 32px rgba(0,0,0,.08);padding:2rem;margin-bottom:2rem}.topicos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.topico-item{background:#f8f9fa;border:1px solid #e0e0e0;border-left:4px solid var(--secondary);padding:1rem;border-radius:6px;cursor:pointer;transition:.2s;font-weight:700;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:10px}.topico-item:hover{background:#e9f5ef;transform:translateY(-2px);box-shadow:0 3px 8px rgba(0,0,0,.08)}.topico-nome{flex:1;line-height:1.3}.empty-temas{text-align:center;padding:1.5rem;background:#f8f9fa;color:#666;border-radius:8px;border:1px solid #eee}.provas-grid{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:1rem}.instituicao-card{background:#f8f9fa;border:1px solid #e3e3e3;border-left:5px solid var(--secondary);border-radius:8px;padding:1.25rem;min-height:150px}.instituicao-card h3{margin:0 0 1.1rem;color:var(--primary);font-size:1.2rem}.anos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}.ano-btn{border:1.5px solid var(--secondary);background:#edf6f0;color:var(--primary);font-weight:800;border-radius:7px;padding:.48rem .55rem;cursor:pointer;transition:.2s;font-size:.92rem}.ano-btn:hover{background:#d8f3dc;transform:translateY(-2px)}.ano-btn-sem{opacity:.7}.question-card{background:white;padding:1.5rem;border-radius:8px;border:1px solid #ddd;margin-bottom:1.5rem}.q-header{display:flex;justify-content:space-between;font-size:.8rem;color:#666;margin-bottom:1rem;gap:1rem}.q-img{text-align:center;margin:1rem 0}.q-img img{max-width:100%;height:auto;border-radius:8px;border:1px solid #ddd;background:#fff;margin:0 auto 14px;display:block}.opt-list{list-style:none;padding:0}.opt-list li{margin-bottom:8px}.opt-list label{display:block;padding:10px;border:1px solid #eee;border-radius:4px;cursor:pointer}.correct{background:#d4edda!important;border-color:#28a745!important}.wrong{background:#f8d7da!important;border-color:#dc3545!important}.btn-add{background:var(--primary);color:white;border:none;padding:.8rem;border-radius:4px;width:100%;cursor:pointer;font-weight:800;margin-bottom:1rem}.btn-more-wrap{text-align:center;margin-top:1.5rem}.btn-more{max-width:260px}.rmais-card{max-width:850px;margin:3rem auto;background:white;border-radius:18px;padding:3rem;text-align:center;box-shadow:0 18px 40px rgba(27,67,50,.12);border-top:5px solid var(--secondary)}.rmais-card h2{color:var(--primary);margin-top:0}
-@media(max-width:1200px){.category-grid,.provas-grid{grid-template-columns:repeat(2,minmax(260px,1fr))}}@media(max-width:850px){.home-cards,.category-grid,.provas-grid{grid-template-columns:1fr}.section-head{flex-direction:column}.btn-back{width:100%;text-align:center}.page{padding:1.2rem 4%}}@media(max-width:560px){.anos-grid{grid-template-columns:repeat(3,1fr)}}
-.btn-copy-q{background:#edf6f0;color:var(--primary);border:1px solid var(--secondary);padding:.45rem .75rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:800;white-space:nowrap}.btn-copy-q:hover{background:#d8f3dc}.q-actions{display:flex;gap:.5rem;align-items:center;justify-content:flex-end}@media(max-width:560px){.q-header{flex-direction:column}.q-actions{justify-content:flex-start}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedIA - Banco de Questões Inteligente</title>
+  <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-<header><h1 onclick="voltarInicio()">🩺 MedIA</h1><div class="sync-status" id="sync-status">Pronto • JSON estático</div></header>
+  <header>
+    <h1 onclick="voltarInicio()">🩺 MedIA</h1>
+    <div class="sync-status" id="sync-status">Pronto • JSON estático</div>
+  </header>
 
-<section id="tela-inicial" class="home-screen">
-  <div class="home-container">
-    <div class="home-badge">Banco de Questões para Inteligência Artificial</div>
-    <h2>Escolha seu banco de questões</h2>
-    <p>Transforme cada questão resolvida em um passo rumo ao seu sonho.</p>
-    <div class="home-cards">
-      <div class="home-card" onclick="abrirBancoR1()">
-        <div class="home-icon">🎯</div>
-        <h3>Questões Acesso Direto (R1)</h3>
-        <p>Especialidades, temas, provas na íntegra e resolução de questões.</p>
-        <div class="home-action">Entrar no R1 →</div>
-      </div>
-      <div class="home-card" onclick="abrirBancoRmais()">
-        <div class="home-icon">🚀</div>
-        <h3>Questões R+</h3>
-        <p>Realize questões de nível avançado!</p>
-        <div class="home-action">Entrar no R+ →</div>
+  <section id="tela-inicial" class="home-screen">
+    <div class="home-container">
+      <div class="home-badge">Banco de Questões para Inteligência Artificial</div>
+      <h2>Escolha seu banco de questões</h2>
+      <p>Transforme cada questão resolvida em um passo rumo ao seu sonho.</p>
+
+      <div class="home-cards">
+        <div class="home-card" onclick="abrirBancoR1()">
+          <div class="home-icon">🎯</div>
+          <h3>Questões Acesso Direto (R1)</h3>
+          <p>Especialidades, temas, provas na íntegra e resolução de questões.</p>
+          <div class="home-action">Entrar no R1 →</div>
+        </div>
+
+        <div class="home-card" onclick="abrirBancoRmais()">
+          <div class="home-icon">🚀</div>
+          <h3>Questões R+</h3>
+          <p>Realize questões de nível avançado!</p>
+          <div class="home-action">Entrar no R+ →</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<main id="tela-r1" class="page hidden">
-  <section id="pagina-especialidades">
-    <div class="category-grid" id="category-grid"></div>
   </section>
-  <section id="area-topicos"></section>
-</main>
 
-<section id="tela-rmais" class="page hidden">
-  <div class="rmais-card">
-    <h2>Questões R+</h2>
-    <p>Esta área já está criada, mas ainda está vazia.</p>
-    <button class="btn-back" onclick="voltarInicio()">← Voltar para a tela inicial</button>
-  </div>
-</section>
+  <main id="tela-r1" class="page hidden">
+    <section id="pagina-especialidades">
+      <div class="category-grid" id="category-grid"></div>
+    </section>
+    <section id="area-topicos"></section>
+  </main>
 
-<script>
-const LIMITE=20;
-let temasPorEspecialidade={},questoesProva=[],indiceProva=0,tituloProva='';
-
-const categorias=[
-  {nome:'Clínica Médica',icone:'🩺',tipo:'grupo',items:['Cardiologia','Clínica Médica Geral','Dermatologia','Emergências Clínicas','Endocrinologia','Gastroenterologia','Geriatria','Hematologia','Imunologia','Infectologia','Nefrologia','Neurologia','Nutrologia','Oftalmologia','Oncologia','Otorrinolaringologia','Pneumologia','Psiquiatria','Reumatologia','UTI']},
-  {nome:'Cirurgia Geral',icone:'🔪',tipo:'especialidade',especialidade:'Cirurgia Geral'},
-  {nome:'Ginecologia e Obstetrícia',icone:'🤰🏼',tipo:'especialidade',especialidade:'Ginecologia e Obstetrícia'},
-  {nome:'Pediatria',icone:'👶🏻',tipo:'especialidade',especialidade:'Pediatria'},
-  {nome:'Medicina Preventiva',icone:'📊',tipo:'especialidade',especialidade:'Medicina Preventiva'},
-  {nome:'Provas na Íntegra',icone:'📚',tipo:'provas'}
-];
-
-const instituicoes=[
-  {nome:'USP-SP',slug:'usp-sp'},
-  {nome:'USP-RP',slug:'usp-rp'},
-  {nome:'Unicamp',slug:'unicamp'},
-  {nome:'Unifesp',slug:'unifesp'},
-  {nome:'HIAE',slug:'hiae'},
-  {nome:'IAMSPE',slug:'iamspe'},
-  {nome:'Santa Casa (SP)',slug:'santa-casa-sp'},
-  {nome:'Sírio Libanês (SP)',slug:'sirio-libanes-sp'},
-  {nome:'SUS-SP',slug:'sus-sp'},
-  {nome:'ENAMED',slug:'enamed'}
-];
-
-const anos=[2026,2025,2024,2023,2022,2021];
-
-const arquivosComQuestoes=new Set([
-  'usp-sp-2024.json',
-  'usp-sp-2025.json',
-  'usp-sp-2026.json',
-  'iamspe-2025.json',
-  'iamspe-2026.json',
-  'sus-sp-2022.json',
-  'sus-sp-2023.json',
-  'sus-sp-2024.json',
-  'sus-sp-2025.json',
-  'sus-sp-2026.json',
-  'usp-rp-2026.json'
-]);
-
-document.addEventListener('DOMContentLoaded',async()=>{
-  await carregarTemas();
-  renderCategorias();
-});
-
-async function carregarTemas(){
-  try{
-    const r=await fetch('./data/temas.json',{cache:'no-store'});
-    temasPorEspecialidade=r.ok?await r.json():{};
-    setStatus('Pronto • temas carregados');
-  }catch(e){
-    temasPorEspecialidade={};
-    setStatus('Pronto • sem temas.json');
-  }
-}
-
-function setStatus(t){document.getElementById('sync-status').innerText=t}
-function mostrar(id){['tela-inicial','tela-r1','tela-rmais'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
-function abrirBancoR1(){mostrar('tela-r1');voltarEspecialidades()}
-function abrirBancoRmais(){mostrar('tela-rmais')}
-function voltarInicio(){mostrar('tela-inicial');limparInterno()}
-function limparInterno(){document.getElementById('area-topicos').innerHTML='';questoesProva=[];indiceProva=0;tituloProva=''}
-
-function renderCategorias(){
-  const grid=document.getElementById('category-grid');
-  grid.innerHTML=categorias.map(c=>`<div class="category-card" onclick='abrirCategoria(${JSON.stringify(c.nome)})'><div class="cat-icon">${c.icone}</div><h3>${c.nome}</h3></div>`).join('');
-}
-
-function abrirCategoria(nome){
-  const c=categorias.find(x=>x.nome===nome);
-  if(!c)return;
-  if(c.tipo==='provas')return abrirPaginaProvas();
-  if(c.tipo==='grupo')return abrirGrupo(c.nome,c.items);
-  return abrirSubtemas(c.especialidade);
-}
-
-function voltarEspecialidades(){
-  limparInterno();
-  document.getElementById('pagina-especialidades').classList.remove('hidden');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function abrirGrupo(titulo,items){
-  document.getElementById('pagina-especialidades').classList.add('hidden');
-  const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${titulo}</h1><p>Escolha uma especialidade para ver os subtemas.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="topicos-grid">${items.map(i=>`<div class="topico-item" onclick='abrirSubtemas(${JSON.stringify(i)})'><span class="topico-nome">${i}</span></div>`).join('')}</div></div>`;
-  area.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function abrirSubtemas(esp){
-  document.getElementById('pagina-especialidades').classList.add('hidden');
-  const temas=(Array.isArray(temasPorEspecialidade[esp])?temasPorEspecialidade[esp]:[]).filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR'));
-  const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${esp}</h1><p>Subtemas carregados de <strong>data/temas.json</strong>.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card">${temas.length?`<div class="topicos-grid">${temas.map(t=>`<div class="topico-item" onclick='abrirSubtemaSelecionado(${JSON.stringify(esp)},${JSON.stringify(t)})'><span class="topico-nome">${t}</span></div>`).join('')}</div>`:`<div class="empty-temas">Nenhum subtema cadastrado para esta especialidade.</div>`}</div>`;
-  area.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function abrirSubtemaSelecionado(esp,tema){
-  const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${tema}</h1><p>Subtema de <strong>${esp}</strong>.</p></div><button class="btn-back" onclick='abrirSubtemas(${JSON.stringify(esp)})'>← Voltar aos subtemas</button></div><div class="panel-card"><div class="empty-temas">Este subtema está cadastrado no arquivo <strong>data/temas.json</strong>. Quando houver questões estáticas vinculadas, elas poderão aparecer aqui.</div></div>`;
-  area.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function abrirPaginaProvas(){
-  document.getElementById('pagina-especialidades').classList.add('hidden');
-  questoesProva=[];
-  indiceProva=0;
-  const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>Provas na Íntegra</h1><p>Escolha a instituição e o ano para começar uma nova prova.</p></div><button type="button" class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="provas-grid">${instituicoes.map(inst=>`<div class="instituicao-card"><h3>${inst.nome}</h3><div class="anos-grid">${anos.map(ano=>{const arq=inst.slug+'-'+ano+'.json';const tem=arquivosComQuestoes.has(arq);return `<button type="button" class="ano-btn ${tem?'':'ano-btn-sem'}" title="${tem?'Abrir prova':'Sem questões ainda'}" onclick='abrirProva(${JSON.stringify(inst.nome)},${ano},${JSON.stringify(arq)},${tem})'>${ano}</button>`}).join('')}</div></div>`).join('')}</div></div>`;
-  area.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-async function abrirProva(nome,ano,arquivo,temQuestoes){
-  document.getElementById('pagina-especialidades').classList.add('hidden');
-  const area=document.getElementById('area-topicos');
-  tituloProva=nome+' '+ano;
-  questoesProva=[];
-  indiceProva=0;
-
-  if(!temQuestoes){
-    area.innerHTML=`<div class="section-head"><div><h1>${tituloProva}</h1><p>Esta prova ainda não possui questões cadastradas.</p></div><button class="btn-back" onclick="abrirPaginaProvas()">← Voltar às provas</button></div><div class="panel-card"><div class="empty-temas">Sem questões ainda.</div></div>`;
-    return;
-  }
-
-  area.innerHTML=`<div class="section-head"><div><h1>${tituloProva}</h1><p id="prova-status">Carregando questões...</p></div><button class="btn-back" onclick="abrirPaginaProvas()">← Voltar às provas</button></div><div class="panel-card"><div id="prova-questoes-container"></div><div id="prova-botao-mais-container" class="btn-more-wrap hidden"><button class="btn-add btn-more" onclick="carregarMaisProva()">Carregar mais questões</button></div></div>`;
-
-  try{
-    const r=await fetch('./data/provas/'+arquivo,{cache:'no-store'});
-    if(!r.ok)throw new Error('Arquivo não encontrado');
-
-    const d=await r.json();
-
-    if(Array.isArray(d)){
-      questoesProva=d;
-    }else if(Array.isArray(d.questoes)){
-      questoesProva=d.questoes;
-    }else if(Array.isArray(d.questions)){
-      questoesProva=d.questions;
-    }else if(Array.isArray(d.itens)){
-      questoesProva=d.itens;
-    }else if(Array.isArray(d.items)){
-      questoesProva=d.items;
-    }else if(d.prova && Array.isArray(d.prova.questoes)){
-      questoesProva=d.prova.questoes;
-    }else{
-      questoesProva=[];
-    }
-
-    document.getElementById('prova-status').innerText=questoesProva.length+' questão(ões) encontrada(s).';
-    renderizarQuestoes(true);
-
-  }catch(e){
-    document.getElementById('prova-questoes-container').innerHTML=`<div style="text-align:center;padding:2rem;color:#7f1d1d;background:#fff0f0;border-radius:12px;">Não consegui abrir esta prova.<br><br>Arquivo esperado: <strong>data/provas/${arquivo}</strong><br><br>Verifique se o nome está exatamente igual e se o JSON é válido.</div>`;
-  }
-
-  area.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function getTexto(q){return q.enun||q.enunciado||q.pergunta||q.questao||q.texto||''}
-function getDisciplina(q){return q.disciplina||q.disc||q.especialidade||''}
-
-function getAlternativas(q){
-  const b=q.opts||q.alternativas||q.options||{};
-  if(Array.isArray(b)){
-    const letras=['A','B','C','D','E'],obj={};
-    b.forEach((v,i)=>obj[letras[i]]=v);
-    return obj;
-  }
-  return b;
-}
-
-function normalizarCaminhoImagem(img){
-  if(!img)return '';
-  const caminho=String(img).trim();
-  if(caminho.startsWith('http://')||caminho.startsWith('https://')||caminho.startsWith('./')||caminho.startsWith('/')||caminho.startsWith('data/'))return caminho;
-  return './data/'+caminho;
-}
-
-function extrairImagensDoTexto(texto){
-  const imagens=[];
-  const regex=/<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
-  let match;
-  while((match=regex.exec(String(texto||'')))!==null){
-    if(match[1])imagens.push(normalizarCaminhoImagem(match[1]));
-  }
-  return imagens;
-}
-
-function removerTagsImgDoTexto(texto){
-  return String(texto||'')
-    .replace(/<div[^>]*class=["']?q-img["']?[^>]*>[\s\S]*?<\/div>/gi,'')
-    .replace(/<img[^>]*>/gi,'');
-}
-
-function getImagens(q){
-  const imagens=[];
-
-  if(Array.isArray(q.imagens)){
-    q.imagens.forEach(img=>{
-      if(img)imagens.push(normalizarCaminhoImagem(img));
-    });
-  }
-
-  if(q.img)imagens.push(normalizarCaminhoImagem(q.img));
-  if(q.imagem)imagens.push(normalizarCaminhoImagem(q.imagem));
-
-  extrairImagensDoTexto(q.enun||q.enunciado||q.pergunta||q.questao||q.texto||'').forEach(img=>imagens.push(img));
-
-  return [...new Set(imagens)];
-}
-
-function cardQuestao(q,index){
-  const alt=getAlternativas(q);
-  const letras=Object.keys(alt).sort();
-  const id=String(q.docId||q.id||('questao-'+index)).replace(/[^a-zA-Z0-9_-]/g,'-');
-  const correta=q.correta||q.gabarito||'';
-  const disciplina=getDisciplina(q);
-  const imagens=getImagens(q);
-  const textoLimpo=removerTagsImgDoTexto(getTexto(q));
-
-  return `<div class="question-card">
-    <div class="q-header">
-      <span>${q.numero?'Questão '+q.numero+' • ':''}${q.banca||q.instituicao||tituloProva||''}${q.ano?' ('+q.ano+')':''}${disciplina?' • <strong>'+disciplina+'</strong>':''}${q.tema?' • '+q.tema:''}</span>
-      <div class="q-actions"><button type="button" class="btn-copy-q" title="Copiar questão completa" onclick="copiarQuestaoPorIndice(${index})">📋 Copiar</button></div>
+  <section id="tela-rmais" class="page hidden">
+    <div class="rmais-card">
+      <h2>Questões R+</h2>
+      <p>Esta área já está criada, mas ainda está vazia.</p>
+      <button class="btn-back" onclick="voltarInicio()">← Voltar para a tela inicial</button>
     </div>
-    <p style="font-weight:500;font-size:1.05rem;line-height:1.5">${textoLimpo}</p>
-    ${imagens.length?`<div class="q-img">${imagens.map(img=>`<img src="${img}" alt="Imagem da questão">`).join('')}</div>`:''}
-    <ul class="opt-list">${letras.map(l=>`<li><label id="l-${id}-${l}"><input type="radio" name="r-${id}" value="${l}"> ${l}) ${alt[l]||''}</label></li>`).join('')}</ul>
-    <button class="btn-add" id="btn-${id}" onclick="corrigir('${id}','${correta}')">Confirmar Resposta</button>
-  </div>`;
-}
+  </section>
 
-function renderizarQuestoes(reset){
-  const cont=document.getElementById('prova-questoes-container');
-  const mais=document.getElementById('prova-botao-mais-container');
-  if(!cont)return;
-
-  if(reset){
-    cont.innerHTML='';
-    indiceProva=0;
-  }
-
-  const prox=questoesProva.slice(indiceProva,indiceProva+LIMITE);
-  const inicio=indiceProva;
-  indiceProva+=prox.length;
-
-  if(!prox.length&&!cont.innerHTML.trim()){
-    cont.innerHTML='<p style="text-align:center;padding:2rem;color:#666">Nenhuma questão encontrada nesta prova.</p>';
-  }else{
-    cont.insertAdjacentHTML('beforeend',prox.map((q,i)=>cardQuestao(q,inicio+i)).join(''));
-  }
-
-  if(mais)mais.classList.toggle('hidden',indiceProva>=questoesProva.length);
-}
-
-function carregarMaisProva(){renderizarQuestoes(false)}
-
-function montarTextoQuestaoParaCopiar(q){
-  const alt=getAlternativas(q);
-  const letras=Object.keys(alt).sort();
-  const disciplina=getDisciplina(q);
-
-  return [
-    q.numero?'Questão '+q.numero:'Questão',
-    q.banca||q.instituicao||tituloProva||'',
-    q.ano?'Ano: '+q.ano:'',
-    disciplina?'Especialidade: '+disciplina:'',
-    q.tema?'Tema: '+q.tema:'',
-    '',
-    removerTagsImgDoTexto(getTexto(q)),
-    '',
-    ...getImagens(q).map(img=>'Imagem: '+img),
-    '',
-    ...letras.map(l=>l+') '+(alt[l]||''))
-  ].filter(linha=>String(linha).trim()!=='').join('\n');
-}
-
-function copiarQuestaoPorIndice(index){
-  const q=questoesProva[index];
-  if(!q){
-    alert('Não foi possível encontrar esta questão para copiar.');
-    return;
-  }
-
-  const texto=montarTextoQuestaoParaCopiar(q);
-
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(texto)
-      .then(()=>alert('📋 Questão copiada com sucesso!'))
-      .catch(()=>copiarQuestaoFallback(texto));
-  }else{
-    copiarQuestaoFallback(texto);
-  }
-}
-
-function copiarQuestaoFallback(texto){
-  const area=document.createElement('textarea');
-  area.value=texto;
-  document.body.appendChild(area);
-  area.select();
-  document.execCommand('copy');
-  document.body.removeChild(area);
-  alert('📋 Questão copiada com sucesso!');
-}
-
-function corrigir(id,correta){
-  const sel=document.querySelector(`input[name="r-${id}"]:checked`);
-  if(!sel){
-    alert('Selecione uma opção!');
-    return;
-  }
-
-  const certa=document.getElementById(`l-${id}-${correta}`);
-  if(certa)certa.classList.add('correct');
-
-  if(sel.value!==correta){
-    const err=document.getElementById(`l-${id}-${sel.value}`);
-    if(err)err.classList.add('wrong');
-  }
-
-  const btn=document.getElementById(`btn-${id}`);
-  if(btn){
-    btn.disabled=true;
-    btn.innerText='Questão Concluída';
-    btn.style.background='#666';
-  }
-}
-</script>
-
-<script id="copiar-sem-alerta">
-(function(){
-  const alertaOriginal=window.alert;
-  window.alert=function(mensagem){
-    const texto=String(mensagem||"");
-    if(texto.includes("Questão copiada")||texto.includes("copiada com sucesso"))return;
-    return alertaOriginal.apply(window,arguments);
-  };
-
-  document.addEventListener("click",function(event){
-    const botao=event.target.closest("button");
-    if(!botao)return;
-
-    const texto=(botao.textContent||"").trim();
-    if(!texto.includes("Copiar"))return;
-
-    const textoOriginal=botao.innerHTML;
-
-    setTimeout(function(){
-      botao.innerHTML="Copiado ✅";
-      botao.disabled=true;
-
-      setTimeout(function(){
-        botao.innerHTML=textoOriginal||"📋 Copiar";
-        botao.disabled=false;
-      },1800);
-    },80);
-  },true);
-})();
-</script>
+  <script src="./js/app.js"></script>
 </body>
 </html>

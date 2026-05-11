@@ -24,7 +24,21 @@ const LIMITE=20;let temasPorEspecialidade={},questoesProva=[],indiceProva=0,titu
 const categorias=[{nome:'Clínica Médica',icone:'🩺',tipo:'grupo',items:['Cardiologia','Clínica Médica Geral','Dermatologia','Emergências Clínicas','Endocrinologia','Gastroenterologia','Geriatria','Hematologia','Imunologia','Infectologia','Nefrologia','Neurologia','Nutrologia','Oftalmologia','Oncologia','Otorrinolaringologia','Pneumologia','Psiquiatria','Reumatologia','UTI']},{nome:'Cirurgia Geral',icone:'🔪',tipo:'especialidade',especialidade:'Cirurgia Geral'},{nome:'Ginecologia e Obstetrícia',icone:'🤰🏼',tipo:'especialidade',especialidade:'Ginecologia e Obstetrícia'},{nome:'Pediatria',icone:'👶🏻',tipo:'especialidade',especialidade:'Pediatria'},{nome:'Medicina Preventiva',icone:'📊',tipo:'especialidade',especialidade:'Medicina Preventiva'},{nome:'Provas na Íntegra',icone:'📚',tipo:'provas'}];
 const instituicoes=[{nome:'USP-SP',slug:'usp-sp'},{nome:'USP-RP',slug:'usp-rp'},{nome:'Unicamp',slug:'unicamp'},{nome:'Unifesp',slug:'unifesp'},{nome:'HIAE',slug:'hiae'},{nome:'IAMSPE',slug:'iamspe'},{nome:'Santa Casa (SP)',slug:'santa-casa-sp'},{nome:'Sírio Libanês (SP)',slug:'sirio-libanes-sp'},{nome:'SUS-SP',slug:'sus-sp'},{nome:'ENAMED',slug:'enamed'}];
 const anos=[2026,2025,2024,2023,2022,2021];
-const arquivosComQuestoes=new Set(['usp-sp-2025.json','usp-sp-2026.json','iamspe-2025.json','iamspe-2026.json','sus-sp-2022.json','sus-sp-2023.json','sus-sp-2024.json','sus-sp-2025.json','sus-sp-2026.json','usp-rp-2026.json']);
+
+const arquivosComQuestoes=new Set([
+  'usp-sp-2024.json',
+  'usp-sp-2025.json',
+  'usp-sp-2026.json',
+  'iamspe-2025.json',
+  'iamspe-2026.json',
+  'sus-sp-2022.json',
+  'sus-sp-2023.json',
+  'sus-sp-2024.json',
+  'sus-sp-2025.json',
+  'sus-sp-2026.json',
+  'usp-rp-2026.json'
+]);
+
 document.addEventListener('DOMContentLoaded',async()=>{await carregarTemas();renderCategorias();});
 async function carregarTemas(){try{const r=await fetch('./data/temas.json',{cache:'no-store'});temasPorEspecialidade=r.ok?await r.json():{};setStatus('Pronto • temas carregados')}catch(e){temasPorEspecialidade={};setStatus('Pronto • sem temas.json')}}
 function setStatus(t){document.getElementById('sync-status').innerText=t}
@@ -44,12 +58,54 @@ async function abrirProva(nome,ano,arquivo,temQuestoes){document.getElementById(
 function getTexto(q){return q.enun||q.enunciado||q.pergunta||q.questao||q.texto||''}
 function getDisciplina(q){return q.disciplina||q.disc||q.especialidade||''}
 function getAlternativas(q){const b=q.opts||q.alternativas||q.options||{};if(Array.isArray(b)){const letras=['A','B','C','D','E'],obj={};b.forEach((v,i)=>obj[letras[i]]=v);return obj}return b}
-function normalizarCaminhoImagem(img){if(!img)return '';const caminho=String(img);if(caminho.startsWith('http://')||caminho.startsWith('https://')||caminho.startsWith('./')||caminho.startsWith('/')||caminho.startsWith('data/'))return caminho;return './data/'+caminho}
-function getImagens(q){const imagens=[];if(Array.isArray(q.imagens)){q.imagens.forEach(img=>{if(img)imagens.push(normalizarCaminhoImagem(img))})}if(q.img)imagens.push(normalizarCaminhoImagem(q.img));if(q.imagem)imagens.push(normalizarCaminhoImagem(q.imagem));return imagens}
-function cardQuestao(q,index){const alt=getAlternativas(q),letras=Object.keys(alt).sort(),id=String(q.docId||q.id||('questao-'+index)).replace(/[^a-zA-Z0-9_-]/g,'-'),correta=q.correta||q.gabarito||'',disciplina=getDisciplina(q),imagens=getImagens(q);return `<div class="question-card"><div class="q-header"><span>${q.numero?'Questão '+q.numero+' • ':''}${q.banca||q.instituicao||tituloProva||''}${q.ano?' ('+q.ano+')':''}${disciplina?' • <strong>'+disciplina+'</strong>':''}${q.tema?' • '+q.tema:''}</span><div class="q-actions"><button type="button" class="btn-copy-q" title="Copiar questão completa" onclick="copiarQuestaoPorIndice(${index})">📋 Copiar</button></div></div><p style="font-weight:500;font-size:1.05rem;line-height:1.5">${getTexto(q)}</p>${imagens.length?`<div class="q-img">${imagens.map(img=>`<img src="${img}" alt="Imagem da questão">`).join('')}</div>`:''}<ul class="opt-list">${letras.map(l=>`<li><label id="l-${id}-${l}"><input type="radio" name="r-${id}" value="${l}"> ${l}) ${alt[l]||''}</label></li>`).join('')}</ul><button class="btn-add" id="btn-${id}" onclick="corrigir('${id}','${correta}')">Confirmar Resposta</button></div>`}
+
+function normalizarCaminhoImagem(img){
+  if(!img)return '';
+  const caminho=String(img).trim();
+  if(caminho.startsWith('http://')||caminho.startsWith('https://')||caminho.startsWith('./')||caminho.startsWith('/')||caminho.startsWith('data/'))return caminho;
+  return './data/'+caminho;
+}
+
+function extrairImagensDoTexto(texto){
+  const imagens=[];
+  const regex=/<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+  let match;
+  while((match=regex.exec(String(texto||'')))!==null){
+    if(match[1])imagens.push(normalizarCaminhoImagem(match[1]));
+  }
+  return imagens;
+}
+
+function removerTagsImgDoTexto(texto){
+  return String(texto||'').replace(/<div[^>]*class=["']?q-img["']?[^>]*>[\s\S]*?<\/div>/gi,'').replace(/<img[^>]*>/gi,'');
+}
+
+function getImagens(q){
+  const imagens=[];
+  if(Array.isArray(q.imagens)){q.imagens.forEach(img=>{if(img)imagens.push(normalizarCaminhoImagem(img))})}
+  if(q.img)imagens.push(normalizarCaminhoImagem(q.img));
+  if(q.imagem)imagens.push(normalizarCaminhoImagem(q.imagem));
+
+  extrairImagensDoTexto(q.enun||q.enunciado||q.pergunta||q.questao||q.texto||'').forEach(img=>imagens.push(img));
+
+  return [...new Set(imagens)];
+}
+
+function cardQuestao(q,index){
+  const alt=getAlternativas(q),
+  letras=Object.keys(alt).sort(),
+  id=String(q.docId||q.id||('questao-'+index)).replace(/[^a-zA-Z0-9_-]/g,'-'),
+  correta=q.correta||q.gabarito||'',
+  disciplina=getDisciplina(q),
+  imagens=getImagens(q),
+  textoLimpo=removerTagsImgDoTexto(getTexto(q));
+
+  return `<div class="question-card"><div class="q-header"><span>${q.numero?'Questão '+q.numero+' • ':''}${q.banca||q.instituicao||tituloProva||''}${q.ano?' ('+q.ano+')':''}${disciplina?' • <strong>'+disciplina+'</strong>':''}${q.tema?' • '+q.tema:''}</span><div class="q-actions"><button type="button" class="btn-copy-q" title="Copiar questão completa" onclick="copiarQuestaoPorIndice(${index})">📋 Copiar</button></div></div><p style="font-weight:500;font-size:1.05rem;line-height:1.5">${textoLimpo}</p>${imagens.length?`<div class="q-img">${imagens.map(img=>`<img src="${img}" alt="Imagem da questão">`).join('')}</div>`:''}<ul class="opt-list">${letras.map(l=>`<li><label id="l-${id}-${l}"><input type="radio" name="r-${id}" value="${l}"> ${l}) ${alt[l]||''}</label></li>`).join('')}</ul><button class="btn-add" id="btn-${id}" onclick="corrigir('${id}','${correta}')">Confirmar Resposta</button></div>`;
+}
+
 function renderizarQuestoes(reset){const cont=document.getElementById('prova-questoes-container'),mais=document.getElementById('prova-botao-mais-container');if(!cont)return;if(reset){cont.innerHTML='';indiceProva=0}const prox=questoesProva.slice(indiceProva,indiceProva+LIMITE),inicio=indiceProva;indiceProva+=prox.length;if(!prox.length&&!cont.innerHTML.trim())cont.innerHTML='<p style="text-align:center;padding:2rem;color:#666">Nenhuma questão encontrada nesta prova.</p>';else cont.insertAdjacentHTML('beforeend',prox.map((q,i)=>cardQuestao(q,inicio+i)).join(''));if(mais)mais.classList.toggle('hidden',indiceProva>=questoesProva.length)}
 function carregarMaisProva(){renderizarQuestoes(false)}
-function montarTextoQuestaoParaCopiar(q){const alt=getAlternativas(q),letras=Object.keys(alt).sort(),disciplina=getDisciplina(q);return [q.numero?'Questão '+q.numero:'Questão',q.banca||q.instituicao||tituloProva||'',q.ano?'Ano: '+q.ano:'',disciplina?'Especialidade: '+disciplina:'',q.tema?'Tema: '+q.tema:'','',getTexto(q),'',...letras.map(l=>l+') '+(alt[l]||''))].filter(linha=>String(linha).trim()!=='').join('\n')}
+function montarTextoQuestaoParaCopiar(q){const alt=getAlternativas(q),letras=Object.keys(alt).sort(),disciplina=getDisciplina(q);return [q.numero?'Questão '+q.numero:'Questão',q.banca||q.instituicao||tituloProva||'',q.ano?'Ano: '+q.ano:'',disciplina?'Especialidade: '+disciplina:'',q.tema?'Tema: '+q.tema:'','',removerTagsImgDoTexto(getTexto(q)),'',...getImagens(q).map(img=>'Imagem: '+img),'',...letras.map(l=>l+') '+(alt[l]||''))].filter(linha=>String(linha).trim()!=='').join('\n')}
 function copiarQuestaoPorIndice(index){const q=questoesProva[index];if(!q){alert('Não foi possível encontrar esta questão para copiar.');return}const texto=montarTextoQuestaoParaCopiar(q);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(texto).then(()=>alert('📋 Questão copiada com sucesso!')).catch(()=>copiarQuestaoFallback(texto));}else{copiarQuestaoFallback(texto)}}
 function copiarQuestaoFallback(texto){const area=document.createElement('textarea');area.value=texto;document.body.appendChild(area);area.select();document.execCommand('copy');document.body.removeChild(area);alert('📋 Questão copiada com sucesso!')}
 function corrigir(id,correta){const sel=document.querySelector(`input[name="r-${id}"]:checked`);if(!sel){alert('Selecione uma opção!');return}const certa=document.getElementById(`l-${id}-${correta}`);if(certa)certa.classList.add('correct');if(sel.value!==correta){const err=document.getElementById(`l-${id}-${sel.value}`);if(err)err.classList.add('wrong')}const btn=document.getElementById(`btn-${id}`);if(btn){btn.disabled=true;btn.innerText='Questão Concluída';btn.style.background='#666'}}

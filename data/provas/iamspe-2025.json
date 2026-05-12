@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "iamspe-2025-001",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 1,
+    "enunciado": "Um paciente de 28 anos procura atendimento com queixas de dispneia aos esforços, sibilos e tosse seca. Ao exame físico, não há alterações relevantes. Qual o exame complementar mais indicado para confirmar o diagnóstico de asma nesse caso?",
+    "alternativas": {
+      "A": "Radiografia de tórax.",
+      "B": "Tomografia computadorizada de tórax.",
+      "C": "Teste de broncoprovocação com metacolina.",
+      "D": "Ecocardiograma.",
+      "E": "Espirometria com prova broncodilatadora."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-002",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 2,
+    "enunciado": "Qual das seguintes afirmações descreve corretamente o Sinal de Fox e sua relevância no exame físico para diagnóstico diferencial em emergência?",
+    "alternativas": {
+      "A": "O Sinal de Fox é caracterizado por equimoses na região inguinal, indicando pancreatite aguda com possível complicação de hemorragia retroperitoneal.",
+      "B": "O Sinal de Fox é caracterizado por dor intensa à palpação do quadrante inferior direito do abdômen, sugerindo apendicite aguda.",
+      "C": "O Sinal de Fox é identificado como uma alteração na pupila, indicando lesão cerebral ou aumento da pressão intracraniana.",
+      "D": "O Sinal de Fox é uma descoloração azulada ao redor do umbigo, associada a gravidez ectópica rota.",
+      "E": "O Sinal de Fox é caracterizado por dor ao levantamento do braço contra resistência, sugerindo tendinite do manguito rotador."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-003",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 3,
+    "enunciado": "Um homem de 55 anos sofre uma parada cardiorrespiratória durante esforço físico. Após o atendimento inicial, o eletrocardiograma mostra fibrilação ventricular como ritmo inicial. Qual é a causa cardíaca mais provável dessa parada cardiorrespiratória?",
+    "alternativas": {
+      "A": "Miocardite viral, frequentemente associada a bloqueios cardíacos completos.",
+      "B": "Infarto agudo do miocárdio, levando a isquemia miocárdica severa e arritmias malignas.",
+      "C": "Taponamento cardíaco, causando colapso hemodinâmico por compressão do coração.",
+      "D": "Dissecção aguda de aorta, resultando em tamponamento e colapso circulatório.",
+      "E": "Síndrome do QT longo, predispondo à taquiarritmia polimórfica."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-004",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 4,
+    "enunciado": "O propofol é um dos agentes anestésicos intravenosos mais utilizados atualmente. Qual o principal mecanismo de ação do propofol que explica seu efeito hipnótico?",
+    "alternativas": {
+      "A": "O propofol atua como agonista dos receptores NMDA, promovendo a inibição da transmissão sináptica.",
+      "B": "O propofol inibe a liberação de acetilcolina nos terminais sinápticos, diminuindo a excitabilidade neuronal.",
+      "C": "O propofol bloqueia os canais de sódio voltagem-dependentes, impedindo a despolarização das membranas neuronais.",
+      "D": "O propofol facilita a ligação do GABA aos seus receptores, aumentando a condutância de íons cloreto e hiperpolarizando a membrana celular.",
+      "E": "O propofol reduz a atividade da adenilciclase, diminuindo a concentração intracelular de AMPC e a atividade neuronal."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-005",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 5,
+    "enunciado": "O BNP é um biomarcador amplamente utilizado na prática clínica para o diagnóstico e manejo da insuficiência cardíaca. Qual das seguintes afirmações sobre o uso do BNP é correta?",
+    "alternativas": {
+      "A": "Níveis de BNP inferiores a 100 pg/mL praticamente excluem o diagnóstico de insuficiência cardíaca em pacientes com dispneia aguda.",
+      "B": "O BNP é um marcador exclusivo para insuficiência cardíaca, não sendo relevante em outras condições cardiovasculares.",
+      "C": "Níveis elevados de BNP não têm correlação com a gravidade da insuficiência cardíaca ou com desfechos clínicos.",
+      "D": "O BNP deve ser utilizado isoladamente para o diagnóstico da insuficiência cardíaca, sem considerar outros exames clínicos.",
+      "E": "A dosagem de BNP é irrelevante para o acompanhamento da resposta ao tratamento em pacientes com insuficiência cardíaca."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-006",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 6,
+    "enunciado": "O mecanismo de ação da nitroglicerina como vasodilatador em doenças vasculares, incluindo sua aplicação clínica, é descrito corretamente por:",
+    "alternativas": {
+      "A": "A nitroglicerina é um antagonista dos receptores de angiotensina II, reduzindo a resistência vascular periférica e a pressão arterial.",
+      "B": "A nitroglicerina atua como um bloqueador dos canais de cálcio, diminuindo a entrada de cálcio nas células musculares lisas e causando vasodilatação.",
+      "C": "A nitroglicerina é um inibidor da enzima fosfodiesterase-5 (PDE-5), aumentando os níveis de GMPc e promovendo a vasodilatação nas artérias coronárias.",
+      "D": "A nitroglicerina é um doador de óxido nítrico (NO), que estimula a produção de GMPc nas células musculares lisas, levando à relaxação e vasodilatação dos vasos sanguíneos.",
+      "E": "A nitroglicerina atua como um bloqueador dos receptores beta-adrenérgicos, reduzindo a frequência cardíaca e promovendo a vasodilatação."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-007",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 7,
+    "enunciado": "O efeito anti-hipertensivo da Candesartana é mediado por:",
+    "alternativas": {
+      "A": "Inibição da enzima conversora de angiotensina.",
+      "B": "Bloqueio competitivo dos receptores AT1.",
+      "C": "Estimulação dos receptores de bradicinina.",
+      "D": "Redução da expressão do gene da proteína Gq/11.",
+      "E": "Aumento da atividade da enzima vasopeptidase."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-008",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 8,
+    "enunciado": "Na fisiopatogenia do Diabetes Tipo 2, qual das seguintes afirmações descreve corretamente os mecanismos que levam à resistência à insulina?",
+    "alternativas": {
+      "A": "A resistência à insulina no Diabetes Tipo 2 é mediada pela inflamação crônica e aumento dos níveis de citocinas inflamatórias, como TNF-α e IL-6, que interferem na sinalização da insulina nos tecidos periféricos.",
+      "B": "A resistência à insulina é primariamente causada por uma mutação genética no receptor de insulina, resultando em uma resposta imune que destrói as células ß pancreáticas.",
+      "C": "A resistência à insulina é um processo autoimune onde os anticorpos atacam diretamente as células produtoras de insulina, levando à deficiência absoluta de insulina.",
+      "D": "O aumento da síntese de glicose hepática devido à hiperatividade da via de gluconeogênese é o único fator contribuinte para a resistência à insulina no Diabetes Tipo 2.",
+      "E": "A resistência à insulina é exclusivamente resultado de uma deficiência na secreção de insulina pelas células ß pancreáticas, sem influência de fatores periféricos."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-009",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 9,
+    "enunciado": "No diagnóstico da Doença Pulmonar Obstrutiva Crônica (DPOC), a espirometria é considerada o exame padrão-ouro porque:",
+    "alternativas": {
+      "A": "Identifica o grau de hiperinsuflação pulmonar pela medida da capacidade residual funcional.",
+      "B": "Diferencia o padrão obstrutivo do padrão restritivo, com base no comportamento dos volumes.",
+      "C": "Avalia a capacidade vital forçada (CVF) e o volume expiratório forçado no 1º segundo (VEF1).",
+      "D": "Mensura a resistência das vias aéreas e a complacência pulmonar, característicos da DPOC.",
+      "E": "Quantifica a reversibilidade do distúrbio ventilatório após broncodilatador, confirmando o diagnóstico."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-010",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 10,
+    "enunciado": "Paciente de 50 anos, com histórico de dispneia progressiva aos esforços, apresenta pressão arterial pulmonar média de 35 mmHg em repouso, medida por cateterismo cardíaco direito. Após investigação, é diagnosticada com Hipertensão Arterial Pulmonar (HAP) idiopática. Qual dos seguintes mecanismos fisiopatológicos é o principal responsável pela elevação da pressão arterial pulmonar na HAP?",
+    "alternativas": {
+      "A": "Aumento da pressão venosa pulmonar por disfunção ventricular esquerda.",
+      "B": "Aumento do débito cardíaco por shunt intracardíaco esquerda-direita.",
+      "C": "Obstrução mecânica da vasculatura pulmonar por êmbolos.",
+      "D": "Hipoventilação alveolar com hipoxemia crônica.",
+      "E": "Vasoconstrição e remodelamento vascular pulmonar."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-011",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 11,
+    "enunciado": "Paciente masculino, 45 anos, portador de pneumonia adquirida na comunidade com isolamento de Streptococcus pneumoniae resistente à penicilina (MIC >2µg/mL) em hemocultura, inicia tratamento com levofloxacino 750mg/dia. Após 72 horas, evolui com piora clínica e nova hemocultura evidencia aumento da MIC para levofloxacino de 0,5 para 4µg/mL. Na análise dos mecanismos moleculares de resistência às fluoroquinolonas e suas implicações terapêuticas, selecione a afirmativa correta:",
+    "alternativas": {
+      "A": "A mutação isolada no gene parC da topoisomerase IV confere resistência de alto nível à levofloxacino por ser seu alvo primário em gram-positivos, mantendo sensibilidade à delafloxacino.",
+      "B": "O desenvolvimento de resistência durante terapia sugere seleção de subpopulação com mutação prévia em gyrA, sendo improvável mutação de novo em parC no período de 72 horas.",
+      "C": "A presença de bomba de efluxo PmrA aumenta a CIM em 4 vezes quando associada à mutação em parC, mantendo atividade bactericida da moxifloxacino pela maior afinidade à DNA girase.",
+      "D": "O mecanismo stepwise de resistência inicia com mutação em gyrA seguida de parC em gram-positivos, exigindo dupla mutação para CIM >4µg/mL em isolados selvagens.",
+      "E": "A resistência por proteína Qnr plasmidial protege tanto a topoisomerase IV quanto a DNA girase, conferindo resistência cruzada a todas as quinolonas independente da geração."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-012",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 12,
+    "enunciado": "No tratamento de infecção do trato urinário em gestantes, o antibiótico de escolha é considerado seguro em boa parte da gestação, mas deve ser evitado próximo ao termo devido ao risco de anemia hemolítica neonatal é:",
+    "alternativas": {
+      "A": "Cefalexina.",
+      "B": "Ciprofloxacino.",
+      "C": "Sulfametoxazol-trimetoprima.",
+      "D": "Doxiciclina.",
+      "E": "Nitrofurantoína."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-013",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 13,
+    "enunciado": "Na abordagem clínica da gonorreia em adultos jovens, preencha corretamente as lacunas com os métodos diagnósticos e tratamentos indicados: ______1: O diagnóstico da infecção por Neisseria gonorrhoeae é confirmado principalmente pelo método laboratorial que utiliza amplificação de ácidos nucleicos. ______2: O tratamento de primeira linha para gonorreia não complicada é realizado com o uso de um antibiótico de terceira geração, administrado por via intramuscular em dose única. As lacunas são corretamente preenchidas, respectivamente, por:",
+    "alternativas": {
+      "A": "PCR, Ceftriaxona.",
+      "B": "Cultura bacteriana, Azitromicina.",
+      "C": "Teste rápido imunocromatográfico, Doxiciclina.",
+      "D": "PCR, Amoxicilina.",
+      "E": "Cultura bacteriana, Cefixima."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-014",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 14,
+    "enunciado": "Paciente feminina, 25 anos, com diagnóstico de Transtorno Depressivo Maior, inicia tratamento com Fluoxetina 20mg/dia. Qual o principal mecanismo de ação da Fluoxetina na melhora dos sintomas depressivos?",
+    "alternativas": {
+      "A": "Inibição da recaptação de serotonina na fenda sináptica, aumentando sua disponibilidade.",
+      "B": "Bloqueio dos receptores dopaminérgicos D2, reduzindo a atividade dopaminérgica.",
+      "C": "Aumento da liberação de noradrenalina na fenda sináptica, promovendo efeito estimulante.",
+      "D": "Inibição da enzima monoaminoxidase (MAO), aumentando a disponibilidade de neurotransmissores.",
+      "E": "Potencialização da ação do GABA, principal neurotransmissor inibitório do sistema nervoso central."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-015",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 15,
+    "enunciado": "Preencha corretamente as lacunas com os nomes dos fármacos associados às seguintes descrições: 1: Este medicamento é um potente inibidor da ciclooxigenase-1 (COX-1), reduzindo a síntese de prostaglandinas, sendo especialmente indicado em crises agudas de gota devido à sua ação anti-inflamatória de rápida resposta. 2: Este fármaco inibe ambas as isoformas da ciclooxigenase (COX-1 e COX-2) de forma não seletiva, possuindo uma longa meia-vida que o torna ideal para condições inflamatórias crônicas como artrite reumatoide e osteoartrite.",
+    "alternativas": {
+      "A": "Piroxicam, Indometacina.",
+      "B": "Celecoxibe, Indometacina.",
+      "C": "Naproxeno, Piroxicam.",
+      "D": "Indometacina, Piroxicam.",
+      "E": "Diclofenaco, Naproxeno."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-016",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 16,
+    "enunciado": "No diagnóstico de insuficiência hepática aguda, o exame laboratorial que fornece uma medida direta da capacidade sintética do fígado é fundamental para avaliar o prognóstico é:",
+    "alternativas": {
+      "A": "Dosagem do tempo de protrombina (TP) e cálculo do INR.",
+      "B": "Dosagem de bilirrubina direta e indireta.",
+      "C": "Níveis séricos de aspartato aminotransferase (AST) e alanina aminotransferase (ALT).",
+      "D": "Albumina sérica.",
+      "E": "Ultrassonografia abdominal com Doppler de vasos hepáticos."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-017",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 17,
+    "enunciado": "O paciente de 35 anos apresenta gastrite crônica associada à infecção por <i>Helicobacter pylori</i>. Qual é o regime terapêutico recomendado?",
+    "alternativas": {
+      "A": "Claritromicina 500mg + Metronidazol 500mg + Lansoprazol 30mg, durante 10 dias.",
+      "B": "Amoxicilina 1g + Metronidazol 500mg + Pantoprazol 40mg, durante 14 dias.",
+      "C": "Levofloxacino 500mg + Amoxicilina 1g + Esomeprazol 40mg, durante 10 dias.",
+      "D": "Claritromicina 500mg + Amoxicilina 1g + Omeprazol 20mg, durante 7 dias.",
+      "E": "Amoxicilina 1g + Claritromicina 500mg + Omeprazol 20mg, durante 14 dias."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-018",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 18,
+    "enunciado": "Na administração de insulina Lantus (glargina) em pacientes com Diabetes Tipo 1, qual das seguintes afirmações descreve corretamente seu mecanismo de ação e aplicação clínica?",
+    "alternativas": {
+      "A": "A insulina Lantus é uma insulina de ação rápida que atinge seu pico de ação em 30 minutos, sendo ideal para controle glicêmico pós-prandial imediato.",
+      "B": "A insulina Lantus é uma insulina basal de ação prolongada que fornece níveis constantes de insulina por aproximadamente 24 horas, sem picos pronunciados, auxiliando no controle glicêmico basal.",
+      "C": "A insulina Lantus é uma insulina de ação intermediária que deve ser administrada duas vezes ao dia para manter o controle glicêmico basal.",
+      "D": "A insulina Lantus é um análogo de insulina que deve ser misturado com insulina de ação rápida para alcançar um efeito prolongado e um controle glicêmico pós-prandial.",
+      "E": "A insulina Lantus é uma insulina de ação ultra-rápida que atinge seu pico de ação em menos de 15 minutos, sendo ideal para correção rápida de hiperglicemia."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-019",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 19,
+    "enunciado": "Na avaliação clínica de um paciente com doença renal crônica, a presença de anemia está associada à/ao:",
+    "alternativas": {
+      "A": "Déficit de ferro decorrente de perda sanguínea oculta.",
+      "B": "Elevação dos níveis de ureia e creatinina séricos.",
+      "C": "Redução da produção de eritropoietina pelo rim.",
+      "D": "Distúrbios eletrolíticos, como hipercalemia e hiponatremia.",
+      "E": "Aumento da pressão arterial sistêmica e risco cardiovascular."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-020",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 20,
+    "enunciado": "Na fisiopatogenia da asma brônquica, diversos mecanismos imunológicos e inflamatórios contribuem para a obstrução das vias aéreas. Qual das seguintes afirmações melhor descreve um dos principais mecanismos envolvidos na resposta asmática?",
+    "alternativas": {
+      "A": "A ativação de linfócitos T CD4+ do tipo Th1 é predominante e leva à produção de citocinas inflamatórias que causam broncoconstrição.",
+      "B": "A liberação de mediadores inflamatórios pelos mastócitos, como histamina e leucotrienos, resulta em broncoconstrição e aumento da permeabilidade vascular.",
+      "C": "A presença de neutrófilos é a principal característica da inflamação nas vias aéreas, contribuindo para a remodelação crônica das mesmas.",
+      "D": "A produção de IgG em resposta a alérgenos é o principal fator que desencadeia a hiperresponsividade brônquica.",
+      "E": "O aumento da secreção de muco é exclusivamente causado pela ativação de linfócitos T CD4+ do tipo Th17."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-021",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 21,
+    "enunciado": "Uma paciente de 73 anos apresentou dor abdominal no hipocôndrio direito há seis dias, associada a mudança no padrão alimentar e perda de peso. Ao dar entrada no pronto-socorro, os exames laboratoriais mostraram os seguintes resultados: Hemoglobina 12,3 g/ dL, leucócitos 12.630/mm³, bilirrubina total 1,3 mg/dL, bilirrubina direta 0,94 mg/dL, INR 1,0, fosfatase alcalina 215 U/L, GGT 748 U/L, amilase 97 U/L, ALT (TGP) 676 U/L, AST (TGO) 349 U/L, PCR 13,7 mg/L (VR<1,0), ureia 50 mg/dL e creatinina 1,25 mg/dL. Foi submetida à colecistectomia videolaparoscópica e optou-se por realizar uma colangiografia intraoperatória que resultou na imagem a seguir. Assinale a alternativa que corresponde ao diagnóstico encontrado:<br><img src=\"imagens/iamspe-2025/q21.png\" alt=\"Imagem da questão 21\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Tumor de papila.",
+      "B": "Lesão de via biliar.",
+      "C": "Coledocolitíase.",
+      "D": "Sem alterações.",
+      "E": "Colangite."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-022",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 22,
+    "enunciado": "Conhecimento da anatomia da região inguinal é crucial para a realização de uma cirurgia segura e efetiva. Reconhecer e evitar lesão de estruturas nervosas no canal inguinal é a chave para evitar as chamadas inguinodínias. Qual nervo que, após cruzar o músculo obliquo interno, passa pelo canal inguinal ao lado do cordão emergindo normalmente pelo orificio interno e terminando no orificio externo onde distribui fibras para inervação sensorial de raiz do pênis e escroto no homem e grandes lábios nas mulheres?",
+    "alternativas": {
+      "A": "Nervo íleo hipogástrico.",
+      "B": "Ramo genital do genitofemoral.",
+      "C": "Nervo íleo inguinal.",
+      "D": "Ramo femoral do genitofemoral.",
+      "E": "Nervo cutâneo lateral da coxa."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-023",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 23,
+    "enunciado": "Paciente masculino, 88 anos, portador de hipertensão e diabetes, com histórico de cateterismo e colocação de stent há 2 anos, em uso de anticoagulante oral, foi trazido pelo cuidador após queda da própria altura em casa. Não apresentou perda de consciência desde a queda até a chegada ao hospital. Ao exame físico, apresenta hematoma subgaleal frontal à esquerda, sem alterações no exame respiratório e sem dor abdominal. Qual deve ser a conduta inicial?",
+    "alternativas": {
+      "A": "Observação do paciente internado por 48 horas para monitoramento de sinais neurológicos e verificar possível intervalo lúcido.",
+      "B": "Solicitar tomografia computadorizada de crânio para avaliação de lesões intracranianas.",
+      "C": "Encaminhar para ressonância magnética de crânio para melhor avaliação de possíveis hematomas subdurais crônicos.",
+      "D": "Iniciar profilaxia de anticonvulsivante devido ao risco aumentado de convulsões pela queda.",
+      "E": "Observação ambulatorial, com orientação para retornar caso apresente sintomas neurológicos ou piora clínica."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-024",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 24,
+    "enunciado": "Um paciente masculino de 85 anos deu entrada no pronto atendimento com queixa de icterícia há cerca de 5 dias e queda do estado geral. Relata perda ponderal de 1 kg na última semana, nega alteração das fezes, mas refere urina mais escura. Ao exame físico, o paciente está lúcido, orientado, ictérico (2+/4+), desidratado (1+/4+), com frequência cardíaca de 64 bpm. O abdome é globoso, flácido e indolor à palpação profunda, e o sinal de Murphy é negativo. Os exames laboratoriais mostraram os seguintes resultados: hemoglobina 15,1 g/dL, leucócitos 6040/mm³, plaquetas 175000/mm³, GGT 225 U/L, amilase 61 U/L, TGP 252 U/L, TGO 147 U/L, bilirrubina total 10,01 mg/dL, bilirrubina direta 7,68 mg/ dL, bilirrubina indireta 2,33 mg/dL, PCR 0,9 mg/dL, ureia 36 mg/dL, potássio 4,2 mEq/L, creatinina 0,91 mg/dL e fosfatase alcalina 189 U/L. A ultrassonografia abdominal revelou vesícula biliar de forma e dimensões normais, paredes finas e regulares, com imagens calculosas em seu interior, móveis a mudança de decúbito medindo 0,6 a 0,9cm e discreta dilatação da vias biliares intra-hepáticas, sem visualização do fator obstrutivo. Com base nas informações acima, qual exame de imagem deve ser solicitado na sequência para melhor avaliação do quadro clínico do paciente?",
+    "alternativas": {
+      "A": "Tomografia Computadorizada Abdominal com contraste.",
+      "B": "Colangiorressonância magnética.",
+      "C": "Radiografia de abdome simples.",
+      "D": "Cintilografia hepatobiliar.",
+      "E": "Novo ultrassom realizado por outro profissional."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-025",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 25,
+    "enunciado": "Paciente feminino de 72 anos com queixa de perda ponderal de 7% do seu peso em 2 meses sem mudança do padrão alimentar, dor abdominal, adinamia, deu entrada no pronto atendimento com quadro obstrutivo agudo e foi diagnosticada com tumor de sigmóide. Foi submetida a retossigmoidectomia na urgência com anastomose primária e durante pós operatório evoluiu com quadro de íleo mais prolongado. Considerando a doença de base, o porte da cirurgia e o quadro atual, assinale a alternativa incorreta:",
+    "alternativas": {
+      "A": "Pelo NRS-2002 a paciente apresenta alto risco nutricional e deve receber intervenção nutricional precoce.",
+      "B": "Para melhora do íleo pós operatório deve-se hidratar paciente com parcimônia, não passando de 30ml/kg.",
+      "C": "Pelo NRS-2002 a paciente apresenta baixo risco nutricional e deve ser reavaliada semanalmente.",
+      "D": "Para melhora do íleo pós operatório deve-se iniciar deambulação precoce, o que também auxilia na prevenção de TVP.",
+      "E": "Para melhora do íleo pós operatório deve-se diminuir o uso de opiáceos."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-026",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 26,
+    "enunciado": "Paciente masculino, 54 anos, apresenta dor abdominal intensa irradiada para o tórax e dorso, com intensidade 10/10, associada a náuseas, porém sem vômitos. Ao exame físico, encontra-se afebril, anictérico, com PA 166x121 mmHg, FC 78 bpm, abdome globoso, tenso, doloroso difusamente, com ruídos hidroaéreos diminuídos. Exames laboratoriais: Hb19,4 g/ dL, leucócitos 21.930/mm³, creatinina 2,81 mg/dL, ureia 92 mg/dL; bilirrubina total 1,45 mg/ dL, bilirrubina direta 0,38 mg/dL, fosfatase alcalina 49 U/L, GGT 37 U/L, amilase 2234 U/L, lipase 2984 U/L, PCR 44 mg/L (VR<1,0). Aferida pressão intrabdominal 17mmHg. Realizada tomografia computadorizada para diagnóstico diferencial e obtida a imagem abaixo: Considerando o diagnóstico do paciente, a conduta imediata deve ser:<br><img src=\"imagens/iamspe-2025/q26.png\" alt=\"Imagem da questão 26\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Drenagem percutânea",
+      "B": "Expansão volêmica e transferência para UTI.",
+      "C": "Drenagem cirúrgica videolaparoscópica.",
+      "D": "Descompressão cirúrgica por laparotomia.",
+      "E": "Nenhuma das anteriores."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-027",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 27,
+    "enunciado": "Paciente masculino, 68 anos, chega ao pronto-socorro com dor abdominal epigástrica intensa e súbita, associada a distensão abdominal há 1 dia. Relata um episódio de vômito, mas nega sangramentos, febre ou perda ponderal. Relata histórico de AVC hemorrágico há 10 anos e hipertensão, em uso de losartana. Ao exame físico apresentava abdome distendido, doloroso difusamente, DB positivo. Exames laboratoriais: Hemoglobina: 10,7 g/ dL, Leucócitos: 8.880/mm³, Plaquetas: 197.000/mm³, Creatinina: 1,9 mg/dL, Ureia: 64 mg/ dL, Sódio: 134 mEq/L, Potássio: 3,7 mEq/L, TGO: 28 U/L, TGP: 29 U/L, Amilase: 96 U/L, PCR: 13,4 mg/L (VR<1,0), Magnésio: 1,7 mg/dL. Realizou RX de abdome agudo com a imagem abaixo: Qual deve ser a conduta imediata?<br><img src=\"imagens/iamspe-2025/q27.png\" alt=\"Imagem da questão 27\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Solicitar tomografia computadorizada de abdome para confirmação diagnóstica e avaliar a extensão da lesão.",
+      "B": "Iniciar antibioticoterapia de largo espectro e hidratação venosa, internação e observação.",
+      "C": "Laparotomia exploradora ou abordagem laparoscópica de urgência, devido à suspeita de perfuração.",
+      "D": "Manter jejum, realizar estabilização hemodinâmica e iniciar passagem de sonda nasogástrica para descompressão gástrica.",
+      "E": "Encaminhar para endoscopia digestiva alta de urgência para investigar a origem da dor abdominal."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-028",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 28,
+    "enunciado": "Durante uma hemicolectomia direita, existe a demanda por ligadura vascular, anastomose intestinal, e fechamento da aponeurose da parede abdominal. Aponte a alternativa que contém os fios de sutura mais adequados para esses tempos cirúrgicos, respectivamente:",
+    "alternativas": {
+      "A": "Poliamida, Algodão, Poliéster.",
+      "B": "Poliamida, Categute, Poliglecaprone.",
+      "C": "Algodão, Polietileno, Polidioxanona.",
+      "D": "Algodão, Poliéster, Poliglatina.",
+      "E": "Poliglatina, Poliamida, Polidioxanona."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-029",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 29,
+    "enunciado": "Paciente feminina, 18 anos, procurou atendimento em UPA com queixa de dor abdominal em baixo ventre há 2 dias e recebeu antibioticoterapia com ciprofloxacina para infecção do trato urinário. Sem melhora dos sintomas após 3 dias de tratamento, procurou um hospital de referência apresentando piora da dor abdominal, além de náuseas e vômitos. Ao exame físico, a paciente estava descorada (1+/4+), desidratada (2+/4+), afebril ao toque, com abdome tenso e doloroso à palpação em flanco e fossa ilíaca direita, com sinal de Giordano negativo. Exames laboratoriais: Hemoglobina: 12,6 g/dL, Leucócitos: 16.260/mm³, Plaquetas: 260.000/mm³, Creatinina: 1,01 mg/dL, Ureia: 21,8 mg/dL, INR: 1,15, PCR: 23,9 mg/L (VR<1,0). Realizou tomografia computadorizada de abdome com contraste venoso para investigação que apresentou o seguinte achado. Dentre os diagnósticos diferenciais para esse caso, qual dos seguintes é o mais provável?<br><img src=\"imagens/iamspe-2025/q29.png\" alt=\"Imagem da questão 29\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Diverticulite de ceco.",
+      "B": "Doença inflamatória pélvica (DIP).",
+      "C": "Torção de cisto ovariano.",
+      "D": "Apendicite aguda.",
+      "E": "Infecção urinária complicada com pielonefrite."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-030",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 30,
+    "enunciado": "Paciente feminina, 21 anos, após confraternização de fim de ano, apresenta sensação de alimento preso na garganta, odinofagia, sialorreia, regurgitação e náuseas (sem vômito). Compareceu ao pronto-socorro onde realizou exames laboratoriais e de imagem. Exames laboratoriais: Hemoglobina 11,1 g/dL, Leucócitos 6.730/mm³, Plaquetas 151.000/mm³, PCR 1,23 mg/L (VR<1,0), Creatinina 0,65 mg/dL, Ureia 24 mg/dL, Sódio 139 mEq/L, Potássio 4,0 mEq/L, Bilirrubina Total 0,23 mg/dL, Amilase 62 U/L, INR1,14. Endoscopia laudava esôfago com mucosa conservada até 20cm da ADS com laceração profunda onde encontra-se corpo estranho impactado. Retirado com auxílio de Roth Net sem intercorrências. Realizada também tomografia computadorizada de pescoço. Vide imagens abaixo. Qual deve ser a conduta imediata?<br><img src=\"imagens/iamspe-2025/q30-1.png\" alt=\"Imagem da questão 30\" class=\"imagem-questao\"><br><img src=\"imagens/iamspe-2025/q30-2.png\" alt=\"Imagem da questão 30\" class=\"imagem-questao\"><br><img src=\"imagens/iamspe-2025/q30-3.png\" alt=\"Imagem da questão 30\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "NPO (nada por via oral), hidratação venosa, antibioticoterapia endovenosa, internação e avaliação para reintervenção endoscópica ou cirúrgica conforme evolução.",
+      "B": "Realizar esofagograma com contraste hidrossolúvel imediatamente para avaliar a extensão da lesão.",
+      "C": "Passagem de sonda nasogástrica e lavagem com soro fisiológico para limpar o esôfago.",
+      "D": "Alta com analgesia e antibiótico, com orientação de retorno caso haja piora dos sintomas.",
+      "E": "Encaminhar imediatamente para cirurgia para reparo esofágico primário, considerando o risco de mediastinite."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-031",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 31,
+    "enunciado": "Homem, 47 anos, se apresenta ao Pronto Socorro com dor em fossa ilíaca esquerda há 1 dia sem febre ou demais sintomas. Nega episódios semelhantes ou cirurgias prévias. No exame físico, está em bom estado geral, normocárdico, afebril, abdome flácido, com dor localizada em fossa ilíaca esquerda, sem dor à descompressão brusca. Hemoglobina 14,8 g/dL (normal 12-16g/dL), Leucócitos 8750 s/ desvio (normal 6-10 mil), Proteína C Reativa 9 mg/L (normal até 5 mg/L). Realizada Tomografia, que observou a seguinte imagem. Aponte o tratamento mais adequado:<br><img src=\"imagens/iamspe-2025/q31.png\" alt=\"Imagem da questão 31\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "internação para antibioticoterapia venosa.",
+      "B": "internação para procedimento cirúrgico de urgência.",
+      "C": "alta com antibioticoterapia oral.",
+      "D": "alta com sintomáticos por via oral.",
+      "E": "alta com tamoxifeno por via oral."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-032",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 32,
+    "enunciado": "Mulher, 67 anos, deu entrada no Pronto Socorro com dor e edema de membro inferior direito associada a leve dispneia. Tem antecedente de histerectomia com salpingo-ooforectomia bilateral videolaparoscópica por neoplasia de ovário há 6 dias, com alta hospitalar há 3 com medicação sintomática. À admissão, estava eupneica em ar ambiente, Sat O2 97%, PA 130 x 80 mmHg, Pulso 82 bpm. Ausculta pulmonar e cardíaca limpas. Abdome flácido, indolor, cicatrizes de bom aspecto. Edema de perna direita com dor à palpação dessa panturrilha, sem outras peculiaridades. Qual a primeira medida mais adequada para realização ainda no Pronto Socorro?",
+    "alternativas": {
+      "A": "Doppler Venoso de Membro Inferior direito.",
+      "B": "Dosagem de D-Dímero.",
+      "C": "Anticoagulação plena.",
+      "D": "Angiotomografia de Tórax.",
+      "E": "Gasometria venosa."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-033",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 33,
+    "enunciado": "Mulher, 52 anos, com dor abdominal e tumefação epigástrica há 4 horas, associada a náusea sem vômitos. Histórico de histerectomia laparotômica, herniorrafias umbilical e incisional suprapúbica. Ao exame físico, Regular estado geral, normocárdica, normotensa, desidratada 2+/4+. Abdome pouco distendido, com nodulação subcutânea dolorosa à meia distância entre cicatriz umbilical e apêndice xifóide, sem edema ou hiperemia, com alguma mobilidade sobre seu eixo em linha média da parede abdominal, compatível com hérnia não redutível. Com tal achado, assinale o tipo da hérnia referida, a complicação apresentada por sua clínica e sua respectiva conduta no Pronto Socorro:",
+    "alternativas": {
+      "A": "hérnia de Spiegel encarcerada; passagem de sonda nasogástrica e analgesia.",
+      "B": "hérnia supraumbilical estrangulada; herniorrafia de urgência.",
+      "C": "hérnia incisional encarcerada; tomografia de abdome.",
+      "D": "hérnia epigástrica encarcerada; herniorrafia de urgência.",
+      "E": "hérnia epigástrica encarcerada; tomografia de abdome."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-034",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 34,
+    "enunciado": "Sobre as herniorrafias inguinais não-laparoscópicas, assinale a alternativa que aponte a técnica cirúrgica com seu respectivo nome:",
+    "alternativas": {
+      "A": "McVay - aproximação do tendão do m. transverso ao ligamento pectíneo.",
+      "B": "Shouldice – colocação de plug de tela em forma de cone no anel inguinal interno.",
+      "C": "Lichtenstein – colocação de tela sem tensão sob o trato iliopúbico e ligamento inguinal.",
+      "D": "Gilbert – sutura dos arcos musculoaponeuróticos do transverso abdominal e oblíquo interno ou tendão conjunto (quando presente",
+      "E": "Bassini - reparo imbricado multicamada da parede posterior do canal inguinal."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-035",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 35,
+    "enunciado": "Sexo feminino, 86 anos, hipertensa, diabética insulinodependente e com histórico de coronariopatia, é admitida no Pronto Socorro com história de dor em hipocôndrio direito há 4 dias, com piora progressiva associada a febre. À entrada, estava anictérica, hidratada, contactuante, plastrão doloroso em hipocôndrio direito, sinal de Murphy positivo. Ultrassonografia mostrou vesícula hiperdistendida, com cálculo impactado no infundíbulo e paredes delaminadas, e líquido pericolecístico, sem coleções ou dilatação de vias biliares. Exames laboratoriais com 21 mil leucócitos sem desvio, Plaquetas 95 mil, Proteína C Reativa 40mg/dL (VR<1,0). Bilirrubinas totais 1,5, Creatinina 1,8 mg/dL. Aponte o fator mais importante para considerar como Colecistite Aguda Grave segundo critérios de Tokyo 2018, e a conduta preconizada neste caso:",
+    "alternativas": {
+      "A": "Idade superior a 75 anos; Antibioticoterapia e Colangiopancreatografia Retrógrada Endoscópica em até 24 horas.",
+      "B": "Vesícula com paredes delaminadas; colecistectomia Laparotômica.",
+      "C": "Leucocitose acima de 18 mil; antibioticoterapia, com colecistectomia após 4 semanas.",
+      "D": "Proteína C Reativa > 100 mg/L (ou 10mg/dL); colecistectomia videolaparoscópica de urgência.",
+      "E": "Plaquetas < 100 mil; colecistostomia por punção."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-036",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 36,
+    "enunciado": "A respeito das hemorragias gastrintestinais, aponte a alternativa correta:",
+    "alternativas": {
+      "A": "O ponto anatômico que separa as hemorragias altas das baixas é a válvula ileocecal.",
+      "B": "A etiologia de cerca de 60% das hemorragias digestivas é a doença ulcerosa péptica.",
+      "C": "A hemorragia digestiva baixa tende a ser mais grave que a alta.",
+      "D": "Dentre as doenças inflamatórias intestinais, a Doença de Crohn causa proporcionalmente mais hemorragia digestiva baixa do que a Retocolite Ulcerativa.",
+      "E": "Nos casos de sangramento de maior monta com instabilidade hemodinâmica, uma colonoscopia deve ser realizada dentro de até 6 horas da entrada."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-037",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 37,
+    "enunciado": "Mulher de 87 anos é trazida por cuidadora à UPA onde você está de plantão após escorregar em tapete e cair com sua bengala sobre mesa de centro da sala de sua casa. A profissional nega trauma de crânio, porém a paciente tem dor intensa sobre parede torácica direita à inspiração. Ao exame físico, ela se apresenta em bom estado geral, fascies dolorosa, eupneica em ar ambiente, acianótica, PA 130 x 90 mmHg, pulso 82 bpm, frequência respiratória 14 incursões/minuto, Sat O2 94%. Inspeção do tórax mostra hematoma em linha axilar anterior direita, à altura do 6º arco costal, com mobilização adequada do arcabouço aos movimentos respiratórios; palpando, a paciente tem dor intensa e crepitação nesse osso. Ausculta pulmonar sem alterações. Diante do quadro apresentado, aponte a alternativa mais adequada no momento:",
+    "alternativas": {
+      "A": "Os dados apontados são suficientes para indicar internação em UTI para monitorização.",
+      "B": "Pela altura e lateralidade do hematoma, lesões traumáticas hepáticas devem ser afastadas.",
+      "C": "Ultrassonografia Point-of-Care neste caso pode ter utilidade devido às boas sensibilidade e especificidade para detecção das alterações esperadas.",
+      "D": "Devido à possibilidade de lesão óssea, o acionamento do médico Ortopedista de plantão é necessário.",
+      "E": "O manejo adequado da dor melhora a tolerância do paciente à respiração profunda e à tosse, porém não há redução do risco de pneumonia."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-038",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 38,
+    "enunciado": "Eviscerações e eventrações são complicações potencialmente graves de procedimentos cirúrgicos por via laparotômica. Assinale a alternativa correta sobre esses eventos:",
+    "alternativas": {
+      "A": "Na evisceração, a cobertura das vísceras com compressas úmidas até a reabordagem está atualmente contraindicada por aumento de lesões de delgado na manipulação.",
+      "B": "As complicações de sítio cirúrgico profundo têm associação com idade avançada, uso de anti-inflamatórios não esteroidais e doença pulmonar subjacente.",
+      "C": "Ao diagnóstico de deiscência de aponeurose, sua correção deve ser realizada imediatamente.",
+      "D": "A deiscência de aponeurose abdominal é diagnosticada inicialmente por saída de secreção purulenta pela ferida operatória.",
+      "E": "O uso de cintas abdominais não interfere na incidência de eventrações e eviscerações, estando indicado para conforto e sensação de segurança do paciente no pós-operatório."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-039",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 39,
+    "enunciado": "Homem, 42 anos, queixa de dor em fossa ilíaca direita de forte intensidade de início súbito associada a náusea sem vômitos há 2 horas, com irradiação para região inguinal ipsilateral, sem fatores de piora ou melhora. Ao exame físico, abdome flácido, leve desconforto à palpação de fossa ilíaca direita, sem plastrão palpável ou tumefações subcutâneas. Sinais de Blumberg e Giordano negativos. Foi medicado e apresentou alívio da dor. Hemograma com Hb 14,3 g/dL, Leucócitos 9580 s/ desvio. Proteína C Reativa 1,2 g/dL (normal <1,0). Urina I com hemácias 12 mil (normal <10 mil) e leucócitos 11 mil (normal < 10 mil), sem outros achados. Após ver a tomografia e confirmar a hipótese diagnóstica mais provável para este caso, cite o próximo passo para o tratamento:<br><img src=\"imagens/iamspe-2025/q39.png\" alt=\"Imagem da questão 39\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Antibioticoterapia com quinolona via oral e reavaliação em 48 horas.",
+      "B": "Videolaparoscopia diagnóstica com provável apendicectomia.",
+      "C": "Arteriografia armada para endoprótese de artéria ilíaca.",
+      "D": "Litotripsia extracorpórea.",
+      "E": "Alfa-bloqueador, anti-espasmódico + analgésicos, corticoides."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-040",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 40,
+    "enunciado": "Paciente masculino de 56 anos, sabidamente portador de doença diverticular dos cólons, apresenta dor abdominal tipo cólica há 5 dias, com diminuição do apetite e procurou atendimento para investigação. Ao exame físico apresentava dor à palpação profunda em fossa ilíaca esquerda, sem massas palpáveis, com DB negativo. Foram realizados exames laboratoriais: Hemoglobina: 12,6 g/dL, Leucócitos: 16.260/mm³, Plaquetas: 260.000/mm³, Creatinina: 1,2 mg/dL, Ureia: 21,8 mg/dL, PCR: 23,9 mg/L (VR: <1,0 mg/L). Realizada tomografia computadorizada de abdome com contraste, mostrando imagem de coleção de 5,6cm de tamanho justa-cólico, sem pneumoperitônio livre, conforme imagem abaixo: Qual deve ser a conduta inicial para esse paciente?<br><img src=\"imagens/iamspe-2025/q40.png\" alt=\"Imagem da questão 40\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Drenagem percutânea da coleção guiada por imagem, antibioticoterapia de amplo espectro e observação hospitalar.",
+      "B": "Antibioticoterapia ambulatorial e orientação para retorno ao hospital se houver piora dos sintomas.",
+      "C": "Laparotomia exploradora de urgência para drenagem cirúrgica e ressecção segmentar do cólon acometido.",
+      "D": "Observação hospitalar com hidratação venosa e controle de dor, sem necessidade de drenagem inicial.",
+      "E": "Realização de colonoscopia imediata para avaliar a extensão da doença diverticular e excluir outras causas de infecção."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-041",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 41,
+    "enunciado": "Paciente de 34 anos, nuligesta com desejo reprodutivo, apresenta sangramento uterino anormal há 3 anos, refratário ao tratamento clínico medicamentoso. Realizou ressonância nuclear magnética de pelve e histeroscopia diagnóstica evidenciando: útero pouco aumentado de volume, com mioma submucoso classificação da FIGO tipo 1, medindo 3,5cm, manto externo até a serosa com 1,5cm de espessura. A base do nódulo ocupa 2/3 da cavidade endometrial e está localizada na parede fúndica anterior. Segundo a classificação proposta por Lasmar conhecida como STEP - W (Size, Topography, Extension, Penetration -lateral Wall), qual é a melhor conduta para essa paciente:",
+    "alternativas": {
+      "A": "Inserção de DIU medicado com progesterona.",
+      "B": "Miomectomia histeroscópica em tempo único, pois trata-se de miomectomia com baixa complexidade.",
+      "C": "Miomectomia histeroscópica precedida de preparo com análogo do GnRH e/ou cirurgia em 2 tempos, trata-se de miomectomia complexa.",
+      "D": "Miomectomia por via não histeroscópica.",
+      "E": "Histerectomia total abdominal, não sendo possível tratamento conservador."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-042",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 42,
+    "enunciado": "Paciente de 16 anos apresenta caracteres sexuais secundários externos normais associados à amenorreia primária. Realizou RNM de pelve que demonstra agenesia do terço superior da vagina e ausência da imagem do útero, ovários sem alterações. Qual a principal hipótese diagnóstica?",
+    "alternativas": {
+      "A": "Síndrome de Mayer-Rokitansky-Kuster-Hauser.",
+      "B": "Síndrome de Turner (45,X).",
+      "C": "Síndrome de Morris.",
+      "D": "Síndrome de Swyer.",
+      "E": "Disgenesia gonadal completa (46,XY)."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-043",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 43,
+    "enunciado": "Paciente com queixa de corrimento vaginal amarelado, de odor fétido e prurido vaginal. Referia ainda que o odor piorava após manter relações sexuais. O exame bacterioscópico do conteúdo vaginal revelou a presença de “clue cells”. Qual o provável agente etiológico desta vaginite?",
+    "alternativas": {
+      "A": "Candida albicans.",
+      "B": "Trichomonas vaginalis.",
+      "C": "Gardnerella vaginalis.",
+      "D": "HPV.",
+      "E": "E. coli."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-044",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 44,
+    "enunciado": "Paciente de 43 anos com 3 filhos vivos foi submetida a colposcopia e biópsia de colo uterino por colpocitologia oncótica NIC 3. A biópsia revelou carcinoma epidermóide in situ. O exame ginecológico era normal e os paramétrios livres. Foi submetida a histerectomia total abdominal. O exame anatomopatológico revelou corpo uterino normal e colo com carcinoma epidermóide invasivo com mais de 5mm de profundidade. Pode-se concluir que:",
+    "alternativas": {
+      "A": "A conduta foi correta e a paciente deve ser considerada curada.",
+      "B": "A conduta foi correta e a paciente deve receber radioterapia pélvica adjuvante.",
+      "C": "A conduta foi inadequada, deveria ter sido feito cirurgia de Wertheim Meigs, visto que a biópsia da colposcopia já mostrava carcinoma \"in situ\".",
+      "D": "A conduta foi inadequada, deveria ter sido feito conização de colo uterino para definição diagnóstica e melhor escolha terapêutica.",
+      "E": "A conduta foi inadequada, pois carcinoma epidermóide \"in situ\" tem ótima resposta ao tratamento radioterápico exclusivo."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-045",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 45,
+    "enunciado": "Paciente de 58 anos, apresentou sangramento pós menopausa e procurou seu ginecologista. Ao exame clínico foi observado pequeno sangramento escuro exteriorizando-se pelo orifício externo do colo, sem outras alterações. Qual a principal hipótese diagnóstica e qual exame complementar deve ser solicitado?",
+    "alternativas": {
+      "A": "Hiperplasia endometrial, ultrassonografia pélvica transvaginal.",
+      "B": "Câncer de endométrio, histeroscopia diagnóstica com biópsia.",
+      "C": "Endometrite crônica, cultura de secreção vaginal.",
+      "D": "Câncer de colo uterino, colposcopia com biópsia.",
+      "E": "Atrofia endometrial, ultrassonografia transvaginal."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-046",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 46,
+    "enunciado": "Uma mulher de 55 anos, assintomática, sem histórico familiar de câncer de mama e sem outros fatores de risco, procura atendimento para realizar seu check-up anual. Sobre o rastreamento mamográfico no Brasil, segundo o protocolo do Ministério da Saúde, assinale a alternativa correta:",
+    "alternativas": {
+      "A": "O Ministério da Saúde recomenda mamografia anual para todas as mulheres a partir dos 40 anos.",
+      "B": "O rastreamento mamográfico deve ser iniciado aos 50 anos, com periodicidade bienal, para mulheres de risco habitual.",
+      "C": "Mulheres com histórico familiar de câncer de mama devem realizar mamografia de rastreamento anualmente, independentemente da idade.",
+      "D": "O Ministério da Saúde recomenda rastreamento mamográfico para mulheres acima de 70 anos, mesmo aquelas saudáveis.",
+      "E": "A realização de mamografia de rastreamento deve ser feita somente em mulheres que apresentam sinais ou sintomas suspeitos de câncer de mama."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-047",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 47,
+    "enunciado": "Paciente de 46 anos previamente hígida procura assistência médica devido à aumento do volume abdominal, associado à dor e constipação há 1 mês. Nega febre ou outros sintomas. Ao exame físico apresenta abdômen distendido, endurecido, doloroso à palpação difusa, sinal de piparote positivo. USG transvaginal com complementação abdominal evidenciando grande quantidade de líquido livre na cavidade, tumorações complexas bilateralmente em região de anexos, medindo 7cm à direita e 11cm à esquerda, septos grosseiros com vascularização com baixo índice de resistência, exibindo vegetações parietais no seu interior, útero de tamanho e morfologia dentro da normalidade. Traz exames de rotina ginecológica realizada 6 meses antes, sem alterações. Qual a hipótese diagnóstica e a conduta mais adequada?",
+    "alternativas": {
+      "A": "Cisto ovariano hemorrágico roto / Ooforoplastia bilateral videolaparoscópica.",
+      "B": "Câncer de ovário / videolaparoscopia diagnóstica com biópsia de congelação (ovariana ou de implantes peritoniais). Se biópsia positiva para malignidade, avaliar citorredução máxima RO (“debulking”). Caso não seja tecnicamente possível, indicado quimioterapia neoadjuvente.",
+      "C": "Câncer de ovário / laparotomia exploradora para histerectomia total com salpingooforectomia bilateral. Aguardar resultado de biópsia de parafina para definição de adjuvância.",
+      "D": "Endometriose profunda com endometriomas bilaterais / Ooforoplastia bilateral videolaparoscópica com ressecção cirúrgica de focos de endometriose e inserção de DIU medicado com progesterona para bloqueio da menstruação e controle de sintomas.",
+      "E": "Cistadenoma mucinoso de ovário roto / Ooforectomia bilateral laparotômica, com lavagem exaustiva da cavidade. Risco de choque tireotóxico devido à mucina ter comportamento biológico semelhante ao hormônio tireoidiano."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-048",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 48,
+    "enunciado": "O câncer do colo do útero é o segundo tipo de câncer mais frequente em mulheres que vivem em regiões em desenvolvimento. Como prevenção a Organização Mundial de Saúde (OMS) recomenda a prática sexual segura, incluindo educação para jovens e promoção do uso e fornecimento de preservativos para pessoas que já iniciaram atividade sexual. Contudo, a prevenção mais eficaz eficiente – indicada pela OMS é a vacinação contra o HPV. A recomendação do Programa Nacional de Imunizações é:",
+    "alternativas": {
+      "A": "para meninos e meninas de 9 a 14 anos 3 doses da vacina, 2ª dose dois meses após a primeira e 3ª dose seis meses após a primeira.",
+      "B": "para meninos e meninas de 9 a 14 anos 2 doses da vacina, 2ª dose dois meses após a primeira.",
+      "C": "para meninos e meninas de 9 a 14 anos - dose única da vacina.",
+      "D": "para meninos e meninas de 9 a 14 anos somente tomar a vacina em caso de violência sexual.",
+      "E": "pessoas de 15 a 19 anos devem receber 2 doses da vacina, 2ª dose dois meses após a primeira."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-049",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 49,
+    "enunciado": "Qual dos exames abaixo não faz parte da rotina de exames laboratoriais solicitados na primeira consulta, realizada no primeiro trimestre do pré-natal?",
+    "alternativas": {
+      "A": "Colpocitologia oncótica.",
+      "B": "Elisa anti-HIV.",
+      "C": "HbsAg.",
+      "D": "Teste oral de tolerância à glicose com 75 gramas de glicose.",
+      "E": "Coombs indireto em pacientes Rh negativas com fator de risco para doença hemolítica perinatal."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-050",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 50,
+    "enunciado": "Paciente de 33 anos com dor pélvica cíclica limitante, associada à dispareunia de profundidade, tentando engravidar há 2 anos sem sucesso. Investigação de infertilidade do parceiro sem alterações. Procurou o ginecologista que solicitou RNM de pelve evidenciando sinais de endometriose profunda em ligamentos útero sacros e fundo de saco posterior, aderências fixas entre útero e ovários na face posterior da pelve (“kissing ovaries”), além de imagens sugestivas de hidrossalpinge bilateralmente. Histerossalpingografia com teste de Cottè negativo. Dosagens hormonais dentro da normalidade, sugerindo manutenção da ovulação. A melhor conduta no caso seria:",
+    "alternativas": {
+      "A": "Estimulação ovariana seguida de punção para captação e congelamento de óvulos, cirurgia para ressecção de focos de endometriose e salpingectomia bilateral, pois assim, além de melhora dos sintomas, aumentaria a chance de sucesso de uma fertilização “in vitro” (FIV).",
+      "B": "Fertilização “in vitro” (FIV) como medida isolada, visto que as tubas já se encontram obstruídas e a possibilidade de gestação espontânea não existe, não havendo benefício com tratamento cirúrgico.",
+      "C": "Cirurgia para tratamento da endometriose com ressecção de todos os focos, drenagem tubária bilateral e tentativa de gestação espontânea posteriormente.",
+      "D": "Análogo do GnRH seguida de fertilização “in vitro” (FIV) após 3 meses. Dessa forma é possível controle dos sintomas, além de maior taxa de sucesso da FIV.",
+      "E": "Preparo endometrial com estrogênio isolado para aumentar a chance de implantação embrionária, visto que os exames hormonais se encontram sem alterações e a investigação do parceiro não evidenciou sinais de infertilidade."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-051",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 51,
+    "enunciado": "A síndrome de transfusão feto-fetal é evento raro em gestações gemelares e pode ser letal para ambos os fetos, tanto para o dito receptor, como para o chamado de doador. Essa condição pode ocorrer:",
+    "alternativas": {
+      "A": "devido a alteração cromossômica fetal e pode ser diagnosticada por cariótipo.",
+      "B": "devido à deficiência materna de ácido fólico pré gestacional.",
+      "C": "como consequência de hipertensão gestacional mal controlada.",
+      "D": "em qualquer gestação gemelar após 17 semanas de gravidez.",
+      "E": "somente em gestações monocoriónicas."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-052",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 52,
+    "enunciado": "Sobre a estática fetal, assinale a alternativa verdadeira:",
+    "alternativas": {
+      "A": "Na apresentação cefálica fletida, o ponto de referência fetal é o bregma, sendo favorável ao parto vaginal.",
+      "B": "Na apresentação cefálica defletida de 2º grau ou fronte, a referência fetal é a glabela, sendo indicação absoluta de cesárea.",
+      "C": "No assinclitismo posterior a sutura sagital do feto está próxima ao sacro.",
+      "D": "Na variedade de posição córmica, a referência fetal é o sacro.",
+      "E": "Na apresentação cefálica defletida de 3º grau, o ponto de referência fetal é o lambda, sendo impossível o parto normal."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-053",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 53,
+    "enunciado": "Não é considerado fator de risco para trabalho de parto prematuro:",
+    "alternativas": {
+      "A": "Tabagismo e uso de álcool durante a gravidez.",
+      "B": "Infecção de trato urinário.",
+      "C": "Hipertensão gestacional.",
+      "D": "Multiparidade.",
+      "E": "Diabetes Mellitus."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-054",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 54,
+    "enunciado": "Em relação à sífilis na gestação, está correto afirmar:",
+    "alternativas": {
+      "A": "A possibilidade de uma reação alérgica à penicilina é alta, sendo indicado teste de sensibilidade para gestantes antes de iniciar tratamento.",
+      "B": "Quando se tem um teste não treponêmico positivo, deve-se aguardar o teste treponêmico específico para iniciar o tratamento.",
+      "C": "A transmissão vertical não acontece intraútero, apenas pode ocorrer durante a passagem do feto pelo canal do parto, se houver a presença de lesão ativa.",
+      "D": "A benzilpenicilina é a única opção segura e eficaz para o tratamento adequado em gestantes.",
+      "E": "Se o teste rápido do parceiro for negativo, ele deve realizar teste treponêmico antes de receber penicilina benzatina."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-055",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 55,
+    "enunciado": "Qual das associações abaixo caracteriza melhor o fenômeno da centralização no feto à dopplervelocimetria?",
+    "alternativas": {
+      "A": "Aumento da relação sístole/diástole nas artérias uterinas e normalidade nas artérias umbilicais.",
+      "B": "Aumento da relação sístole/diástole nas artérias uterinas e diminuição da relação sístole/ diástole na artéria cerebral média.",
+      "C": "Diminuição da relação sístole/diástole nas umbilicais e diminuição da relação sístole/ diástole na artéria cerebral média.",
+      "D": "Aumento da relação sístole/diástole tanto nas umbilicais como na cerebral média.",
+      "E": "Aumento da relação sístole/diástole nas umbilicais e diminuição da relação sístole/ diástole na cerebral média."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-056",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 56,
+    "enunciado": "O partograma abaixo evidencia:<br><img src=\"imagens/iamspe-2025/q56.png\" alt=\"Imagem da questão 56\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Trabalho de parto eutócico.",
+      "B": "Parada secundária da dilatação.",
+      "C": "Parada secundária da descida.",
+      "D": "Apresentação cefálica defletida de 2º grau.",
+      "E": "Fase de latência prolongada."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-057",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 57,
+    "enunciado": "Paciente de 23 anos, dá entrada no PS de Ginecologia com quadro de dor em baixo ventre de forte intensidade associada a um pico febril de 38,5˚ hoje. Última menstruação há 2 semanas, não utiliza método anticoncepcional no momento, vida sexual ativa. Sinais vitais normais na admissão, ao exame físico apresenta no toque bimanual dor à mobilização de colo uterino e ao especular cervicite mucopurulenta. USG transvaginal assim como exames laboratoriais realizados não mostraram alterações significativas, exceto leucocitúria de 30.000 na urina tipo 1. Qual a principal hipótese diagnóstica e a melhor conduta nesse caso?",
+    "alternativas": {
+      "A": "Doença inflamatória aguda - internação para antibioticoterapia de amplo espectro e drenagem de abcesso tubo ovariano por videolaparoscopia.",
+      "B": "Vaginose bacteriana - tratamento com creme vaginal (metronidazol) por 7 noites, abstinência sexual no período.",
+      "C": "Endometrite aguda - antibiótico de amplo espectro (ceftriaxone 250mg IM dose única + doxiciclina 100mg via oral de 12/12 horas por 14 dias). Retorno se piora ou manutenção da febre por mais de 48-72h para reavaliação.",
+      "D": "Infecção do trato urinário inferior - nitrofurantoína 100mg via oral de 6/6h por 7 dias. Colher urocultura antes de iniciar tratamento.",
+      "E": "Apendicite aguda - tomografia para confirmação diagnóstica. Caso confirmado indicado apendicectomia videolaparoscópica."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-058",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 58,
+    "enunciado": "Sobre a cardiotocografia ante parto abaixo, pode-se afirmar:<br><img src=\"imagens/iamspe-2025/q58.png\" alt=\"Imagem da questão 58\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Apresenta taquicardia fetal, compatível com sofrimento fetal agudo.",
+      "B": "Trata-se de padrão não reativo, repetir após administração de soro glicosado.",
+      "C": "Trata-se padrão sinusoidal, alto risco para óbito fetal.",
+      "D": "Apresenta desacelerações tardias repetidas, mudar o decúbito materno, possível compressão de cordão umbilical.",
+      "E": "Indica boa vitalidade fetal."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-059",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 59,
+    "enunciado": "A ligadura bilateral de artéria hipogástrica é um método seguro e eficaz para controlar hemorragias em pacientes com alto risco de sangramento obstétrico, podendo ser definitiva não só para a preservação uterina, mas também para controle efetivo de sangramento em pacientes já histerectomizadas. Sua realização deve ser feita 2cm abaixo da bifurcação das artérias ilíacas comuns, com o objetivo de preservar 3 ramos posteriores importantes desses vasos. Quais são esses ramos?",
+    "alternativas": {
+      "A": "Sacral lateral, circunflexa e obturatória.",
+      "B": "Sacral média, sacral lateral e pudenda.",
+      "C": "Glútea superior, iliolombar e sacral lateral.",
+      "D": "Iliolombar, sacral medial e circunflexa.",
+      "E": "Obturatória, glútea superior e sacral lateral."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-060",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 60,
+    "enunciado": "As recentes diretrizes da Organização Mundial da Saúde (OMS) e dos principais protocolos de manejo de Diabetes Mellitus (DM) recomendam que a hiperglicemia inicialmente detectada em qualquer momento da gravidez deve ser categorizada e diferenciada em DM diagnosticado na gestação (do inglês Overt Diabetes) ou em Diabetes Mellitus Gestacional. Assinale a alternativa correta:",
+    "alternativas": {
+      "A": "Diabetes Mellitus Gestacional (DMG): mulher com hiperglicemia detectada pela primeira vez durante a gravidez, com níveis glicêmicos sanguíneos de jejum superiores a 126mg/dl.",
+      "B": "Diabetes Mellitus diagnosticado na gestação (Overt Diabetes): mulher sem diagnóstico prévio de DM, com hiperglicemia detectada na gravidez e com níveis glicêmicos sanguíneos que atingem os critérios da OMS para a DM na ausência de gestação.",
+      "C": "Considera-se que o teste com melhor sensibilidade e especificidade para o diagnóstico de DMG é a glicemia de jejum, e deve ser realizado no primeiro trimestre da gravidez.",
+      "D": "Glicemia de jejum igual ou maior que 110mg/dl faz diagnóstico de DM em qualquer período da gravidez.",
+      "E": "Todas as gestantes com glicemia de jejum acima de 92 mg/dL devem realizar o TOTG com 75g de glicose de 24 a 28 semanas."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-061",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 61,
+    "enunciado": "O reflexo de Moro é avaliado rotineiramente no exame neurológico do recém-nascido. Qual achado observado durante a avaliação desse reflexo sugere anormalidade neurológica?",
+    "alternativas": {
+      "A": "Abertura simétrica dos braços seguida de flexão dos cotovelos.",
+      "B": "Resposta ausente unilateralmente, com movimento normal do membro contralateral.",
+      "C": "Presença do reflexo até os 4 meses de idade, com resposta simétrica.",
+      "D": "Resposta exagerada, com movimentos amplos e prolongados.",
+      "E": "Ausência bilateral do reflexo imediatamente após o nascimento."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-062",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 62,
+    "enunciado": "Em relação ao uso de ambroxol em pediatria, a indicação clínica mais fundamentada pelo seu mecanismo de ação é:",
+    "alternativas": {
+      "A": "Alívio imediato de crises asmáticas devido à sua ação broncodilatadora direta.",
+      "B": "Redução da viscosidade do muco em doenças respiratórias com hipersecreção, facilitando a expectoração.",
+      "C": "Prevenção de infecções respiratórias virais devido à sua ação imunomoduladora nas vias aéreas.",
+      "D": "Controle da inflamação em bronquiolites através da inibição de mediadores inflamatórios.",
+      "E": "Tratamento de tosse seca crônica por sua ação antitussígena no sistema nervoso central."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-063",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 63,
+    "enunciado": "A característica que justifica a escolha da técnica de lavagem nasal com baixo volume e alta pressão em crianças está relacionada a/à:",
+    "alternativas": {
+      "A": "Melhoria da permeabilidade nasal pela remoção eficaz de secreções e partículas acumuladas.",
+      "B": "Aumento da drenagem dos seios paranasais por pressão negativa induzida na cavidade nasal.",
+      "C": "Redução da produção de muco nasal por inibição direta das células caliciformes.",
+      "D": "Alívio imediato da obstrução nasal por estimulação de receptores vasoconstritores locais.",
+      "E": "Substituição de tratamentos farmacológicos em casos de infecções respiratórias virais graves."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-064",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 64,
+    "enunciado": "No Brasil, a vacina contra o rotavírus faz parte do Programa Nacional de Imunizações (PNI). Considerando as diretrizes do Ministério da Saúde, qual das seguintes afirmações sobre a vacinação contra o rotavírus em crianças está CORRETA?",
+    "alternativas": {
+      "A": "A vacina contra o rotavírus é administrada em duas doses, aos 2 e 4 meses de idade, com intervalo mínimo de 30 dias entre as doses.",
+      "B": "A vacina contra o rotavírus deve ser administrada por via intramuscular, preferencialmente na região deltoide.",
+      "C": "A vacina contra o rotavírus é contraindicada para crianças com histórico de invaginação intestinal ou alergia a qualquer componente da vacina.",
+      "D": "A primeira dose da vacina contra o rotavírus deve ser administrada a partir dos 6 meses de idade, juntamente com a vacina contra a poliomielite.",
+      "E": "Em caso de atraso na administração de uma dose da vacina contra o rotavírus, não é necessário reiniciar o esquema vacinal, devendo-se administrar a dose em atraso o mais breve possível."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-065",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 65,
+    "enunciado": "No contexto do diagnóstico de sarampo em pediatria, a característica que melhor descreve os sinais de Koplik é:",
+    "alternativas": {
+      "A": "Lesões maculopapulares eritematosas difusas, presentes principalmente no tronco e membros.",
+      "B": "Manchas descamativas hipercrômicas presentes nas regiões de flexura e dobras cutâneas.",
+      "C": "Vesículas esparsas na mucosa oral, associadas a úlceras dolorosas e edema subjacente.",
+      "D": "Pequenas áreas hipopigmentadas na mucosa oral, com bordas irregulares e inflamação subjacente.",
+      "E": "Pápulas esbranquiçadas na mucosa oral, com halo eritematoso localizadas próximas aos molares."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-066",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 66,
+    "enunciado": "O vírus sincicial respiratório (VSR) é uma causa frequente de infecções respiratórias em crianças, especialmente nos primeiros anos de vida. Considerando as características clínicas e epidemiológicas da infecção pelo VSR em pediatria, qual das seguintes afirmações está INCORRETA?",
+    "alternativas": {
+      "A": "A infecção pelo VSR geralmente se manifesta com sintomas leves, como coriza, tosse e febre baixa, assemelhando-se a um resfriado comum.",
+      "B": "Em lactentes, a infecção pelo VSR pode evoluir para quadros mais graves, como bronquiolite e pneumonia, com necessidade de hospitalização.",
+      "C": "A transmissão do VSR ocorre principalmente por contato direto com secreções respiratórias infectadas, como saliva e muco.",
+      "D": "A maioria das crianças é infectada pelo VSR pelo menos uma vez até os 2 anos de idade, sendo a primoinfecção geralmente mais grave",
+      "E": "A infecção pelo VSR confere imunidade permanente, sendo incomum a reinfecção em crianças mais velhas e adultos."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-067",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 67,
+    "enunciado": "A característica clínica dos guinchos respiratórios (\"whoop\") na coqueluche em crianças está relacionada:",
+    "alternativas": {
+      "A": "A contrações espasmódicas da musculatura diafragmática durante o esforço respiratório prolongado.",
+      "B": "A episódios de tosse paroxística seguidos de inspiração ruidosa devido à obstrução parcial das vias aéreas superiores.",
+      "C": "Ao broncoespasmo associado a hipersecreção mucosa, resultando em sons estridentes contínuos durante a expiração.",
+      "D": "A alterações estruturais das vias aéreas inferiores com colapso dinâmico durante o ciclo respiratório.",
+      "E": "A presença de edema laríngeo intenso associado a epiglotite bacteriana concomitante."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-068",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 68,
+    "enunciado": "A escabiose é uma infestação cutânea causada pelo ácaro Sarcoptes scabiei, que pode acometer pessoas de todas as idades, incluindo crianças. Em relação ao tratamento da escabiose em crianças menores de 6 meses, qual das seguintes alternativas está CORRETA, de acordo com as recomendações do Ministério da Saúde do Brasil?",
+    "alternativas": {
+      "A": "O tratamento de escolha para crianças menores de 6 meses é a permetrina 5% creme, aplicada em todo o corpo, inclusive na cabeça e no couro cabeludo, devendo ser repetida após 7 dias.",
+      "B": "A ivermectina oral é uma opção segura e eficaz para o tratamento da escabiose em crianças menores de 6 meses, sendo a dose calculada de acordo com o peso da criança.",
+      "C": "O lindano loção a 1% é recomendado para crianças menores de 6 meses, aplicado em todo o corpo, com exceção da face, e removido com banho após 6 horas.",
+      "D": "O enxofre precipitado a 6% em vaselina pode ser utilizado em crianças menores de 6 meses, aplicado em todo o corpo, exceto na face, durante 3 noites consecutivas, com banho após cada aplicação.",
+      "E": "Em crianças menores de 6 meses, o tratamento da escabiose deve ser iniciado somente após a confirmação do diagnóstico por exame microscópico de raspado de pele."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-069",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 69,
+    "enunciado": "A leucemia linfoide aguda (LLA) é a neoplasia maligna mais comum na infância. Qual dos seguintes achados clínicos NÃO é frequentemente encontrado em crianças com LLA na fase inicial da doença?",
+    "alternativas": {
+      "A": "Palidez cutâneo-mucosa.",
+      "B": "Hepatoesplenomegalia.",
+      "C": "Petéquias e equimoses.",
+      "D": "Linfonodomegalia generalizada.",
+      "E": "Dor abdominal intensa e persistente."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-070",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 70,
+    "enunciado": "O Ministério da Saúde do Brasil preconiza o aleitamento materno exclusivo até os seis meses de idade. Considerando as recomendações do Ministério da Saúde sobre amamentação, qual das seguintes afirmações está INCORRETA?",
+    "alternativas": {
+      "A": "O aleitamento materno deve ser iniciado na primeira hora após o nascimento, mesmo em casos de parto cesáreo ou prematuridade.",
+      "B": "A amamentação deve ser em livre demanda, ou seja, sem restrições de horários e frequência, de acordo com a necessidade do bebê.",
+      "C": "É recomendado o uso de chupetas e mamameiras nos primeiros meses de vida, para acalmar o bebê e complementar a amamentação.",
+      "D": "A mãe deve ser orientada sobre a pega eo posicionamento corretos durante a amamentação, para garantir a efetividade da sucção e prevenir lesões mamilares.",
+      "E": "O leite materno é o alimento ideal para o bebê, fornecendo todos os nutrientes necessários para seu crescimento e desenvolvimento saudável nos primeiros seis meses de vida."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-071",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 71,
+    "enunciado": "Entre os marcos do desenvolvimento infantil até os 6 meses de idade, qual característica é esperada e indicativa de desenvolvimento neuropsicomotor adequado?",
+    "alternativas": {
+      "A": "Resposta ao som com localização auditiva precisa em direção à fonte sonora.",
+      "B": "Capacidade de sustentar o peso corporal nas pernas ao ser colocado em posição de pé.",
+      "C": "Realização de movimentos amplos e coordenados ao alcançar objetos próximos.",
+      "D": "Controle cefálico completo ao ser colocado em posição sentada, com pouca oscilação da cabeça.",
+      "E": "Emissão de vocalizações simples e resposta a estímulos visuais com seguimento ocular."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-072",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 72,
+    "enunciado": "Sopros cardíacos são frequentemente auscultados em crianças, sendo a maioria deles inocentes (funcionais). Qual das seguintes características NÃO é típica de um sopro inocente em crianças?",
+    "alternativas": {
+      "A": "Sopro sistólico de baixa intensidade (grau I-II/VI).",
+      "B": "Sopro melhor audível na borda esternal esquerda inferior ou na base do coração.",
+      "C": "Sopro que varia com a posição da criança (mais intenso em decúbito dorsal).",
+      "D": "Sopro acompanhado de outros sinais e sintomas, como cianose, dispneia ou retardo no crescimento.",
+      "E": "Sopro musical ou vibratório, com timbre suave."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-073",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 73,
+    "enunciado": "A síndrome do lactente chiador é uma condição comum em crianças pequenas, caracterizada por episódios recorrentes de sibilância. A avaliação radiológica pode auxiliar no diagnóstico diferencial e no manejo dessa síndrome. Qual das seguintes afirmações sobre o papel da radiografia de tórax na síndrome do lactente chiador está CORRETA?",
+    "alternativas": {
+      "A": "A radiografia de tórax é essencial para o diagnóstico da síndrome do lactente chiador, sendo necessária em todos os casos para confirmar o diagnóstico.",
+      "B": "A radiografia de tórax é útil para diferenciar a asma de outras causas de sibilância, como a aspiração de corpo estranho e a malformação congênita das vias aéreas.",
+      "C": "A presença de hiperinsuflação pulmonar e infiltrado intersticial difuso na radiografia de tórax é característica da bronquiolite viral aguda, principal causa da síndrome do lactente chiador.",
+      "D": "A radiografia de tórax normal exclui o diagnóstico de asma, sendo indicativa de outras causas de sibilância, como refluxo gastroesofágico ou infecções respiratórias.",
+      "E": "A radiografia de tórax deve ser realizada rotineiramente durante as crises de sibilância, para monitorar a resposta ao tratamento e identificar possíveis complicações."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-074",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 74,
+    "enunciado": "Os achados semiológicos característicos na síndrome do bebê azul em neonatos estão associados principalmente à/ao:",
+    "alternativas": {
+      "A": "Cianose central persistente agravada pelo choro, sem melhora com administração de oxigênio suplementar.",
+      "B": "Palidez cutânea generalizada associada à taquicardia e hiperpnéia em repouso.",
+      "C": "Rubor facial evidente durante o choro, com melhora após elevação da cabeça.",
+      "D": "Cianose periférica transitória em extremidades, com pulsos femorais amplos e simétricos.",
+      "E": "Icterícia generalizada com discreta coloração azulada em leitos ungueais e mucosas."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-075",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 75,
+    "enunciado": "Entre os achados laboratoriais no hemograma sugestivos de anemia ferropriva em crianças, qual é característico dessa condição?",
+    "alternativas": {
+      "A": "Microcitose, hipocromia e aumento da contagem de reticulócitos.",
+      "B": "Normocitose, normocromia e leucocitose reativa.",
+      "C": "Microcitose, hipocromia e aumento do RDW (red cell distribution width).",
+      "D": "Macrocitose, hipocromia e aumento do VCM (volume corpuscular médio).",
+      "E": "Normocitose, hipocromia e plaquetopenia leve."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-076",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 76,
+    "enunciado": "Entre as indicações para o uso de ibuprofeno em pediatria, aquela respaldada por sua ação farmacológica é:",
+    "alternativas": {
+      "A": "Redução da febre e alívio da dor leve a moderada em infecções virais e bacterianas.",
+      "B": "Prevenção de crises asmáticas em crianças com hiper-responsividade brônquica.",
+      "C": "Controle de convulsões febris em crianças suscetíveis, como terapia de manutenção.",
+      "D": "Tratamento de infecções bacterianas do trato respiratório superior com dor associada.",
+      "E": "Alívio de náuseas e vômitos em doenças gastrointestinais autolimitadas."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-077",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 77,
+    "enunciado": "O tratamento da tuberculose pulmonar em crianças apresenta particularidades em relação ao tratamento em adultos. Considerando as diretrizes do Ministério da Saúde do Brasil, qual das seguintes afirmações sobre o tratamento da tuberculose pulmonar em crianças está INCORRETA?",
+    "alternativas": {
+      "A": "O esquema básico de tratamento para crianças com tuberculose pulmonar sensível aos fármacos é composto por quatro medicamentos: rifampicina, isoniazida, pirazinamida e etambutol.",
+      "B": "A rifampicina, um dos medicamentos do esquema básico, pode causar coloração alaranjada da urina, suor e lágrimas, o que deve ser informado aos pais ou responsáveis pela criança.",
+      "C": "A isoniazida, outro medicamento do esquema básico, pode causar neuropatia periférica como efeito adverso, sendo necessária a suplementação com piridoxina (vitamina B6) para prevenir essa complicação.",
+      "D": "A duração do tratamento da tuberculose pulmonar em crianças é geralmente mais curta do que em adultos, variando de 4 a 6 meses, dependendo da forma clínica da doença.",
+      "E": "Em caso de tuberculose pulmonar resistente aos fármacos, o tratamento é mais complexo e prolongado, podendo envolver a combinação de diferentes medicamentos e a hospitalização da criança."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-078",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 78,
+    "enunciado": "A síndrome mão-pé-boca é uma doença viral comum na infância, caracterizada por lesões cutâneas e mucosas. Qual das seguintes alternativas NÃO descreve um achado típico da síndrome mão-pé-boca?",
+    "alternativas": {
+      "A": "Lesões vesiculares (pequenas bolhas",
+      "B": "Lesões ulcerativas (aftas",
+      "C": "Exantema maculopapular (manchas vermelhas e elevadas",
+      "D": "Febre alta persistente por mais de 7 dias.",
+      "E": "Mal-estar, inapetência e irritabilidade."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-079",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 79,
+    "enunciado": "Os parâmetros avaliados no índice de Apgar ao nascimento incluem:",
+    "alternativas": {
+      "A": "Temperatura corporal, frequência cardíaca, tônus muscular, reflexo de sucção e cor da pele.",
+      "B": "Frequência cardíaca, esforço respiratório, reflexo pupilar, tônus muscular e coloração das extremidades.",
+      "C": "Frequência cardíaca, respiração, cor da pele, tônus muscular e reflexo à estimulação.",
+      "D": "Frequência cardíaca, esforço respiratório, reflexo de Moro, movimentação ativa e temperatura corporal.",
+      "E": "Reflexo de sucção, frequência cardíaca, cor dos lábios, esforço respiratório e movimentação das extremidades."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-080",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 80,
+    "enunciado": "No Programa Nacional de Imunizações (PNI), a substituição da vacina oral poliomielite (VOP) pela vacina inativada poliomielite (VIP) no esquema básico infantil foi baseada principalmente na justificativa de:",
+    "alternativas": {
+      "A": "Eliminação do risco de poliomielite vacinal associado ao uso de vacina oral.",
+      "B": "Maior facilidade de administração da vacina inativada em crianças menores de 2 anos.",
+      "C": "Redução da imunogenicidade da vacina oral em regiões endêmicas para poliovírus.",
+      "D": "Prolongamento da resposta imunológica com menor número de doses no esquema vacinal.",
+      "E": "Necessidade de reforço em populações não vacinadas, reduzindo a circulação de vírus selvagem."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-081",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 81,
+    "enunciado": "Na aplicação prática da Teoria da Hierarquia das Necessidades de Abraham Maslow em saúde pública, qual das seguintes afirmações descreve corretamente a relação entre as necessidades básicas e a promoção da saúde?",
+    "alternativas": {
+      "A": "A necessidade de autoeficácia, focando na capacidade do indivíduo em atingir objetivos e superar desafios, é primordial para a promoção da saúde e deve ser priorizada sobre as necessidades fisiológicas.",
+      "B": "A necessidade de pertencimento e aceitação dentro da comunidade é a base para o desenvolvimento da saúde pública, superando a importância das necessidades fisiológicas e de segurança.",
+      "C": "A busca pela autorrealização, através da expressão criativa e do desenvolvimento pessoal, é essencial para a promoção da saúde e deve ser o foco principal das intervenções em saúde pública.",
+      "D": "A autorregulação emocional e o controle do estresse são os pilares fundamentais para a promoção da saúde, sendo mais importantes que as necessidades fisiológicas e sociais.",
+      "E": "As necessidades fisiológicas, como alimentação e abrigo, são fundamentais e devem ser atendidas primeiro para garantir a sobrevivência e a saúde básica, permitindo que as pessoas avancem para níveis superiores de bem-estar."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-082",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 82,
+    "enunciado": "Determinantes sociais da saúde, conforme proposto por Thomas McKeown, são mais bem caracterizados por:",
+    "alternativas": {
+      "A": "Influência da assistência médica na redução da morbidade.",
+      "B": "Relação causal entre fatores socioeconômicos (nutrição, habitação, trabalho) e saúde.",
+      "C": "Predominância de fatores genéticos na determinação da saúde.",
+      "D": "Interrelação entre meio ambiente e comportamentos de risco.",
+      "E": "Determinação da saúde pela estrutura social e relações de poder"
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-083",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 83,
+    "enunciado": "Hans Rosling, em suas análises sobre saúde global e desenvolvimento sustentável, enfatiza a importância de dados estatísticos na compreensão das desigualdades sociais. Qual das seguintes afirmações reflete corretamente um princípio central da teoria de Rosling sobre saúde global?",
+    "alternativas": {
+      "A": "O aumento da renda per capita é o único determinante da melhoria na saúde pública.",
+      "B": "As intervenções de saúde devem ser focadas exclusivamente em doenças infecciosas.",
+      "C": "A educação e o acesso à informação são fundamentais para a redução das desigualdades em saúde.",
+      "D": "O crescimento econômico não influencia a longevidade da população.",
+      "E": "A melhoria na saúde global é irrelevante para o desenvolvimento econômico dos países."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-084",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 84,
+    "enunciado": "No modelo teórico proposto por Hugh Leavell e Edwin Clark, o foco da Medicina Preventiva é dividido em níveis de prevenção. O nível de prevenção que inclui a detecção precoce de doenças e a aplicação de medidas para limitar a progressão do agravo é denominado:",
+    "alternativas": {
+      "A": "Prevenção secundária.",
+      "B": "Prevenção primária.",
+      "C": "Prevenção terciária.",
+      "D": "Prevenção quaternária.",
+      "E": "Promoção da saúde."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-085",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 85,
+    "enunciado": "Segundo a teoria do Modelo de Crenças em Saúde, proposta por Rosenstock, Hochbaum e Becker, o principal fator que influencia a adoção de hábitos saudáveis e a prevenção de doenças é:",
+    "alternativas": {
+      "A": "A percepção individual da gravidade da doença.",
+      "B": "O incentivo e apoio dos profissionais de saúde.",
+      "C": "O custo e a acessibilidade dos serviços de saúde.",
+      "D": "A percepção individual da suscetibilidade à doença.",
+      "E": "O nível socioeconômico e de escolaridade do indivíduo."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-086",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 86,
+    "enunciado": "Sir Geoffrey Rose, renomado epidemiologista e estatístico britânico, desenvolveu a teoria da \"estratégia de alto risco\" e a \"estratégia populacional\" para prevenção de doenças. Qual das alternativas abaixo descreve o princípio fundamental da estratégia populacional proposta por Geoffrey Rose?",
+    "alternativas": {
+      "A": "Priorizar intervenções em indivíduos com maior risco de desenvolver a doença, através de identificação e tratamento precoce.",
+      "B": "Direcionar ações preventivas para grupos populacionais específicos, com base em características socioeconômicas e culturais.",
+      "C": "Focar na prevenção primária, com medidas de promoção da saúde e proteção contra fatores de risco, a fim de evitar o surgimento da doença.",
+      "D": "Adotar medidas que visem reduzir a exposição da população como um todo aos fatores de risco, deslocando a curva de distribuição do fator de risco para a esquerda.",
+      "E": "Concentrar esforços em ações de reabilitação e reinserção social de indivíduos que já desenvolveram a doença, minimizando suas sequelas."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-087",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 87,
+    "enunciado": "Paciente feminina, 52 anos, tabagista de 30 anos-maço, sem comorbidades, apresenta score de Fagerström 8 (dependência elevada), três tentativas prévias de cessação com recaída em até 60 dias, último cigarro há 12 horas. Refere forte fissura, irritabilidade e ansiedade. Estágio motivacional de ação, CO exalado de 18ppm, sem contraindicações medicamentosas. Na estratégia terapêutica baseada em evidências para cessação do tabagismo, considerando características individuais e preditores de resposta, selecione a afirmativa correta:",
+    "alternativas": {
+      "A": "A combinação de adesivo de nicotina 21mg/dia com goma 4mg sob demanda está indicada nas primeiras 8 semanas, seguida por monoterapia com adesivo em desmame gradual por mais 4 semanas.",
+      "B": "O uso de vareniclina 1mg 12/12h deve ser iniciado 7 dias antes da data de cessação, com titulação gradual da dose e manutenção por 12 semanas independente da resposta inicial.",
+      "C": "A associação de bupropiona 150mg 12/12h com adesivo de nicotina 14mg/dia tem eficácia superior à vareniclina em monoterapia em pacientes com alta dependência e múltiplas recaídas.",
+      "D": "O tratamento inicial com adesivo de nicotina 21mg/dia associado à bupropiona 150mg/ dia tem menor eficácia que a vareniclina em monoterapia para prevenção de recaídas precoces.",
+      "E": "A terapia combinada com vareniclina 1mg 12/12h e bupropiona 150mg 12/12h aumenta as taxas de abstinência em 24 semanas quando comparada à vareniclina isolada em fumantes com Fagerström >7."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-088",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 88,
+    "enunciado": "Na saúde coletiva, o estudo epidemiológico que avalia a relação entre exposição e desfecho em um único momento, fornecendo uma fotografia da frequência e distribuição das condições de saúde em uma população, é denominado:",
+    "alternativas": {
+      "A": "Estudo de coorte.",
+      "B": "Estudo de caso-controle.",
+      "C": "Ensaio clínico randomizado.",
+      "D": "Estudo transversal.",
+      "E": "Estudo ecológico."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-089",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 89,
+    "enunciado": "Paciente masculino, 43 anos, apresenta mancha hipocrômica em face posterior do antebraço direito com 8cm de diâmetro, bordas mal definidas e alteração de sensibilidade térmica à avaliação com tubos de água quente/fria, sem alteração de sensibilidade dolorosa ou tátil. Teste de histamina evidencia resposta ausente na lesão e presente na pele normal. Baciloscopia de raspado dérmico negativa nos 6 sítios. Na avaliação diagnóstica complementar e classificação operacional da hanseníase, selecione a afirmativa correta:",
+    "alternativas": {
+      "A": "A avaliação da sensibilidade térmica por tubos com água a 45°C/20°C apresenta especificidade de 95% para diagnóstico de lesões hansênicas quando comparada ao teste com monofilamentos.",
+      "B": "O teste de pilocarpina a 1% com resposta sudoral ausente na lesão e presente na pele adjacente indica comprometimento autonômico seletivo, característico da forma indeterminada.",
+      "C": "A presença do reflexo pilomotor de Souza-Campos diminuído na lesão após estímulo farádico tem sensibilidade de 90% para classificação como paucibacilar quando associada à baciloscopia negativa.",
+      "D": "O teste da histamina apresentando resposta tripla ausente na lesão indica comprometimento neural inicial, sendo desnecessária biópsia para confirmação diagnóstica em área endêmica.",
+      "E": "A resposta positiva ao teste do suor com ninidrina em papel filtro na pele adjacente e negativa na lesão tem acurácia superior ao teste da histamina para avaliação autonômica."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-090",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 90,
+    "enunciado": "Paciente masculino, 45 anos, procura a Unidade Básica de Saúde queixando-se de desânimo, fadiga e dificuldade de concentração há cerca de 2 meses. Ele relata perda de interesse em atividades que antes lhe davam prazer, além de insônia e perda de apetite. Para auxiliar no diagnóstico e avaliação da gravidade dos sintomas, o médico de família e comunidade decide aplicar a escala PHQ-9. O paciente obtém escore 12 na escala. Qual a interpretação deste resultado e a conduta mais adequada?",
+    "alternativas": {
+      "A": "Depressão leve; iniciar tratamento com antidepressivo em dose baixa e acompanhamento regular.",
+      "B": "Depressão moderada; iniciar tratamento com antidepressivo em dose moderada e encaminhamento para psicoterapia.",
+      "C": "Depressão grave; iniciar tratamento com antidepressivo em dose alta e avaliação psiquiátrica urgente.",
+      "D": "Ansiedade generalizada; prescrever benzodiazepínico e encaminhar para avaliação psicológica.",
+      "E": "Transtorno bipolar; encaminhar para avaliação psiquiátrica para iniciar estabilizador de humor."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-091",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 91,
+    "enunciado": "O princípio da longitudinalidade, essencial para a efetividade da Estratégia Saúde da Família, compreende:",
+    "alternativas": {
+      "A": "A coordenação do cuidado, com articulação entre os diversos níveis de atenção à saúde.",
+      "B": "A abordagem centrada na família, considerando seu contexto socioeconômico e cultural.",
+      "C": "A responsabilidade da equipe pelo acompanhamento integral do indivíduo ao longo do tempo.",
+      "D": "A atenção às demandas agudas e urgentes, com acesso facilitado aos serviços de saúde.",
+      "E": "A ênfase em ações de promoção da saúde e prevenção de agravos na comunidade."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-092",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 92,
+    "enunciado": "O método PRACTICE é uma abordagem sistemática que visa facilitar a avaliação das famílias em contextos de saúde. Qual das seguintes opções descreve corretamente os componentes do acrônimo PRACTICE e suas respectivas funções na avaliação familiar?",
+    "alternativas": {
+      "A": "Problema apresentado, Relações e estrutura, Afeto, Comunicação, Tempo de vida, Intervenção, Coping com estresse, Ecologia.",
+      "B": "Problema apresentado, Papéis e estrutura, Afeto, Comunicação, Tempo de vida, Intervenção, Conflitos e estresse, Ecologia.",
+      "C": "Problema apresentado, Papéis e estrutura, Afeto, Comunicação, Tempo de vida, Doença, Coping com estresse, Ecologia.",
+      "D": "Problema apresentado, Relações e estrutura, Afeto, Conflitos, Tempo de vida, Intervenção, Coping com estresse, Ecologia.",
+      "E": "Problema apresentado, Papéis e estrutura, Afeto, Comunicação, Tempo de vida, Doença crônica, Ecologia."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-093",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 93,
+    "enunciado": "Na atenção primária em saúde, o método diagnóstico de escolha para confirmar tuberculose pulmonar em pacientes com suspeita clínica é:",
+    "alternativas": {
+      "A": "Baciloscopia do escarro, evidenciando a presença de bacilos ácido-alcoólico resistentes (BAAR).",
+      "B": "Radiografia de tórax, mostrando alterações cavitárias típicas em lobos superiores.",
+      "C": "Teste tuberculínico (PPD), indicando infecção latente ou ativa pelo Mycobacterium tuberculosis.",
+      "D": "Tomografia computadorizada de tórax, identificando lesões pulmonares de alta resolução.",
+      "E": "Cultura do escarro para Mycobacterium tuberculosis, com crescimento em meio específico."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-094",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 94,
+    "enunciado": "Na prática da medicina de família, qual das seguintes afirmações descreve corretamente o conceito de \"notificação compulsória\" em vigilância epidemiológica?",
+    "alternativas": {
+      "A": "Notificação compulsória é o processo de comunicação voluntária de doenças infecciosas entre médicos, garantindo a privacidade dos pacientes e sem necessidade de intervenção governamental.",
+      "B": "A notificação compulsória é um sistema de vigilância que utiliza exclusivamente técnicas laboratoriais para identificar e reportar surtos de doenças infecciosas, sem a necessidade de registros clínicos.",
+      "C": "Notificação compulsória é um método de vigilância passiva que depende da observação comunitária e relatos espontâneos de casos de doenças por indivíduos não profissionais.",
+      "D": "Notificação compulsória é um sistema de coleta de dados anônimos sobre doenças crônicas, sem incluir doenças transmissíveis, para análise estatística em estudos epidemiológicos.",
+      "E": "Notificação compulsória refere-se à exigência legal de comunicação de certas doenças e agravos à saúde às autoridades de saúde pública, permitindo a implementação de medidas de controle e prevenção."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-095",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 95,
+    "enunciado": "O Projeto Terapêutico Singular (PTS) na Medicina da Família é composto por:",
+    "alternativas": {
+      "A": "Diagnóstico clínico, plano terapêutico e acompanhamento.",
+      "B": "Avaliação biopsicossocial, plano de cuidado individualizado e rede de apoio.",
+      "C": "Anamnese, exame físico e prescrição medicamentosa.",
+      "D": "Diagnóstico diferencial, tratamento farmacológico e prevenção primária.",
+      "E": "Histórico clínico, plano de tratamento e avaliação de satisfação."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-096",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 96,
+    "enunciado": "Na Saúde Coletiva, diferentes teóricos contribuíram com abordagens teóricas específicas que influenciaram a compreensão do processo saúde-doença. Preencha corretamente as lacunas com os nomes dos autores associados às seguintes descrições: ________1: Este autor é conhecido por abordar o habitus e os capitais (cultural, social, econômico e simbólico), evidenciando como as estruturas sociais influenciam o acesso à saúde e os determinantes sociais do adoecimento. ________2: Este teórico propõe a análise das práticas de saúde como práticas sociais, destacando a interdisciplinaridade e a interação entre saberes biomédicos e sociais. ________3: Este autor destaca a importância da abordagem crítica na Saúde Coletiva, enfatizando o papel das desigualdades estruturais e da determinação social da saúde no Brasil. As lacunas são corretamente preenchidas, respectivamente, por:",
+    "alternativas": {
+      "A": "Pierre Bourdieu, Schraiber e Paim.",
+      "B": "Almeida Filho, Pierre Bourdieu e Nunes.",
+      "C": "Pierre Bourdieu, Almeida Filho e Paim.",
+      "D": "Schraiber, Paim e Nunes.",
+      "E": "Nunes, Schraiber e Pierre Bourdieu."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-097",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 97,
+    "enunciado": "Uma das estratégias preventivas mais eficazes para reduzir a incidência de gravidez na adolescência, recomendada pela Organização Mundial da Saúde, é:",
+    "alternativas": {
+      "A": "Oferecer acesso irrestrito a métodos contraceptivos de longa duração para todas as adolescentes.",
+      "B": "Ampliar a cobertura do pré-natal e puerpério, com acompanhamento multidisciplinar.",
+      "C": "Implementar programas de educação sexual abrangentes nas escolas, com envolvimento familiar.",
+      "D": "Promover campanhas de abstinência sexual como principal estratégia de prevenção.",
+      "E": "Incentivar a interrupção da gravidez por meio de serviços de aborto legal e seguro."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-098",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 98,
+    "enunciado": "Em estudo ecológico realizado em município de grande porte, analisou-se a distribuição espacial da mortalidade infantil e seus determinantes sociais utilizando dados do último censo demográfico e sistemas de informação em saúde. Na análise multinível por setores censitários, controlada por variáveis individuais (idade materna, escolaridade e paridade), observou-se associação independente entre mortalidade infantil pós-neonatal e índice de privação social composto (IPS). Na interpretação da análise hierarquizada dos determinantes sociais e suas implicações para políticas públicas, selecione a afirmativa correta:",
+    "alternativas": {
+      "A": "O efeito do contexto socioeconômico sobre a mortalidade infantil pós-neonatal, após ajuste para variáveis individuais, indica necessidade de intervenções focalizadas exclusivamente nas famílias em situação de vulnerabilidade social.",
+      "B": "A associação entre IPS e mortalidade infantil demonstra interação cross-level quando a magnitude do efeito das variáveis individuais varia conforme o estrato socioeconômico do setor censitário.",
+      "C": "O coeficiente de correlação intraclasse de 25% na análise multinível indica que a variabilidade da mortalidade infantil é explicada principalmente por características individuais maternas.",
+      "D": "A análise espacial por setores censitários tem menor poder explicativo que dados agregados por distritos administrativos para identificação de disparidades na mortalidade infantil.",
+      "E": "O efeito contextual do IPS superior a 2,0 na razão de chances ajustada sugere causalidade reversa entre privação social e desfechos adversos na saúde infantil."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-099",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 99,
+    "enunciado": "Um estudo epidemiológico buscou analisar a prevalência de transtornos mentais comuns, como depressão e ansiedade, em diferentes grupos populacionais. Os resultados evidenciaram maior prevalência desses transtornos em indivíduos com baixa renda, menor escolaridade e em situação de desemprego. Considerando os determinantes sociais da saúde mental, qual a principal conclusão que pode ser inferida a partir desses resultados?",
+    "alternativas": {
+      "A": "Fatores genéticos e hereditários são os principais responsáveis pela maior prevalência de transtornos mentais em populações vulneráveis.",
+      "B": "As condições socioeconômicas desfavoráveis atuam como fator de risco para o desenvolvimento de transtornos mentais, evidenciando a necessidade de ações intersetoriais para promoção da saúde mental.",
+      "C": "A maior prevalência de transtornos mentais em grupos vulneráveis se deve à falta de acesso a serviços de saúde mental especializados.",
+      "D": "Os transtornos mentais são mais prevalentes em indivíduos com baixa escolaridade devido à dificuldade de compreensão das informações sobre saúde mental.",
+      "E": "O desemprego aumenta o risco de transtornos mentais por causar isolamento social e perda do convívio familiar."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2025-100",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2025",
+    "banca": "IAMSPE",
+    "ano": 2025,
+    "numero": 100,
+    "enunciado": "Na saúde pública, a análise de bases de dados para o diagnóstico de saúde da comunidade utiliza indicadores epidemiológicos para identificar padrões e necessidades. Um exemplo de indicador derivado de bases de dados que permite mensurar a carga de doenças e avaliar o impacto de intervenções é:",
+    "alternativas": {
+      "A": "Coeficiente de incidência, que avalia a frequência de novos casos em um intervalo de tempo.",
+      "B": "Taxa de letalidade, que mede a gravidade de uma doença específica em relação aos óbitos.",
+      "C": "Prevalência, que estima a proporção de casos existentes em uma população definida.",
+      "D": "Taxa de mortalidade geral, que calcula os óbitos por todas as causas em uma população.",
+      "E": "Anos de Vida Perdidos por Incapacidade (DALY), que combina mortalidade e morbidade em uma única métrica."
+    },
+    "correta": "E",
+    "anulada": false
+  }
+]

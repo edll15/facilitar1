@@ -1,0 +1,1442 @@
+[
+  {
+    "id": "iamspe-2024-001",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 1,
+    "enunciado": "A classificação da ASA continua sendo uma avaliação amplamente utilizada, rápida, simples e razoavelmente precisa do risco cirúrgico, tanto da cirurgia eletiva como da emergencial. Um paciente do sexo masculino, 58 anos, com doença sistêmica severa que está em constante ameaça de morte pode ser classificado como ASA:",
+    "alternativas": {
+      "A": "V.",
+      "B": "I.",
+      "C": "II.",
+      "D": "III.",
+      "E": "IV."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-002",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 2,
+    "enunciado": "Em relação ao tratamento cirúrgico da Síndrome do Túnel do Carpo (STC), analise as afirmativas e marque o item correto.",
+    "alternativas": {
+      "A": "Os resultados da cirurgia em geral não são bons.",
+      "B": "A cirurgia consiste na divisão completa do ligamento transverso do carpo, estendendo-se distalmente do lado ulnar do nervo mediano.",
+      "C": "A cirurgia não é indicada nos casos de sintomas intratáveis que sejam refratários ao tratamento clínico.",
+      "D": "A cirurgia consiste em infiltrações, bloqueios e radiofrequência para resolver as dores no pulso.",
+      "E": "A cirurgia somente pode ser realizada por abordagem aberta."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-003",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 3,
+    "enunciado": "A respeito das hérnias inguinais em adultos, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "O reparo laparoscópico de hérnias inguinais causa menos dor aguda e crônica, permitindo o retorno mais rápido do paciente às suas atividades e oferecendo menor risco de infecção, menos complicações com a ferida cirúrgica e menor sensação de parestesia do que cirurgia aberta.",
+      "B": "As hérnias inguinais são mais frequentes em mulheres, com uma proporção de 25:1 entre mulheres e homens.",
+      "C": "O objetivo essencial do reparo herniário é a restauração da integridade funcional da estrutura umbilical laminar da região da barriga e a restauração de órgãos comprometidos.",
+      "D": "A incidência máxima ocorre na terceira década e 75% são do tipo direto.",
+      "E": "No caso de hérnia direta grande, o saco, que se situa na fáscia vertical, é reparado com uma sutura enviesada para que se obtenha uma superfície plana sobre a qual se coloca a tela protética."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-004",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 4,
+    "enunciado": "A cirurgia bariátrica é o único meio de obtenção de uma perda ponderal de longo prazo, confiável e significativa, com resolução das comorbidades associadas à obesidade mórbida. Sobre as técnicas desse tipo de cirurgia, é correto afirmar que:",
+    "alternativas": {
+      "A": "O Bypass Gástrico é utilizado para separar uma pequena bolsa gástrica proximal de, aproximadamente, 80ml de volume, do estômago distal, que é deixado in situ.",
+      "B": "A Gastrectomia em Manga é a cirurgia bariátrica mais comumente realizada em todo o mundo.",
+      "C": "A banda gástrica é um anel inflável de metal fixado ao redor da porção proximal do estômago para criar uma zona de constrição com uma pequena bolsa gástrica proximal de aproximadamente, 60 ml.",
+      "D": "A cirurgia de switch duodenal pode ser realizada como um procedimento de dois estágios, mas é mais comumente realizada em um único procedimento, em que o primeiro estágio é uma gastrectomia convencional em manga.",
+      "E": "A Derivação em Y de Roux é um método raro em que o primeiro passo envolve o emprego de um grampeador de corte transversal."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-005",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 5,
+    "enunciado": "Considerando uma paciente idosa, 78 anos, nunca antes submetida à cirurgia abdominal, apresenta distensão e dores abdominais intermitentes há cerca de sete dias seguida de vômitos persistentes desde o dia anterior. Ao exame: não se evidencia hérnias, mas é consistente com obstrução do intestino delgado distal, acianótica, anictérica, afebril. O resultado do hemograma evidenciou leucometria de 5.000/mm². Nesse caso, a etapa seguinte no seguimento dessa paciente é:",
+    "alternativas": {
+      "A": "Determinar o nível sérico do antígeno carcinoembrionário (ACE) para avaliar possível cirurgia.",
+      "B": "Inserir sonda nasogástrica e observar a paciente por 48 horas.",
+      "C": "Realizar Tomografia computadorizada de abdômen.",
+      "D": "Realizar endoscopia digestiva alta de emergência.",
+      "E": "Prosseguir para a laparotomia exploradora imediata."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-006",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 6,
+    "enunciado": "O paciente C.L.S, sexo masculino, 68 anos, chega à emergência com quadro de confusão mental, dor abdominal, tremores, febre e icterícia. Foi realizada uma radiografia abdominal que mostrou presença de ar na árvore biliar. Nesse caso, o diagnóstico é:",
+    "alternativas": {
+      "A": "Encefalopatia hepática aguda.",
+      "B": "Colangite aguda.",
+      "C": "Pancreatite aguda.",
+      "D": "Colecistite aguda.",
+      "E": "Apendicite aguda."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-007",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 7,
+    "enunciado": "Um homem com 35 anos chega ao hospital com história de vômitos com \"grande quantidade de sangue vermelho-vivo\". Em relação à hemorragia digestiva alta (HDA), assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "A causa mais comum de HDA em um paciente com cirrose e hipertensão é o sangramento nasal, que implica tamponamento do nariz para evitar novo sangramento.",
+      "B": "A endoscopia é útil na identificação das fontes de dores e, em pacientes com muita fadiga, pode ser útil para equilibrar o controle do refluxo gástrico.",
+      "C": "A cirurgia é indicada para a doença ulcerosa péptica (complicada HDA) maciça, persistente ou recorrente associada a úlceras gigantes (> 4cm) ou que não cicatrizam.",
+      "D": "O tamponamento com balão é a terapia de escolha nos casos de sangramento agudo por varizes esofágicas devido a sua alta eficácia no controle do sangramento.",
+      "E": "AHDA deve ser tratada com reanimação cardíaca agressiva, monitoração estrita da resposta do paciente e colocação de sonda nasogástrica, para evitar o sangramento ativo."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-008",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 8,
+    "enunciado": "Um homem com 27 anos é levado para a emergência em razão de dor grave no tórax e no abdômen superior. É diagnosticado com perfuração esofágica. Sobre essa condição, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "O prognóstico da perfuração esofágica não tem relação direta com o tempo decorrido entre a perfuração e o tratamento.",
+      "B": "Traumatismo é a causa mais comum.",
+      "C": "A maioria das rupturas esofágicas espontâneas ocorre no terço proximal do esôfago.",
+      "D": "Uma vez diagnosticada a perfuração, os tratamentos iniciais incluem reanimação imediata (com base no ABC), antibioticoterapia e preparação para cirurgia.",
+      "E": "Tradicionalmente, o melhor teste diagnóstico inicial para confirmar uma ruptura esofágica é uma ressonância nuclear magnética de tórax."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-009",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 9,
+    "enunciado": "Em relação ao tratamento cirúrgico do câncer de tireoide, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A tireoidectomia parcial é recomendada para carcinomas papilíferos (> 2 cm), foliculares, de células de Hürthle.",
+      "B": "Para os carcinomas papilíferos solitários com menos de 1 cm, a lobectomia da tireoide é o tratamento adequado.",
+      "C": "Para o carcinoma papilífero com menos de 3 cm, as opções cirúrgicas aceitáveis são as tireoidectomias quase total.",
+      "D": "O tratamento do carcinoma diferenciado da tireoide (que inclui carcinoma anaplásico ou carcinoma medular da tireoide) consiste em remoção cirúrgica da glândula.",
+      "E": "A tireoidectomia não é adequada no caso de células medulares, porque é uma cirurgia que produz danos aos nervos laríngeos recorrentes."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-010",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 10,
+    "enunciado": "A respeito da Apendicite Aguda, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "Em geral, os achados nas radiografias simples de abdômen ajudam muito no diagnóstico de apendicite aguda.",
+      "B": "Os fecalitos e os cálculos são encontrados em cerca de 90% dos apêndices agudamente inflamados.",
+      "C": "Os toques retal e vaginal tendem a ser positivos; quando negativos, apontam para outra etiologia.",
+      "D": "Em indivíduos HIV-positivos, a apendicite, embora seja 3 vezes menos frequente, produz a mesma síndrome observada em adultos saudáveis, porém a contagem de leucócitos geralmente é maior.",
+      "E": "A apendicectomia durante a gravidez frequentemente é seguida por trabalho de parto prematuro, mas raramente por nascimento prematuro."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-011",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 11,
+    "enunciado": "A cirurgia desempenha um papel central no tratamento da Retocolite ulcerativa inespecífica (RCUI). Sobre o tratamento cirúrgico da RCUIA, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Para uma anastomose reservatório-anal com sutura manual, uma mucosectomia é realizada no canal anal, começando na linha pectinea.",
+      "B": "A retocolectomia com ileostomia terminal de Brooke remove toda a doença, porém apresenta alta taxa de complicações, mas rie deixa o paciente com um estoma incontinente.",
+      "C": "A ileostomia referente é realizada pela utilização de 90 cm de íleo terminal e dobrando-o em uma configuração de dois membros ou bolsa T.",
+      "D": "A colectomia com anastomose ileorretal (IRA) deve ser considerada quando o reto apresentar intensa inflamação.",
+      "E": "A colectomia, em geral, deve ser considerada quando houver displasia retal, não necessitando de acompanhamento rigorosa."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-012",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 12,
+    "enunciado": "A Acalasia é convencionalmente definida pela ausência de perístaltismo (isso não significa a ausência de contrações) em associação com um esfíncter inferior do esôfago (EIE) que não relaxa completamente. Sobre Acalasia primária, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "Em cerca de 60% dos casos, os pacientes necessitam de esofagectomia.",
+      "B": "A radiografia simples é proposta para a maioria dos pacientes com disfagia, como uma primeira investigação.",
+      "C": "A maioria dos pacientes com acalasia responde bem ao tratamento medicamentoso via oral.",
+      "D": "A bolha de gás gástrica, na radiologia com bário, quando ausente, descarta o diagnóstico de acalasia.",
+      "E": "A cardiomiotomia envolve a secção do músculo do esôfago inferior e cardia, sendo a principal complicação o refluxo gastroesofágico."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-013",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 13,
+    "enunciado": "Considera-se como queimado de média gravidade o paciente com:",
+    "alternativas": {
+      "A": "Queimaduras, em maiores de 12 anos, de terceiro grau com área corporal atingida maior do que 10%.",
+      "B": "Queimaduras, em maiores de 12 anos, que não envolvam face, mão, períneo ou pé, de terceiro grau com até 10% da área corporal atingida.",
+      "C": "Queimaduras por corrente elétrica.",
+      "D": "Queimaduras de segundo ou terceiro grau atingindo a períneo, em qualquer idade.",
+      "E": "Lesão inalatória."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-014",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 14,
+    "enunciado": "Em relação ao diagnóstico e ao tratamento da Pancreatite Aguda (PA) é correto afirmar que",
+    "alternativas": {
+      "A": "Nos casos de PA de etiologia secundária à litíase biliar, a colecistectomia deve ser realizada, com objetivo na prevenção de episódios recorrentes de PA.",
+      "B": "Na análise laboratorial, devido à sua alta sensibilidade e especificidade, a amilase é o principal marcador sérico de PA, sendo o principal método de escolha.",
+      "C": "O nível elevado de triglicerídeos séricos não influencia o nível de amilase, como acontece no caso da lipase.",
+      "D": "Diretrizes recentes recomendaram o uso rotineira de antibióticos profiláticos em pacientes com PA.",
+      "E": "Atualmente, existe uma terapia farmacológica específica para o tratamento da PA, em que são utilizadas altas doses de corticoide."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-015",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 15,
+    "enunciado": "Um paciente do sexo masculino, 35 anos, chega à consulta com queixa de lesão escura hiperpigmentada em ombro direito. A biópsia solicitada evidencia melanoma com 1,2 mm de espessura. A melhor estratégia a ser considerada neste caso é:",
+    "alternativas": {
+      "A": "Excisão ampla local seguida por biópsia de LNS axilar.",
+      "B": "A excisão ampla local do melanoma, seguida por terapia com interferon alpha.",
+      "C": "Linfocintilografia, biópsia de linfonodo sentinela (LNS) e excisão ampla local do melanoma e terapia com interferon alpha.",
+      "D": "Excisão ampla local do melanoma e radioterapia.",
+      "E": "Linfocintilografia, biópsia de LNS e excisão ampla local do melanoma."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-016",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 16,
+    "enunciado": "Uma Paciente do sexo feminino, 62 anos, é submetida a uma cirurgia de um tumor com 0,3 cm, em que há a conservação da mama esquerda (nodulectomia). Os linfonodos axilares são negativos. Neste caso o próximo passo na terapia desta paciente é:",
+    "alternativas": {
+      "A": "Linfonodectomia bilateral.",
+      "B": "Quimioterapia combinada.",
+      "C": "Radioterapia da mama esquerda.",
+      "D": "Nenhuma terapia adicional e observação a cada seis meses.",
+      "E": "Mastectomia radical bilateral."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-017",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 17,
+    "enunciado": "Observando a figura abaixo, a alternativa que descreve o principal achado no ECG mostrado é:<br><img src=\"imagens/iamspe-2024/q17.png\" alt=\"Imagem da questão 17\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Isquemia miocárdica severa.",
+      "B": "Hipertrofia ventricular esquerda.",
+      "C": "Fibrilação Atrial.",
+      "D": "Bloqueio atrioventricular de segundo grau.",
+      "E": "Taquicardia ventricular."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-018",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 18,
+    "enunciado": "Uma mulher de 38 anos com HIV é internada com convulsões de início recente. Foi solicitado Tomografia Computadorizada do crânio que está apresentada na figura abaixo. Considerando esse quadro, assinale a alternativa que representa o tratamento ideal para a patologia dessa paciente.<br><img src=\"imagens/iamspe-2024/q18.png\" alt=\"Imagem da questão 18\" class=\"imagem-questao\">",
+    "alternativas": {
+      "A": "Cefalexina.",
+      "B": "Ganciclovir.",
+      "C": "Oxacilina",
+      "D": "Sulfadiazina com pirimetamina.",
+      "E": "Penicilina benzatina."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-019",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 19,
+    "enunciado": "Considerando as informações a respeito do Acidente Vascular Cerebral (AVC), assinale a alternativa correta:",
+    "alternativas": {
+      "A": "Os acidentes vasculares cerebrais (AVC) hemorrágicos representam 95% de todos os acidentes vasculares cerebrais.",
+      "B": "Uma emergência médica definida como o desenvolvimento rápido de sinais clínicos de distúrbios focais (ou globais) da função encefálica, com sintomas que perduram por período > 24 horas ou conduzem à morte, sem outra causa aparente além da origem vascular.",
+      "C": "O ataque isquêmico transitório (AIT), com sintomas reversíveis em menos de 24 horas e ausência de lesões em exames de neuroimagem, não deve ser avaliado como uma emergência médica.",
+      "D": "A causa mais comum de hemorragia craniana traumática é a ruptura de aneurisma venoso.",
+      "E": "A Tomografia Computadorizada de crânio frequentemente é normal nas primeiras horas após o AVC hemorrágico."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-020",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 20,
+    "enunciado": "Considerando a insuficiência renal aguda (IRA) pré-renal, assinale o item que apresenta os dados laboratoriais relacionados.",
+    "alternativas": {
+      "A": "Razão ureia/creatinina plasmática > 40.",
+      "B": "Osmolaridade urinária em torno de 300 mOsm.",
+      "C": "Sódio > 40 mEq/l.",
+      "D": "Potássio elevado",
+      "E": "Bicarbonato e pH diminuídos."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-021",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 21,
+    "enunciado": "Um paciente, sexo masculino, 75 anos, apresenta-se para consulta com quadro de anedonia, falta de interesse nas coisas, fadiga excessiva há cerca de cinco semanas, posterior à morte súbita e prematura da mulher com quem estava casado há 40 anos. Refere insônia intensa, perda de cerca de 5 kg nesse período, além de frequentes crises de choro e de profunda culpa por ter vivido mais do que ela. Na última semana, convenceu-se de que seu corpo está literalmente se decompondo. Relata ter visto o rosto da esposa durante o dia, assim como ter ouvido a voz dela lhe dizendo para se matar e se juntar a ela. Nesse caso, o diagnóstico é de:",
+    "alternativas": {
+      "A": "Transtorno psicótico induzido por substância.",
+      "B": "Transtorno esquizoafetivo.",
+      "C": "Esquizofrenia.",
+      "D": "Psicose devida a uma condição médica geral.",
+      "E": "Depressão maior com características psicóticas."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-022",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 22,
+    "enunciado": "Considerando as informações sobre o câncer de pele não melanoma (CPNM), assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "A abordagem para o tratamento do CPNM depende do tamanho, da profundidade, da localização e dos fatores do hospedeiro, e a principal meta consiste na erradicação do tumor com amplas margens locais.",
+      "B": "A maioria dos casos de CPNM consiste em doença ampla com alto potencial metastática.",
+      "C": "Quando se compara o CBC com o CCE, o CCE é a menos agressivo dos CPNM e tipicamente é uma neoplasia de crescimento lento e localmente invasiva 1.",
+      "D": "Ampera dos CPNM consiste em carcinomas basocelulares (CBCS, 10 a 20%) ou carcinoma de células escamosas (CCE, cerca de 90%).",
+      "E": "O principal fator de risco para todos os CPNMs é o consumo de alimentos embutidos e processados."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-023",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 23,
+    "enunciado": "Considerando o diagnóstico das Pneumonias adquiridas na Comunidade (PAC), assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "Dos pacientes hospitalizados com PAC, mais de 35% terão hemoculturas positivas.",
+      "B": "O diagnóstico ambulatorial de PAC frequentemente exige confirmação por meio de radiografia de tórax, visto que a sensibilidade e a especificidade dos achados ao exame físico são, respectivamente, de cerca de 58 e 67%.",
+      "C": "A etiologia da pneumonia adquirida na comunidade, é geralmente identificada em cerca de 80% dos casos.",
+      "D": "Na maioria dos casos de PAC, o tratamento ambulatorial não é suficiente, tendo assim a necessidade de diagnóstico etiológico definitivo de microrganismo causador.",
+      "E": "Em geral, a positividade da cultura de escarro com coloração, pelo método de Gram, é maior que 60% nas PAC."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-024",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 24,
+    "enunciado": "Um paciente, sexo masculino, 62 anos, com história de dor abdominal crônica, queimação retroesternal e dispepsia realizou endoscopia digestiva alta (EDA). No exame, não foram visualizadas úlcera gástrica ou duodenal, porém são observadas protusões semelhantes a línguas de mucosa avermelhada que se estendem proximamente a partir da junção gastroesofágica para dentro do esôfago. As biópsias dessas áreas demonstram metaplasia coluna. A respeito do diagnóstico desse paciente, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "A esofagectomia, um dos principais tratamentos para essa patologia, tem uma taxa de mortalidade que varia de 0,5 a 2%, além de causar uma baixa morbidade.",
+      "B": "É uma patologia que é mais comum em mulheres da raça negra.",
+      "C": "Possui uma forte associação com o desenvolvimento subsequente de adenocarcinoma esofágico.",
+      "D": "A crioablação por calor, para essa patologia, permite criar benefícios em relação à ablação endoscópica.",
+      "E": "Esse paciente corre alto risco de câncer coexistente."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-025",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 25,
+    "enunciado": "O exame de imagem das articulações constitui uma ferramenta de importância crítica tanto para o diagnóstico quanto para o monitoramento da doença na Artrite Reumatoide (AR). Das opções abaixo, assinale aquela que representa o achado radiográfico mais precoce de artrite reumatoide.",
+    "alternativas": {
+      "A": "Subluxação articular.",
+      "B": "Estreitamento simétrico do espaço articular.",
+      "C": "Erosões ósseas subcondrais.",
+      "D": "Osteopenia justa-articular.",
+      "E": "Edema dos tecidos moles."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-026",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 26,
+    "enunciado": "O paciente J.L.S, sexo masculino, 72 anos, procura assistência devido ao desenvolvimento de obesidade abdominal, miopatia proximal e hiperpigmentação cutânea. Os exames laboratoriais revelam alcalose metabólica hipopotassêmica. Foi aventada a hipótese diagnóstica de síndrome de Cushing (SC). Em relação a essa síndrome, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A classificação da SC pode ser feita em primária e secundária, sendo a primária uma causa endógena caracterizada pela hipersecreção de ACTH CRH no eixo hipotálamo hipofisário e a secundária, que ocorre mais frequentemente, por causas exógenas devido ao uso crônico de medicamentos com glicocorticoides.",
+      "B": "A causa mais comum é idiopática, pelo uso desconhecido ou indiscriminado de opioides.",
+      "C": "Os níveis basais de ACTH provavelmente estão baixos.",
+      "D": "A estratégia para confirmação diagnóstica da SC deve iniciar com exame de sangue e raio x para ver as condições dos pulmões.",
+      "E": "A avaliação do cortisol sanguíneo livre com duas ou três vezes medidas consecutivas, tem sido considerada ineficiente, inclusive quando os valores excedem cinco vezes o valor basal."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-027",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 27,
+    "enunciado": "Um paciente, sexo masculino, 47 anos diabético tipo II, em sua consulta, apresenta M.A.P.A evidenciando hipertensão arterial. Dos medicamentos abaixo, assinale aquele que não interfere no metabolismo glicêmico, reduz a resistência à insulina e o risco de eventos cardiovasculares.",
+    "alternativas": {
+      "A": "Hidroclorotiazida.",
+      "B": "Betabloqueador.",
+      "C": "Furosemida.",
+      "D": "Inibidor da ECA.",
+      "E": "Bloqueador de canal de cálcio."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-028",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 28,
+    "enunciado": "Considerando a pneumonia causada pelo SARS-CoV-2, analise as afirmativas abaixo e assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "Atualmente, o protocolo recomendado para o tratamento de COVID-19 é muito parecido com o feito em outras infecções respiratórias e articulares causadas por vírus, como a Dengue, Hepatite e Febre amarela.",
+      "B": "SARS-CoV-2 pode causar infecção pulmonar leve e insuficiência renal, portanto o diagnóstico precoce de COVID-19 é crucial para o controle da doença.",
+      "C": "Os sintomas da COVID-19 são estáveis, mas em caso de obesidade mórbida pode evoluir do quadro assintomático para uma gama extensa de manifestações.",
+      "D": "O tratamento inicial inclui medidas de suporte para dores na coluna, controle da febre, suporte respiratório para os pacientes obesos e tratamento com corticoides.",
+      "E": "Os achados típicos da tomografia computadorizada de alta resolução (TCAR) do tórax incluem opacidades em vidro fosco e consolidações focais, geralmente com envolvimento pulmonar bilateral, multifocal e de distribuição periférica."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-029",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 29,
+    "enunciado": "O lúpus eritematoso sistêmico (LES) é uma doença inflamatória crônica pouco frequente, que acomete múltiplos órgãos e sistemas e ocorre principalmente em mulheres jovens. A respeito desta patologia, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "A hemorragia alveolar é uma manifestação pulmonar como do LES, com mortalidade baixa que fica entre 10% a 15%.",
+      "B": "A maioria dos pacientes com lúpus sistémico tem poliartrite intermitente, com sintomas que podem ser discretos au Incapacitantes.",
+      "C": "O pico de idade de incidência ocorre em adultos jovens (entre 18 e 25 anos).",
+      "D": "Mulheres em uso de contraceptivo oral contendo estrogênio apresentam uma diminuição de 50% no risco de desenvolverem LES.",
+      "E": "Comprometimento cutâneo no LES é incomum, ocorrendo em apenas 05 a 10% dos pacientes durante a evolução da doença."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-030",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 30,
+    "enunciado": "A cetoacidose diabética (CAD) é uma complicação aguda que ocorre tipicamente no diabetes tipo 1 (DM1), embora também possa ocorrer em pacientes com DM tipo 2 (DM2). Acerca do tema Cetoacidose Diabética, assinale a afirmativa correta.",
+    "alternativas": {
+      "A": "A hipofosfatemia grave é um achado comum e geralmente com sintomas de febre durante a terapia da CAD.",
+      "B": "É definida pela ausência de hiperglicemia, acidose F metabólica e cetose.",
+      "C": "Os eventos mais raros em pacientes com CAD são as F infecções, (geralmente estomacal ou do trato urinário) e descontinuação da terapia com insulina. 12.",
+      "D": "Cetonemia 2 mmol/L e um ânion gap >08 são indicadores de CAD grave.",
+      "E": "A administração de bicarbonato de sódio intravenoso de rotina não demonstrou melhora clínica na resolução da acidose, na duração do plano de tratamento e na mortalidade em pacientes com CAD."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-031",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 31,
+    "enunciado": "O paciente M.J.S, sexo masculino, 72 anos, com história de enfisema pulmonar crônico estável e saturação de oxigênio em repouso de 85%. Considerando as terapias abaixo, assinale aquela que apresenta mais benefícios para o paciente mencionado.",
+    "alternativas": {
+      "A": "Oxigênio suplementar usado à noite.",
+      "B": "Prednisolona oral diariamente.",
+      "C": "Tiotrópio inalatório em dias alterados.",
+      "D": "Oxigênio suplementar usado diariamente.",
+      "E": "Albuterol inalado conforme a necessidade."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-032",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 32,
+    "enunciado": "Um paciente, sexo masculino, 21 anos, há cerca de 7 dias com alteração progressiva de comportamento, e, nas últimas 24 h, apresentou rebaixamento do nível de consciência e icterícia também progressiva. Devido ao rebaixamento do nível de consciência, foi indicada a intubação orotraqueal. Após análise dos exames laboratoriais, chegou-se ao diagnóstico de insuficiência hepática aguda (IHA). Em relação a esse caso, assinale a afirmativa correta:",
+    "alternativas": {
+      "A": "O uso de corticoides com intuito de reduzir a inflamação cerebral aumenta a incidência de episódios de HIC, por isso não devem ser utilizados com essa finalidade na IHA.",
+      "B": "Deve-se utilizar a infusão de soluções hipotônicas e reforçar episódios de hiponatremia que contribuem com o edema cerebral.",
+      "C": "A hiperventilação profilática não é recomendada em pacientes com IHA por não prevenir Hipertensão Intracraniana (HIC) e pode ocasionar edema cerebral por redução da oferta de oxigênio cerebral.",
+      "D": "Sonolência e torpor com resposta aos estímulos verbais, desorientação grosseira e agitação psicomotora configuram a Encefalopatia hepática grau III em que o grande marcador semiológico é o flapping.",
+      "E": "A indução de hipernatremia torna-se desnecessário porque junto com a amônia a hiponatremia é fator que dispensa gravidade."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-033",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 33,
+    "enunciado": "A doença inflamatória pélvica (DIP) é considerada um conjunto de processos inflamatórios da região pélvica que acontece devido à propagação de micro-organismos que surgem a partir do colo do útero e da vagina para o endométrio, as tubas, o peritônio e as estruturas adjacentes. Sobre a DIP é correto afirmar que:",
+    "alternativas": {
+      "A": "Nos casos de DIP associada com uso de DIU, a remoção do dispositivo é obrigatória para iniciar o tratamento.",
+      "B": "O agente etiológico mais comum é a Neisseria gonorrhoeae especialmente em mulheres de 20 a 24 anos.",
+      "C": "Pacientes com salpingite prévia têm uma chance aumentada em 90% de desenvolver um novo episódio infeccioso.",
+      "D": "Dor em baixo ventre espontânea, dor à mobilização cervical e a secreção vagínal/cervical anormal são critérios maiores (obrigatórios) para diagnóstico de DIP.",
+      "E": "A febre e o corrimento vaginal ou mesmo a alteração do muco cervical podem, ou não, estarem presentes no diagnóstico clínico da DIP."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-034",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 34,
+    "enunciado": "Dentre agravos do trato reprodutivo inferior, destacam-se as vulvovaginites e as vaginoses. Sobre essas condições é correto afirmar que a/as:",
+    "alternativas": {
+      "A": "Vaginose citolítica é causada pela baixa concentração de Lactobacillus, pela redução do pH vaginal e pela citólise, levando ao aparecimento de sintomas.",
+      "B": "Vaginite inflamatória descamativa é uma forma pouco frequente, mas severa, de vaginite purulenta crônica.",
+      "C": "Vulvovaginites e as vaginoses representam as queixas pouco frequentes nos consultórios de ginecologia, sendo responsáveis por menos de 15% dos motivos de consulta.",
+      "D": "Vaginite aeróbica é um estado de alteração do meio vaginal caracterizado por microflora contendo bactérias aeróbicas entéricas e excesso de Lactobacillus.",
+      "E": "Vaginose bacteriana é um estado de desequilíbrio da flora vaginal caracterizado pelo excesso de Lactobacillus e pela ausência de bactérias anaeróbias."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-035",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 35,
+    "enunciado": "A adenomiose é uma alteração benigna do útero que histologicamente se caracteriza pela invasão benigna do endométrio no miométrio. Sobre a adenomiose é correto afirmar que:",
+    "alternativas": {
+      "A": "Cistos miometriais são considerados sinais inespecíficos de adenomiose.",
+      "B": "Pacientes com infiltração sub-basal do miométrio e com menor densidade glandular tendem a apresentar sangramento anormal com mais frequência.",
+      "C": "A espessura da zona juncional é independente de hormônios, o que pode melhorar a acurácia diagnóstica da ressonância magnética.",
+      "D": "Em exame de imagem, a espessura da zona juncional superior a 5 mm é considerada diagnóstico de adenomiose.",
+      "E": "A dispareunia e a dor pélvica crônica destacam-se entre os sintomas menos comuns da adenomiose."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-036",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 36,
+    "enunciado": "Considerando os tumores anexiais é correto afirmar que:",
+    "alternativas": {
+      "A": "Em mulheres de 30 anos todos os tumores anexiais são de origem tireoidiana, e, desses, a maioria são cistos benignos.",
+      "B": "Nas meninas pré-púberes, as lesões malignas chegam a representar aproximadamente 80% dos casos.",
+      "C": "Meninas adolescentes têm uma grande proporção de lesões benignas, com uma menor proporção de lesões malignas, de 5% a 10%.",
+      "D": "Nas gestantes, há uma prevalência de 4,9% a 6,1% de massas anexiais do ultrassom de primeiro trimestre, havendo regressão espontânea em 71% a 89% dos casos.",
+      "E": "Nas mulheres na pós-menopausa, menos de 5% podem apresentar massas anexiais, sendo lesões suspeitas em 36% a 59% delas."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-037",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 37,
+    "enunciado": "Sobre a fisiopatologia da Síndrome dos Ovários Policísticos (SOP) é correto afirmar que:",
+    "alternativas": {
+      "A": "O aumento da insulina circulante tem efeito direto na produção de androgênios ovarianos, uma vez que esta possui ação sinérgica ao FSH nas células da teca, estimulando a produção de androgênios.",
+      "B": "Mulheres portadoras de SOP têm menor sensibilidade hipotalâmica ao retrocontrole feitos pelos estrogênios e pela progesterona, de origem ovariana, com marcada resistência dos neurônios secretores de hormônio liberador de gonadotrofinas (GnRH) à regulação inibitória feita pela progesterona, o que prolongaram os pulsos de GnRH e LH.",
+      "C": "Dentre os mecanismos endócrinos envolvidos na etiopatogênese da SOP está o padrão de secreção de gonadotrofinas, com hipersecreção característica de Hormônio Luteinizante (Lutheinizing Hormone - LH), evento patognomônico desta síndrome, com redução na amplitude dos pulsos.",
+      "D": "Secreção aumentada de LH leva à uma hiperatividade das células da granulosa que produzirão quantidades aumentadas de androgênios, predominantemente testosterona, sem a conversão proporcional deste androgênio em estradiol.",
+      "E": "Em mulheres com SOP o recrutamento e a ativação folicular ocorrem de maneira menos intensa, porém com menor atresia dos folículos em estágios iniciais, por isso não há depleção precoce da população de folículos nesses indivíduos."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-038",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 38,
+    "enunciado": "A resistência à insulina é um fenômeno fundamental na complexa fisiopatologia da síndrome dos ovários policísticos (SOP). Por isso, os sensibilizadores de insulina são ferramentas terapêuticas importantes nos mais variados aspectos da síndrome. Considerando o uso dos sensibilizadores de insulina, no tratamento da mulher infértil de causa anovulatória devido à SOP, é correto afirmar que:",
+    "alternativas": {
+      "A": "O uso crônico de metformina pode estar associado a menores níveis séricos de ácido fólico.t 012.",
+      "B": "As evidências sugerem que a metformina não melhora as Taxas de nascidos vivos em comparação com o placebo.",
+      "C": "A associação de mio-inositol (MI) e o D-quiro-inositol (DQI), numa proporção de 40:1 (MI:DQI), parece conferir benefícios nos tratamentos de infertilidade em SOP.",
+      "D": "A metformina, em mulheres com SOP, não melhora a hiperandrogenemia e a sensibilidade metabólica alterada à insulina.",
+      "E": "A posologia da metformina, recomendada para o tratamento da SOP, é de 500 a 1.000 mg/dia divididos em duas tomadas."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-039",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 39,
+    "enunciado": "Sangramento Uterino Anormal (SUA) é a denominação utilizada atualmente para nomear as alterações da menstruação decorrentes de aumento no volume, na duração ou na frequência. Considerando as informações obre a SUA é correto afirmar que:",
+    "alternativas": {
+      "A": "Em casos de miomas intramurais, na vigência de sangramento uterino aumentado, a primeira opção terapêutica é embolização das artérias uterinas.",
+      "B": "No \"sistema\" PALM-COEIN, proposto pela Federação Internacional de Ginecologia e de Obstetrícia, em 2011, o acrômio PALM refere-se às causas não estruturais de SUA.",
+      "C": "A biópsia de endométrio guiada por histeroscopia tem boa Sensibilidade (94,4%) e baixa especificidade (44,6%) no diagnóstico de lesões benignas do endométrio.",
+      "D": "O exame complementar que mais dados fornece para a condução dos casos de SUA é a ultrassonografia da região pélvica, com ótima sensibilidade (96%), porém baixa especificidade (13,8%) para lesões endometriais em geral.",
+      "E": "A condição menopausal SUA e o tamanho dos pólipos endometriais não apresentam correlação com risco de malignidade."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-040",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 40,
+    "enunciado": "A classificação da Federação Internacional de Ginecologia e Obstetrícia (FIGO) para os miomas permite estabelecer uma estratégia de abordagem mais bem definida (cirúrgica ou clínica). Nessa classificação, um mioma uterino subseroso, com componente intramural maior ou igual a 50% de seu diâmetro, é classificado como:",
+    "alternativas": {
+      "A": "FIGO 6.",
+      "B": "FIGO 2.",
+      "C": "FIGO 3.",
+      "D": "FIGO 4.",
+      "E": "FIGO 5."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-041",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 41,
+    "enunciado": "Considerando o diagnóstico e o tratamento da endometriose é correto afirmar que:",
+    "alternativas": {
+      "A": "O tratamento medicamentoso (contraceptivos hormonais ou progestágenos) para endometriose não deve ser considerado sem que haja a confirmação da doença por algum meio diagnóstico (ultrassonografia ou ressonância magnética).",
+      "B": "O uso de biomarcadores no tecido endometrial, especialmente o produto gênico de proteína marcador neuronal 9.5 (PGP 9.5), deve fazer parte da investigação inicial para endometriose.",
+      "C": "O estadiamento da endometriose, proposto pela Sociedade Americana de Medicina Reprodutiva (ASRM), apresenta correlação com a gravidade dos sintomas, especialmente dor pélvica e infertilidade.",
+      "D": "Para identificar pacientes inférteis, que podem se beneficiar das técnicas de reprodução assistida, após a cirurgia para endometriose, o Índice de Fertilidade da Endometriose (Endometriosis Fertility Index - EFI), deve ser usado porque é validado, reprodutível e econômico.",
+      "E": "O diagnóstico de endometriose pode ser descartado diante da ausência de imagens suspeitas de endometriose na ultrassonografia transvaginal e na ressonância magnética."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-042",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 42,
+    "enunciado": "A violência sexual é qualquer ato sexual ou tentativa de obtenção de ato sexual por violência ou por coerção, independentemente da relação com a vítima. Sobre a violência sexual contra a mulher, criança ou adolescente é correto afirmar que:",
+    "alternativas": {
+      "A": "A eficácia da AE pode ser reduzida em usuárias de fármacos indutores de enzimas CYP3A4 (como barbitúricos, carbamazepina, felbamato, griseofulvina, oxcarbazepina, fenitoína, rifampicina, erva-de-são-joão e topiramato).",
+      "B": "A interrupção de uma gestação indesejada, decorrente de uma violência sexual, deve ser realizada durante o primeiro trimestre, após a apresentação de alvará judicial.",
+      "C": "Lesões condilomatosas, na região vulvoperineal, de uma criança, sexo feminino com 2 anos de idade, é um achado especifico para constatar violência sexual.",
+      "D": "O uso de doxiciclina (100mg de 12 em 12 horas por 14 dias) é a primeira opção para a prevenção de infecção por clamídia após episódio de violência sexual.",
+      "E": "Quando realizada as primeiras 72 horas, após a violência sexual, a anticoncepção de emergência (AE) oral com levonorgestrel (LNG) tem a mesma eficácia que a combinada etinilestradiol e LNG (método Yuzpe)."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-043",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 43,
+    "enunciado": "A sífilis é uma infecção bacteriana sistêmica, crônica, curável e exclusiva do ser humano. O Brasil, assim como muitos países, apresenta uma reemergência da doença. Sobre o diagnóstico e tratamento da sífilis, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A sífilis latente é o período em que se observa sinal ou sintoma da doença. Pode ser dividida em latente recente e latente tardia.",
+      "B": "Lesões cutâneas gomosas e nodulares, de caráter destrutivo, são alterações sugestivas de sífilis primária e herpes genital.",
+      "C": "A Reação de Jarisch-Herxheimer é um evento que ocorre durante as 24 horas após a primeira dose de penicilina, em especial nas fases primária ou secundária.",
+      "D": "Os testes rápidos para sífilis são testes treponêmicos. Eles são importantes para o diagnóstico, e podem ser utilizados para monitoramento da resposta ao tratamento.",
+      "E": "Pacientes sintomáticos com suspeita de sífilis primária e secundária e impossibilidade de realização de qualquer teste diagnóstico, recomenda-se tratamento empírico imediato para sífilis recente."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-044",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 44,
+    "enunciado": "De forma geral, úlceras genitais representam um tipo de síndrome clínica, sendo muitas vezes causadas por infecções sexualmente transmissíveis (IST). Sobre as ISTS que apresentam úlceras genitais em seu quadro clínico é correto afirmar que:",
+    "alternativas": {
+      "A": "Na mulher com cancro mole, infecção provocada por Haemophilus ducreyi, as localizações mais frequentes das úlceras são no colo uterino e no canal vaginal.",
+      "B": "A Doxiciclina 100mg, 12/12h, via oral, por 30 dias, é uma opção terapêutica para os casos de sífilis, inclusive para gestantes.",
+      "C": "O diagnóstico de ISTs com base no aspecto clínico da úlcera genital apresenta valores preditivos positivos elevados para sífilis e cancroide.",
+      "D": "Na donovanose, as lesões ulceradas se localizam, preferencialmente, nas regiões de dobras e região perianal.",
+      "E": "A primeira opção para o tratamento do linfogranuloma venéreo é Ciprofloxacinoa 500mg, 1 comprimido, VO, 2x/ dia, por 14 dias."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-045",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 45,
+    "enunciado": "O aborto recorrente é uma condição ginecológica de origem multifatorial, podendo ser decorrente de fatores masculinos e/ou femininos. Assinale a alternativa que apresenta as condições que exclui o risco elevado para abortos de repetição.",
+    "alternativas": {
+      "A": "Parceiro com cariótipo banda G em sangue apresentando translocação balanceada.",
+      "B": "Obesidade materna.",
+      "C": "Mutação hetorozigota G77C → T da enzima metilenotetrahidrofolato redutase (MTHFR).",
+      "D": "Paciente com a presença de fator antinuclear (FAN) positivo.",
+      "E": "Parceiro com fragmentação de DNA espermático aumentada."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-046",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 46,
+    "enunciado": "A alternativa que apresenta a melhor combinação de marcadores para avaliação da reserva ovariana de uma mulher com quadro de infertilidade conjugal é:",
+    "alternativas": {
+      "A": "AMH e contagem de folículos antrais na fase folicular inicial.",
+      "B": "LH e Kisspeptina dosados no 3° dia do ciclo.",
+      "C": "Inibina B e FSH dosados no 3° dia do ciclo.",
+      "D": "FSH e estradiol dosados no 3° dia do ciclo.",
+      "E": "IGF-1 e progesterona na fase folicular inicial."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-047",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 47,
+    "enunciado": "Considerando o desenvolvimento puberal normal e a puberdade precoce é correto afirmar que:",
+    "alternativas": {
+      "A": "Nas meninas, em torno de 85%, o primeiro sinal clínico de puberdade é a pubarca, seguido pelo desenvolvimento das mamas, início do estirão do crescimento, e, mais tardiamente, a menarca.",
+      "B": "A kisspeptina, elemento excitatório central, é considerada fundamental na liberação do GnRH e também no pulso gerador hipotalâmico, modulada por neuroquinina B e dinorfina.",
+      "C": "A causa da puberdade precoce central em meninas é conhecida em cerca de 80% a 90% dos casos.",
+      "D": "A Síndrome de McCune Albright (SMA) é caracterizada por puberdade precoce central, manchas café com leite na pele e displasia fibrosa poliostótica.",
+      "E": "Valores de 17 OH-progesterona superiores a 540 ng/dL têm alta sensibilidade e baixa especificidade para o diagnóstico de hiperplasia adrenal congênita."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-048",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 48,
+    "enunciado": "As normas éticas que regulam a utilização das técnicas de reprodução assistida (RA) no Brasil foram atualizadas pelo Conselho Federal de Medicina (CFM) através da Resolução n° 2.320/22. O item que descreve uma conduta relacionada à reprodução assistida vedada pelo CFM é:",
+    "alternativas": {
+      "A": "Realizar a transferência, em uma mulher de 40 anos, para a cavidade uterina de quatro embriões que não submetidos ao diagnóstico pré-implantacional.",
+      "B": "Submeter um casal homoafetivo feminino a uma gestação compartilhada.",
+      "C": "Aceitar que paciente com falência ovariana prematura receba óvulos doados de uma prima.",
+      "D": "Realizar a transferência, em uma mulher de 36 anos, para a cavidade uterina de dois embriões euploides ao diagnóstico pré-implantacional.",
+      "E": "Realizar técnica de reprodução assistida para criar uma gestação de substituição, em que a cedente temporária do útero é irmã da paciente e tem apenas um filho vivo."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-049",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 49,
+    "enunciado": "Considerando os defeitos abertos do tubo neural (DTN), assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Mulheres com risco aumentado para DTN podem se beneficiar com o uso de ácido fólico (4 mg ao dia) um mês antes da concepção e devem manter a suplementação até o final do primeiro trimestre de gestação.",
+      "B": "O folato alimentar e o ácido fólico não passam por processos enzimáticos necessários à metabolização para a forma ativa, 5-metiltetrahidrofolato (5-MTHF), que circula no plasma.",
+      "C": "O disrafismo do estômago, quando coberto de pele, surge através da perturbação do processo de neurulação primária.",
+      "D": "Para prevenção de DTN em mulheres, com obesidade mórbida, recomenda-se a suplementação de ácido fólico (forma sintética do folato), iniciando-se pelo menos 6 meses antes da concepção e mantendo a suplementação até o final do segundo trimestre de gestação.",
+      "E": "Portadoras de polimorfismo genéticos (MTHFR C-677T) não fazem parte de grupo de risco para deficiência de ferro."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-050",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 50,
+    "enunciado": "O estado nutricional da gestante está relacionado com várias complicações obstétricas. Sobre o manejo nutricional durante a gravidez é correto afirmar que:",
+    "alternativas": {
+      "A": "Mulheres com baixa ingestão de cálcio durante a gravidez devem realizar suplementação com doses variando de 3,5 a 5 g/dia.",
+      "B": "Segundo as orientações da Organização Mundial da Saúde (OMS, 1995) e do Institute of Medicine (IOM, 1990), é recomendado que uma gestante, com índice de massa corpórea entre 25,0 a 29,9 kg/m², tenha um ganho de peso entre 11,5-16,0 kg durante toda a gravidez.",
+      "C": "A inadequação do estado nutricional e/ou do ganho de peso na gestação associa se a resultados adversos na gravidez, mas não impacta na saúde da prole.",
+      "D": "A deficiência de ferro na gravidez está relacionada ao desenvolvimento de anemia, fetos pequenos para a idade gestacional, prematuridade e sepse puerperal.",
+      "E": "A vitamina D é um micronutriente que possui aumento na necessidade no período gestacional, sendo indicada a suplementação durante a gravidez."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-051",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 51,
+    "enunciado": "Considerando os critérios para indicar tratamento medicamentoso para a gravidez ectópica, assinale o item que demonstra equívoco na indicação.",
+    "alternativas": {
+      "A": "Gravidez heterotópica.",
+      "B": "Diâmetro da massa anexial inferior ou igual a 3,5 cm.",
+      "C": "Beta-hCG inicial inferior ou igual a 5.000 mUl/mL.",
+      "D": "Ausência de dor abdominal.",
+      "E": "Estabilidade hemodinâmica."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-052",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 52,
+    "enunciado": "Considerando o manejo da doença hemolítica perinatal (DHP), é correto afirmar que:",
+    "alternativas": {
+      "A": "Na DHP grave, os níveis elevados de bilirrubina indireta no sangue fetal comprometem o desenvolvimento neurológico / intrauterino.",
+      "B": "Valores de pico de velocidade sistólica na dopplervelocimetria da artéria cerebral média (PVS ACM) acima de 1,5 múltiplo da mediana (MoM) para a idade gestacional evidenciam anemia fetal moderada ou grave, com sensibilidade baixa sensibilidade (36%) e alta especificidade (91%).",
+      "C": "Para transfusão intrauterina, utiliza-se sangue do tipo O Rh negativo, com hematócrito entre 65% e 85% e submetido à irradiação, que promove menor reação enxerto-hospedeiro.",
+      "D": "O teste de coombs direto deve ser preconizado a gestantes Rh negativo (D variante negativo), parceiro Rh positivo, na primeira visita pré-natal e nos trimestres subsequentes.",
+      "E": "A avaliação do PVS-ACM fetal deve ser realizada de rotina nas gestantes Rh negativo com Cl positivo, independente dos valores de titulação."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-053",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 53,
+    "enunciado": "Considerando os transtornos psiquiátricos que ocorrem no pós-parto, é correto afirmar que:",
+    "alternativas": {
+      "A": "Os distúrbios psiquiátricos no pós-parto aumentam o risco para a interrupção precoce do aleitamento materno. Puérperas com blues puerperal apresentam contraindicação absoluta para amamentação, devido ao uso comum de drogas psiquiátricas.",
+      "B": "Na disforia puerperal, os sintomas de tristeza profunda, agitação e alteração no sono têm início após 3 meses do parto, sendo que o diagnóstico só pode ser dado até 6 meses pós-parto.",
+      "C": "A depressão puerperal é o transtorno psiquiátrico mais comum do puerpério. O início é insidioso e ocorre nas primeiras quatro semanas do pós-parto.",
+      "D": "O transtorno pós-parto mais grave é a neurose puerperal. Trata-se de uma doença psiquiátrica em que a mãe apresenta sintomas como: delírios e alucinações, insônia, agitação, confusão mental e raiva.",
+      "E": "O blues puerperal ou baby blues, chega a afetar até 50% das puérperas. Trata-se de uma tristeza que surge entre o 3° e 5° dia após o parto, porém costuma se resolver sozinha após algumas semanas de evolução."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-054",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 54,
+    "enunciado": "A rotura prematura de membranas (RPM) é uma complicação obstétrica com riscos fetais, maternos e para o recém-nascido. Pode ocorrer em gestações de termo ou pré termo. Nesse sentido, sobre a RPM é correto afirmar que:",
+    "alternativas": {
+      "A": "O uso de misoprostol está contraindicado na indução do parto pelo risco de infecção.",
+      "B": "Estudos demonstram evidências para recomendar a triagem e o tratamento da vaginose bacteriana e da tricomoníase, em gestantes de risco habitual, com o objetivo de prevenção da rotura prematura de membranas (RPM).",
+      "C": "A RPM é uma contraindicação absoluta para tocólise, independentemente da idade gestacional.",
+      "D": "O oligoâmnio grave e prolongado, em pacientes com RPM, eleva o risco de deformidades fetais e sindrome da banda amniótica.",
+      "E": "Não se deve administrar corticoide em casos de RPM, mesmo nas gestações entre 26 e 34 semanas pelo risco de infecção."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-055",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 55,
+    "enunciado": "A gestação gemelar é associada a risco aumentado de complicações maternas e fetais. Nesse aspecto, sobre esse tipo de gestação é correto afirmar que:",
+    "alternativas": {
+      "A": "Gestações monozigóticas resultam da divisão de massa embrionária inicial comum, gerando produtos conceptuais com carga genética idêntica Isso representa menos de 10% das gestações gemelares naturalmente concebidas.",
+      "B": "O sinal de lambda, que define a gravidez dicoriônica, está presente até 15 semanas em todas as gestações dicoriônicas, porém, em idades gestacionais mais avançadas, sua presença é menor.",
+      "C": "A corionicidade pode ser definida com mais acurácia, próxima a 100%, no período entre 14 semanas e 19 semanas e 6 dias..",
+      "D": "Gêmeos unidos são resultantes de falha na separação completa dos embriões, quando esse processo de divisão ocorre tardiamente, entre o 8º e o 10 dia após a fertilização.",
+      "E": "O melhor parâmetro para determinar a idade gestacional nas gestações múltiplas é o comprimento cabeça-nádega (CCN) do menor embrião."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-056",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 56,
+    "enunciado": "Considerando o exame de ultrassonografia, no primeiro trimestre de gravidez, o critério que determina a inviabilidade da gestação é a/o:",
+    "alternativas": {
+      "A": "CCN >4 mm sem a presença de batimentos cardíacos.",
+      "B": "Falha em demonstrar o embrião com batimentos cardíacos em ultrassonografia realizada 7 dias após exame que identificou saco gestacional com vesícula vitelina.",
+      "C": "Falha em demonstrar o embrião com batimentos cardíacos em ultrassonografia realizada 7 dias após exame que identificou saco gestacional sem vesícula vitelina.",
+      "D": "Diâmetro médio do saco gestacional > 25 mm sem embrião ou vesícula vitelina.",
+      "E": "Diâmetro médio do saco gestacional > 15 mm sem embrião ou vesícula vitelina."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-057",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 57,
+    "enunciado": "A translucência nucal (TN) é a representação ultrassonográfica do fluido, sob a pele, presente na região da nuca, no primeiro trimestre de gestação. A TN é um preditor para cromossomopatias. Dessa forma, considerando a técnica para a medida ultrassonográfica da TN é correto afirmar que:",
+    "alternativas": {
+      "A": "Deve ser obtido um corte sagital do feto, onde o osso nasal ecogênico e o palato retangular são vistos separadamente.",
+      "B": "A medida da TN deve ser feita colocando a barra transversal do caliper eletrônico na borda externa das linhas brancas horizontais que delimitam o espaço anecoico da TN.",
+      "C": "O comprimento cabeça-nádegas (CCN) do feto necessário para a medida da translucência nucal é entre 35 mm e 74 mm.",
+      "D": "A imagem deve ser magnificada para que apenas a cabeça e a parte superior do tórax ocupem pelo menos metade da tela.",
+      "E": "A medida deve ser repetida por pelo menos duas vezes e a menor medida deve ser anotada."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-058",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 58,
+    "enunciado": "Considerando as informações sobre a hemorragia pós-parto (HPP) é correto afirmar que:",
+    "alternativas": {
+      "A": "O mnemônico dos 4 Ts descreve, didaticamente, as principais causas da HPP, são elas: tônus, trauma, tecido e trombofilia.",
+      "B": "Deve-se evitar o uso universal de ocitocina pós-parto. Indicado apenas nos casos de risco elevado para HPP, como nos casos de gestação gemelar.",
+      "C": "O clampeamento do cordão umbilical após 60 segundos, na ausência de contraindicações, é uma medida de prevenção para HPP.",
+      "D": "A tração controlada do cordão umbilical, associada à manobra de Brandt-Andrews, não deve ser realizada com o intuito de prevenir HPP.",
+      "E": "Outros uterotónicos, como metilergometrina ou misoprostol, não auxiliam na redução do risco de HPP, devendo ser proscritos."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-059",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 59,
+    "enunciado": "Considerando a morbidade e a mortalidade materna, assinale a definição correta.",
+    "alternativas": {
+      "A": "Morbidade Materna Grave: conjunto de condições potencialmente ameaçadoras à vida. Essa é uma categoria abrangente de condições não clínicas, incluindo doenças obstétricas que podem ameaçar a vida da mulher durante a gestação, o parto e após o término da gestação.",
+      "B": "Condições ameaçadoras à vida (CAV): todos os casos de morte materna decorrente de causa clínica e obstétrica.",
+      "C": "Razão de mortalidade do near miss materno (NMM; 1 MM): razão entre casos de near miss e óbitos maternos. Razões mais baixas indicam um atendimento melhor.",
+      "D": "Desfecho materno grave: correspondente aos casos de condições ameaçadoras à vida (ou seja, disfunção orgânica), excluindo os óbitos maternos.",
+      "E": "Near miss materno (NMM): mulher que quase morreu, mas sobreviveu a uma complicação grave que ocorreu durante a gravidez, o parto ou em até 42 dias após o término da gravidez."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-060",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 60,
+    "enunciado": "A ocorrência de sífilis na gestação vem assustando os profissionais de saúde pelo fato de apresentar grande frequência e severas repercussões ao ambiente fetal. No Brasil, o índice apresentou alta constatada de 1.047% entre 2005 e 2013 e aumento no número de notificações de sífilis congênita de 135%. Nesse aspecto, considerando a sífilis na gestação é correto afirmar que:",
+    "alternativas": {
+      "A": "Nas infecções primária e secundária, há menor chance de acometimento fetal (30% - 40% ), complicações e más formações. A transmissão é de 70-80% nos casos de sífilis latente recente e de 50% na terciária.",
+      "B": "Os testes não treponêmicos (VDRL, RPR) apresentam baixa sensibilidade e alta especificidade.",
+      "C": "O tratamento da gestante só será considerado adequado se realizado até 60 dias antes do parto.",
+      "D": "Os testes não treponêmicos como o FTA-Abs são mais recomendados para o seguimento após o tratamento.",
+      "E": "A benzilpenicilina benzatina é uma opção segura e eficaz para o tratamento adequado da gestante e do feto. Não há evidências de resistência de T. pallidum à penicilina no Brasil e no mundo."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-061",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 61,
+    "enunciado": "Infecção puerperal, também denominada de morbidade febril puerperal, caracteriza um quadro de infecção do trato genital, que pode ocorrer em qualquer momento entre a ruptura das membranas ou entre o trabalho de parto e o 42º dia após o parto. Nesse sentido, considerando a infeção puerperal é correto afirmar que:",
+    "alternativas": {
+      "A": "A infecção da pele e dos tecidos moles é um diagnóstico diferencial de infecção puerperal e se manifesta, geralmente, duas semanas após a cesariana.",
+      "B": "A gestante com vaginose bacteriana, presença de mecônio no trabalho de parto e placentação baixa são fatores de risco para infecção puerperal.",
+      "C": "O conceito clássico da morbidade febril puerperal seria a ocorrência de dois episódios de temperatura oral igual ou superior a 38°C, separados por mais de seis horas, após 24 horas do parto.",
+      "D": "A miometrite necrotizante é a principal causa de infecção no puerpério e caracterizada pela presença de dor pélvica e febre.",
+      "E": "No parto vaginal, de risco habitual, é indicado o uso profilático de antibióticos visando à profilaxia de infecção puerperal."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-062",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 62,
+    "enunciado": "De acordo com a Diretriz Nacional de Assistência ao Parto Normal, publicada em 2022, é correto afirmar que:",
+    "alternativas": {
+      "A": "Considerar segundo período prolongado depois de decorridos 30 minutos do nascimento, sem expulsão da placenta, caracterizando a retenção placentária.",
+      "B": "A fase passiva do primeiro período do parto é caracterizada por contrações uterinas indolores regulares, um grau substancial de apagamento cervical e dilatação cervical mais rápida de 5 cm até a dilatação completa para nulíparas e multíparas.",
+      "C": "As mulheres devem ser informadas de que a duração da fase ativa do terceiro período do parto (fase de dilatação) de 2 cm até a dilatação cervical total, geralmente não se estende além de 18 horas nas nulíparas, e, geralmente, não se estende além de 2 horas nas multíparas.",
+      "D": "A cardiotocografia de rotina é recomendada para a avaliação do bem estar fetal na admissão do parto de início espontâneo, em gestantes saudáveis de risco habitual.",
+      "E": "As mulheres devem ser informadas de que a duração do segundo período do parto varia de uma mulher para outra. Em nulíparas, o período expulsivo geralmente é concluído em até 3 horas, enquanto que, em multíparas, o período expulsivo geralmente é concluído em até 2 horas."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-063",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 63,
+    "enunciado": "Durante um toque vaginal de uma gestante em trabalho de parto, o obstetra percebeu que a fontanela lambdoide do feto estava voltada na direção da eminência iliopectínea direita da mãe e o diâmetro biparietal estava ao nível das espinhas bi-isquiáticas. Nesse contexto, baseando-se nessas informações é possível determinar que a:",
+    "alternativas": {
+      "A": "Variedade de posição é occipito direita anterior. O feto está no-1 de DeLee.",
+      "B": "Variedade de posição é occipito direita anterior. O feto está no 3° plano de Hodge.",
+      "C": "Variedade de posição é occipito direita anterior. O feto está no plano zero de DeLee.",
+      "D": "Variedade de posição é occipito direita posterior. O feto está no plano zero de DeLee.",
+      "E": "Variedade de posição é occipito esquerda posterior. O feto está no plano zero de DeLee."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-064",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 64,
+    "enunciado": "No mecanismo de parto de uma apresentação cefálica fletida, em que o desprendimento fetal ocorre em occípito-púbico, é correto afirmar que:",
+    "alternativas": {
+      "A": "A avaliação do estreito médio da bacia é possível ser realizada através da medida da conjugada diagonal.",
+      "B": "Na variedade de apresentação occipito-esquerda anterior a rotação interna será de 45 graus no sentido horário.",
+      "C": "Na variedade de apresentação occipito-direita-posterior a rotação interna será de 135 graus no sentido horário.",
+      "D": "No assinclitismo anterior (de Nagele) a sutura sagital está mais próxima da sínfise púbica e longe do promontório.",
+      "E": "A rotação externa, geralmente, ocorre no mesmo sentido da rotação interna."
+    },
+    "correta": "*",
+    "anulada": true
+  },
+  {
+    "id": "iamspe-2024-065",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 65,
+    "enunciado": "Uma criança de 6 anos é levada ao pronto-socorro pediátrico após ter sofrido acidente escorpiônico há 2 horas. A criança apresenta dor intensa no local da picada, sudorese, taquicardia e sialorreia discreta. Não apresentou vômitos. A pressão arterial está dentro dos valores normais. Considerando as informações no quadro apresentado, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Além do soro antiescorpiônico, deve-se administrar corticoide sistêmico e aplicação de gelo no local da picada.",
+      "B": "Deve-se aguardar a realização de exames laboratoriais para determinar a melhor conduta.",
+      "C": "A presença de hipotensão não mudaria a conduta do caso.",
+      "D": "A melhor conduta é a analgesia e a hidratação, sem a administração de soro antiescorpiônico, pois trata-se de acidente escorpiônico leve.",
+      "E": "Deve-se realizar a administração de 2 a 3 ampolas de soro antiescorpiônico."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-066",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 66,
+    "enunciado": "Um paciente previamente asmático, com 7 anos de idade, apresenta quadro de tosse e sibilos, mais de uma vez por semana, porém não diariamente. Apresenta sintomas noturnos de três a quatro vezes ao mês e limitação das atividades durante as exacerbações. Não apresentou internações recentes e nunca foi internado em unidade de terapia intensiva. Nesse contexto, pode- se dizer que o paciente apresenta:",
+    "alternativas": {
+      "A": "Não há dados suficientes para a classificação.",
+      "B": "Asma Persistente Leve.",
+      "C": "Asma Intermitente.",
+      "D": "Asma Persistente Grave.",
+      "E": "Asma Persistente Moderada."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-067",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 67,
+    "enunciado": "Um lactente com 6 meses de vida é trazido pelos pais ao ambulatório de puericultura para acompanhamento. O paciente nasceu a termo, com peso adequado para a idade gestacional, sem fatores de risco identificáveis para anemia ferropriva. Além disso, estava em aleitamento materno exclusivo até o momento da consulta. Considerando a suplementação medicamentosa de ferro, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Este paciente já deveria estar recebendo suplementação de ferro elementar desde os 90 dias de vida.",
+      "B": "A suplementação de ferro elementar não deve ser recomendada.",
+      "C": "Deve-se recomendar a administração de 1 mg de ferro elementar por quilo por dia até os 24 meses.",
+      "D": "Deve-se recomendar a administração de 4 mg de ferro elementar por quilo por dia até os 24 meses.",
+      "E": "Deve-se solicitar exames laboratoriais que avaliem a hemoglobina e os índices hematimétricos para avaliar a indicação de ferro elementar."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-068",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 68,
+    "enunciado": "Um paciente de 3 anos é levado ao consultório pediátrico com queixa de cansaço aos leves esforços, além de dificuldade de ganho de peso. Não há histórico de febre ou de dor. Foi submetido ao teste do coraçãozinho ao nascer, que estava normal. Ao exame, é notado discreta cianose periférica e um sopro holossistólico, melhor audível em borda esternal esquerda. O eletrocardiograma demonstrou hipertrofia ventricular direita. Nesse contexto, assinale a alternativa que corresponde ao diagnóstico mais provável.",
+    "alternativas": {
+      "A": "Comunicação interventricular.",
+      "B": "Insuficiência aórtica.",
+      "C": "Defeito do septo atrial.",
+      "D": "Coarctação de aorta.",
+      "E": "Tetralogia de Fallot."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-069",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 69,
+    "enunciado": "Um adolescente de 14 anos apresenta quadro de fadiga, perda de peso e bronzeamento da pele, apesar da baixa exposição solar. O paciente possui histórico de hipotensão ortostática. Na avaliação laboratorial dos eletrólitos, apresenta hiponatremia e hipercalcemia. Nesse contexto, assinale a alternativa que corresponde ao diagnóstico do paciente.",
+    "alternativas": {
+      "A": "Insuficiência Renal Crônica.",
+      "B": "Doença de Addison.",
+      "C": "Diabetes mellitus tipo 1.",
+      "D": "Hipotireoidismo.",
+      "E": "Síndrome de Cushing."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-070",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 70,
+    "enunciado": "Uma criança de 3 anos apresenta febre alta persistente, por cinco dias, conjuntivite bilateral não-purulenta, língua em framboesa, edema e eritema nas mãos e exantema polimorfo. Não há história de viagem recente. A criança está irritada e o exame cardíaco está normal. Dessa forma, em relação ao quadro, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Deve-se evitar o uso de ácido acetilsalicílico.",
+      "B": "Deve-se administrar penicilina benzatina na dose de 600.000 UI.",
+      "C": "O uso de imunoglobulina em dose alta é indicada para o caso.",
+      "D": "Deve-se iniciar antibiótico de amplo espectro.",
+      "E": "O exame cardíaco normal afasta alterações cardíacas no quadro."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-071",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 71,
+    "enunciado": "Uma criança de 9 anos, sexo masculino, é levada ao ambulatório de pediatria com queixa de estar bem mais baixa que os colegas da mesma série. A criança é fisicamente ativa, realiza treinamento de futebol e de voleibol em um volume semanal de 450 minutos por semana. A criança apresenta estatura -1 DP abaixo da média e atraso na idade óssea em um ano. A estatura alvo é de 180 cm. A criança nasceu a termo, com peso adequado para a idade gestacional. Não apresenta alterações fenotípicas ao exame físico e não há sinais de entrada na puberdade. Nesse contexto, em relação ao quadro clínico, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Espera-se que os valores laboratoriais estejam de acordo com a idade cronológica.",
+      "B": "A previsão de estatura final é baixa.",
+      "C": "Deve-se realizar o teste de estímulo do hormônio do crescimento com clonidina.",
+      "D": "Espera-se, nos exames laboratoriais, valores elevados de testosterona.",
+      "E": "A previsão de estatura é de acordo com o alvo genético."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-072",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 72,
+    "enunciado": "Uma paciente de 6 meses é levada à emergência pediátrica com quadro de tosse, febre baixa e coriza, evoluindo com chiado no peito e dispneia há 1 dia. Ao exame físico, encontrava-se irritada, taquicárdica, com tiragem intercostal e subcostal, e sibilos e crepitações grossas difusas à ausculta respiratória. A saturação é de 90%. A radiografia de tórax apresentou retificação dos arcos costais, sem outras alterações. Nesse contexto, assinale a alternativa correta quanto à conduta adequada.",
+    "alternativas": {
+      "A": "Recomenda-se iniciar hidratação venosa hipotônica.",
+      "B": "Recomenda-se administrar antibióticos de amplo espectro.",
+      "C": "Recomenda-se administrar corticoide sistêmico.",
+      "D": "Recomenda-se administrar oxigênio suplementar.",
+      "E": "Recomenda-se administrar broncodilatadores."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-073",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 73,
+    "enunciado": "Um paciente de 5 anos é levado ao pronto-socorro pediátrico com queixa de febre alta há 3 dias, cefaleia e dor retro-orbitária, evoluindo com vômitos persistentes e dor abdominal. Ao exame físico, a criança encontrava-se consciente, taquipneica, com perfusão periférica de 4 segundos e turgor diminuído. Há presença de petéquias no antebraço. A pressão arterial está normal e não há sangramentos ativos. A diurese está reduzida. Nesse contexto, assinale a alternativa correta em relação ao quadro.",
+    "alternativas": {
+      "A": "Deve-se iniciar expansão com 20 a 30 ml/kg de cloreto de sódio a 0,9% ou ringer lactato até 60 ml/kg no total.",
+      "B": "Deve-se iniciar imediatamente a terapia de reidratação oral na taxa de 100 ml para cada episódio de vômito.",
+      "C": "Deve-se iniciar terapia hídrica de manutenção com 120% do estipulado pela regra de Holliday- Segar.",
+      "D": "Deve-se iniciar drogas vasoativas e regular a paciente para uma unidade de terapia intensiva.",
+      "E": "Deve-se aguardar os exames laboratoriais para definir a melhor conduta."
+    },
+    "correta": "A",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-074",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 74,
+    "enunciado": "Um paciente de 7 anos apresenta quadro de febre há 2 dias, mal-estar geral, anorexia, odinofagia, evoluindo com exantema papular no peito, que se expandiu para tronco, pescoço e membros, poupando a palma da mão. Ao exame, o paciente apresentou exsudato purulento em tonsilas amigdalianas, bochechas hiperemiadas com palidez perioral, pele do tronco áspera e linhas transversais nas dobras de flexão. Nesse contexto, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "O teste para antiestreptolisina (ASLO) é necessário para o diagnóstico dessa condição.",
+      "B": "A transmissão do quadro não ocorre nos primeiros dias de sintomas.",
+      "C": "Trata-se de uma doença de notificação compulsória.",
+      "D": "Algumas das complicações não-supurativas são glomerulonefrite difusa aguda e a poliarterite nodosa.",
+      "E": "O uso de antibiótico associado a um inibidor da beta- lactamase é necessário, já que o agente etiológico da doença produz beta-lactamase."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-075",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 75,
+    "enunciado": "Um paciente de 2 anos é levado pelos pais à emergência com quadro de ganho de peso, significativo no último mês, associado a edema, inicialmente em membros inferiores, que evoluiu para anasarca. Não havia a presença de hematúria. Nesse contexto, em relação à condição apresentada, selecione a alternativa correta.",
+    "alternativas": {
+      "A": "É esperado que o fator antinuclear (FAN) esteja positivo.",
+      "B": "O uso de corticosteroides não deve ser indicado devido ao maior risco de infecções apresentado por esses pacientes.",
+      "C": "A biópsia renal deve ser realizada para a confirmação diagnóstica.",
+      "D": "A maioria dos casos em crianças é de origem secundária sendo os casos idiopáticos cerca de 10% do total.",
+      "E": "A confirmação diagnóstica dessa condição depende de dados clínicos e laboratoriais."
+    },
+    "correta": "E",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-076",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 76,
+    "enunciado": "Um paciente de 1 ano com quadro de irritabilidade, rinorreia hialina, tosse e febre há 1 dia, é atendido no ambulatório de pediatria. À otoscopia, o paciente apresenta discreta hiperemia na membrana timpânica direita, sem opacificação ou abaulamento. A oroscopia é normal. No contexto desse quadro apresentado, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Deve-se iniciar corticoterapia oral associado à anti-histamínico de segunda geração.",
+      "B": "Deve-se iniciar antibiótico de amplo espectro, associado a um inibidor de beta-lactamase.",
+      "C": "Deve-se iniciar antibiótico de amplo espectro, sem um inibidor de beta-lactamase.",
+      "D": "A melhor conduta é expectante, com analgesia por via oral, com reavaliação em 48 horas.",
+      "E": "Deve-se iniciar antibiótico bacteriostático."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-077",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 77,
+    "enunciado": "Uma criança de 2 anos e 6 meses, sexo masculino, nascida a termo, é levada ao ambulatório de puericultura pois ainda não desenvolveu a fala. Ela realiza pouca comunicação não-verbal com pais (não dá tchau e não aponta para objetos). Além disso, realiza atividades motoras de forma repetitiva e estereotipada e apresenta interesse fixo por brinquedos que produzem sons, irritando- se quando o objeto é retirado. Nesse contexto, em relação ao quadro apresentado pelo paciente, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Deve-se aguardar a idade escolar para fechar o diagnóstico do transtorno do espectro autista.",
+      "B": "Trata-se de um paciente com transtorno do espectro autista, ao menos, nível 2 de suporte.",
+      "C": "Exames laboratoriais são necessários para realizar o diagnóstico de transtorno do espectro autista.",
+      "D": "O transtorno do espectro autista é mais frequente em meninas.",
+      "E": "A escala M-CHAT-R/F não deve ser utilizada para esse paciente."
+    },
+    "correta": "B",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-078",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 78,
+    "enunciado": "Um lactente de 3 meses e 10 dias, idade cronológica, nascido com 28 semanas, pequeno para a idade gestacional, de parto cesáreo, devido à pré-eclâmpsia materna, é levado à primeira consulta de puericultura. O paciente permaneceu internado por 3 meses, devido ao quadro de síndrome da angústia respiratória do recém-nascido, e recebeu alta sem necessidade de oxigênio suplementar. O APGAR ao nascer foi de 6 no primeiro minuto e 8 no quinto minuto. Os testes do coraçãozinho e do pezinho foram normais. O peso na consulta atual é de 3550 gramas. Consta na caderneta da criança a administração de dose única da vacina para hepatite B, sem o registro de outras vacinas. Considerando o quadro apresentado pelo paciente, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Deve-se dar preferência à DTP em relação à DTPa para esses pacientes.",
+      "B": "O calendário vacinal deve seguir a idade corrigida do paciente.",
+      "C": "É recomendada a administração de palivizumabe para esse paciente.",
+      "D": "A vacina BCG não deve ser administrada para esse paciente.",
+      "E": "Não é recomendada a administração da vacina contra o rotavírus para esse paciente."
+    },
+    "correta": "C",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-079",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 79,
+    "enunciado": "Uma paciente de 7 anos e 5 meses, sexo feminino, é levada pelos pais devido ao aparecimento de broto mamário e pelos pubianos. A criança apresenta IMC normal para a idade, é fisicamente inativa e não faz uso de medicamentos. O estádio puberal da paciente é M2P2, sem outros achados no exame físico. Considerando o quadro da paciente, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Trata-se de pubarca precoce benigna, que pode ocorrer em decorrência da adrenarca.",
+      "B": "A ressonância magnética de sela túrcica é obrigatória na investigação do quadro.",
+      "C": "A maioria dos quadros de puberdade precoce central em meninas é independente de GnRH.",
+      "D": "A investigação laboratorial é necessária para a investigação do caso.",
+      "E": "Trata-se de puberdade precoce central, que é patológica na maioria dos casos em meninas."
+    },
+    "correta": "D",
+    "anulada": false
+  },
+  {
+    "id": "iamspe-2024-080",
+    "disciplina": "Prova na íntegra",
+    "tema": "IAMSPE 2024",
+    "banca": "IAMSPE",
+    "ano": 2024,
+    "numero": 80,
+    "enunciado": "Uma lactente de 9 meses, sexo feminino, é levada ao pronto-socorro com quadro de febre há 48 horas, acima de 39 graus. Os pais negaram a presença de sintomas respiratórios, vômitos ou diarreia. Ao exame, a paciente está abatida, hipocorada (1+/4+) e eupneica. Fontanela anterior aberta, normotensa. Não há exantema. Oroscopia e otoscopia normais. Dessa maneira, em relação ao quadro apresentado, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A presença de esterase leucocitária no exame de urina (EAS), mesmo ausência de nitrito, coletada por punção suprapúbica ou por sonda, indica o início da antibioticoterapia para a paciente.",
+      "B": "Deve-se orientar os pais sobre a probabilidade elevada de quadro viral e recomendar observação por 48 horas em domicílio.",
+      "C": "Deve-se iniciar antibioticoterapia de amplo espectro de forma imediata, sem a necessidade de aguardar por exames laboratoriais.",
+      "D": "Deve-se solicitar a urocultura e aguardar o resultado do exame para iniciar o tratamento.",
+      "E": "Deve-se realizar punção lombar, radiografia de tórax, EAS e hemograma para investigar o foco da infecção."
+    },
+    "correta": "A",
+    "anulada": false
+  }
+]

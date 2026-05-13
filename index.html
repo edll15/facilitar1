@@ -283,15 +283,145 @@ function questaoAnulada(q){
   return getCorreta(q)==='*'||q.anulada===true;
 }
 
-function normalizarCaminhoImagem(img){
+function valorImagem(img){
   if(!img)return '';
-  const caminho=String(img).trim();
-  if(caminho.startsWith('http://')||caminho.startsWith('https://')||caminho.startsWith('data:')||caminho.startsWith('./')||caminho.startsWith('/'))return caminho;
-  if(caminho.startsWith('imagens/'))return './'+caminho;
-  if(caminho.startsWith('data/'))return './'+caminho;
-  return './data/'+caminho;
+  if(typeof img==='object'){
+    return img.src || img.url || img.path || img.caminho || img.arquivo || img.imagem || img.image || '';
+  }
+  return String(img);
 }
 
+function slugDaProvaAtual(){
+  return String(tituloProva||'')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'');
+}
+
+function unicos(arr){
+  return [...new Set(arr.filter(Boolean).map(x=>String(x).trim()).filter(Boolean))];
+}
+
+function variacoesExtensao(caminhos){
+  const saida=[];
+  caminhos.forEach(c=>{
+    saida.push(c);
+    if(c.startsWith('data:') || c.startsWith('http://') || c.startsWith('https://')) return;
+
+    const semQuery=c.split('?')[0];
+    const m=semQuery.match(/^(.*)\.([a-zA-Z0-9]+)$/);
+    if(!m) return;
+
+    const base=m[1];
+    ['png','jpg','jpeg','webp','PNG','JPG','JPEG','WEBP'].forEach(ext=>{
+      saida.push(base+'.'+ext);
+    });
+  });
+  return unicos(saida);
+}
+
+function caminhosPossiveisImagem(img){
+  const bruto=valorImagem(img);
+  if(!bruto)return [];
+
+  let caminho=String(bruto).trim().replace(/\\/g,'/');
+
+  // URLs externas e imagens embutidas
+  if(caminho.startsWith('http://') || caminho.startsWith('https://') || caminho.startsWith('data:')){
+    return [caminho];
+  }
+
+  // Evita caminho absoluto tipo /imagens/... quebrar no GitHub Pages de repositório
+  let semInicio=caminho.replace(/^\.?\//,'').replace(/^\/+/,'');
+  let base=semInicio;
+
+  // Remove prefixos comuns para remontar candidatos relativos ao index.html
+  base=base.replace(/^data\/provas\//,'');
+  base=base.replace(/^data\/imagens\//,'');
+  base=base.replace(/^data\//,'');
+  base=base.replace(/^imagens\//,'');
+
+  const slug=slugDaProvaAtual();
+  const candidatos=[];
+
+  // Mantém também o caminho originalmente informado, mas em versão relativa
+  candidatos.push('./'+semInicio);
+
+  if(base.includes('/')){
+    // Ex.: iamspe-2023/q5.png
+    candidatos.push('./imagens/'+base);
+    candidatos.push('./data/imagens/'+base);
+    candidatos.push('./data/provas/imagens/'+base);
+    candidatos.push('./data/provas/'+base);
+    candidatos.push('./'+base);
+  }else{
+    // Ex.: q5.png
+    if(slug){
+      candidatos.push('./imagens/'+slug+'/'+base);
+      candidatos.push('./data/imagens/'+slug+'/'+base);
+      candidatos.push('./data/provas/imagens/'+slug+'/'+base);
+    }
+    candidatos.push('./imagens/'+base);
+    candidatos.push('./data/imagens/'+base);
+    candidatos.push('./data/provas/imagens/'+base);
+    candidatos.push('./'+base);
+  }
+
+  // Casos em que o JSON já veio com imagens/... ou data/...
+  if(semInicio.startsWith('imagens/') || semInicio.startsWith('data/')){
+    candidatos.unshift('./'+semInicio);
+  }
+
+  return variacoesExtensao(unicos(candidatos));
+}
+
+function normalizarCaminhoImagem(img){
+  const candidatos=caminhosPossiveisImagem(img);
+  return candidatos[0] || '';
+}
+
+function escAttr(v){
+  return String(v??'')
+    .replace(/&/g,'&amp;')
+    .replace(/"/g,'&quot;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
+
+function tentarProximaImagem(el){
+  let lista=[];
+  try{lista=JSON.parse(el.getAttribute('data-srcs')||'[]')}catch(e){lista=[]}
+
+  const atual=Number(el.getAttribute('data-img-index')||0);
+  const prox=atual+1;
+
+  if(prox<lista.length){
+    el.setAttribute('data-img-index',prox);
+    el.src=lista[prox];
+    return;
+  }
+
+  el.onerror=null;
+  el.style.display='none';
+
+  if(!el.nextElementSibling || !el.nextElementSibling.classList.contains('img-error-msg')){
+    const tentados=lista.slice(0,6).join('<br>');
+    el.insertAdjacentHTML('afterend',
+      '<div class="img-error-msg" style="padding:.8rem;margin:.5rem 0;border:1px solid #f0c36d;background:#fff8e1;color:#6b4e00;border-radius:8px;font-size:.9rem;text-align:left">'+
+      '<strong>Imagem não encontrada no GitHub.</strong><br>'+
+      'Confira se o arquivo foi enviado e se maiúsculas/minúsculas batem exatamente.<br>'+
+      '<small>Caminhos testados:<br>'+tentados+'</small>'+
+      '</div>'
+    );
+  }
+}
+
+function renderImagemQuestao(img){
+  const candidatos=caminhosPossiveisImagem(img);
+  if(!candidatos.length)return '';
+  return '<img src="'+escAttr(candidatos[0])+'" data-srcs="'+escAttr(JSON.stringify(candidatos))+'" data-img-index="0" onerror="tentarProximaImagem(this)" alt="Imagem da questão">';
+}
 function extrairImagensDoTexto(texto){
   const imagens=[];
   const regex=/<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
@@ -311,18 +441,25 @@ function removerTagsImgDoTexto(texto){
 function getImagens(q){
   const imagens=[];
 
-  if(Array.isArray(q.imagens)){
-    q.imagens.forEach(img=>{
-      if(img)imagens.push(normalizarCaminhoImagem(img));
-    });
-  }
+  const camposArray=['imagens','images','figuras','figures'];
+  camposArray.forEach(campo=>{
+    if(Array.isArray(q[campo])){
+      q[campo].forEach(img=>{
+        const valor=valorImagem(img);
+        if(valor)imagens.push(valor);
+      });
+    }
+  });
 
-  if(q.img)imagens.push(normalizarCaminhoImagem(q.img));
-  if(q.imagem)imagens.push(normalizarCaminhoImagem(q.imagem));
+  ['img','imagem','image','figura','figure','imageUrl','urlImagem','caminhoImagem','arquivoImagem'].forEach(campo=>{
+    const valor=valorImagem(q[campo]);
+    if(valor)imagens.push(valor);
+  });
 
+  // Também aceita imagens embutidas no enunciado como <img src="...">
   extrairImagensDoTexto(q.enun||q.enunciado||q.pergunta||q.questao||q.texto||'').forEach(img=>imagens.push(img));
 
-  return [...new Set(imagens)];
+  return unicos(imagens);
 }
 
 function cardQuestao(q,index){
@@ -340,7 +477,7 @@ function cardQuestao(q,index){
       <div class="q-actions"><button type="button" class="btn-copy-q" title="Copiar questão completa" onclick="copiarQuestaoPorIndice(${index})">📋 Copiar</button>${anulada?'<span class="badge-anulada">⚠️ Anulada</span>':''}</div>
     </div>
     <p style="font-weight:500;font-size:1.05rem;line-height:1.5">${textoLimpo}</p>
-    ${imagens.length?`<div class="q-img">${imagens.map(img=>`<img src="${img}" alt="Imagem da questão">`).join('')}</div>`:''}
+    ${imagens.length?`<div class="q-img">${imagens.map(img=>renderImagemQuestao(img)).join('')}</div>`:''}
     <ul class="opt-list">${letras.map(l=>`<li><label id="l-${id}-${l}"><input type="radio" name="r-${id}" value="${l}"> ${l}) ${alt[l]||''}</label></li>`).join('')}</ul>
     <button class="btn-add" id="btn-${id}" onclick="corrigir('${id}',${index})">${anulada?'Confirmar leitura da questão anulada':'Confirmar Resposta'}</button>
   </div>`;

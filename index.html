@@ -6,12 +6,16 @@
 <title>MedIA - Banco de Questões Inteligente</title>
 <style>
 :root{--primary:#1b4332;--secondary:#40916c;--bg:#f4f7f4;--white:#fff;--text:#2d3436;--danger:#c1121f;--muted:#666}
-*{box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,GeneVA,Verdana,sans-serif;background:radial-gradient(circle at top left,rgba(64,145,108,.12),transparent 32%),radial-gradient(circle at bottom right,rgba(27,67,50,.10),transparent 35%),var(--bg);color:var(--text);margin:0;padding:0}.hidden{display:none!important}
+*{box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:radial-gradient(circle at top left,rgba(64,145,108,.12),transparent 32%),radial-gradient(circle at bottom right,rgba(27,67,50,.10),transparent 35%),var(--bg);color:var(--text);margin:0;padding:0}.hidden{display:none!important}
 header{background:var(--primary);color:var(--white);padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2);position:sticky;top:0;z-index:100}header h1{cursor:pointer;margin:0;font-size:1.8rem}.sync-status{font-size:.85rem;background:rgba(255,255,255,.14);padding:.45rem .8rem;border-radius:999px}
 .page{padding:2.2rem 5%;max-width:1500px;margin:0 auto}.home-screen{min-height:calc(100vh - 74px);padding:2rem 5%;display:flex;align-items:center;justify-content:center}.home-container{width:100%;max-width:1050px;text-align:center}.home-badge{display:inline-block;background:#edf6f0;color:var(--primary);border:1px solid #d8f3dc;padding:.5rem 1rem;border-radius:999px;font-size:.85rem;font-weight:800;margin-bottom:1rem}.home-container h2{margin:0;color:var(--primary);font-size:clamp(2rem,5vw,3.8rem)}.home-container p{max-width:680px;margin:1rem auto 2.5rem;color:#666;font-size:1.05rem;line-height:1.6}.home-cards{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:1.5rem}.home-card,.category-card{background:white;border-radius:22px;padding:2rem;text-align:center;border:1px solid rgba(27,67,50,.08);box-shadow:0 18px 40px rgba(27,67,50,.12);cursor:pointer;transition:.25s;position:relative;overflow:hidden;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center}.home-card:hover,.category-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(27,67,50,.18)}.home-card::after,.category-card::after{content:"";position:absolute;width:170px;height:170px;background:rgba(64,145,108,.12);border-radius:50%;top:-70px;right:-70px;pointer-events:none}.home-icon,.cat-icon{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;display:flex;justify-content:center;align-items:center;font-size:1.8rem;margin-bottom:1rem;position:relative;z-index:1}.home-card h3,.category-card h3{position:relative;z-index:1;margin:0;color:var(--primary);font-size:1.45rem;line-height:1.15}.home-card p{position:relative;z-index:1;margin:.8rem 0 1.2rem;color:#666;font-size:.98rem}.home-action{position:relative;z-index:1;color:var(--primary);font-weight:800}.category-grid{display:grid;grid-template-columns:repeat(3,minmax(260px,1fr));gap:1.5rem;align-items:start}.category-card{min-height:250px}.section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;margin-bottom:2rem}.section-head h1{color:var(--primary);font-size:clamp(2.4rem,5vw,4.4rem);margin:0 0 .7rem;line-height:1}.section-head p{margin:0;color:#666;font-size:1.1rem}.btn-back{background:linear-gradient(135deg,#1b4332,#40916c);color:white;border:none;border-radius:999px;padding:1rem 1.6rem;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 16px 35px rgba(27,67,50,.22);white-space:nowrap}.btn-back:hover{filter:brightness(.97);transform:translateY(-1px)}
-.panel-card{background:white;border-radius:16px;border-top:5px solid var(--primary);box-shadow:0 12px 32px rgba(0,0,0,.08);padding:2rem;margin-bottom:2rem}.topicos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.topico-item{background:#f8f9fa;border:1px solid #e0e0e0;border-left:4px solid var(--secondary);padding:1rem;border-radius:6px;cursor:pointer;transition:.2s;font-weight:700;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:10px}.topico-item:hover{background:#e9f5ef;transform:translateY(-2px);box-shadow:0 3px 8px rgba(0,0,0,.08)}.topico-nome{flex:1;line-height:1.3}.empty-temas{text-align:center;padding:1.5rem;background:#f8f9fa;color:#666;border-radius:8px;border:1px solid #eee}.provas-grid{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:1rem}.instituicao-card{background:#f8f9fa;border:1px solid #e3e3e3;border-left:5px solid var(--secondary);border-radius:8px;padding:1.25rem;min-height:150px}.instituicao-card h3{margin:0 0 1.1rem;color:var(--primary);font-size:1.2rem}.anos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}.ano-btn{border:1.5px solid var(--secondary);background:#edf6f0;color:var(--primary);font-weight:800;border-radius:7px;padding:.48rem .55rem;cursor:pointer;transition:.2s;font-size:.92rem}.ano-btn:hover{background:#d8f3dc;transform:translateY(-2px)}.ano-btn-sem{opacity:.7}.question-card{background:white;padding:1.5rem;border-radius:8px;border:1px solid #ddd;margin-bottom:1.5rem}.q-header{display:flex;justify-content:space-between;font-size:.8rem;color:#666;margin-bottom:1rem;gap:1rem}.q-img{text-align:center;margin:1rem 0}.q-img img{max-width:100%;height:auto;border-radius:8px;border:1px solid #ddd;background:#fff;margin:0 auto 14px;display:block}.opt-list{list-style:none;padding:0}.opt-list li{margin-bottom:8px}.opt-list label{display:block;padding:10px;border:1px solid #eee;border-radius:4px;cursor:pointer}.correct{background:#d4edda!important;border-color:#28a745!important}.wrong{background:#f8d7da!important;border-color:#dc3545!important}.btn-add{background:var(--primary);color:white;border:none;padding:.8rem;border-radius:4px;width:100%;cursor:pointer;font-weight:800;margin-bottom:1rem}.btn-more-wrap{text-align:center;margin-top:1.5rem}.btn-more{max-width:260px}.rmais-card{max-width:850px;margin:3rem auto;background:white;border-radius:18px;padding:3rem;text-align:center;box-shadow:0 18px 40px rgba(27,67,50,.12);border-top:5px solid var(--secondary)}.rmais-card h2{color:var(--primary);margin-top:0}
+.panel-card{background:white;border-radius:16px;border-top:5px solid var(--primary);box-shadow:0 12px 32px rgba(0,0,0,.08);padding:2rem;margin-bottom:2rem}.topicos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.topico-item{background:#f8f9fa;border:1px solid #e0e0e0;border-left:4px solid var(--secondary);padding:1rem;border-radius:6px;cursor:pointer;transition:.2s;font-weight:700;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:10px}.topico-item:hover{background:#e9f5ef;transform:translateY(-2px);box-shadow:0 3px 8px rgba(0,0,0,.08)}.topico-nome{flex:1;line-height:1.3}.empty-temas{text-align:center;padding:1.5rem;background:#f8f9fa;color:#666;border-radius:8px;border:1px solid #eee}.provas-grid{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:1rem}.instituicao-card{background:#f8f9fa;border:1px solid #e3e3e3;border-left:5px solid var(--secondary);border-radius:8px;padding:1.25rem;min-height:150px}.instituicao-card h3{margin:0 0 1.1rem;color:var(--primary);font-size:1.2rem}.anos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}.ano-btn{border:1.5px solid var(--secondary);background:#edf6f0;color:var(--primary);font-weight:800;border-radius:7px;padding:.48rem .55rem;cursor:pointer;transition:.2s;font-size:.92rem}.ano-btn:hover{background:#d8f3dc;transform:translateY(-2px)}.ano-btn-sem{opacity:.7}.question-card{background:white;padding:1.5rem;border-radius:8px;border:1px solid #ddd;margin-bottom:1.5rem}.q-header{display:flex;justify-content:space-between;font-size:.8rem;color:#666;margin-bottom:1rem;gap:1rem}.q-text{font-weight:500;font-size:1.05rem;line-height:1.5;white-space:pre-line}.q-img{text-align:center;margin:1rem 0}.q-img img{max-width:100%;height:auto;border-radius:8px;border:1px solid #ddd;background:#fff;margin:0 auto 14px;display:block}.opt-list{list-style:none;padding:0}.opt-list li{margin-bottom:8px}.opt-list label{display:block;padding:10px;border:1px solid #eee;border-radius:4px;cursor:pointer;white-space:pre-line}.correct{background:#d4edda!important;border-color:#28a745!important}.wrong{background:#f8d7da!important;border-color:#dc3545!important}.btn-add{background:var(--primary);color:white;border:none;padding:.8rem;border-radius:4px;width:100%;cursor:pointer;font-weight:800;margin-bottom:1rem}.btn-more-wrap{text-align:center;margin-top:1.5rem}.btn-more{max-width:260px}.rmais-card{max-width:850px;margin:3rem auto;background:white;border-radius:18px;padding:3rem;text-align:center;box-shadow:0 18px 40px rgba(27,67,50,.12);border-top:5px solid var(--secondary)}.rmais-card h2{color:var(--primary);margin-top:0}
 @media(max-width:1200px){.category-grid,.provas-grid{grid-template-columns:repeat(2,minmax(260px,1fr))}}@media(max-width:850px){.home-cards,.category-grid,.provas-grid{grid-template-columns:1fr}.section-head{flex-direction:column}.btn-back{width:100%;text-align:center}.page{padding:1.2rem 4%}}@media(max-width:560px){.anos-grid{grid-template-columns:repeat(3,1fr)}}
 .btn-copy-q{background:#edf6f0;color:var(--primary);border:1px solid var(--secondary);padding:.45rem .75rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:800;white-space:nowrap}.btn-copy-q:hover{background:#d8f3dc}.badge-anulada{background:#fff3cd;color:#8a5a00;border:1px solid #f0c36d;border-radius:999px;padding:.45rem .75rem;font-size:.82rem;font-weight:900;white-space:nowrap}.q-actions{display:flex;gap:.5rem;align-items:center;justify-content:flex-end}@media(max-width:560px){.q-header{flex-direction:column}.q-actions{justify-content:flex-start}}
+
+/* Ajustes de renderização das questões/imagens sem mudar o design */
+.q-text{font-weight:500;font-size:1.05rem;line-height:1.55;white-space:normal;overflow-wrap:normal;word-break:normal;margin-bottom:.8rem;width:100%;max-width:none}.q-text:empty{display:none}.q-img:empty{display:none}.q-img{display:block;text-align:center;margin:1rem 0}.q-img img{width:auto;max-width:min(100%,840px);max-height:760px;height:auto;object-fit:contain;border-radius:8px;border:1px solid #ddd;background:#fff;margin:.75rem auto;display:block}.opt-img{display:block;text-align:center;margin:.8rem 0 .2rem}.opt-img img{width:auto;max-width:min(100%,680px);max-height:520px;height:auto;object-fit:contain;border:1px solid #ddd;border-radius:8px;background:white;display:block;margin:.4rem auto}.img-error-msg{padding:.75rem;margin:.4rem auto;border:1px solid #f0c36d;background:#fff8e1;color:#6b4e00;border-radius:8px;font-size:.88rem;text-align:left;max-width:840px}.question-card{overflow:hidden}.question-card .q-text,.question-card .opt-list{width:100%;max-width:none}.opt-list label{line-height:1.45;overflow-wrap:anywhere}.q-header span{line-height:1.35}
+
 </style>
 </head>
 <body>
@@ -56,7 +60,7 @@ header{background:var(--primary);color:var(--white);padding:1rem 5%;display:flex
 
 <script>
 const LIMITE=20;
-let temasPorEspecialidade={},questoesProva=[],indiceProva=0,tituloProva='';
+let temasPorEspecialidade={},questoesProva=[],indiceProva=0,tituloProva='',provasConfig=[];
 
 const categorias=[
   {nome:'Clínica Médica',icone:'🩺',tipo:'grupo',items:['Cardiologia','Clínica Médica Geral','Dermatologia','Emergências Clínicas','Endocrinologia','Gastroenterologia','Geriatria','Hematologia','Imunologia','Infectologia','Nefrologia','Neurologia','Nutrologia','Oftalmologia','Oncologia','Otorrinolaringologia','Pneumologia','Psiquiatria','Reumatologia','UTI']},
@@ -67,7 +71,7 @@ const categorias=[
   {nome:'Provas na Íntegra',icone:'📚',tipo:'provas'}
 ];
 
-const instituicoes=[
+const instituicoesPadrao=[
   {nome:'USP-SP',slug:'usp-sp'},
   {nome:'USP-RP',slug:'usp-rp'},
   {nome:'Unicamp',slug:'unicamp'},
@@ -80,28 +84,16 @@ const instituicoes=[
   {nome:'ENAMED',slug:'enamed'}
 ];
 
-const anos=[2026,2025,2024,2023,2022,2021];
-
-const arquivosComQuestoes=new Set([
-  'usp-sp-2022.json',
-  'usp-sp-2023.json',
-  'usp-sp-2024.json',
-  'usp-sp-2025.json',
-  'usp-sp-2026.json',
-  'iamspe-2023.json',
-  'iamspe-2024.json',
-  'iamspe-2025.json',
-  'iamspe-2026.json',
-  'sus-sp-2022.json',
-  'sus-sp-2023.json',
-  'sus-sp-2024.json',
-  'sus-sp-2025.json',
-  'sus-sp-2026.json',
+const anosPadrao=[2026,2025,2024,2023,2022,2021];
+const arquivosFallback=new Set([
+  'usp-sp-2022.json','usp-sp-2023.json','usp-sp-2024.json','usp-sp-2025.json','usp-sp-2026.json',
+  'iamspe-2022.json','iamspe-2023.json','iamspe-2024.json','iamspe-2025.json','iamspe-2026.json',
+  'sus-sp-2022.json','sus-sp-2023.json','sus-sp-2024.json','sus-sp-2025.json','sus-sp-2026.json',
   'usp-rp-2026.json'
 ]);
 
 document.addEventListener('DOMContentLoaded',async()=>{
-  await carregarTemas();
+  await Promise.all([carregarTemas(),carregarListaProvas()]);
   renderCategorias();
 });
 
@@ -116,6 +108,49 @@ async function carregarTemas(){
   }
 }
 
+async function carregarListaProvas(){
+  provasConfig=[];
+  try{
+    const r=await fetch('./data/provas.json',{cache:'no-store'});
+    if(!r.ok)return;
+    const data=await r.json();
+    provasConfig=normalizarListaProvas(data);
+  }catch(e){
+    provasConfig=[];
+  }
+}
+
+function normalizarListaProvas(data){
+  let lista=[];
+  if(Array.isArray(data)) lista=data;
+  else if(data&&Array.isArray(data.provas)) lista=data.provas;
+  else if(data&&Array.isArray(data.items)) lista=data.items;
+  else if(data&&typeof data==='object'){
+    Object.keys(data).forEach(k=>{
+      const v=data[k];
+      if(Array.isArray(v)){
+        v.forEach(item=>{
+          if(typeof item==='number'||typeof item==='string') lista.push({instituicao:k,ano:item});
+          else if(item&&typeof item==='object') lista.push({instituicao:k,...item});
+        });
+      }else if(v&&typeof v==='object'){
+        Object.keys(v).forEach(ano=>lista.push({instituicao:k,ano,arquivo:v[ano]}));
+      }
+    });
+  }
+
+  return lista.map(p=>{
+    const nomeInst=p.instituicao||p.banca||p.nomeInstituicao||p.nome_inst||p.inst||'';
+    const ano=Number(p.ano||p.year||extrairAno(p.nome||p.titulo||p.title||p.arquivo||p.file||''));
+    const slugInst=p.slug||slugify(nomeInst)||slugify(String(p.nome||'').replace(/\b20\d{2}\b/g,''));
+    const arquivo=p.arquivo||p.file||p.filename||p.path||p.url||p.json||(slugInst&&ano?`${slugInst}-${ano}.json`:'' );
+    const titulo=p.titulo||p.title||p.nome||(`${nomeInst||slugInst.toUpperCase()} ${ano||''}`.trim());
+    return {instituicao:nomeInst||titulo.replace(/\s*\(?20\d{2}\)?\s*/g,'').trim(),slug:slugInst,ano,arquivo,titulo};
+  }).filter(p=>p.arquivo||p.slug);
+}
+
+function extrairAno(s){const m=String(s||'').match(/20\d{2}/);return m?m[0]:''}
+function slugify(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
 function setStatus(t){document.getElementById('sync-status').innerText=t}
 function mostrar(id){['tela-inicial','tela-r1','tela-rmais'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
 function abrirBancoR1(){mostrar('tela-r1');voltarEspecialidades()}
@@ -125,7 +160,7 @@ function limparInterno(){document.getElementById('area-topicos').innerHTML='';qu
 
 function renderCategorias(){
   const grid=document.getElementById('category-grid');
-  grid.innerHTML=categorias.map(c=>`<div class="category-card" onclick='abrirCategoria(${JSON.stringify(c.nome)})'><div class="cat-icon">${c.icone}</div><h3>${c.nome}</h3></div>`).join('');
+  grid.innerHTML=categorias.map(c=>`<div class="category-card" onclick='abrirCategoria(${JSON.stringify(c.nome)})'><div class="cat-icon">${c.icone}</div><h3>${escapeHtml(c.nome)}</h3></div>`).join('');
 }
 
 function abrirCategoria(nome){
@@ -145,7 +180,7 @@ function voltarEspecialidades(){
 function abrirGrupo(titulo,items){
   document.getElementById('pagina-especialidades').classList.add('hidden');
   const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${titulo}</h1><p>Escolha uma especialidade para ver os subtemas.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="topicos-grid">${items.map(i=>`<div class="topico-item" onclick='abrirSubtemas(${JSON.stringify(i)})'><span class="topico-nome">${i}</span></div>`).join('')}</div></div>`;
+  area.innerHTML=`<div class="section-head"><div><h1>${escapeHtml(titulo)}</h1><p>Escolha uma especialidade para ver os subtemas.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="topicos-grid">${items.map(i=>`<div class="topico-item" onclick='abrirSubtemas(${JSON.stringify(i)})'><span class="topico-nome">${escapeHtml(i)}</span></div>`).join('')}</div></div>`;
   area.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
@@ -153,332 +188,334 @@ function abrirSubtemas(esp){
   document.getElementById('pagina-especialidades').classList.add('hidden');
   const temas=(Array.isArray(temasPorEspecialidade[esp])?temasPorEspecialidade[esp]:[]).filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${esp}</h1><p>Subtemas carregados de <strong>data/temas.json</strong>.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card">${temas.length?`<div class="topicos-grid">${temas.map(t=>`<div class="topico-item" onclick='abrirSubtemaSelecionado(${JSON.stringify(esp)},${JSON.stringify(t)})'><span class="topico-nome">${t}</span></div>`).join('')}</div>`:`<div class="empty-temas">Nenhum subtema cadastrado para esta especialidade.</div>`}</div>`;
+  area.innerHTML=`<div class="section-head"><div><h1>${escapeHtml(esp)}</h1><p>Subtemas carregados de <strong>data/temas.json</strong>.</p></div><button class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card">${temas.length?`<div class="topicos-grid">${temas.map(t=>`<div class="topico-item" onclick='abrirSubtemaSelecionado(${JSON.stringify(esp)},${JSON.stringify(t)})'><span class="topico-nome">${escapeHtml(t)}</span></div>`).join('')}</div>`:`<div class="empty-temas">Nenhum subtema cadastrado para esta especialidade.</div>`}</div>`;
   area.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function abrirSubtemaSelecionado(esp,tema){
   const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>${tema}</h1><p>Subtema de <strong>${esp}</strong>.</p></div><button class="btn-back" onclick='abrirSubtemas(${JSON.stringify(esp)})'>← Voltar aos subtemas</button></div><div class="panel-card"><div class="empty-temas">Este subtema está cadastrado no arquivo <strong>data/temas.json</strong>. Quando houver questões estáticas vinculadas, elas poderão aparecer aqui.</div></div>`;
+  area.innerHTML=`<div class="section-head"><div><h1>${escapeHtml(tema)}</h1><p>Subtema de <strong>${escapeHtml(esp)}</strong>.</p></div><button class="btn-back" onclick='abrirSubtemas(${JSON.stringify(esp)})'>← Voltar aos subtemas</button></div><div class="panel-card"><div class="empty-temas">Este subtema está cadastrado no arquivo <strong>data/temas.json</strong>. Quando houver questões estáticas vinculadas, elas poderão aparecer aqui.</div></div>`;
   area.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function instituicoesParaExibir(){
+  const mapa=new Map(instituicoesPadrao.map(i=>[i.slug,{...i}]));
+  provasConfig.forEach(p=>{
+    const slug=p.slug||slugify(p.instituicao);
+    if(slug&&!mapa.has(slug))mapa.set(slug,{nome:p.instituicao||p.titulo||slug.toUpperCase(),slug});
+  });
+  return [...mapa.values()];
+}
+
+function anosParaInstituicao(inst){
+  const set=new Set(anosPadrao);
+  provasConfig.filter(p=>(p.slug===inst.slug||slugify(p.instituicao)===inst.slug)).forEach(p=>{if(p.ano)set.add(Number(p.ano));});
+  return [...set].sort((a,b)=>b-a);
+}
+
+function configDaProva(inst,ano){
+  const achada=provasConfig.find(p=>Number(p.ano)===Number(ano)&&(p.slug===inst.slug||slugify(p.instituicao)===inst.slug||slugify(p.titulo).includes(inst.slug)));
+  if(achada)return {...achada,_known:true};
+  const arquivoPadrao=`${inst.slug}-${ano}.json`;
+  return {instituicao:inst.nome,slug:inst.slug,ano,arquivo:arquivoPadrao,titulo:`${inst.nome} ${ano}`,_known:arquivosFallback.has(arquivoPadrao)};
+}
+
+function provaConhecida(cfg){
+  return Boolean(cfg&&cfg._known);
 }
 
 function abrirPaginaProvas(){
   document.getElementById('pagina-especialidades').classList.add('hidden');
-  questoesProva=[];
-  indiceProva=0;
+  questoesProva=[];indiceProva=0;
   const area=document.getElementById('area-topicos');
-  area.innerHTML=`<div class="section-head"><div><h1>Provas na Íntegra</h1><p>Escolha a instituição e o ano para começar uma nova prova.</p></div><button type="button" class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="provas-grid">${instituicoes.map(inst=>`<div class="instituicao-card"><h3>${inst.nome}</h3><div class="anos-grid">${anos.map(ano=>{const arq=inst.slug+'-'+ano+'.json';const tem=arquivosComQuestoes.has(arq);return `<button type="button" class="ano-btn ${tem?'':'ano-btn-sem'}" title="${tem?'Abrir prova':'Sem questões ainda'}" onclick='abrirProva(${JSON.stringify(inst.nome)},${ano},${JSON.stringify(arq)},${tem})'>${ano}</button>`}).join('')}</div></div>`).join('')}</div></div>`;
+  const insts=instituicoesParaExibir();
+  area.innerHTML=`<div class="section-head"><div><h1>Provas na Íntegra</h1><p>Escolha a instituição e o ano para começar uma nova prova.</p></div><button type="button" class="btn-back" onclick="voltarEspecialidades()">← Voltar às especialidades</button></div><div class="panel-card"><div class="provas-grid">${insts.map(inst=>`<div class="instituicao-card"><h3>${escapeHtml(inst.nome)}</h3><div class="anos-grid">${anosParaInstituicao(inst).map(ano=>{const cfg=configDaProva(inst,ano);const tem=provaConhecida(cfg);return `<button type="button" class="ano-btn ${tem?'':'ano-btn-sem'}" title="${tem?'Abrir prova':'Tentar abrir arquivo'}" onclick='abrirProvaConfig(${JSON.stringify(cfg).replace(/'/g,"&#39;")})'>${ano}</button>`}).join('')}</div></div>`).join('')}</div></div>`;
   area.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-async function abrirProva(nome,ano,arquivo,temQuestoes){
+function abrirProvaConfig(cfg){abrirProva(cfg.instituicao||cfg.titulo||'',cfg.ano,cfg.arquivo,cfg.titulo)}
+
+async function abrirProva(nome,ano,arquivo,titulo){
   document.getElementById('pagina-especialidades').classList.add('hidden');
   const area=document.getElementById('area-topicos');
-  tituloProva=nome+' '+ano;
-  questoesProva=[];
-  indiceProva=0;
-
-  if(!temQuestoes){
-    area.innerHTML=`<div class="section-head"><div><h1>${tituloProva}</h1><p>Esta prova ainda não possui questões cadastradas.</p></div><button class="btn-back" onclick="abrirPaginaProvas()">← Voltar às provas</button></div><div class="panel-card"><div class="empty-temas">Sem questões ainda.</div></div>`;
-    return;
-  }
-
-  area.innerHTML=`<div class="section-head"><div><h1>${tituloProva}</h1><p id="prova-status">Carregando questões...</p></div><button class="btn-back" onclick="abrirPaginaProvas()">← Voltar às provas</button></div><div class="panel-card"><div id="prova-questoes-container"></div><div id="prova-botao-mais-container" class="btn-more-wrap hidden"><button class="btn-add btn-more" onclick="carregarMaisProva()">Carregar mais questões</button></div></div>`;
+  tituloProva=(titulo||`${nome} ${ano}`).trim();
+  questoesProva=[];indiceProva=0;
+  area.innerHTML=`<div class="section-head"><div><h1>${escapeHtml(tituloProva)}</h1><p id="prova-status">Carregando questões...</p></div><button class="btn-back" onclick="abrirPaginaProvas()">← Voltar às provas</button></div><div class="panel-card"><div id="prova-questoes-container"></div><div id="prova-botao-mais-container" class="btn-more-wrap hidden"><button class="btn-add btn-more" onclick="carregarMaisProva()">Carregar mais questões</button></div></div>`;
 
   try{
-    let r=await fetch('./data/provas/'+arquivo,{cache:'no-store'});
-    if(!r.ok){
-      // Fallback para teste local: permite deixar o JSON na mesma pasta do index.
-      r=await fetch('./'+arquivo,{cache:'no-store'});
+    const caminhos=caminhosPossiveisJSON(arquivo);
+    let r=null,ultimo='';
+    for(const caminho of caminhos){
+      ultimo=caminho;
+      try{
+        r=await fetch(caminho,{cache:'no-store'});
+        if(r.ok)break;
+      }catch(e){}
     }
-    if(!r.ok)throw new Error('Arquivo não encontrado');
-
+    if(!r||!r.ok)throw new Error('Arquivo não encontrado: '+ultimo);
     const d=await r.json();
-
-    if(Array.isArray(d)){
-      questoesProva=d;
-    }else if(Array.isArray(d.questoes)){
-      questoesProva=d.questoes;
-    }else if(Array.isArray(d.questions)){
-      questoesProva=d.questions;
-    }else if(Array.isArray(d.itens)){
-      questoesProva=d.itens;
-    }else if(Array.isArray(d.items)){
-      questoesProva=d.items;
-    }else if(d.prova && Array.isArray(d.prova.questoes)){
-      questoesProva=d.prova.questoes;
-    }else{
-      questoesProva=[];
-    }
-
+    questoesProva=extrairQuestoes(d).map((q,i)=>normalizarQuestao(q,i));
     document.getElementById('prova-status').innerText=questoesProva.length+' questão(ões) encontrada(s).';
     renderizarQuestoes(true);
-
   }catch(e){
-    document.getElementById('prova-questoes-container').innerHTML=`<div style="text-align:center;padding:2rem;color:#7f1d1d;background:#fff0f0;border-radius:12px;">Não consegui abrir esta prova.<br><br>Arquivo esperado: <strong>data/provas/${arquivo}</strong><br>ou <strong>${arquivo}</strong> na mesma pasta do index<br><br>Verifique se o nome está exatamente igual e se o JSON é válido.</div>`;
+    document.getElementById('prova-status').innerText='Não foi possível carregar.';
+    document.getElementById('prova-questoes-container').innerHTML=`<div style="text-align:center;padding:2rem;color:#7f1d1d;background:#fff0f0;border-radius:12px;">Não consegui abrir esta prova.<br><br>Arquivo esperado: <strong>data/provas/${escapeHtml(arquivo)}</strong><br>ou <strong>${escapeHtml(arquivo)}</strong> na mesma pasta do index.<br><br>Confira se o nome do arquivo está exatamente igual, inclusive maiúsculas/minúsculas.</div>`;
   }
-
   area.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function getTexto(q){return q.enun||q.enunciado||q.pergunta||q.questao||q.texto||''}
-function getDisciplina(q){return q.disciplina||q.disc||q.especialidade||''}
-
-function valorAlternativa(v){
-  if(v===null||v===undefined)return '';
-  if(typeof v==='object')return v.texto||v.text||v.label||v.html||v.enunciado||'';
-  return String(v);
+function caminhosPossiveisJSON(arquivo){
+  const a=String(arquivo||'').replace(/\\/g,'/').replace(/^\/+/, '');
+  const semData=a.replace(/^\.\//,'').replace(/^data\/provas\//,'').replace(/^provas\//,'');
+  return unicos(['./data/provas/'+semData,'./provas/'+semData,'./'+semData,'./data/'+semData,a.startsWith('./')?a:'./'+a]);
 }
 
-function getAlternativas(q){
-  const b=q.opts||q.alternativas||q.options||{};
-  const letras=['A','B','C','D','E'];
-  const obj={};
+function extrairQuestoes(d){
+  if(Array.isArray(d))return d;
+  if(d&&Array.isArray(d.questoes))return d.questoes;
+  if(d&&Array.isArray(d.questions))return d.questions;
+  if(d&&Array.isArray(d.itens))return d.itens;
+  if(d&&Array.isArray(d.items))return d.items;
+  if(d&&d.prova&&Array.isArray(d.prova.questoes))return d.prova.questoes;
+  return [];
+}
 
-  if(Array.isArray(b)){
-    b.forEach((v,i)=>obj[letras[i]]=valorAlternativa(v));
-    return obj;
-  }
+function normalizarQuestao(q,i){
+  q=q||{};
+  if(!q.numero)q.numero=i+1;
+  if(!q.ano){const a=extrairAno(tituloProva);if(a)q.ano=a;}
+  if(!q.banca&&!q.instituicao)q.banca=tituloProva.replace(/\s*\(?20\d{2}\)?\s*$/,'').trim();
+  return q;
+}
 
-  if(b&&typeof b==='object'){
-    letras.forEach(l=>{
-      const valor=b[l]??b[l.toLowerCase()]??b['alternativa'+l]??b['alternativa_'+l];
-      if(valor!==undefined)obj[l]=valorAlternativa(valor);
+function escapeHtml(s){return String(s??'').replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function escAttr(v){return String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function unicos(arr){return [...new Set((arr||[]).filter(Boolean).map(x=>String(x).trim()).filter(Boolean))]}
+function getTexto(q){return q.enun||q.enunciado||q.pergunta||q.questao||q.texto||q.statement||''}
+function getDisciplina(q){return q.disciplina||q.disc||q.especialidade||q.area||''}
+function valorImagem(img){
+  if(!img)return '';
+  if(typeof img==='object')return img.src||img.url||img.path||img.caminho||img.arquivo||img.imagem||img.image||img.file||'';
+  return String(img);
+}
+function textoDeObjeto(v){
+  if(v===null||v===undefined)return '';
+  if(typeof v==='object')return v.texto||v.text||v.label||v.html||v.enunciado||v.valor||'';
+  return String(v);
+}
+function imagensDeObjeto(v){
+  const imgs=[];
+  if(!v||typeof v!=='object')return imgs;
+  ['imagem','img','image','figura','figure','src','url','path','caminho','arquivo'].forEach(k=>{const x=valorImagem(v[k]);if(x)imgs.push(x);});
+  ['imagens','images','figuras','figures'].forEach(k=>{if(Array.isArray(v[k]))v[k].forEach(x=>{const y=valorImagem(x);if(y)imgs.push(y);});});
+  return imgs;
+}
+
+function extrairImgsTexto(texto){
+  const imgs=[];
+  let s=String(texto||'');
+  const reImg=/<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+  let m;while((m=reImg.exec(s))!==null){if(m[1])imgs.push(m[1]);}
+  const reMd=/!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
+  while((m=reMd.exec(s))!==null){if(m[1])imgs.push(m[1]);}
+  return imgs;
+}
+
+function limparTexto(texto){
+  return String(texto||'')
+    .replace(/<div[^>]*class=["']?q-img["']?[^>]*>[\s\S]*?<\/div>/gi,'\n')
+    .replace(/<img[^>]*>/gi,'\n')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g,'\n')
+    .replace(/<br\s*\/?>/gi,'\n')
+    .replace(/<\/p\s*>/gi,'\n')
+    .replace(/<[^>]+>/g,'')
+    .replace(/&nbsp;/gi,' ')
+    .replace(/\r\n/g,'\n')
+    .replace(/[ \t]+\n/g,'\n')
+    .replace(/\n[ \t]+/g,'\n')
+    .replace(/\n{3,}/g,'\n\n')
+    .trim();
+}
+
+function normalizarQuebrasTexto(texto){
+  return String(texto||'')
+    .replace(/\r\n/g,'\n')
+    .replace(/[ \t]+/g,' ')
+    .replace(/[ \t]+\n/g,'\n')
+    .replace(/\n[ \t]+/g,'\n')
+    .replace(/\n{3,}/g,'\n\n')
+    .split(/\n{2,}/)
+    .map(p=>p.replace(/\n+/g,' ').replace(/\s{2,}/g,' ').trim())
+    .filter(Boolean)
+    .join('\n\n');
+}
+
+function limparTextoParaExibicao(texto,totalImagens){
+  let t=limparTexto(texto);
+  if(!t)return '';
+  if(totalImagens){
+    t=t
+      .replace(/\s*(?:e\s+)?foram obtidas as imagens apresentadas a seguir:?\s*/gi,'.\n\n')
+      .replace(/\s*(?:conforme|observe|veja)?\s*(?:as\s+)?(?:imagens?|figuras?|gr[aá]ficos?|tabelas?)\s+(?:abaixo|a seguir|seguintes?|apresentad[ao]s?)[:.]?\s*/gi,'\n\n')
+      .replace(/\n{3,}/g,'\n\n');
+
+    const captionPrefix=/^(ultrassonografia|ultrassom|ecocardiograma|eletrocardiograma|ecg|radiografia|tomografia|resson[aâ]ncia|rx|figura|imagem|gr[aá]fico|tabela|perfil glic[eê]mico|mamografia|colonoscopia|endoscopia|angiografia|doppler|esquema|fotografia|foto)\b/i;
+    let paragrafos=t.split(/\n{2,}/).map(p=>p.trim()).filter(Boolean);
+    paragrafos=paragrafos.filter(p=>{
+      const s=String(p||'').replace(/\s+/g,' ').trim();
+      if(!s)return false;
+      if(s.length<=240 && captionPrefix.test(s))return false;
+      return true;
     });
-    return obj;
+    t=paragrafos.join('\n\n');
   }
+  return normalizarQuebrasTexto(t);
+}
 
-  letras.forEach(l=>{
-    const valor=q[l]??q[l.toLowerCase()];
-    if(valor!==undefined)obj[l]=valorAlternativa(valor);
-  });
-  return obj;
+function formatarTexto(texto){return escapeHtml(normalizarQuebrasTexto(texto)).replace(/\n\n/g,'<br><br>')}
+
+function valorAlternativa(v){return textoDeObjeto(v)}
+function getAlternativasDetalhadas(q){
+  const letras=['A','B','C','D','E'];
+  const b=q.opts||q.alternativas||q.options||q.alternatives||{};
+  const out=[];
+  if(Array.isArray(b)){
+    b.forEach((v,i)=>{if(i<letras.length)out.push({letra:letras[i],texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});});
+  }else if(b&&typeof b==='object'){
+    letras.forEach(l=>{
+      const v=b[l]??b[l.toLowerCase()]??b['alternativa'+l]??b['alternativa_'+l];
+      if(v!==undefined)out.push({letra:l,texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
+    });
+  }else{
+    letras.forEach(l=>{
+      const v=q[l]??q[l.toLowerCase()];
+      if(v!==undefined)out.push({letra:l,texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
+    });
+  }
+  return out;
+}
+function getAlternativas(q){
+  const obj={};getAlternativasDetalhadas(q).forEach(a=>obj[a.letra]=a.texto);return obj;
 }
 
 function normalizarGabarito(valor){
   if(Array.isArray(valor))valor=valor.join(',');
   valor=String(valor??'').trim().toUpperCase();
-
   if(!valor)return '';
-  if(valor==='*'||valor.includes('ANUL'))return '*';
-
+  if(valor==='*'||valor==='X'||valor.includes('ANUL'))return '*';
   const letras=valor.match(/[A-E]/g);
   return letras?[...new Set(letras)].join(','):'';
 }
+function getCorreta(q){return normalizarGabarito(q.correta??q.gabarito??q.resposta??q.answer??q.correctAnswer??q.alternativaCorreta??q.resposta_correta)}
+function getCorretas(q){const c=getCorreta(q);return(!c||c==='*')?[]:c.split(',').map(x=>x.trim()).filter(Boolean)}
+function questaoAnulada(q){return getCorreta(q)==='*'||q.anulada===true}
+function slugDaProvaAtual(){return slugify(tituloProva)}
 
-function getCorreta(q){
-  return normalizarGabarito(
-    q.correta??q.gabarito??q.resposta??q.answer??q.correctAnswer??q.alternativaCorreta??q.resposta_correta
-  );
-}
-
-function getCorretas(q){
-  const correta=getCorreta(q);
-  if(!correta||correta==='*')return [];
-  return correta.split(',').map(x=>x.trim()).filter(Boolean);
-}
-
-function questaoAnulada(q){
-  return getCorreta(q)==='*'||q.anulada===true;
-}
-
-function valorImagem(img){
-  if(!img)return '';
-  if(typeof img==='object'){
-    return img.src || img.url || img.path || img.caminho || img.arquivo || img.imagem || img.image || '';
-  }
-  return String(img);
-}
-
-function slugDaProvaAtual(){
-  return String(tituloProva||'')
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^a-z0-9]+/g,'-')
-    .replace(/^-+|-+$/g,'');
-}
-
-function unicos(arr){
-  return [...new Set(arr.filter(Boolean).map(x=>String(x).trim()).filter(Boolean))];
+function nomesNumericos(numero){
+  const n=parseInt(numero,10);
+  if(!n)return [];
+  const a=String(n), b=String(n).padStart(2,'0'), c=String(n).padStart(3,'0');
+  const bases=[`q${a}`,`q${b}`,`q${c}`,`questao${a}`,`questao${b}`,`questao${c}`,`questao-${a}`,`questao-${b}`,`questao-${c}`,`questao_${a}`,`questao_${b}`,`questao_${c}`];
+  const out=[];bases.forEach(base=>['png','jpg','jpeg','webp','PNG','JPG','JPEG','WEBP'].forEach(ext=>out.push(`${base}.${ext}`)));
+  return out;
 }
 
 function variacoesExtensao(caminhos){
   const saida=[];
   caminhos.forEach(c=>{
-    saida.push(c);
-    if(c.startsWith('data:') || c.startsWith('http://') || c.startsWith('https://')) return;
-
+    if(!c)return;saida.push(c);
+    if(c.startsWith('data:')||c.startsWith('http://')||c.startsWith('https://'))return;
     const semQuery=c.split('?')[0];
     const m=semQuery.match(/^(.*)\.([a-zA-Z0-9]+)$/);
-    if(!m) return;
-
+    if(!m)return;
     const base=m[1];
-    ['png','jpg','jpeg','webp','PNG','JPG','JPEG','WEBP'].forEach(ext=>{
-      saida.push(base+'.'+ext);
-    });
+    ['png','jpg','jpeg','webp','PNG','JPG','JPEG','WEBP'].forEach(ext=>saida.push(base+'.'+ext));
   });
   return unicos(saida);
 }
 
-function caminhosPossiveisImagem(img){
+function caminhosPossiveisImagem(img,numero){
   const bruto=valorImagem(img);
   if(!bruto)return [];
-
   let caminho=String(bruto).trim().replace(/\\/g,'/');
-
-  // URLs externas e imagens embutidas
-  if(caminho.startsWith('http://') || caminho.startsWith('https://') || caminho.startsWith('data:')){
-    return [caminho];
-  }
-
-  // Evita caminho absoluto tipo /imagens/... quebrar no GitHub Pages de repositório
-  let semInicio=caminho.replace(/^\.?\//,'').replace(/^\/+/,'');
-  let base=semInicio;
-
-  // Remove prefixos comuns para remontar candidatos relativos ao index.html
-  base=base.replace(/^data\/provas\//,'');
-  base=base.replace(/^data\/imagens\//,'');
-  base=base.replace(/^data\//,'');
-  base=base.replace(/^imagens\//,'');
-
+  if(caminho.startsWith('http://')||caminho.startsWith('https://')||caminho.startsWith('data:'))return [caminho];
+  let sem=caminho.replace(/^\.\//,'').replace(/^\/+/, '');
+  let base=sem
+    .replace(/^data\/provas\//,'')
+    .replace(/^data\/imagens\//,'')
+    .replace(/^data\//,'')
+    .replace(/^provas\//,'')
+    .replace(/^imagens\//,'');
   const slug=slugDaProvaAtual();
-  const candidatos=[];
-
-  // Mantém também o caminho originalmente informado, mas em versão relativa
-  candidatos.push('./'+semInicio);
-
+  const basename=base.split('/').pop();
+  const cand=[];
+  cand.push('./'+sem);
+  cand.push('./'+base);
   if(base.includes('/')){
-    // Ex.: iamspe-2023/q5.png
-    candidatos.push('./imagens/'+base);
-    candidatos.push('./data/imagens/'+base);
-    candidatos.push('./data/provas/imagens/'+base);
-    candidatos.push('./data/provas/'+base);
-    candidatos.push('./'+base);
-  }else{
-    // Ex.: q5.png
-    if(slug){
-      candidatos.push('./imagens/'+slug+'/'+base);
-      candidatos.push('./data/imagens/'+slug+'/'+base);
-      candidatos.push('./data/provas/imagens/'+slug+'/'+base);
-    }
-    candidatos.push('./imagens/'+base);
-    candidatos.push('./data/imagens/'+base);
-    candidatos.push('./data/provas/imagens/'+base);
-    candidatos.push('./'+base);
+    cand.push('./imagens/'+base);
+    cand.push('./data/imagens/'+base);
+    cand.push('./data/provas/imagens/'+base);
+    cand.push('./data/provas/'+base);
   }
-
-  // Casos em que o JSON já veio com imagens/... ou data/...
-  if(semInicio.startsWith('imagens/') || semInicio.startsWith('data/')){
-    candidatos.unshift('./'+semInicio);
+  if(slug){
+    cand.push('./imagens/'+slug+'/'+base);
+    cand.push('./imagens/'+slug+'/'+basename);
+    cand.push('./data/imagens/'+slug+'/'+base);
+    cand.push('./data/imagens/'+slug+'/'+basename);
+    cand.push('./data/provas/imagens/'+slug+'/'+base);
+    cand.push('./data/provas/imagens/'+slug+'/'+basename);
+    nomesNumericos(numero).forEach(n=>{
+      cand.push('./imagens/'+slug+'/'+n);
+      cand.push('./data/imagens/'+slug+'/'+n);
+      cand.push('./data/provas/imagens/'+slug+'/'+n);
+    });
   }
-
-  return variacoesExtensao(unicos(candidatos));
-}
-
-function normalizarCaminhoImagem(img){
-  const candidatos=caminhosPossiveisImagem(img);
-  return candidatos[0] || '';
-}
-
-function escAttr(v){
-  return String(v??'')
-    .replace(/&/g,'&amp;')
-    .replace(/"/g,'&quot;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;');
+  cand.push('./imagens/'+base,'./imagens/'+basename,'./data/imagens/'+base,'./data/imagens/'+basename,'./data/provas/imagens/'+base,'./data/provas/imagens/'+basename);
+  return variacoesExtensao(unicos(cand));
 }
 
 function tentarProximaImagem(el){
-  let lista=[];
-  try{lista=JSON.parse(el.getAttribute('data-srcs')||'[]')}catch(e){lista=[]}
-
-  const atual=Number(el.getAttribute('data-img-index')||0);
-  const prox=atual+1;
-
-  if(prox<lista.length){
-    el.setAttribute('data-img-index',prox);
-    el.src=lista[prox];
-    return;
-  }
-
-  el.onerror=null;
-  el.style.display='none';
-
-  if(!el.nextElementSibling || !el.nextElementSibling.classList.contains('img-error-msg')){
-    const tentados=lista.slice(0,6).join('<br>');
-    el.insertAdjacentHTML('afterend',
-      '<div class="img-error-msg" style="padding:.8rem;margin:.5rem 0;border:1px solid #f0c36d;background:#fff8e1;color:#6b4e00;border-radius:8px;font-size:.9rem;text-align:left">'+
-      '<strong>Imagem não encontrada no GitHub.</strong><br>'+
-      'Confira se o arquivo foi enviado e se maiúsculas/minúsculas batem exatamente.<br>'+
-      '<small>Caminhos testados:<br>'+tentados+'</small>'+
-      '</div>'
-    );
+  let lista=[];try{lista=JSON.parse(el.getAttribute('data-srcs')||'[]')}catch(e){lista=[]}
+  const atual=Number(el.getAttribute('data-img-index')||0), prox=atual+1;
+  if(prox<lista.length){el.setAttribute('data-img-index',prox);el.src=lista[prox];return;}
+  el.onerror=null;el.style.display='none';
+  const box=el.closest('.q-img,.opt-img');
+  if(box&&!box.querySelector('.img-error-msg')){
+    const tentados=lista.slice(0,4).map(escapeHtml).join('<br>');
+    box.insertAdjacentHTML('beforeend','<div class="img-error-msg"><strong>Imagem não encontrada.</strong><br><small>Confira a pasta <strong>imagens/'+escapeHtml(slugDaProvaAtual())+'</strong> e o nome exato do arquivo.<br>'+tentados+'</small></div>');
   }
 }
 
-function renderImagemQuestao(img){
-  const candidatos=caminhosPossiveisImagem(img);
+function renderImagemQuestao(img,numero){
+  const candidatos=caminhosPossiveisImagem(img,numero);
   if(!candidatos.length)return '';
   return '<img src="'+escAttr(candidatos[0])+'" data-srcs="'+escAttr(JSON.stringify(candidatos))+'" data-img-index="0" onerror="tentarProximaImagem(this)" alt="Imagem da questão">';
-}
-function extrairImagensDoTexto(texto){
-  const imagens=[];
-  const regex=/<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
-  let match;
-  while((match=regex.exec(String(texto||'')))!==null){
-    if(match[1])imagens.push(normalizarCaminhoImagem(match[1]));
-  }
-  return imagens;
-}
-
-function removerTagsImgDoTexto(texto){
-  return String(texto||'')
-    .replace(/<div[^>]*class=["']?q-img["']?[^>]*>[\s\S]*?<\/div>/gi,'')
-    .replace(/<img[^>]*>/gi,'');
 }
 
 function getImagens(q){
   const imagens=[];
-
-  const camposArray=['imagens','images','figuras','figures'];
-  camposArray.forEach(campo=>{
-    if(Array.isArray(q[campo])){
-      q[campo].forEach(img=>{
-        const valor=valorImagem(img);
-        if(valor)imagens.push(valor);
-      });
-    }
-  });
-
-  ['img','imagem','image','figura','figure','imageUrl','urlImagem','caminhoImagem','arquivoImagem'].forEach(campo=>{
-    const valor=valorImagem(q[campo]);
-    if(valor)imagens.push(valor);
-  });
-
-  // Também aceita imagens embutidas no enunciado como <img src="...">
-  extrairImagensDoTexto(q.enun||q.enunciado||q.pergunta||q.questao||q.texto||'').forEach(img=>imagens.push(img));
-
+  ['imagens','images','figuras','figures'].forEach(campo=>{if(Array.isArray(q[campo]))q[campo].forEach(img=>{const v=valorImagem(img);if(v)imagens.push(v);});});
+  ['img','imagem','image','figura','figure','imageUrl','urlImagem','caminhoImagem','arquivoImagem'].forEach(campo=>{const v=valorImagem(q[campo]);if(v)imagens.push(v);});
+  extrairImgsTexto(getTexto(q)).forEach(img=>imagens.push(img));
   return unicos(imagens);
 }
 
 function cardQuestao(q,index){
-  const alt=getAlternativas(q);
-  const letras=Object.keys(alt).sort();
+  const alts=getAlternativasDetalhadas(q);
   const id=String(q.docId||q.id||('questao-'+index)).replace(/[^a-zA-Z0-9_-]/g,'-');
   const anulada=questaoAnulada(q);
   const disciplina=getDisciplina(q);
   const imagens=getImagens(q);
-  const textoLimpo=removerTagsImgDoTexto(getTexto(q));
-
+  const textoHtml=formatarTexto(limparTextoParaExibicao(getTexto(q),imagens.length));
+  const num=q.numero||index+1;
   return `<div class="question-card">
     <div class="q-header">
-      <span>${q.numero?'Questão '+q.numero+' • ':''}${q.banca||q.instituicao||tituloProva||''}${q.ano?' ('+q.ano+')':''}${disciplina?' • <strong>'+disciplina+'</strong>':''}${q.tema?' • '+q.tema:''}</span>
+      <span>${num?'Questão '+escapeHtml(num)+' • ':''}${escapeHtml(q.banca||q.instituicao||tituloProva||'')}${q.ano?' ('+escapeHtml(q.ano)+')':''}${disciplina?' • <strong>'+escapeHtml(disciplina)+'</strong>':''}${q.tema?' • '+escapeHtml(q.tema):''}</span>
       <div class="q-actions"><button type="button" class="btn-copy-q" title="Copiar questão completa" onclick="copiarQuestaoPorIndice(${index})">📋 Copiar</button>${anulada?'<span class="badge-anulada">⚠️ Anulada</span>':''}</div>
     </div>
-    <p style="font-weight:500;font-size:1.05rem;line-height:1.5">${textoLimpo}</p>
-    ${imagens.length?`<div class="q-img">${imagens.map(img=>renderImagemQuestao(img)).join('')}</div>`:''}
-    <ul class="opt-list">${letras.map(l=>`<li><label id="l-${id}-${l}"><input type="radio" name="r-${id}" value="${l}"> ${l}) ${alt[l]||''}</label></li>`).join('')}</ul>
+    <div class="q-text">${textoHtml}</div>
+    ${imagens.length?`<div class="q-img">${imagens.map(img=>renderImagemQuestao(img,num)).join('')}</div>`:''}
+    <ul class="opt-list">${alts.map(a=>`<li><label id="l-${id}-${a.letra}"><input type="radio" name="r-${id}" value="${a.letra}"> ${a.letra}) ${escapeHtml(a.texto||'')}${a.imagens.length?`<span class="opt-img">${a.imagens.map(img=>renderImagemQuestao(img,num)).join('')}</span>`:''}</label></li>`).join('')}</ul>
     <button class="btn-add" id="btn-${id}" onclick="corrigir('${id}',${index})">${anulada?'Confirmar leitura da questão anulada':'Confirmar Resposta'}</button>
   </div>`;
 }
@@ -487,151 +524,68 @@ function renderizarQuestoes(reset){
   const cont=document.getElementById('prova-questoes-container');
   const mais=document.getElementById('prova-botao-mais-container');
   if(!cont)return;
-
-  if(reset){
-    cont.innerHTML='';
-    indiceProva=0;
-  }
-
+  if(reset){cont.innerHTML='';indiceProva=0;}
   const prox=questoesProva.slice(indiceProva,indiceProva+LIMITE);
-  const inicio=indiceProva;
-  indiceProva+=prox.length;
-
-  if(!prox.length&&!cont.innerHTML.trim()){
-    cont.innerHTML='<p style="text-align:center;padding:2rem;color:#666">Nenhuma questão encontrada nesta prova.</p>';
-  }else{
-    cont.insertAdjacentHTML('beforeend',prox.map((q,i)=>cardQuestao(q,inicio+i)).join(''));
-  }
-
+  const inicio=indiceProva;indiceProva+=prox.length;
+  if(!prox.length&&!cont.innerHTML.trim())cont.innerHTML='<p style="text-align:center;padding:2rem;color:#666">Nenhuma questão encontrada nesta prova.</p>';
+  else cont.insertAdjacentHTML('beforeend',prox.map((q,i)=>cardQuestao(q,inicio+i)).join(''));
   if(mais)mais.classList.toggle('hidden',indiceProva>=questoesProva.length);
 }
-
 function carregarMaisProva(){renderizarQuestoes(false)}
 
 function montarTextoQuestaoParaCopiar(q){
-  const alt=getAlternativas(q);
-  const letras=Object.keys(alt).sort();
+  const alts=getAlternativasDetalhadas(q);
   const disciplina=getDisciplina(q);
-
   return [
     q.numero?'Questão '+q.numero:'Questão',
     q.banca||q.instituicao||tituloProva||'',
     q.ano?'Ano: '+q.ano:'',
     disciplina?'Especialidade: '+disciplina:'',
     q.tema?'Tema: '+q.tema:'',
+    questaoAnulada(q)?'ANULADA':'',
     '',
-    removerTagsImgDoTexto(getTexto(q)),
+    limparTextoParaExibicao(getTexto(q), getImagens(q).length),
     '',
     ...getImagens(q).map(img=>'Imagem: '+img),
     '',
-    ...letras.map(l=>l+') '+(alt[l]||''))
+    ...alts.map(a=>a.letra+') '+(a.texto||'')+(a.imagens.length?'\n'+a.imagens.map(img=>'Imagem da alternativa '+a.letra+': '+img).join('\n'):''))
   ].filter(linha=>String(linha).trim()!=='').join('\n');
 }
-
 function copiarQuestaoPorIndice(index){
   const q=questoesProva[index];
-  if(!q){
-    alert('Não foi possível encontrar esta questão para copiar.');
-    return;
-  }
-
+  if(!q){alert('Não foi possível encontrar esta questão para copiar.');return;}
   const texto=montarTextoQuestaoParaCopiar(q);
-
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(texto)
-      .then(()=>alert('📋 Questão copiada com sucesso!'))
-      .catch(()=>copiarQuestaoFallback(texto));
-  }else{
-    copiarQuestaoFallback(texto);
-  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(texto).then(()=>alert('📋 Questão copiada com sucesso!')).catch(()=>copiarQuestaoFallback(texto));}
+  else copiarQuestaoFallback(texto);
 }
-
-function copiarQuestaoFallback(texto){
-  const area=document.createElement('textarea');
-  area.value=texto;
-  document.body.appendChild(area);
-  area.select();
-  document.execCommand('copy');
-  document.body.removeChild(area);
-  alert('📋 Questão copiada com sucesso!');
-}
+function copiarQuestaoFallback(texto){const area=document.createElement('textarea');area.value=texto;document.body.appendChild(area);area.select();document.execCommand('copy');document.body.removeChild(area);alert('📋 Questão copiada com sucesso!')}
 
 function corrigir(id,index){
   const q=questoesProva[index]||{};
   const corretas=getCorretas(q);
   const anulada=questaoAnulada(q);
   const sel=document.querySelector(`input[name="r-${id}"]:checked`);
-
-  if(!sel&&!anulada){
-    alert('Selecione uma opção!');
-    return;
-  }
-
+  if(!sel&&!anulada){alert('Selecione uma opção!');return;}
   if(anulada){
     document.querySelectorAll(`input[name="r-${id}"]`).forEach(input=>input.disabled=true);
-    const btn=document.getElementById(`btn-${id}`);
-    if(btn){
-      btn.disabled=true;
-      btn.innerText='Questão Anulada';
-      btn.style.background='#8a5a00';
-    }
+    const btn=document.getElementById(`btn-${id}`);if(btn){btn.disabled=true;btn.innerText='Questão Anulada';btn.style.background='#8a5a00';}
     return;
   }
-
-  if(!corretas.length){
-    alert('Gabarito não encontrado para esta questão. Verifique o campo gabarito/correta/resposta no JSON.');
-    return;
-  }
-
-  corretas.forEach(letra=>{
-    const certa=document.getElementById(`l-${id}-${letra}`);
-    if(certa)certa.classList.add('correct');
-  });
-
-  if(!corretas.includes(sel.value)){
-    const err=document.getElementById(`l-${id}-${sel.value}`);
-    if(err)err.classList.add('wrong');
-  }
-
+  if(!corretas.length){alert('Gabarito não encontrado para esta questão. Verifique o campo gabarito/correta/resposta no JSON.');return;}
+  corretas.forEach(letra=>{const certa=document.getElementById(`l-${id}-${letra}`);if(certa)certa.classList.add('correct');});
+  if(!corretas.includes(sel.value)){const err=document.getElementById(`l-${id}-${sel.value}`);if(err)err.classList.add('wrong');}
   document.querySelectorAll(`input[name="r-${id}"]`).forEach(input=>input.disabled=true);
-
-  const btn=document.getElementById(`btn-${id}`);
-  if(btn){
-    btn.disabled=true;
-    btn.innerText='Questão Concluída';
-    btn.style.background='#666';
-  }
+  const btn=document.getElementById(`btn-${id}`);if(btn){btn.disabled=true;btn.innerText='Questão Concluída';btn.style.background='#666';}
 }
 
-</script>
-
-<script id="copiar-sem-alerta">
 (function(){
   const alertaOriginal=window.alert;
-  window.alert=function(mensagem){
-    const texto=String(mensagem||"");
-    if(texto.includes("Questão copiada")||texto.includes("copiada com sucesso"))return;
-    return alertaOriginal.apply(window,arguments);
-  };
-
-  document.addEventListener("click",function(event){
-    const botao=event.target.closest("button");
-    if(!botao)return;
-
-    const texto=(botao.textContent||"").trim();
-    if(!texto.includes("Copiar"))return;
-
+  window.alert=function(mensagem){const texto=String(mensagem||'');if(texto.includes('Questão copiada')||texto.includes('copiada com sucesso'))return;return alertaOriginal.apply(window,arguments);};
+  document.addEventListener('click',function(event){
+    const botao=event.target.closest('button');if(!botao)return;
+    const texto=(botao.textContent||'').trim();if(!texto.includes('Copiar'))return;
     const textoOriginal=botao.innerHTML;
-
-    setTimeout(function(){
-      botao.innerHTML="Copiado ✅";
-      botao.disabled=true;
-
-      setTimeout(function(){
-        botao.innerHTML=textoOriginal||"📋 Copiar";
-        botao.disabled=false;
-      },1800);
-    },80);
+    setTimeout(function(){botao.innerHTML='Copiado ✅';botao.disabled=true;setTimeout(function(){botao.innerHTML=textoOriginal||'📋 Copiar';botao.disabled=false;},1800);},80);
   },true);
 })();
 </script>

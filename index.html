@@ -14,7 +14,17 @@ header{background:var(--primary);color:var(--white);padding:1rem 5%;display:flex
 .btn-copy-q{background:#edf6f0;color:var(--primary);border:1px solid var(--secondary);padding:.45rem .75rem;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:800;white-space:nowrap}.btn-copy-q:hover{background:#d8f3dc}.badge-anulada{background:#fff3cd;color:#8a5a00;border:1px solid #f0c36d;border-radius:999px;padding:.45rem .75rem;font-size:.82rem;font-weight:900;white-space:nowrap}.q-actions{display:flex;gap:.5rem;align-items:center;justify-content:flex-end}@media(max-width:560px){.q-header{flex-direction:column}.q-actions{justify-content:flex-start}}
 
 /* Ajustes de renderização das questões/imagens sem mudar o design */
-.q-text{font-weight:500;font-size:1.05rem;line-height:1.55;white-space:normal;overflow-wrap:normal;word-break:normal;margin-bottom:.8rem;width:100%;max-width:none}.q-text:empty{display:none}.q-img:empty{display:none}.q-img{display:block;text-align:center;margin:1rem 0}.q-img img{width:auto;max-width:min(100%,840px);max-height:760px;height:auto;object-fit:contain;border-radius:8px;border:1px solid #ddd;background:#fff;margin:.75rem auto;display:block}.opt-img{display:block;text-align:center;margin:.8rem 0 .2rem}.opt-img img{width:auto;max-width:min(100%,680px);max-height:520px;height:auto;object-fit:contain;border:1px solid #ddd;border-radius:8px;background:white;display:block;margin:.4rem auto}.img-error-msg{padding:.75rem;margin:.4rem auto;border:1px solid #f0c36d;background:#fff8e1;color:#6b4e00;border-radius:8px;font-size:.88rem;text-align:left;max-width:840px}.question-card{overflow:hidden}.question-card .q-text,.question-card .opt-list{width:100%;max-width:none}.opt-list label{line-height:1.45;overflow-wrap:anywhere}.q-header span{line-height:1.35}
+.q-text{font-weight:500;font-size:1.05rem;line-height:1.5;white-space:normal;overflow-wrap:anywhere;margin-bottom:.8rem}.q-text:empty{display:none}.q-img:empty{display:none}.q-img{display:block;text-align:center;margin:1rem 0}.q-img img{width:auto;max-width:min(100%,840px);max-height:760px;height:auto;object-fit:contain;border-radius:8px;border:1px solid #ddd;background:#fff;margin:.75rem auto;display:block}.opt-img{display:block;text-align:center;margin:.8rem 0 .2rem}.opt-img img{width:auto;max-width:min(100%,680px);max-height:520px;height:auto;object-fit:contain;border:1px solid #ddd;border-radius:8px;background:white;display:block;margin:.4rem auto}.img-error-msg{padding:.75rem;margin:.4rem auto;border:1px solid #f0c36d;background:#fff8e1;color:#6b4e00;border-radius:8px;font-size:.88rem;text-align:left;max-width:840px}.question-card{overflow:hidden}.opt-list label{line-height:1.45;overflow-wrap:anywhere}.q-header span{line-height:1.35}
+
+
+/* Correção final: impede que textos do PDF/JSON fiquem espremidos por quebras artificiais */
+.q-text,.opt-list label{
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+  max-width:none!important;
+  width:100%!important;
+}
 
 </style>
 </head>
@@ -330,22 +340,24 @@ function limparTexto(texto){
     .replace(/<\/p\s*>/gi,'\n')
     .replace(/<[^>]+>/g,'')
     .replace(/&nbsp;/gi,' ')
-    .replace(/\r\n/g,'\n')
     .replace(/[ \t]+\n/g,'\n')
     .replace(/\n[ \t]+/g,'\n')
     .replace(/\n{3,}/g,'\n\n')
     .trim();
 }
-
 function normalizarQuebrasTexto(texto){
-  return String(texto||'')
-    .replace(/\r\n/g,'\n')
+  let s=String(texto||'')
+    .replace(/\r/g,'')
+    .replace(/\u00a0/g,' ')
     .replace(/[ \t]+/g,' ')
-    .replace(/[ \t]+\n/g,'\n')
-    .replace(/\n[ \t]+/g,'\n')
+    .replace(/[ \t]*\n[ \t]*/g,'\n')
     .replace(/\n{3,}/g,'\n\n')
+    .trim();
+  if(!s)return '';
+  return s
     .split(/\n{2,}/)
-    .map(p=>p.replace(/\n+/g,' ').replace(/\s{2,}/g,' ').trim())
+    .map(paragrafo=>paragrafo.split(/\n+/).map(l=>l.trim()).filter(Boolean).join(' '))
+    .map(paragrafo=>paragrafo.replace(/\s{2,}/g,' ').trim())
     .filter(Boolean)
     .join('\n\n');
 }
@@ -353,26 +365,38 @@ function normalizarQuebrasTexto(texto){
 function limparTextoParaExibicao(texto,totalImagens){
   let t=limparTexto(texto);
   if(!t)return '';
+
   if(totalImagens){
     t=t
-      .replace(/\s*(?:e\s+)?foram obtidas as imagens apresentadas a seguir:?\s*/gi,'.\n\n')
+      .replace(/\s*(?:e\s+)?foram obtidas as imagens apresentadas a seguir:?\s*/gi,'\n\n')
       .replace(/\s*(?:conforme|observe|veja)?\s*(?:as\s+)?(?:imagens?|figuras?|gr[aá]ficos?|tabelas?)\s+(?:abaixo|a seguir|seguintes?|apresentad[ao]s?)[:.]?\s*/gi,'\n\n')
       .replace(/\n{3,}/g,'\n\n');
 
+    const introPattern=/(imagem(?:ns)?|figura(?:s)?|gr[aá]fico(?:s)?|tabela(?:s)?).*(abaixo|a seguir|apresentad|seguinte)|foram obtidas as imagens apresentadas a seguir|conforme as imagens apresentadas|observe a imagem/i;
     const captionPrefix=/^(ultrassonografia|ultrassom|ecocardiograma|eletrocardiograma|ecg|radiografia|tomografia|resson[aâ]ncia|rx|figura|imagem|gr[aá]fico|tabela|perfil glic[eê]mico|mamografia|colonoscopia|endoscopia|angiografia|doppler|esquema|fotografia|foto)\b/i;
+
     let paragrafos=t.split(/\n{2,}/).map(p=>p.trim()).filter(Boolean);
-    paragrafos=paragrafos.filter(p=>{
+
+    const isCaptionParagrafo=(p)=>{
       const s=String(p||'').replace(/\s+/g,' ').trim();
       if(!s)return false;
-      if(s.length<=240 && captionPrefix.test(s))return false;
-      return true;
-    });
+      if(s.length<=160 && introPattern.test(s))return true;
+      if(s.length>240)return false;
+      if(captionPrefix.test(s))return true;
+      if(/:\s*$/.test(s) && /(ultrassonografia|ultrassom|ecocardiograma|eletrocardiograma|ecg|radiografia|tomografia|resson[aâ]ncia|rx|figura|imagem|gr[aá]fico|tabela|perfil glic[eê]mico|mamografia|colonoscopia|endoscopia|angiografia|doppler|esquema|fotografia|foto)/i.test(s))return true;
+      return false;
+    };
+
+    paragrafos=paragrafos.filter(p=>!isCaptionParagrafo(p));
     t=paragrafos.join('\n\n');
   }
+
   return normalizarQuebrasTexto(t);
 }
 
-function formatarTexto(texto){return escapeHtml(normalizarQuebrasTexto(texto)).replace(/\n\n/g,'<br><br>')}
+function formatarTexto(texto){
+  return escapeHtml(normalizarQuebrasTexto(texto)).replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+}
 
 function valorAlternativa(v){return textoDeObjeto(v)}
 function getAlternativasDetalhadas(q){
@@ -380,16 +404,16 @@ function getAlternativasDetalhadas(q){
   const b=q.opts||q.alternativas||q.options||q.alternatives||{};
   const out=[];
   if(Array.isArray(b)){
-    b.forEach((v,i)=>{if(i<letras.length)out.push({letra:letras[i],texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});});
+    b.forEach((v,i)=>{if(i<letras.length)out.push({letra:letras[i],texto:normalizarQuebrasTexto(limparTexto(valorAlternativa(v))),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});});
   }else if(b&&typeof b==='object'){
     letras.forEach(l=>{
       const v=b[l]??b[l.toLowerCase()]??b['alternativa'+l]??b['alternativa_'+l];
-      if(v!==undefined)out.push({letra:l,texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
+      if(v!==undefined)out.push({letra:l,texto:normalizarQuebrasTexto(limparTexto(valorAlternativa(v))),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
     });
   }else{
     letras.forEach(l=>{
       const v=q[l]??q[l.toLowerCase()];
-      if(v!==undefined)out.push({letra:l,texto:limparTexto(valorAlternativa(v)),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
+      if(v!==undefined)out.push({letra:l,texto:normalizarQuebrasTexto(limparTexto(valorAlternativa(v))),imagens:unicos([...imagensDeObjeto(v),...extrairImgsTexto(valorAlternativa(v))])});
     });
   }
   return out;
@@ -506,7 +530,8 @@ function cardQuestao(q,index){
   const anulada=questaoAnulada(q);
   const disciplina=getDisciplina(q);
   const imagens=getImagens(q);
-  const textoHtml=formatarTexto(limparTextoParaExibicao(getTexto(q),imagens.length));
+  const textoTela=limparTextoParaExibicao(getTexto(q),imagens.length);
+  const textoHtml=formatarTexto(textoTela);
   const num=q.numero||index+1;
   return `<div class="question-card">
     <div class="q-header">
@@ -515,7 +540,7 @@ function cardQuestao(q,index){
     </div>
     <div class="q-text">${textoHtml}</div>
     ${imagens.length?`<div class="q-img">${imagens.map(img=>renderImagemQuestao(img,num)).join('')}</div>`:''}
-    <ul class="opt-list">${alts.map(a=>`<li><label id="l-${id}-${a.letra}"><input type="radio" name="r-${id}" value="${a.letra}"> ${a.letra}) ${escapeHtml(a.texto||'')}${a.imagens.length?`<span class="opt-img">${a.imagens.map(img=>renderImagemQuestao(img,num)).join('')}</span>`:''}</label></li>`).join('')}</ul>
+    <ul class="opt-list">${alts.map(a=>`<li><label id="l-${id}-${a.letra}"><input type="radio" name="r-${id}" value="${a.letra}"> ${a.letra}) ${formatarTexto(a.texto||'')}${a.imagens.length?`<span class="opt-img">${a.imagens.map(img=>renderImagemQuestao(img,num)).join('')}</span>`:''}</label></li>`).join('')}</ul>
     <button class="btn-add" id="btn-${id}" onclick="corrigir('${id}',${index})">${anulada?'Confirmar leitura da questão anulada':'Confirmar Resposta'}</button>
   </div>`;
 }

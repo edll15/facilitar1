@@ -1,0 +1,1110 @@
+{
+  "prova": "HIAE 2024",
+  "total_questoes": 75,
+  "questoes": [
+    {
+      "numero": 1,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher de 25 anos tem antecedente de 3 abortamentos espontâneos. Apresenta anticorpos antifosfolípides. Foram avaliados os tempos de protrombina (TP) e tromboplastina parcial ativada (TTPA). É mais provável haver alargamento do:",
+      "alternativas": {
+        "A": "TP e episódios de sangramento",
+        "B": "TTPA e episódios de trombose",
+        "C": "TTPA e episódios de sangramento",
+        "D": "TP e episódios de trombose"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 2,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Homem de 37 anos, assintomático, apresenta em exame de rotina Hb: 10,5 g/dL e VCM: 65 fL. As dosagens de ferro e ferritina são normais. Entre as opções abaixo, o próximo exame a ser pedido deve ser:",
+      "alternativas": {
+        "A": "mielograma com coloração de Perls",
+        "B": "endoscopia digestiva alta",
+        "C": "eletroforese de hemoglobina",
+        "D": "colonoscopia"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 3,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Homem de 70 anos, tabagista e hipertenso crônico, está em tratamento com anlodipino. Há 6 meses o controle da pressão arterial ficou difícil mesmo com acréscimo de outros anti-hipertensivos. PA: 160 x 100 mmHg, ureia: 42 mg/dL e creatinina: 1,1 mg/dL. Entre as opções abaixo, o exame que tem maior probabilidade de indicar o motivo da piora da hipertensão arterial é:",
+      "alternativas": {
+        "A": "ecodopplercardiograma transesofágico",
+        "B": "dosagem de metanefrinas urinárias",
+        "C": "tomografia computadorizada de tórax",
+        "D": "ultrassonografia com doppler de artérias renais"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 4,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 27 anos, diabético, está em uso de insulina NPH 30 U pela manhã e 15 U à noite. Para reduzir a dose em 20% e fazer conversão para insulina basal uma vez ao dia, a melhor opção entre as abaixo é:",
+      "alternativas": {
+        "A": "glargina ou degludeca",
+        "B": "degludeca ou glulisina",
+        "C": "detemir ou lispro",
+        "D": "glargina ou asparte"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 5,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher de 48 anos apresenta oligomenorreia e hirsutismo. Foi considerada com baixa probabilidade de síndrome de Cushing, mas, por segurança, optou-se por realizar testes simples para descartar tal hipótese. O exame MENOS indicado é dosagem de:",
+      "alternativas": {
+        "A": "cortisol matinal, tendo recebido 1 mg de dexametasona na noite anterior",
+        "B": "cortisol salivar na hora de dormir",
+        "C": "ACTH pela manhã assim que despertar",
+        "D": "cortisol livre em urina de 24 horas"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 6,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Um homem de 26 anos teve contato com água de enchente em área urbana e 5 dias depois apresentou febre, cefaleia, mialgia e hiperemia conjuntival, sem secreção purulenta. Após 4 dias volta a apresentar febre, cefaleia intensa, acrescidas de náuseas, vômitos e dor abdominal, recebendo diagnóstico de fase imunológica dessa infecção. O achado mais característico desta fase é:",
+      "alternativas": {
+        "A": "hepatite aguda",
+        "B": "colecistite acalculosa",
+        "C": "meningite asséptica",
+        "D": "icterícia"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 7,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "O time de resposta rápida de um hospital universitário foi acionado para atender um homem de 58 anos de idade, que foi levado para a sala de emergência após ser encontrado caído no banheiro do ambulatório. Ao iniciar a avaliação, a equipe constata que o paciente não está consciente e não apresenta pulso ou respiração, sendo iniciada a RCP. Após a verificação inicial de ritmo, foi observada a presença de uma fibrilação ventricular. Realizada a desfibrilação com carga de 200 J seguida de retorno imediato da RCP, mantendo-se uma relação de 30 compressões para 2 ventilações com dispositivo bolsa-válvula-máscara (AMBU), com boa elevação visível do tórax durante estas. Em seguida, foram instalados os eletrodos para monitorização eletrocardiográfica contínua do paciente e foi obtido acesso venoso periférico. Entre as condutas abaixo, a que deve ser obrigatoriamente realizada antes do término do ciclo atual de dois minutos de RCP e antes da próxima verificação de ritmo é:",
+      "alternativas": {
+        "A": "obter via aérea avançada por meio de intubação orotraqueal",
+        "B": "o coach de RCP deve monitorar a qualidade da RCP",
+        "C": "aplicar 1 mg de epinefrina por via intravenosa",
+        "D": "pesquisar causas reversíveis de parada cardiorrespiratória"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 8,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso a seguir para responder às questões de números 8 e 9. Mulher, de 68 anos de idade, é admitida na unidade de emergência com queixa de mal-estar. Relata que há cerca de duas horas iniciou quadro de mal-estar inespecífico, tontura e falta de ar em repouso quando estava em casa assistindo televisão. Ao tentar se levantar para ir ao banheiro, apresentou episódio de síncope, presenciada por sua filha, sem pródromos ou outros sintomas associados, com retorno à consciência após cerca de 30 segundos. No momento, mantém as mesmas queixas, sem outros sintomas associados. Tem história prévia de hipertensão arterial sistêmica, diabetes mellitus tipo 2 e dislipidemia, estando em uso de enalapril 20 mg/dia, atenolol 50 mg/dia, metformina 2.000 mg/dia e atorvastatina 40 mg/dia. Ao exame físico, apresenta desorientação tempo-espacial leve. A frequência de pulso é de 44 bpm, com pulso filiforme e de ritmo irregular, PA: 82 x 56 mmHg, FR: 22 ipm e SatO2: 68% em ar ambiente. O exame cardíaco apresentou frequência cardíaca igual à de pulso, com arritmia de bulhas que estão globalmente hipofonéticas. Suas extremidades estão frias, com tempo de enchimento capilar de 3 segundos. Eletrocardiograma de 12 derivações mostrado na imagem a seguir. O diagnóstico eletrocardiográfico da paciente é:",
+      "alternativas": {
+        "A": "Ritmo juncional com bloqueio atrioventricular do segundo grau",
+        "B": "Ritmo sinusal com bloqueio atrioventricular do segundo grau Mobitz II",
+        "C": "Ritmo juncional com bloqueio atrioventricular do primeiro grau",
+        "D": "Ritmo sinusal com bloqueio atrioventricular do terceiro grau Mobitz I"
+      },
+      "resposta": "B",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q08.png"
+      ]
+    },
+    {
+      "numero": 9,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso a seguir para responder às questões de números 8 e 9. Mulher, de 68 anos de idade, é admitida na unidade de emergência com queixa de mal-estar. Relata que há cerca de duas horas iniciou quadro de mal-estar inespecífico, tontura e falta de ar em repouso quando estava em casa assistindo televisão. Ao tentar se levantar para ir ao banheiro, apresentou episódio de síncope, presenciada por sua filha, sem pródromos ou outros sintomas associados, com retorno à consciência após cerca de 30 segundos. No momento, mantém as mesmas queixas, sem outros sintomas associados. Tem história prévia de hipertensão arterial sistêmica, diabetes mellitus tipo 2 e dislipidemia, estando em uso de enalapril 20 mg/dia, atenolol 50 mg/dia, metformina 2.000 mg/dia e atorvastatina 40 mg/dia. Ao exame físico, apresenta desorientação tempo-espacial leve. A frequência de pulso é de 44 bpm, com pulso filiforme e de ritmo irregular, PA: 82 x 56 mmHg, FR: 22 ipm e SatO2: 68% em ar ambiente. O exame cardíaco apresentou frequência cardíaca igual à de pulso, com arritmia de bulhas que estão globalmente hipofonéticas. Suas extremidades estão frias, com tempo de enchimento capilar de 3 segundos. Eletrocardiograma de 12 derivações mostrado na imagem a seguir. A paciente foi inicialmente tratada com atropina 1 mg por via intravenosa, mas não apresentou resposta apropriada. Dentre os medicamentos a seguir, a melhor opção para esta paciente, neste momento, é:",
+      "alternativas": {
+        "A": "Dopamina 5 mcg/kg/min",
+        "B": "Dobutamina 10 mcg/min",
+        "C": "Norepinefrina 2 mcg/min",
+        "D": "Fenilefrina 1 mcg/kg/min"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 10,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente feminina, 56 anos, compareceu ao ambulatório para seguimento de hipertensão arterial sistêmica. Nesta consulta, estava assintomática, relatando boa aderência ao uso de enalapril 40 mg/dia e hidroclorotiazida 25 mg/dia. Ao exame físico, apresentava PA: 112 x 68 mmHg e restante normal. Trouxe o resultado de exames laboratoriais solicitados previamente, que podem ser vistos na tabela abaixo (Exame 1). Com base nestes resultados, foi indicada reposição de 50.000 UI de vitamina D uma vez por semana por oito semanas e suspensão da hidroclorotiazida. A paciente retorna após três meses para reavaliação e com novos exames laboratoriais (Exame 2). Entre as hipóteses diagnósticas abaixo, a mais provável para esta paciente no início de seu quadro (quando apresentou os resultados do Exame 1) é:",
+      "alternativas": {
+        "A": "hipercalcemia normocalcêmica por hipovitaminose D",
+        "B": "hiperparatireoidismo secundário",
+        "C": "hiperparatireoidismo primário",
+        "D": "hipercalcemia hipocalciúrica familiar"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q10.png"
+      ]
+    },
+    {
+      "numero": 11,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente masculino, 54 anos, procura pronto-socorro por dor lombar há 30 dias, com piora progressiva e irradiação para membros inferiores, principalmente MID. Relata melhora parcial com uso de analgésicos simples e anti-inflamatórios. Hoje não conseguiu urinar e teve perda espontânea de fezes. Nega febre. Nega comorbidades prévias. Os sinais vitais estão normais. No exame neurológico percebe-se força muscular grau IV em MID e grau V em MIE, sem alterações de marcha e sensibilidade. Entre as hipóteses diagnósticas abaixo, a mais provável para este paciente é síndrome:",
+      "alternativas": {
+        "A": "da cauda equina",
+        "B": "medular central",
+        "C": "de Brown-Sequard",
+        "D": "medular posterior"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 12,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso a seguir para responder às questões de números 12 a 14. Homem, 75 anos de idade, procura pronto-socorro por dispneia de longa data, principalmente ao subir ladeiras, com piora progressiva há 3 dias, associada a tosse com secreção amarelada em grande quantidade. Nega febre. Tem antecedente de hipertensão arterial sistêmica e tabagismo, com carga tabágica de 80 maços-ano. Está em uso de formoterol 2 vezes ao dia. Relata quadro semelhante há 2 meses quando foi internado para antibioticoterapia. Ao exame físico, está com estado geral regular, FC: 105 bpm, FR: 35 ipm, temperatura axilar: 38°C, saturação periférica de oxigênio de 86% em ar ambiente e PA: 110 x 78 mmHg. Ausculta pulmonar globalmente reduzida com estertores na base direita, sem outras alterações. Foram realizados testes de antígeno que descartaram infecção por influenza vírus e SARS-CoV-2. Entre as opções abaixo, a melhor antibioticoterapia para este paciente é:",
+      "alternativas": {
+        "A": "amoxicilina com clavulanato",
+        "B": "levofloxacino",
+        "C": "ceftriaxona + oxacilina",
+        "D": "claritromicina"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 13,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso a seguir para responder às questões de números 12 a 14. Homem, 75 anos de idade, procura pronto-socorro por dispneia de longa data, principalmente ao subir ladeiras, com piora progressiva há 3 dias, associada a tosse com secreção amarelada em grande quantidade. Nega febre. Tem antecedente de hipertensão arterial sistêmica e tabagismo, com carga tabágica de 80 maços-ano. Está em uso de formoterol 2 vezes ao dia. Relata quadro semelhante há 2 meses quando foi internado para antibioticoterapia. Ao exame físico, está com estado geral regular, FC: 105 bpm, FR: 35 ipm, temperatura axilar: 38°C, saturação periférica de oxigênio de 86% em ar ambiente e PA: 110 x 78 mmHg. Ausculta pulmonar globalmente reduzida com estertores na base direita, sem outras alterações. Foram realizados testes de antígeno que descartaram infecção por influenza vírus e SARS-CoV-2. O paciente foi levado à sala de emergência e instalado cateter nasal com fluxo de 1 litro/minuto, administrado antibioticoterapia empírica e coletado exames pelo protocolo sepse. O paciente permanece taquipneico, sem uso de musculatura acessória. O resultado da gasometria arterial revela pH: 7,30, pCO2: 58,5, HCO3: 31,2. Entre as condutas abaixo, a melhor para este paciente, neste momento é:",
+      "alternativas": {
+        "A": "iniciar cateter nasal de alto fluxo",
+        "B": "realizar intubação orotraqueal",
+        "C": "iniciar ventilação não invasiva",
+        "D": "ofertar oxigênio por máscara de Venturi"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 14,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso a seguir para responder às questões de números 12 a 14. Homem, 75 anos de idade, procura pronto-socorro por dispneia de longa data, principalmente ao subir ladeiras, com piora progressiva há 3 dias, associada a tosse com secreção amarelada em grande quantidade. Nega febre. Tem antecedente de hipertensão arterial sistêmica e tabagismo, com carga tabágica de 80 maços-ano. Está em uso de formoterol 2 vezes ao dia. Relata quadro semelhante há 2 meses quando foi internado para antibioticoterapia. Ao exame físico, está com estado geral regular, FC: 105 bpm, FR: 35 ipm, temperatura axilar: 38°C, saturação periférica de oxigênio de 86% em ar ambiente e PA: 110 x 78 mmHg. Ausculta pulmonar globalmente reduzida com estertores na base direita, sem outras alterações. Foram realizados testes de antígeno que descartaram infecção por influenza vírus e SARS-CoV-2. Após a compensação inicial e término da antibioticoterapia, o paciente evoluiu com significativa melhora clínica e receberá alta nas 24 horas seguintes. Últimos exames evidenciam hemoglobina: 15,6 g/dL, leucócitos: 8.950 células/mm³, eosinófilos: 540 células/µL, plaquetas: 380.000/mm³, restante normal. Dentre as opções de tratamento ambulatorial abaixo, a melhor para este paciente é manter beta-agonista de longa ação e associar:",
+      "alternativas": {
+        "A": "agonista muscarínico de longa ação e corticoide inalatório",
+        "B": "corticoide inalatório",
+        "C": "agonista muscarínico de longa ação",
+        "D": "beta-agonista de curta ação de resgate e corticoide inalatório"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 15,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 68 anos, com diagnóstico de DPOC, ex-tabagisia com carga tabágica de BO maços-ano, comparece em consulta de seguimento com queixa de dispneia persistente, parando para respirar ao andar cerca de 5 metros. Nega dispneia em repouso, tosse e febre. Relata inlernação ha 3 meses por dispneia importante. Faz uso regular de vilanterol e umeciidinio. Ao exame clínico, apresenta PA: 128 « 76 mmHg, FC: 96 bpm, FR: 26 irpm e saturação periférica de oxigênio de 93% a.a. Entre 05 exa- mes abaixo, o que ajudará na definição e ajuste do tratamento é:",
+      "alternativas": {
+        "A": "Teste de caminhada de 6 minutos",
+        "B": "Cultura do escarro",
+        "C": "Hemograma",
+        "D": "Gasometria arterial"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 16,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher de 35 anos apresenta história de infecções urinárias de repetição há 5 anos. Iniciou dor lombar à esquerda há 6 meses. Nos exames complementares, foi identificada a bactéria Proteus mirabilis em urocultura. Realizou radiografia de abdome com a imagem abaixo. Entre as opções abaixo, a etiologia da doença dessa paciente está mais relacionada a:",
+      "alternativas": {
+        "A": "Cistina",
+        "B": "Fosfato de Cálcio",
+        "C": "Oxalato de Cálcio",
+        "D": "Estruvita"
+      },
+      "resposta": "D",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q16.png"
+      ]
+    },
+    {
+      "numero": 17,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente feminino, 55 anos, dá entrada no pronto-socorro com dor torácica de forte intensidade há 1 hora. Antecedentes pessoais de hipertensão arterial sistêmica e tabagismo. Ao exame físico: PA: 200 x 100 mmHg, pulso: 110 bpm, SatO2: 88% em ar ambiente. Pulsos em MMSS e MMII todos presentes. Radiografia e tomografia de tórax abaixo. Dentre os tratamentos abaixo, o melhor para este caso é:",
+      "alternativas": {
+        "A": "Internação hospitalar para drenagem de tórax de emergência",
+        "B": "Internação em UTI para controle de dor, pressão arterial e frequência cardíaca",
+        "C": "Internação em UTI e anticoagulação plena",
+        "D": "Correção cirúrgica de emergência com toracotomia exploradora"
+      },
+      "resposta": "B",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q17.png"
+      ]
+    },
+    {
+      "numero": 18,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 55 anos foi viima de ferimento por arma branca em hemitóras esquerdo. Na cena, com grande quantidade de sangue, notou-se vias adreas pérvias, FR: 15 ipm e SatO; 90% em ar ambiente, munmúrios vesiculares presentes bilateralmente, PA: 90 = 60 mmHg, FC: 81 bpm, bulhas hipofonéticas. No transporte, feta expansão inicial com 500 mL de ringer lactato, suporte de oxigênio e curativo em 3 pontas não soprante, Exame físico de entrada: vias aéreas pérvias, sem colar cervical. FR: 16 ipm, SatO;: 99% com máscara 10 L/min. Murmúrio vesicular diminuído à esquerda, não timpânico, PA: 60 « 36 mmHg, FC: 121 bpm, bulhas ritmicas, hipofonéticas, descorado 3+/4+. Ultrassom FAST com achado de liquido no pericárdio, sem liquido lite abdominal Escala de coma de Glasgow 15. Paciente em prancha rigida, três ferimentos penetrantes em região precordial, e múltiplas escoria- ções em tórax e abdome. Na sala de emergência evoluiu com atridade elétrica sem pulso e fol intubado. A melhor conduta imediata nesse momento deve ser",
+      "alternativas": {
+        "A": "esternotomia mediana",
+        "B": "massagem cardíaca externa",
+        "C": "passagem de REBOA com colocação do balão na zona",
+        "D": "toracotomia anterolateral esquerda"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 19,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente masculino, 32 anos, vai ao pronto-socorro com história de 7 dias de epigastralgia com parada de eliminação de flatos e fezes. Não tem antecedentes cirúrgicos ou quadros pregressos semelhantes. Não havia alterações no exame físico. Foram colhidos exames laboratoriais: hemoglobina: 10,6 g/dL, leucograma: 9.850/mm³, plaquetas: 554.000/mm³, ureia: 24 mg/dL, creatinina: 0,7 mg/dL, bilirrubina direta: 0,13 mg/dL, TGO: 13 U/L, TGP: 117 U/L, FA: 67 U/L, GGT: 22 U/L, amilase: 110 U/L, lipase: 24 U/L. Foi solicitada tomografia de abdome cujo resultado é mostrado abaixo. Melhor conduta diante do quadro clínico e achado tomográfico, dentre as listadas abaixo:",
+      "alternativas": {
+        "A": "Seguimento ambulatorial com ressonância",
+        "B": "Passagem de sonda nasogástrica e jejum",
+        "C": "Indicar laparoscopia ou laparotomia",
+        "D": "Observação clínica seriada, mantendo dieta"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q19.png"
+      ]
+    },
+    {
+      "numero": 20,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente masculino de 54 anos vai ao pronto-socorro por dor abdominal intensa e distensão abdominal. Conta que um colega de trabalho inseriu uma mangueira de ar comprimido no seu ânus “por cima da calça”. Ao exame físico estava ansioso, FC: 110 bpm, eupneico, PA: 120 x 70 mmHg. Abdome distendido, timpânico e doloroso (nota 8 de 10). Toque retal sem alterações. Exames laboratoriais: hemoglobina: 14,8 g/dL, leucograma: 6.590/mm³, plaquetas: 230.000/mm³, PCR: 12 mg/L, INR: 1,08. Foi solicitada tomografia de abdome abaixo mostrada. Nesse caso, a conduta adequada, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Laparotomia",
+        "B": "Sonda de Fouchet para esvaziar o cólon",
+        "C": "Colonoscopia",
+        "D": "Enema opaco"
+      },
+      "resposta": "A",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q20.png"
+      ]
+    },
+    {
+      "numero": 21,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente vai ao pronto-socorro com queixa de dor abdominal em andar superior direito, em cólica, ha 3 dias, que plorava ao se alimentar, sem irradiação. Sem alteração urinária ou febre, mantendo evacuações. Antecedente de colecistopatia calculosa, diabetes mellitus, hipertensão e doença coronariana com colocação de stent há 10 anos. Faz uso de sinvastalina, aniodi- pino. metformina e omeprazol, Refere cirurgia prévia de esofagectomia parcial por ingestão de soda cáustica na infância. Exame clínico: corado, hidratado, acianático, aniciérico, afebril, eupreico, SatO,: 96% em ar ambiente; FC: 76 bpm; FR: 14 ipm PA: 130 = 80 mmHg; ausculta cardiaca e pulmonar sem alterações, Abdome gioboso, flacido, doloroso à palpação superficial ¢ profunda difusamente, sinal de Murphy negativo, descompressão brusca positiva. Exames taboratoniais: Hemoglobina: 15,3 g/dL, Leucócitos: 20.400/mm?, Plaquetas: 204,000/mm?, INR: 1,19, PCR: 133 mg/L, Ureia: 35 mg/dL, Creatinina: 1,04 mg/dL, Bilir- rubina total: 1 mg/dl, TGO; 10 UML TGP: 45 UM, FA: 70 WL, GGT: 50 UM, Amilase; 80 UA, Lipase: 27 UM Foi submetido a tomografia mostrada abaixo. O diagnóstico mais provável nesse caso, dentre os abaixo, é",
+      "alternativas": {
+        "A": "Isquemia mesentérica",
+        "B": "Colecistite aguda",
+        "C": "Tumor de cólon perfurado",
+        "D": "Diverticulite de delgado"
+      },
+      "resposta": "D",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q21.png"
+      ]
+    },
+    {
+      "numero": 22,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente com 62 anos vai ao pronto-socorro com dor em hipocôndrio direito, com irradiação para o dorso, associada a náuseas e vômitos, há 1 dia. Sem febre, hipertensão arterial controlada. Ao exame clínico, a paciente estava em regular estado geral, anictérica, pulso de 110 bpm, PA: 150 x 90 mmHg, FR: 20 ipm. Exame cardiorrespiratório sem alterações e abdome globoso, distendido, tenso à palpação, sinal de Murphy positivo. Laboratório: creatinina: 1,2 mg/dL, hemoglobina: 11,3 g/dL, leucócitos: 12.670/mm³, plaquetas: 118.000/mm³, FA: 72 U/L, GGT: 45 U/L, amilase: 20 U/L, lipase: 20 U/L, APACHE II < 7. Realizado exame ultrassonográfico mostrado abaixo. A conduta preconizada nesse caso é:",
+      "alternativas": {
+        "A": "Colecistectomia aberta",
+        "B": "Colecistostomia",
+        "C": "Colecistectomia por vídeo",
+        "D": "Tratamento não operatório com antibioticoterapia"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q22.png"
+      ]
+    },
+    {
+      "numero": 23,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso abaixo para responder às questões de números 23 e 24. Paciente masculino, 77 anos, vai ao pronto-socorro queixando-se de dor abdominal, em cólica, difusa, associada a parada de eliminação de flatos e fezes há 5 dias. Apresentou vários episódios de vômitos. Refere “hérnia abdominal” há cerca de 10 anos. Hipertenso e diabético. Exame clínico geral sem alterações. Abdome globoso, distendido, doloroso à palpação de epigástrio, associado a abaulamento local, endurado, de cerca de 5 x 5 cm, sem hiperemia. Conteúdo herniário irredutível. Toque retal com fecaloma. Exames laboratoriais: creatinina: 2,46 mg/dL, ureia: 99 mg/dL, hemoglobina: 14,9 g/dL, leucócitos: 8.950/mm³, amilase: 48 U/L, INR: 1,12, lactato venoso: 15,1. De acordo com os achados:",
+      "alternativas": {
+        "A": "deve-se realizar sedação e redução do saco herniário",
+        "B": "trata-se de uma hérnia estrangulada",
+        "C": "deve-se realizar ultrassom de abdome",
+        "D": "trata-se de obstrução intestinal mecânica podendo ser complicada"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 24,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso abaixo para responder às questões de números 23 e 24. Paciente masculino, 77 anos, vai ao pronto-socorro queixando-se de dor abdominal, em cólica, difusa, associada a parada de eliminação de flatos e fezes há 5 dias. Apresentou vários episódios de vômitos. Refere “hérnia abdominal” há cerca de 10 anos. Hipertenso e diabético. Exame clínico geral sem alterações. Abdome globoso, distendido, doloroso à palpação de epigástrio, associado a abaulamento local, endurado, de cerca de 5 x 5 cm, sem hiperemia. Conteúdo herniário irredutível. Toque retal com fecaloma. Exames laboratoriais: creatinina: 2,46 mg/dL, ureia: 99 mg/dL, hemoglobina: 14,9 g/dL, leucócitos: 8.950/mm³, amilase: 48 U/L, INR: 1,12, lactato venoso: 15,1. Foi realizada tomografia, cujas imagens estão abaixo. Na tomografia verificam-se:",
+      "alternativas": {
+        "A": "sinais de obstrução intestinal",
+        "B": "sinais de sofrimento de alça de cólon",
+        "C": "sinais de pneumatose intestinal",
+        "D": "uma hérnia de Richter"
+      },
+      "resposta": "A",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q24-1.png",
+        "imagens/hiae-2024/q24-2.png"
+      ]
+    },
+    {
+      "numero": 25,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 17 anos, IMC: 20 kgim?, val ao pronto-socorro com dor abdominal difusa há 6 meses, continua, de leve a modera- da intensidade, associada a diarmeia intermitente, náuseas e vômitos, inapetência, perda pondera! importante e edema de mem- bros inferiores até raiz de coxa. Piora súbita da dor abdominal há 1 dia, localizada em epigástrio e mesogásirio, em cólica. Nega febre. nega demais queixas. Sem morbidades, internações ou cirurgias prévias. Ao exame fisico: Regular estado geral, desco- rado, desidratado, afebril, anictérico, aciandtico, eupneico, taquicardiaco e caquético. Abdome plano, tenso (em tábua), descom- pressão brusca positiva, Os membros mostram edema simétrico até joelho 2+/4+, compressível. Exames laboratoriais: Hemo- globina: 9,1 gid, Leucócitos: 21.650/mm? (Neutrófiios: 045, basionetes: 10%; 84% segmentado), albumina: 3,9 g/dL. Foi subme- tido a tombgrafia, com imagens abaixo: Submetido a laparotomia mediana não houve instabilidade hemodinâmica durante a operação. Os achados foram os seguintes: moderada quantidade de liquido purulento em goteira parietocdlica direita e pelve. Grande dilatação de alças jejunais a 1,80 m do ângulo de Traitz, evidenciado segmento de 60 cm de jejuno contendo sete áreas estenóticas, sendo a mais proximal pertu- rada e bloqueada na sua borda contra mesentérica, recoberta por fibrina, Cólon hipoplásico em toda sua extensão (desuso) Restante dos órgãos e estruturas de aspecto macroscópico normal Melhor conduta, dentre as abaixo:",
+      "alternativas": {
+        "A": "Ressecção do segmento perfurado, grampeamento dos cotos das alças e peritoniostomia",
+        "B": "Enterectomia segmentar com jejunostomia proximal e distal",
+        "C": "Enterectomia segmentar com anastomose jejunoileal",
+        "D": "Sutura do segmento perfurado e plastias dos segmentos estenosados"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q25-1.png",
+        "imagens/hiae-2024/q25-2.png"
+      ]
+    },
+    {
+      "numero": 26,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente feminina de 62 anos com história de enterorragia e perda ponderal de & kg vai ao pronto-socorro com fadiga, dores no anus e hipogastrio há aproximadamente 2 meses. Exame Fisico: descorada, desidratada, anictérica e acianótica e eupneica Sem alterações cardiopulmônares. Abdome: flacido, ruídos hidroséreos presentes, iimpanico à percussão e doloroso à palpação difusa. Massa palpável em quadrante inferior esquerdo. Descompressão brusca negativo. Toque Retal: fezes liquidas em dedo de luva, esfincter hipertônico, sem culras alterações, Exames laboratoriais: Hemogiobina: 8,3 g/dL, Leucdcitos: 9.320mm? Creatina: 0,71 mg/dL, Albumina: 2,1 g/dL Foi submetida a fomografia com imagens abaixo: + E? o * 5 “J e “ = E ES [E] E O exame evidenciou extensa lesão no sigmoide com ampla superficie de contato com o útero, com sinais de invasão loco megio- nal. Foi realizada colonascopia cujo resultado mostrou: lesão vegetante e ulcerada, com superficie friável, imegular e grande quantidade de muco e fibrina aderida, prejudicando a distensibilidade das paredes da alça neste segmento. À lesão acomete cerca de 70% da circunferência da estrutura, provocando estenose Intransponivel ao aparelho, O diagnóstico anatomopatoldgi- co mostrou uma lesão vilotubular com displasia intraepitelial de alto grau. Melhor conduta nesse caso, dentre as abaixo",
+      "alternativas": {
+        "A": "Neoadjuvância com radioterapia e quimioterapia, para posterior retossigmoidectomia",
+        "B": "Retossigmoidectomia Hartmann com histerectomia subtotal",
+        "C": "Retossigmoidectomia com anastomose primária e pan-histerectomia",
+        "D": "Colostomia e quimioterapia"
+      },
+      "resposta": "B",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q26.png"
+      ]
+    },
+    {
+      "numero": 27,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 35 anos, vítima de acidente com veículo automotor. No serviço de emergência está instável, com pressão arterial sistólica de 60 mmHg; FC: 140 bpm. FAST negativo. Realizada uma radiografia de pelve mostrada a seguir. Colocada uma cinta pélvica, sem melhora hemodinâmica. Iniciado protocolo de transfusão maciça. Próximo passo a ser dado, dentre as opções abaixo, deverá ser:",
+      "alternativas": {
+        "A": "Tamponamento pré-peritoneal",
+        "B": "Fixação interna da pelve",
+        "C": "Laparotomia",
+        "D": "Arteriografia"
+      },
+      "resposta": "A",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q27.png"
+      ]
+    },
+    {
+      "numero": 28,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente do sexo masculino, 73 anos, foi internado para investigação de anemia e perda ponderal, além de dor e distensão abdominal. Ao exame fisico apresenta descompressão brusca negativa, massa palpável em flanco direito, toque retal sem alterações. PA! 120 x 80 mmHg P: 90 bpm. Realizou tomografia de abdome com o achado mostrado na figura abaixo. Dentre os tratamentos abaixo, o melhor nesse caso é",
+      "alternativas": {
+        "A": "colectomia direita",
+        "B": "colonoscopia descompressiva",
+        "C": "ressecção cólon sigmoide",
+        "D": "neoadjuvância com quimioterapia para posterior abordagem cirúrgica"
+      },
+      "resposta": "A",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q28.png"
+      ]
+    },
+    {
+      "numero": 29,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 25 anos, usuário de crack é submetido a laparotomia por pneumoperitônio e sepse grave, necessitando de noradre- nalina para manter estabilidade hemodinâmica. No intraoperatório, nota-se úlcera péptica pré-pilórica de 4 cm com fibrose e estenose intensa imposaibiltando a visão da luz duodenal. Estômago dilatado & paredes espessadas difusamente. A melhor abordagem cirúrgica para este caso, dentre as ababoo, é",
+      "alternativas": {
+        "A": "Gastrectomia total",
+        "B": "Gastrectomia subtotal",
+        "C": "Rafia gástrica em 2 planos",
+        "D": "Rafia gástrica plano total com patch epiplon"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 30,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Paciente de 73 anos está internada por quadro de distensão abdominal, inapetência e parada de eliminação de gases e fezes ha 5 dias, Antecedente de adenocarcinoma de ovário com carcinomalose e omental cake, além de metástases hepáticas. Tomogra- fia revela distensão difusa de delgado com múltiplos ponios de subociusão. Realizadas analgesia, hidratação e passagem de sonda nasogástrica Dentre os medicamentos abaixo, o mais adequado nesse momento para o tratamento da afecção de urgência é:",
+      "alternativas": {
+        "A": "Bromoprida",
+        "B": "Ondansetrona",
+        "C": "Dimenidrato",
+        "D": "Corticoide"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 31,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Uma criança do sexo masculino de dois anos de idade é atendida, com história de dor e edema em joelho direito ha dois dias, Exame fisico. criança hiperativa, com bom estado geral, afebril. Ainda no Serviço de Emergência, foi realizada punção articular evidenciando hemartrose. Foram realizados exames laboratoriais. Dentre os resultados de exames laboratoriais abaixo, O espe- rado para este paciente é",
+      "alternativas": {
+        "A": "tempo de protrombina aumentado",
+        "B": "aumento do fator VIII da coagulação",
+        "C": "tempo de tromboplastina parcial ativada prolongado",
+        "D": "plaquetopenia grave"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 32,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Recém-nascido, sexo feminino, nascida de parto pélvico de mãe primigesta com polidramnio, posição pélvica, pé metatarsa aduto, apresenta Manobra de Ortolani positiva, bilateralmente. Entre os dados de história e achados do exame fisico, NÃO é fator de risco para a principal hipótese diagnóstica deste paciente",
+      "alternativas": {
+        "A": "parto pélvico",
+        "B": "polidrâmnio",
+        "C": "sexo feminino",
+        "D": "pé metatarso aduto"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 33,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "PFJ, cinco anos de idade, sexo feminino, comparece ao pronto atendimento levada por seus pais, devido a história de lesões purpúricas em membros inferiores ha cinco dias. Cerca de dez dias antes, a criança havia apresentado resfriado com coriza, tos- se e febre, com resolução espontânea. Exame fisico: bom estado geral. hipocorada +/4, hidratada, afebril, com lesões cutâneas purpúricas, maculopapulares entematosas, peléquias & equimoses, predominantemente em membros inferiores. Apresentava também dor e edema em tornozelos. Exames laboratoriais: Hb: 9,2 mg/dL, leucociose com discreto desvio para a esquerda, plaquetas normais: aumento de proteina C reativa e da velocidade de hemossedimentação. exame de urina normal, De acordo cam a principal hipótese diagnóstica, entre as opções abaixo, neste caso",
+      "alternativas": {
+        "A": "as plaquetas normais indicam melhor prognóstico",
+        "B": "deve-se iniciar tratamento com corticosteroides",
+        "C": "as manifestações articulares deixaram sequelas incapacitantes",
+        "D": "a biópsia das lesões mostraria vasculite leucocitoclástica"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 34,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Menina de 3 anos de idade é levada à consulta com queixa de que ainda não fala. Só diz “mama e papa”. Desenvolvimento: mãe refere que a criança tem um bom desenvolvimento, mas é muito agitada, “não obedece e não para quieta”, anda desde os 12 meses de idade. tira o sapato & algumas peças de roupa sozinha; é carinhosa, curiosa, sabe dar “ichau” com a mão e mandar beijo; aponta tudo que quer, conhece a função dos objetos, mas não os nomeia. A mãe diz que sempre recebe queixas da creche, por ela ser muito agressiva, e não gostar de dividir seus brinquedos. Não obedece a professora, fica imitada com facilidade, faz muita birra e prefere brincar sozinha. Brinca de colocar a boneca para dormir e de lhe dar de comer. ISDA: Não gosta de barulhos fortes, como de helicóptero ou de secador de cabelo, Ronca à noite e acorda várias vezes com o nariz obstruido. Apresenta coriza constante e prurido nasal, Alimentação: É muito seletiva na alimentação e só aceita os alimentos em forma de purê, Antecedentes: nasceu a termo, com 3.015 9. Mãe refere que está sempre gripada, desde que entrou na creche, aos 4 meses de idade. Já leve um quadro de pneumonia e 4 otites médias agudas. Entre as hipóteses diagnósticas abaixo, a mais provável para esta paciente é",
+      "alternativas": {
+        "A": "deficiência auditiva congênita",
+        "B": "perda auditiva condutiva",
+        "C": "perda auditiva neurossensorial",
+        "D": "transtorno do espectro autista (TEA)"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 35,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Laciente de 6 meses, sexo masculino. apresenta fontanela bregmática fechada e perímetro celálico (PC) de 40,5 cm (escore z de PC para idade e sexo entre —1 e -2) Nasceu a termo, sem intercorrências, com PC: 35 cm. Ao exame, está em bom estado geral e bom estado nutricional; fixa o olhar, sustenta a cabeça e a movimenta ativamente para acompanhar objetos na hori- zontal; na posição prona, eleva a parte superior do tronco e a cabeça, apolando-se nos antebragos; leva as mãos à boca, segura os objetos colocados em sua mão; sori e dá mostras de prazer e de desconforio e senta com apolo, Não pega os objetos oferecidos e não rola. Vocaliza e não apresenta balbucios. Entre as condutas a abaixo, a melhor para este paciente é:",
+      "alternativas": {
+        "A": "solicitar ultrassom transfontanela",
+        "B": "pesquisar infecções congênitas",
+        "C": "estimular o desenvolvimento e acompanhar o crescimento do PC",
+        "D": "encaminhar para cirurgia de craniossinostose"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 36,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Recém-nascida apresentou a evolução descrita na tabela abaixo. Com 20 dias de vida, retorna à unidade básica de saúde e a mãe refere que deseja continuar a amamentar, apesar das dificuldades dos primeiros dias. A criança apresenta boa pega, com sucção presente e continua ictérica, pesando 3.100 g. Entre as alternativas a seguir, a melhor conduta neste caso é:",
+      "alternativas": {
+        "A": "Oferecer fórmula láctea e suspender o aleitamento materno",
+        "B": "Rever a técnica de amamentação e oferecer o seio a cada 1-2 horas",
+        "C": "Complementar a amamentação com fórmula láctea",
+        "D": "Iniciar investigação laboratorial, mantendo o aleitamento materno exclusivo"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q36.png"
+      ]
+    },
+    {
+      "numero": 37,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Laciente de 4 meses de idade é alendida com descontorto respiratório após dois dias de coriza hialina e redução da aceitação alimentar e febre não aferida. Mãe nega quadro semelhante anteriormente. Criança em regular estado geral. afebril, taquidispneica com uso de musculatura acessória, FR; 55 ipm, SatO;: 92% em aa, ausculta pulmonar com sibiios e estertores finos bilate- ralmente. Restante do exame físico normal. Entre às propostas terapêuticas que seguem, a melhor para esta paciente é;",
+      "alternativas": {
+        "A": "beta-2-adrenérgico via inalatória e prednisolona via oral",
+        "B": "nebulização com soro fisiológico",
+        "C": "nebulização com adrenalina",
+        "D": "beta-2-adrenérgico via inalatória"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 38,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Menino com 4 anos e 6 meses de idade é levado ao Serviço de Saúde por apresentar-se edemaciado:. Sem antecedentes obstétricos e neonatais de importância. nega alergias a alimentos e medicamentos. Nega febre. Ao exame físico o paciente apresenta bom contato, hidratado, corado, acianótico. Ausculta cardiaca é pulmonar sem anormalidades. Abdome globoso, baço e ligado não palpáveis. Edema detectado em região periorbitária e membros inferiores. O exame de urina revela proteina de 40 mgimêh. Entre as alterações abaixo, esse paciente pode apresentar com maior frequência",
+      "alternativas": {
+        "A": "HDL diminuído",
+        "B": "triglicérides diminuídos",
+        "C": "LDL diminuído",
+        "D": "VLDL diminuído"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 39,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Criança de 1 ano de idade, sem anormalidades cardíacas detectadas previamente, é levada ao pronto-socorro pelos pais por acharem que o “coração está acelerado”. Referem quadro de coriza aquosa e febre há 1 dia. Utilizaram antitérmico uma vez. Ao exame físico, criança consciente, com temperatura de 38,5°C, FR: 35, FC: 200 e SatO2: 97% em ar ambiente. Realizado o seguinte eletrocardiograma com criança mais calma. Entre as opções abaixo, a melhor conduta inicial para esta criança é:",
+      "alternativas": {
+        "A": "Betabloqueador",
+        "B": "Manobra vagal",
+        "C": "Antitérmico",
+        "D": "Ecocardiograma com doppler"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q39.png"
+      ]
+    },
+    {
+      "numero": 40,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Maria, seis anos de idade, apresenta quadro de febre até 38,5 °C, cefaleia, artralgias é exantema morbiliforme de aspecto ren- dilhado em face e região extensora dos membros. Entre os diagnósticos abaixo, o mais provável para esta paciente é",
+      "alternativas": {
+        "A": "roséola",
+        "B": "sarampo",
+        "C": "eritema infeccioso",
+        "D": "escarlatina"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 41,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Fernando, 8 anos, é levado pelo pai ao pronto-socorro devido a quadro de febre até 39°C, taquicardia, dispneia e anorexia. Ao exame físico, febril, prostrado, regular estado geral com boa perfusão capilar e sem estase jugular. Ausculta cardíaca apresenta bulhas rítmicas normofonéticas. Ausculta pulmonar normal. Abdômen flácido, indolor, com fígado palpável a 4 cm do rebordo costal direito. Realizada a seguinte radiografia de tórax. Entre os agentes abaixo, o que mais frequentemente causa o quadro descrito é:",
+      "alternativas": {
+        "A": "SARS-CoV-2",
+        "B": "Coxsackie B",
+        "C": "Staphylococcus aureus",
+        "D": "Streptococcus viridans"
+      },
+      "resposta": "B",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q41.png"
+      ]
+    },
+    {
+      "numero": 42,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Recém-nascido, sexo masculino, 6 dias de vida, é admitido no pronto-socorro com vômitos, desidratação e perda de 17% do peso de nascimento. À monitorização, observou-se FC; 152 bpm, FR: 48 irpm, temperatura axilar: 36,8 °C e pressão arterial sistólica de 55 mmHg. O parto foi normal, ficou alojado com a mãe, recebeu alta com 50 horas de vida, em aleitamento matemo exclusivo. Os exames colhidos na emergência resultaram: hemograma e PCR normais, Na: 118 mEq/L e K: 6.2 mEq/L, Entre os exames abaixo, O que mais provavelmente está alterado nessa criança é:",
+      "alternativas": {
+        "A": "17-OH progesterona",
+        "B": "TSH",
+        "C": "tripsina imunorreativa",
+        "D": "biotinidase"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 43,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Primigesta, 20 anos, dá à luz um recém-nascido de 36 semanas por pario normal, Apgar de 7 e 9, respectivamente, nos 1º & 5º minutos. O peso ao nascimento: 2.1 kg (abaixo do percentil 5); o restante do exame físico foi normal, Na carteira do pré-natal, constam duas consultas com 12.6 16 semanas. Exames de rotina no pré-natal, incluindo VDRL, mostraram-se negativos. O teste rapido para sífilis feito na entrada da matemidade foi positivo. Entre as opções abaixo. a melhor conduta para este caso é;",
+      "alternativas": {
+        "A": "solicitar radiografia de ossos longos, hemograma, punção lombar e VDRL do recém-nascido",
+        "B": "realizar um teste treponêmico no RN",
+        "C": "solicitar radiografia de ossos longos, hemograma e VDRL do recém-nascido",
+        "D": "colher VDRL de sangue periférico do binômio"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 44,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Primigesta, com idade gestacional de 35 semanas e 2 dias, é intemada devido 4 rolura prematura de membranas. seguida de contrações. O liquide amniótico é meconial & o parto otome por via vaginal. O recém-nascido (RN) apresenta movimentos respi- ratérios irregulares e tônus muscular fácido. A sequência cometa da reanimação do RN é",
+      "alternativas": {
+        "A": "Manter a temperatura do ambiente entre 23-25°C; fazer aspiração traqueal e iniciar a VPP com máscara facial",
+        "B": "Promover o contato pele a pele com a mãe; garantir a normotermia e manter permeabilidade da via aérea",
+        "C": "Realizar o clampeamento imediato do cordão; levar o RN à mesa de reanimação e aspirar vias aéreas obstruídas",
+        "D": "Conduzir o recém-nascido à mesa de reanimação; secar com campos aquecidos e realizar massagem cardíaca"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 45,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Recém-nascido, sexo feminino, nasceu de parto normal, a termo, com peso de nascimento de 3.015 g e com boa vitalidade. Encontra-se no alojamento conjunto, com 30 horas de vida, ictérica com progressão céfalo-caudal até raiz das coxas e restante do exame físico normal. A diurese é presente, apresentou três episódios de evacuação até o momento. Tipagem sanguínea materna: O Rh positivo; tipagem sanguínea da criança: A Rh positivo. Nível sérico de bilirrubina indireta: 15,2 mg/dL e de bilirrubina direta: 0,59 mg/dL. Segundo as diretrizes nacionais e o nomograma norte-americano de Bhutani, reproduzido acima, a melhor conduta a ser tomada neste momento, entre as opções abaixo, é:",
+      "alternativas": {
+        "A": "solicitar Coombs direto e teste do eluato",
+        "B": "colher hemograma, reticulócitos e G6PD",
+        "C": "iniciar fototerapia e reavaliar BTF em 4h",
+        "D": "reavaliar BTF em 4h para ver se há indicação de fototerapia"
+      },
+      "resposta": "C",
+      "anulada": false,
+      "imagens": [
+        "imagens/hiae-2024/q45.png"
+      ]
+    },
+    {
+      "numero": 46,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Primigesta, 24 anos, 16 semanas de gestação dá entrada no pronto-socorro obstétrico com dor abdominal de forte intensidade (EVA 8), principalmente na fossa iliaca direita, náuseas e vômitos ha 4 horas. Nega episódios de febre ou diminuição do apetite. Encontra-se hemodinamicamente estáve! e afebnl. É realizada analgesia venosa com ópiúides, sem melhora do quadro, Exame físico: dor abdominal & defesa ao avaliar fossa illaca direita. Sinal de descompressão brusca negativo. Realiza ultrassonografia: gestação tópica 16 semanas, feto vivo e sem alterações, colo 28 mm de comprimento. Apêndice cecal não visibilizado na fossa illaca direita, ovário esquerdo sem alterações & ovário direito com cisto simples de 6 em, pequena quantidade de liquide livre na pelve. O diagnóstico mais provável e o tratamento mais adequado, dentre os apresentados abaixo, são, respectivamente:",
+      "alternativas": {
+        "A": "Aborto evitável - prescrição de progesterona oral",
+        "B": "Torção anexial direita - destorção do cisto",
+        "C": "Cisto hemorrágico roto - ooforectomia direita",
+        "D": "Doença inflamatória pélvica aguda - antibioticoterapia"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 47,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Primigesta, 40 anos de idade, na 382 semana, sem comorbidades, val ao pronto-socorro de Obstetrícia encaminhada da UBS em que realiza o pré-natal devido a dificuldade para auscultar os balimentos cardiacos fetais. Paciente assintomática, refere mo- vimentação fetal presente pela manhã. Ao exame físico, altura uterina de 33 cm, BCF ausente, movimentação fetal ausente, Ao realizar o Point of Care Ulitrassound não se identificam os batimentos cardíacos fetais, nem movimentação fetal ou fluxo sanguíneo em vasos umbilicais, À conduta mais adequada após a comunicação da má noticia seguindo o protocolo de Spikes deverá ser.",
+      "alternativas": {
+        "A": "conduta expectante por até 4 semanas, com retorno semanal para exames",
+        "B": "aguardar 40 semanas para realizar o parto cesáreo",
+        "C": "realizar parto cesáreo nas próximas horas",
+        "D": "indução de parto com misoprostol 200 mcg a cada 6 horas"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 48,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Gestante de 42 anos, idade gestacional de 13 semanas, realiza exame moriólógico de primeiro trimestre com marcadores de rts- CO genético alterados (transiucéncia nucal: 4,2 mm e ausência de 0550 nasal) Realiza biópsia de vilo coral com resultado de trissomia do cromossomo 9. De acordo com as leis brasileiras vigentes,",
+      "alternativas": {
+        "A": "a interrupção não poderá ser solicitada pois não se trata de estupro ou risco de vida materno",
+        "B": "a interrupção da gestação poderá ser solicitada mediante assinatura e concordância do parceiro",
+        "C": "as trissomias não estão contempladas para a interrupção da gestação",
+        "D": "a interrupção da gestação poderá ser solicitada por múltiplas malformações"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 49,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 26 anos de idade, traz laudo de ultrassonografia endovaginal solicitada para avaliar posicionamento de DIU hormonal inserido há 6 meses. Observa-se, no exame, anexo direito com imagem multicistica, medindo 4 cm no maior diâmetro, com septo espesso e 2 vegetações, medindo a maior 9 mm, sem fluxo ao doppler colondo. À conduta mais adequada nesse caso, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Indicar ooforoplastia e retirada do DIU",
+        "B": "Indicar ooforectomia unilateral e histerectomia total por videolaparoscopia ou laparotomia",
+        "C": "Conduta expectante com controle ultrassonográfico em 3 meses",
+        "D": "Indicar ooforectomia com proteção de bolsa para retirada da peça e congelação"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 50,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Homem trans homossexual, 34 anos de idade, sexualmente ativo, dá entrada no pronto-socorro referindo sangramento genital vultuoso há 3 dias com piora hoje. Refere que a última menstruação foi há cerca de 8 meses, dois meses depois de ter iniciado a terapia androgênica com testosterona intramuscular. No momento, não está realizando a terapia androgênica por ter perdido o acompanhamento médico. Nesse caso, a conduta mais adequada. dentre as abaixo. é",
+      "alternativas": {
+        "A": "Solicitar um teste de porção beta da gonadotrofina coriônica humana",
+        "B": "Orientar sobre os riscos da hormonização e observação clínica",
+        "C": "Prescrever medroxiprogesterona de depósito para estabilizar o endométrio",
+        "D": "Solicitar histeroscopia diagnóstica com biópsia"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 51,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 32 anos de idade, é acompanhada em ambulatório especializado por infertilidade. Paciente assintomática, exceto a in- fertilidade referida ha Z anos e meio. Parceiro com exames normais sem comorbidades. Trouxe histerossalpingografia normal e ultrassonografia endovaginal com espessamento hipoecoide na região retrocervical medindo 1,2 = 0,9 cm sem outras altera- ções, A conduta mais adequada, nesse caso, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Tratamento empírico de doença inflamatória pélvica com endometriose",
+        "B": "Prescrever contraceptivo combinado contínuo por seis meses",
+        "C": "Indicar videolaparoscopia para exérese da lesão endometriótica",
+        "D": "Indicar videolaparoscopia para congelação da lesão suspeita"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 52,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 30 anos de idade, em consulta ginecológica de rotina, teve diagnóstico de nódulo de mama direita de 2,5 cm de diã- metro, axilas negativas. Realizou core-biposy com resultado de carcinoma invasivo não especial triplo negativo. A conduta imediata mais adequada é;",
+      "alternativas": {
+        "A": "adenomastectomia bilateral",
+        "B": "quimioterapia neoadjuvante",
+        "C": "quadrantectomia direita com pesquisa de linfonodo sentinela",
+        "D": "mastectomia direita com pesquisa de linfonodo sentinela"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 53,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Gestante, 26 anos de idade, encontra-se na 25º semana de gestação, procura pronto-socorro após ultrassonografia obstétrica apresentar o seguinte diagnóstico: “edema de lecido celular subcutâneo e ascite do feto, caracterizando quadro de hidropisia fe- ta”. Ultrassonografias anteriores sem alterações. Paciente é professora da educação infantil, secundigesta com parto vaginal a ter- mo sem intercorrências há 4 anos, O diagnóstico mais provável e a conduta mais adequada, respectivamente, são:",
+      "alternativas": {
+        "A": "Infecção por toxoplasmose; realizar biópsia de lobo placentário",
+        "B": "infecção por citomegalovírus, rubéola ou parvovírus B19; rastreamento pré-natal de rotina no segundo trimestre",
+        "C": "Infecção por parvovírus B19; realizar sorologia materna e/ou amniocentese e pesquisa por PCR do DNA do vírus",
+        "D": "anemia fetal; avaliar semanalmente o pico de velocidade sistólica da artéria cerebral média"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 54,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Uma gestante que procura o pronto-socomo com queixa principal de sangramento genital foi atendida em 11/11/23. Vitalidade fetal preservada, Nega dores abdominais. G4P3A0, Histórico de 3 partos cesáreos. A data da úlima menstruação (DUM) é 18/02/2023 e é compativel com a ultrassonografia obstétrica inicial, Nesse caso, como a idade gestacional atual é de",
+      "alternativas": {
+        "A": "37 semanas, no limite da prematuridade, deve-se aplicar injeção intramuscular de corticoide e prescrição de ácido tranexâmico",
+        "B": "38 semanas, considerando que a paciente não tem risco de descolamento prematuro da placenta, deve-se indicar parto cesáreo quando a paciente iniciar o trabalho de parto",
+        "C": "37 semanas, deve-se internar para observação e solicitação de ressonância magnética",
+        "D": "38 semanas e considerando as hipóteses de acretismo ou inserção baixa de placenta, agendar o parto cesáreo eletivo para amanhã"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 55,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 49 anos de idade, referia 5 episódios de ondas de calor diariamente, sudorese noturna e insônia. Foi medicada com associação de estradiol e drospirenona há 2 meses e retorna agora para reavaliação do ginecologista com melhora importante dos sintomas. Nega comorbidades e antecedentes pessoais e familiares que contraindiquem a terapia hormonal. A queixa atual é desejo sexual hipoativo, apesar de estar num novo relacionamento há apenas 6 meses. A conduta mais adequada nesse caso, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Prescrição de testosterona transdérmica em baixas doses e manutenção da terapia estroprogestativa oral",
+        "B": "Suspensão da terapia estroprogestativa oral e prescrição de implante subcutâneo de drospirenona associada a testosterona",
+        "C": "Prescrição de testosterona injetável intramuscular e suspensão da terapia estroprogestativa oral",
+        "D": "Substituição da terapia estroprogestativa oral para a via transdérmica contendo estrogênio, progesterona e testosterona"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 56,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 28 anos de idade, refere cólica menstrual moderada, que melhora com uso de analgésico em meses alterados. Teve 2 partos normais, O último há 3 anos. Nega vida sexual desde então, Refere ciclos menstruais regulares com duração de 5 dias, Realizou ultrassonografia endovaginal cujo laudo informava a presença de 1 nódulo uterino de 4 cm classificado como Sistema FIGO 6. Referente ao possivel mioma, dentre as condutas abaixo, a mais adequada é:",
+      "alternativas": {
+        "A": "Miomectomia histeroscópica",
+        "B": "Inserção de DIU hormonal",
+        "C": "Miomectomia laparoscópica",
+        "D": "Controle clínico anual"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 57,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher, 76 anos de idade, refere bola na vagina, aumento da frequência urinária (10 vezes/dia), 2 episódios de perda urinária diária e nocturia (levanta-se para urinar durante a madrugada 3 vezes) há 1 ano. É hiperiensa controlada com anlodipina. Refere 5 partos vaginais e histerectomia aos 50 anos de idade. Nega atividade sexual. Ao exame físico observou-se o seguinte esta- diamento POP-q: [la LITE Ip. À condula mais adequada nesse caso, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Colpocleise e prescrição de oxibutinina",
+        "B": "Colpossacrofixação e prescrição de mirabegrona",
+        "C": "Colpoplastia anterior e sling retropúbico",
+        "D": "Colpoplastia anterior e colpoplastia posterior"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 58,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Mulher de 22 anos de idade realizou citologia cérvico-vaginal cujo resultado fol ASC-US. Faz uso irregular de preservativo e é usuária de implante subcutâneo liberador de etonogestrel. Além da orientação para utilização de preservativo nas relações se- xuais, à conduta mais adequada para essa paciente, dentre as abaixo, é:",
+      "alternativas": {
+        "A": "Orientar repetição da citologia cérvico-vaginal em 3 anos e manutenção do implante subcutâneo",
+        "B": "Realizar conduta ver e tratar e troca de método contraceptivo para dispositivo intrauterino de cobre",
+        "C": "Repetir citologia cérvico-vaginal em 1 ano e troca para método contraceptivo combinado",
+        "D": "Solicitar colposcopia com biópsia e anátomo-patológico e manutenção do implante subcutâneo"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 59,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Secundigesta na 14º semana de gestação comparece para a primeira consulta de pré-natal, Refere ter tido pré-eclâmpsia na primeira gestação e ter lido parto cesárea há 1 ano. PA: 120 « 80 mmHg. O risco de pré-eclâmpsia pré-lermo pode ser diminuído com a administração de:",
+      "alternativas": {
+        "A": "hidroclorotiazida 25 mg 12/12 horas",
+        "B": "heparina de baixo peso molecular 40 mg ao dia",
+        "C": "cálcio 250 mg ao dia",
+        "D": "ácido acetilsalicílico 150 mg ao dia"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 60,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Primipara, 39 anos de idade, encontra-se na 8\" semana pós-parto normal, em aleitamento matemo, e comparece a Unidade Básica de Saúde para reavaliação pós-parto. Refere ter lido diabetes gestacional controlada com dieta e atividade fisica, Trouxe 6 teste de tolerância oral à glicose realizado há 2 dias: glicemia jejum: 99 mg/T, glicemia 2 horas: 142 g/DI. A hipótese diagnós- tica mais provável para essa paciente é:",
+      "alternativas": {
+        "A": "baixo risco para diabetes",
+        "B": "intolerância à glicose",
+        "C": "diabetes puerperal",
+        "D": "diabetes tipo"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 61,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Aurora, 73 anos, branca, agente comunitária de saúde aposentada. Hoje, procura a UBS com queixa de uma ferida no nariz que não cicatriza há mais de 1 ano. Notou, no inicio, uma bolinha em dorso de nariz, que tentava espremer sempre que aparecia. Passados alguns dias, voltava a mesma lesão. Fol percebendo um aumento local da lesão, ao longo do tempo. Não tem prurido, O incômodo estético a faz retirar com a unha sempre que retoma. Não sabe o que pode ter desencadeado, Ao exame, nota-se uma papula normocrômica, de 0,7 cm em região de dorso de nariz, com descamação, escoriação e crosta central. Entre os exames abaixo, o melhor a ser solicitado para a confirmação da principal hipótese diagnóstica é:",
+      "alternativas": {
+        "A": "biópsia",
+        "B": "curetagem",
+        "C": "micológico direto",
+        "D": "dermatoscopia"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 62,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Jéssica, 23 anos, procura a UBS após ter sofrido violência sexual há 2 dias. Está muito abalada, veio trazida pela mãe, que esta bastante preocupada com a saúde de sua filha. Foram acolhidas pela equipe da UBS e Jéssica gostaria de saber como pode se prevenir de contrair HIV, De acordo com Norma Técnica do Ministério da Saúde - Prevenção e tratamento dos agravos resultantes da violência sexual, a conduta recomendada para esta paciente nesse momento &",
+      "alternativas": {
+        "A": "não oferecer antirretrovirais, caso não tenha ocorrido penetração; oferecer no caso de janela para profilaxia",
+        "B": "realizar o teste rápido para HIV (duas amostras) e, caso negativo, oferecer profilaxia com antirretrovirais",
+        "C": "encaminhar para realização de sorologia para HIV e oferecer antirretrovirais, independentemente do teste rápido",
+        "D": "encaminhar para acompanhamento, uma vez que o tempo decorrido é maior que a janela para profilaxia"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 63,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Joana, 45 anos, hipertensa e diabética, procura a Unidade Básica de Saúde (UBS) onde é acompanhada pela equipe de Saúde da Família, queixando-se de dor no peito, falta de ar e pressão arterial elevada. À médica da equipe suspeita de um infarto agudo do miocárdio e solicita uma ambulância para encaminha-la ao hospital mais próximo. Neste momento, a médica a atende imediatamente, deixando as pessoas agendadas aguardando, e prescreve um anti-hipertensivo e um antiagregante plaquetário para ser tomado enquanto espera à ambulância. Ao final do atendimento, registra tudo no prontuário eletrônico, enviando uma cópia para o hospital & orienta a agente comunitária de saúde a visitar Joana após a alta hospitalar para venficar à adesão de Joana ao tratamento. Das ações realizadas pela médica neste atendimento a que melhor representa o atributo coordenação do cuidado pela Atenção Primária à Saúde (APS) é",
+      "alternativas": {
+        "A": "registro de atendimento no prontuário eletrônico e envio de uma cópia ao hospital",
+        "B": "prescrição de anti-hipertensivo e um antiagregante plaquetário para Joana",
+        "C": "atendimento imediato a Joana, deixando as pessoas agendadas aguardando",
+        "D": "orientação da agente comunitária de saúde a visitar Joana após a alta hospitalar"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 64,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Marina, 25-anos, gestante de 20 semanas, realiza seu primeiro pré-natal na Unidade Básica de Saúde (UBS) onde é cadastra- da. Relata que ainda não fez nenhum exame durante a gestação, confessa que tem medo de agulhas. Contou que se sente bem, sempre teve boa saúde, e está sem nenhum sintoma. Tem parceiro fixo, e conta que ele teve uma lesão genital no início do relacionamento, ha mais de 1 ano, que desapareceu espontaneamente. Ela nunca teve lesão ou corrimento vaginal, A enfermeira da equipe de saúde da familia solicita os exames de rotina do pré-natal, incluindo o teste rápido para sífilis, que tem resultado positivo. Segundo o Protocolo da Atenção Básica Saúde: da Mulher de 2016, do Ministério da Saúde, o melhor tratamento neste caso é:",
+      "alternativas": {
+        "A": "Confirmar o diagnóstico com um teste não treponêmico (VDRL) e prescrever penicilina benzatina para Marina e seu parceiro na dose de 2.400.000 UI, em dose única",
+        "B": "Orientar o parceiro a procurar uma unidade de saúde para realizar o teste e o tratamento, se necessário",
+        "C": "Penicilina benzatina para Marina e seu parceiro na dose de 7.200.000 UI, divididos em três doses de 2.400.000 UI com intervalo de uma semana entre elas",
+        "D": "Doxiciclina 100 mg via oral de 12/12h por 30 dias, usando o princípio da decisão compartilhada, já que Marina tem medo de agulha. Tratar parceiro com mesmo esquema"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 65,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Valéria, 35 anos, professora, procura atendimento médico por dor de cabeça frequente há cerca de dois meses. Relala que a dor é do tipo pulsátil, bilateral, de intensidade moderada a forte, que piora com o barulho e a luz, Costuma tomar analgésicos comuns, mas nem sempre aliviam a dor. Nega náuseas, vômitos, alterações visuals ou auditivas e não tem histórico de doenças crônicas, alergias ou uso de medicamentos contínuos. Não fuma, bebe sociaimente e não pratica atividade fisica regularmente. O médico realiza o exame fisico e não encontra alterações significativas. Pergunta a Valéria sobre sua vida pessoa! e profis- sional, tentando entender melhor o contexto em que ela esta inserida. Ela é casada ha dez anos, tem dois filhos pequenos & trabalha em uma escola pública. Gosta do seu trabalho, mas ultimamente tem se sentido muito estressada e sobrecarregada com as demandas da escola e da família. Confessa que tem dificuldade para retaxar e dormir bem à noite e tem medo de ter algum problema grave de saúde, pois sua mãe morreu de um tumor cerebral há cinco anos. O médico explica a ela que sua dor pode ser classificada como uma cefaleia tensional e a tranquiliza sobre seu exame clínico que não mostrou nenhuma alteração preocupante. Propõe a Valéria um plano de tratamento que inclui o uso de analgésicos quando necessário, técnicas de rela- xamento, terapia cognitivo-comportamental e orientações sobre hábitos de vida saudáveis e a necessidade de Iniciar alguma atividade fisica. Combina um retomo em duas semanas para avaliar a evolução do quadro. O componente do Método Clinico Centrado na Pessoa que o médico utilizou procitanamente nesta consulta foi:",
+      "alternativas": {
+        "A": "Entendimento da pessoa como um todo",
+        "B": "Incorporação de medidas de prevenção e promoção de saúde",
+        "C": "Orentação comunitária",
+        "D": "Busca de plano comuns entre o médico e o paciente"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 66,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Carlos, 60 anos, negro, procura atendimento médico por apresentar tontura rotatória há dois dias. Relata que a tontura é constante, intensa e não melhora com nenhuma posição. Nega alterações visuais, auditivas, motoras ou sensitivas ou outros sintomas. Não faz uso regular de medicação. É tabagista há mais de 40 anos, Exame fisico geral sem alteração. Realizados os teste do impulso cefálico, nistagmo e de Skew, Não é notado nenhum movimento sacádico corretivo dos olhos, mas apresenta nistagmo horizontal que muda de direção conforme o lado que Carlos olha e desalinhamento vertical dos olhos no teste de Skew. Entre as hipóteses diagnósticas seguintes, a mais provável para Carlos é:",
+      "alternativas": {
+        "A": "Doença de Ménière",
+        "B": "Vertigem central",
+        "C": "Vertigem posicional paroxística benigna",
+        "D": "Neurite vestibular"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 67,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Ana, 25 anos, gestante de 20 semanas, procura atendimento médico para realizar o pré-natal. Relata que esta se sentindo bem, sem queixas ou intercorrências. Não lem comorbidades nem alergias. Está em uso regular de sulfato fesroso. A médica da UBS verifica o cartão de vacinação de Ana e constata que ela está com algumas vacinas atrasadas. Recebeu a vacina contra difteria e tétano (dT) há 1 ano, reforço contra Covid-19 bivalente ha 1 més, uma dose de vacina contra Sarampo, Caxumba e Rubéola (SCR) na infância, e trás doses de Hepatite B sendo a última há 6 meses, De acordo com o calendário vacinal do PNI 2023, as vacinas que Ana precisará tomar são;",
+      "alternativas": {
+        "A": "dT e contra influenza",
+        "B": "dTpa e contra SCR",
+        "C": "dTpa e contra influenza",
+        "D": "dT e contra SCR"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 68,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Rafael, 40 anos, bancário, procura atendimento médico por apresentar insônia, ansiedade e estresse há alguns meses. Não tem comorbidades nem alergias e faz uso ocasional de diazepam para dormir. Relata que tem dificuldade para pegar no sono, acorda várias vezes durante a noite e se sente cansado e imtado durante 6 dia. Fala que tem medo de perder à emprego e de não conseguir pagar as contas. O médico realiza o exame físico & solicita exames laboratoriais, sem alterações significativas, Prescrito um antidepressivo inibidor da recaptação de serotonina e um hipnótico para aliviar 05 sintomas. É orientado a tomar os medica- mentos conforme prescritos, a evitar cafeina, álcool e nicotina, a praticar atividade fisica regularmente e acordam o enca- minhamento para terapia. Entre as medidas abaixo, a que representaria prevenção quatermária no acompanhamento de Rafael é",
+      "alternativas": {
+        "A": "Indicar técnicas de relaxamento e meditação para redução do estresse",
+        "B": "encaminhar para avaliação psiquiátrica",
+        "C": "solicitar polissonografia",
+        "D": "revisar periodicamente a necessidade e dose dos medicamentos"
+      },
+      "resposta": "D",
+      "anulada": false
+    },
+    {
+      "numero": 69,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Marlene, 68 anos, comparece à consulta com médico de familia e comunidade (MFC) pela primeira vez e conta que não é exa- minada desde que teve seu último parto, há 20 anos. Agendou esta consulta porque tem sentido cansaço frequente para suas atividades laborais, mas nega falta de ar. Atualmente, trabalha com faxina em casa de familia. Não tem histórico pessoal de ne- nhuma doença. Nega tabagismo, elilismo e uso de drogas. Seus pais eram hipertensos e a mãe, diabética. Ao exame físico apre- senta-se eupneica, corada, acianótica, aniciérica em bom estado geral. FC; 80 bpm, FR: 18 pm, Pressão arterial (PA) verificada em 2 medidas com intervalo de 2 minutos 150 » 95 € 145 = 90 mmHg (membro superior direito) e 160 « 100 e 150 = 95 mmHg (membro superior esquerdo). Indice de massa corpórea 29 kg/m*. Não apresentava edemas. Ausculta cardíaca e pulmonar sem altorações. Entre as condutas abaixo, a melhor para o diagnóstico de hipertensão arterial neste caso é",
+      "alternativas": {
+        "A": "Considerar o diagnóstico de hipertensão arterial diante da presença de sintomas associados à elevação de PA observada ao exame físico. Devido à baixa adesão da paciente à assistência à saúde, iniciar o tratamento medicamentoso com anti- -hipertensivo",
+        "B": "Solicitar monitoramento da pressão arterial na unidade básica de saúde, durante 2 dias. Considerar como diagnóstico de HAS as médias das medidas sistólicas acima de 140 e/ou as medidas diastólicas acima de 90 mmHg",
+        "C": "Realizar monitoramento residencial da pressão arterial com aparelho digital de braço, 3 vezes por dia por 3 dias. Con- siderar como pré-hipertensdo as medidas sistúlicas acima ou igual a 140 e/ou as medidas diastólicas acima ou igual a 90 mmHg",
+        "D": "Aguardar 1 hora e reavaliar a PA na UBS, para estabelecer o diagnósiico mais rapidamente, Considerar alteradas medidas acima de 130 = 80 mmHg. Instituir o tratamento se necessário, nesta mesma consulta, considerando a baixa adesão da paciente aos programas preventivos"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 70,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Maurício, 60 anos, diabético, tabagista. sem outras comorbidades, está. há 3 anos, em tratamento com metiormina 2.550 mg por dia e glicazida 60 mg por dia. Pratica corrida de rua 3 vezes por semana & musculação 3 vezes por semana há 2 anos, não fuma é não bebe. Sua alimentação é saudável, orientada por nutricionista. Traz exames realizados há 30 dias, solicitados após 3 meses do ajuste das doses das medicações. Ao exame físico: IMC: 27kg/m?, PA: 135 = 84 mmHg, sem outras alterações Exames taboratoriais: Glicose: 138 mg/dL. Hb glicada; 6,8%. Colesterol! total: 203 mgidL. HDL: 38 mgidl. Triglicerideos: 150 mg/dL Creatinina: 0,7 mg/dL. Microalbuminúria: 11 mg/g. De acordo com a Diretriz de Prevenção Cardiovascular da Sociedade Brasileira de Cardiologia de 2019, a classificação de risco cardiovascular e melhor conduta, dentre as opções baixo, para este paciente é:",
+      "alternativas": {
+        "A": "Risco cardiovascular alto - iniciar rosuvastatina 20 mg/dia e ciprofibrato 100 mg/dia",
+        "B": "Risco cardiovascular alto - iniciar atorvastatina 40 mg/dia",
+        "C": "Risco cardiovascular baixo - manter tratamento atual",
+        "D": "Risco cardiovascular intermediário - iniciar sinvastatina 20 mg/dia"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 71,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Marlene, 42 anos, negra, catadora de material reciclável, evangélica e divorciada, vive em habitação coletiva na zona Norte do municipio do São Paulo com 5 filhos menores de idade. É hipertensa e tabagista e teve pré-eclâmpsia em 2 gestações. Refere não poder usar anticoncepcional oral por recomendação do ginecologista, Não tem vida sexual ativa porque tem medo de engravidar novamente, Há 2 semanas recebeu visita da agente comunitária de saúde que agendou inserção de DIU de cobre com o médico de familia no primeiro horário, para ela não perder o dia de trabalho, já que tem muito medo de perder o emprego, A dimensão de vulnerabilidade superada com essa intervenção pela equipe de saúde da familia foi",
+      "alternativas": {
+        "A": "social",
+        "B": "individual",
+        "C": "programático",
+        "D": "de gênero"
+      },
+      "resposta": "C",
+      "anulada": false
+    },
+    {
+      "numero": 72,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso abaixo para responder às questões de números 72 e 73. No ano de 2020, em um município no interior de São Paulo, com 100.000 habitantes, foram notificados 2.000 óbitos. Dentre estes, 50 foram por infarto agudo do miocárdio (IAM) e 30 por acidente vascular encefálico (AVE). No mesmo ano, foram notificados 500 casos de IAM e 300 de AVE. Entre os casos notificados de IAM, 200 eram hipertensos e destes 30 evoluíram para óbito. Entre os casos de AVE, 150 eram hipertensos e 20 evoluíram para óbito. Os casos de óbito neste município apresentaram:",
+      "alternativas": {
+        "A": "letalidade por IAM foi de 0,1",
+        "B": "a mortalidade proporcional por AVE foi de 1,5%",
+        "C": "mortalidade proporcional por IAM foi de 10%",
+        "D": "letalidade por AVE foi de 0,02"
+      },
+      "resposta": "A",
+      "anulada": false
+    },
+    {
+      "numero": 73,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Considere o caso abaixo para responder às questões de números 72 e 73. No ano de 2020, em um município no interior de São Paulo, com 100.000 habitantes, foram notificados 2.000 óbitos. Dentre estes, 50 foram por infarto agudo do miocárdio (IAM) e 30 por acidente vascular encefálico (AVE). No mesmo ano, foram notificados 500 casos de IAM e 300 de AVE. Entre os casos notificados de IAM, 200 eram hipertensos e destes 30 evoluíram para óbito. Entre os casos de AVE, 150 eram hipertensos e 20 evoluíram para óbito. Em relação aos hipertensos deste município é correto afirmar:",
+      "alternativas": {
+        "A": "a letalidade por AVE foi de 0,06",
+        "B": "apresentam risco relativo de 2,14 para óbito por IAM",
+        "C": "a prevalência de hipertensão é 3,5/1000 habitantes",
+        "D": "apresentam risco relativo de 2,30 para óbito por AVE"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 74,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Clarice, 48 anos, procurou a unidade básica de saúde da comunidade onde vive por apresentar dor de cabeça intensa, insônia, perda de apetite é emagrecimento há 4 meses. Fez uso de ervas & rezas, mas não obteve melhora e decidiu pedir ajuda, O enfermeiro do acolhimento solicitou avaliação da médica de familia, porque a pressão arterial estava elevada: 150 = 80 mmHg e ela estava clatamente em sofrimento psíquico, apresentando fala rápida, choro e inquietude. A avaliação médica identificou que Clarice é indigena, curandeira de sua comunidade e sem histórico de hipertensão ou outras comorbidades. Conta que esta muito preocupada com seu filho mais novo que usa drogas, convive com amigos ruins e quase foi preso pela polícia há alguns meses. Com exceção da pressão arterial elevada, o exame físico geral e neurológico de Clarice foi normal. Após conversar com a paciente e expor a possibilidade de tratamento medicamentoso para transtorno depressivo, a médica se colocou à disposição para retorno breve para avaliar os efeitos do medicamento e a evolução dos sintomas, Ao retornar, em 3 semanas, Clarice contou que abandonou o medicamento porque a impedia de manter suas atividades de cura. Resolveu viajar para a aldeia de sua familia, no norte do país, para se tratar, A médica, então, investigou novamente sinais de alarme e a orientou a procurar ajuda se necessário. Explicou que a equipe de saúde pode ajudá-la em outros momentos & desejou sucesso em sua viagem, Segundo os princípios do atendimento centrado na pessoa e da atenção primária em saúde, à postura da equipe de saúde no atendimento de Clarice fol",
+      "alternativas": {
+        "A": "inadequada por não valorizar a integralidade do cuidado ao não aboniar à hipertensão e por considerar a cultura é hábitos de paciente com transtorno depressivo",
+        "B": "adequada por levar em consideração a cultura e os hábitos da paciente e por respeitar o código de ética médico valorizando a autonomia do paciente",
+        "C": "adequada por permitir consulta com a médica de família sem agendamento prévio e inadequada por não se respon- sabilizar pela coordenação do cuidado",
+        "D": "inadequada por valorizar as crenças e costumes da pessoa sobre os riscos inerentes do transtorno depressivo e adequada por promover o acesso e à longitudinalidade do cuidado"
+      },
+      "resposta": "B",
+      "anulada": false
+    },
+    {
+      "numero": 75,
+      "ano": 2024,
+      "instituicao": "HIAE",
+      "enunciado": "Sr. Antônio, 62 anos, portador de hipertensão arterial é diabetes meditus tipo 2 há 20 amos, vai à primeira consulta em UBS após ter mudado de municipio, Traz a última receita que segue há 3 anos sem modificações e os resultados dos últimos exames labo- ratoriais, realizados há 40 dias. Está assintomático, não fuma e não tem outras comorbidades. Os medicamentos em uso são Hidroclorotiazida 25 mg por dia, Enalapril 40 mg por dia, Metformina 2.550 mg por dia e Rosuvastalina 40 mg por dia, Exame fisico: Peso: 95 kg, Altura: 1,72 m, IMC: 31,4 kgim?, PA: 135 « 85 mmHg. Exames: Glicemia: 128 g/dL, HbA tc: 7,5%, Colesterol total: 200 mg/dl. HDL: 46 mg/dL. Triglicérides: 160 mg/dL. Creatinina: 1.8 mg/dl (taxa de fitração giomerular calculada por Cockroft-Gault 57,2 mLimin), Albuminúria: 12 mg/L. De acordo com as recomendações da Sociedade Brasileira de Diabetes de 2023, a melhor proposta terapéutica. dentre as abaixo, neste caso é:",
+      "alternativas": {
+        "A": "suspender Rosuvastatina e iniciar agonista do receptor GLP-1",
+        "B": "suspender Metformina e iniciar Insulina NPH",
+        "C": "aumentar a dose de Enalapril e iniciar Glicazida",
+        "D": "manter medicação atual e reforçar mudança de estilo de vida"
+      },
+      "resposta": "D",
+      "anulada": false
+    }
+  ],
+  "observacao": "Arquivo corrigido: enunciados e alternativas separados corretamente; imagens referenciadas em imagens/hiae-2024/."
+}
